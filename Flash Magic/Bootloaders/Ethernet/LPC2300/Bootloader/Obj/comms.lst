@@ -1,0 +1,473 @@
+L 1 "comms.c"
+N//-----------------------------------------------------------------------------
+N// Software that is described herein is for illustrative purposes only  
+N// which provides customers with programming information regarding the  
+N// products. This software is supplied "AS IS" without any warranties.  
+N// NXP Semiconductors assumes no responsibility or liability for the 
+N// use of the software, conveys no license or title under any patent, 
+N// copyright, or mask work right to the product. NXP Semiconductors 
+N// reserves the right to make changes in the software without 
+N// notification. NXP Semiconductors also make no representation or 
+N// warranty that such application will be suitable for the specified 
+N// use without further testing or modification. 
+N//-----------------------------------------------------------------------------
+N
+N#include "sbl_config.h"
+L 1 "sbl_config.h" 1
+N /*----------------------------------------------------------------------------
+N * which provides customers with programming information regarding the  
+N * products. This software is supplied "AS IS" without any warranties.  
+N * NXP Semiconductors assumes no responsibility or liability for the 
+N * use of the software, conveys no license or title under any patent, 
+N * copyright, or mask work right to the product. NXP Semiconductors 
+N * reserves the right to make changes in the software without 
+N * notification. NXP Semiconductors also make no representation or 
+N * warranty that such application will be suitable for the specified 
+N * use without further testing or modification. 
+N *---------------------------------------------------------------------------*/
+N
+N#ifndef  _SBL_CONFIG_H
+N#define  _SBL_CONFIG_H
+N
+N//*** <<< Use Configuration Wizard in Context Menu >>> ***
+N
+N/*
+N// <h> Flash Configuration
+N//   <o0> User Start Sector <2=> Sector 2 <3=> Sector 3
+N//   <o1> User Start Sector Address <0x2000=> Sector 2 <0x3000=> Sector 3
+N//   <o2> User End Sector <10=> Sector 10 <14=> Sector 14 <27=> Sector 27
+N//   <o3> User End Sector Address <0x1FFFF=> Sector 10 <0x3FFFF=> Sector 14 <0x7DFFF=> Sector 27
+N//   <o4> Code Read Protection
+N//        <0x11223344=> NO CRP <0x12345678=> CRP1 <0x87654321=> CRP2 <0x43218765=> CRP3
+N// </h>
+N*/
+N
+N#define USER_START_SECTOR 2
+N#define USER_START_SECTOR_ADDRESS 8192
+N#define USER_END_SECTOR 27
+N#define USER_END_SECTOR_ADDRESS 516095
+N#define CRP 0x11223344
+N#define USER_START_SECTOR_SIZE 0x1000
+N#define RAM_START 0x40000000
+N#define RAM_END	  0x4000FFFF
+N
+Nextern const unsigned fcclk_KHz;
+Nextern const unsigned crp;
+N
+N#define CRP1  0x12345678
+N#define CRP2  0x87654321
+N#define CRP3  0x43218765
+N#define NOCRP 0x11223344
+N
+N/*
+N// <h> Update Entry Pin
+N//   <o0> Port
+N//        <0xE0028000=> Port 0 <0xE0028010=> Port 1
+N//   <o1> Pin <0-31>
+N// </h>
+N*/
+N#define ISP_ENTRY_GPIO_REG 0xE0028000  /* Port */
+N#define ISP_ENTRY_PIN 	   15          /* Pin  */
+N
+N/*
+N// <h> Interface Selection
+N//   <o0> Interface
+N//        <1=> Ethernet <0=> Other
+N// </h>
+N*/
+N#define USE_ETHERNET 	1			   /* Use Interface */
+N
+N/*
+N// <h> Ethernet Options
+N//   <o0> Use Debug
+N//        <1=> Yes <0=> No 
+N//   <o1> PHY chip
+N//        <0=> National PHY <1=> Other PHY
+N//   <o2> PHY address  <00-31>
+N//   <o3> MAC_Address_6 <0x00-0xFF>   
+N//   <o4> MAC_Address_5 <0x00-0xFF>  
+N//   <o5> MAC_Address_4 <0x00-0xFF>  
+N//   <o6> MAC_Address_3 <0x00-0xFF>  
+N//   <o7> MAC_Address_2 <0x00-0xFF>  
+N//   <o8> MAC_Address_1 <0x00-0xFF>  
+N// </h>
+N*/
+N#define ETHERNET_DEBUG 	0			   /* Use Debug */
+N#define PHY_CHIP		0			   /* PHY chip */
+N#define PHY_ADDRESS		1			   /* PHY address */
+N#define MYMAC_6         0x0C		   /* MAC_6 */
+N#define MYMAC_5         0x1D		   /* MAC_5 */
+N#define MYMAC_4         0x12		   /* MAC_4 */
+N#define MYMAC_3         0xE0		   /* MAC_3 */
+N#define MYMAC_2         0x1F		   /* MAC_2 */
+N#define MYMAC_1         0x10           /* MAC_1 */ 
+N            
+N/*
+N// <h> Activity Indicator LED
+N//   <o0> Enabled
+N//        <1=> Yes  <0=> No
+N//   <o1> Select LED (Port 2 - pin X)
+N//        LED <0-7>
+N// </h>
+N*/
+N#define  LED_ENABLED	1			   /* LED enabled */
+N#define  PORT2_PIN		7			   /* Port 2 pin */
+N
+N/*
+N// <h> Protocol Options
+N//   <o0> Timeout (milliseconds) <0-1000000>   
+N// </h>
+N*/
+N#define ETHERNET_TIMEOUT 60000         /* Ethernet timeout */
+N
+N#endif  /* __SBL_CONFIG_H__ */
+L 15 "comms.c" 2
+N#if USE_ETHERNET
+X#if 1
+N#include "ethernet\emac.h"
+L 1 "ethernet\emac.h" 1
+N//-----------------------------------------------------------------------------
+N// Software that is described herein is for illustrative purposes only  
+N// which provides customers with programming information regarding the  
+N// products. This software is supplied "AS IS" without any warranties.  
+N// NXP Semiconductors assumes no responsibility or liability for the 
+N// use of the software, conveys no license or title under any patent, 
+N// copyright, or mask work right to the product. NXP Semiconductors 
+N// reserves the right to make changes in the software without 
+N// notification. NXP Semiconductors also make no representation or 
+N// warranty that such application will be suitable for the specified 
+N// use without further testing or modification. 
+N//-----------------------------------------------------------------------------
+N
+N#ifndef _EMAC_H
+N#define _EMAC_H
+N
+N/* EMAC Memory Buffer configuration for 16K Ethernet RAM. */
+N#define NUM_RX_FRAG         25          
+N#define NUM_TX_FRAG         3           
+N#define ETH_FRAG_SIZE       120 
+N       
+N/* Max. Ethernet Frame Size          */
+N#define ETH_MAX_FLEN        1522       
+N
+N/* EMAC variables located in 16K Ethernet SRAM */
+N#define RX_DESC_BASE        0x7FE00000
+N#define RX_STAT_BASE        (RX_DESC_BASE + NUM_RX_FRAG*8)
+N#define TX_DESC_BASE        (RX_STAT_BASE + NUM_RX_FRAG*8)
+N#define TX_STAT_BASE        (TX_DESC_BASE + NUM_TX_FRAG*8)
+N#define RX_BUF_BASE         (TX_STAT_BASE + NUM_TX_FRAG*4)
+N#define TX_BUF_BASE         (RX_BUF_BASE  + NUM_RX_FRAG*ETH_FRAG_SIZE)
+N
+N/* RX and TX descriptor and status definitions. */
+N#define RX_DESC_PACKET(i)   (*(unsigned int *)(RX_DESC_BASE   + 8*i))
+N#define RX_DESC_CTRL(i)     (*(unsigned int *)(RX_DESC_BASE+4 + 8*i))
+N#define RX_STAT_INFO(i)     (*(unsigned int *)(RX_STAT_BASE   + 8*i))
+N#define RX_STAT_HASHCRC(i)  (*(unsigned int *)(RX_STAT_BASE+4 + 8*i))
+N#define TX_DESC_PACKET(i)   (*(unsigned int *)(TX_DESC_BASE   + 8*i))
+N#define TX_DESC_CTRL(i)     (*(unsigned int *)(TX_DESC_BASE+4 + 8*i))
+N#define TX_STAT_INFO(i)     (*(unsigned int *)(TX_STAT_BASE   + 4*i))
+N#define RX_BUF(i)           (RX_BUF_BASE + ETH_FRAG_SIZE*i)
+N#define TX_BUF(i)           (TX_BUF_BASE + ETH_FRAG_SIZE*i)
+N
+N/* MAC Configuration Register 1 */
+N#define MAC1_REC_EN         0x00000001  /* Receive Enable                    */
+N#define MAC1_PASS_ALL       0x00000002  /* Pass All Receive Frames           */
+N#define MAC1_RX_FLOWC       0x00000004  /* RX Flow Control                   */
+N#define MAC1_TX_FLOWC       0x00000008  /* TX Flow Control                   */
+N#define MAC1_LOOPB          0x00000010  /* Loop Back Mode                    */
+N#define MAC1_RES_TX         0x00000100  /* Reset TX Logic                    */
+N#define MAC1_RES_MCS_TX     0x00000200  /* Reset MAC TX Control Sublayer     */
+N#define MAC1_RES_RX         0x00000400  /* Reset RX Logic                    */
+N#define MAC1_RES_MCS_RX     0x00000800  /* Reset MAC RX Control Sublayer     */
+N#define MAC1_SIM_RES        0x00004000  /* Simulation Reset                  */
+N#define MAC1_SOFT_RES       0x00008000  /* Soft Reset MAC                    */
+N
+N/* MAC Configuration Register 2 */
+N#define MAC2_FULL_DUP       0x00000001  /* Full Duplex Mode                  */
+N#define MAC2_FRM_LEN_CHK    0x00000002  /* Frame Length Checking             */
+N#define MAC2_HUGE_FRM_EN    0x00000004  /* Huge Frame Enable                 */
+N#define MAC2_DLY_CRC        0x00000008  /* Delayed CRC Mode                  */
+N#define MAC2_CRC_EN         0x00000010  /* Append CRC to every Frame         */
+N#define MAC2_PAD_EN         0x00000020  /* Pad all Short Frames              */
+N#define MAC2_VLAN_PAD_EN    0x00000040  /* VLAN Pad Enable                   */
+N#define MAC2_ADET_PAD_EN    0x00000080  /* Auto Detect Pad Enable            */
+N#define MAC2_PPREAM_ENF     0x00000100  /* Pure Preamble Enforcement         */
+N#define MAC2_LPREAM_ENF     0x00000200  /* Long Preamble Enforcement         */
+N#define MAC2_NO_BACKOFF     0x00001000  /* No Backoff Algorithm              */
+N#define MAC2_BACK_PRESSURE  0x00002000  /* Backoff Presurre / No Backoff     */
+N#define MAC2_EXCESS_DEF     0x00004000  /* Excess Defer                      */
+N
+N/* Back-to-Back Inter-Packet-Gap Register */
+N#define IPGT_FULL_DUP       0x00000015  /* Recommended value for Full Duplex */
+N#define IPGT_HALF_DUP       0x00000012  /* Recommended value for Half Duplex */
+N
+N/* Non Back-to-Back Inter-Packet-Gap Register */
+N#define IPGR_DEF            0x00000012  /* Recommended value                 */
+N
+N/* Collision Window/Retry Register */
+N#define CLRT_DEF            0x0000370F  /* Default value                     */
+N
+N/* PHY Support Register */
+N#define SUPP_SPEED          0x00000100  /* Reduced MII Logic Current Speed   */
+N
+N/* Test Register */
+N#define TEST_SHCUT_PQUANTA  0x00000001  /* Shortcut Pause Quanta             */
+N#define TEST_TST_PAUSE      0x00000002  /* Test Pause                        */
+N#define TEST_TST_BACKP      0x00000004  /* Test Back Pressure                */
+N
+N/* MII Management Configuration Register */
+N#define MCFG_SCAN_INC       0x00000001  /* Scan Increment PHY Address        */
+N#define MCFG_SUPP_PREAM     0x00000002  /* Suppress Preamble                 */
+N#define MCFG_CLK_SEL        0x0000001C  /* Clock Select Mask                 */
+N#define MCFG_RES_MII        0x00008000  /* Reset MII Management Hardware     */
+N
+N/* Clock Host dividers                  */
+N#define HOST_CLK_BY_4		(0x00 << 2)	/* Host Clock divided by 4           */
+N#define HOST_CLK_BY_6		(0x02 << 2)	/* Host Clock divided by 6           */
+N#define HOST_CLK_BY_8		(0x03 << 2)	/* Host Clock divided by 8           */
+N#define HOST_CLK_BY_10		(0x04 << 2)	/* Host Clock divided by 10          */
+N#define HOST_CLK_BY_14		(0x05 << 2)	/* Host Clock divided by 14          */
+N#define HOST_CLK_BY_20		(0x06 << 2)	/* Host Clock divided by 20          */
+N#define HOST_CLK_BY_28		(0x07 << 2)	/* Host Clock divided by 28          */
+N
+N/* MII Management Command Register */
+N#define MCMD_READ           0x00000001  /* MII Read                          */
+N#define MCMD_SCAN           0x00000002  /* MII Scan continuously             */
+N
+N#define MII_WR_TOUT         0x00050000  /* MII Write timeout count           */
+N#define MII_RD_TOUT         0x00050000  /* MII Read timeout count            */
+N
+N/* MII Management Address Register */
+N#define MADR_REG_ADR        0x0000001F  /* MII Register Address Mask         */
+N#define MADR_PHY_ADR        0x00001F00  /* PHY Address Mask                  */
+N
+N/* MII Management Indicators Register */
+N#define MIND_BUSY           0x00000001  /* MII is Busy                       */
+N#define MIND_SCAN           0x00000002  /* MII Scanning in Progress          */
+N#define MIND_NOT_VAL        0x00000004  /* MII Read Data not valid           */
+N#define MIND_MII_LINK_FAIL  0x00000008  /* MII Link Failed                   */
+N
+N/* Command Register */
+N#define CR_RX_EN            0x00000001  /* Enable Receive                    */
+N#define CR_TX_EN            0x00000002  /* Enable Transmit                   */
+N#define CR_REG_RES          0x00000008  /* Reset Host Registers              */
+N#define CR_TX_RES           0x00000010  /* Reset Transmit Datapath           */
+N#define CR_RX_RES           0x00000020  /* Reset Receive Datapath            */
+N#define CR_PASS_RUNT_FRM    0x00000040  /* Pass Runt Frames                  */
+N#define CR_PASS_RX_FILT     0x00000080  /* Pass RX Filter                    */
+N#define CR_TX_FLOW_CTRL     0x00000100  /* TX Flow Control                   */
+N#define CR_RMII             0x00000200  /* Reduced MII Interface             */
+N#define CR_FULL_DUP         0x00000400  /* Full Duplex                       */
+N
+N/* Status Register */
+N#define SR_RX_EN            0x00000001  /* Enable Receive                    */
+N#define SR_TX_EN            0x00000002  /* Enable Transmit                   */
+N
+N/* Transmit Status Vector 0 Register */
+N#define TSV0_CRC_ERR        0x00000001  /* CRC error                         */
+N#define TSV0_LEN_CHKERR     0x00000002  /* Length Check Error                */
+N#define TSV0_LEN_OUTRNG     0x00000004  /* Length Out of Range               */
+N#define TSV0_DONE           0x00000008  /* Tramsmission Completed            */
+N#define TSV0_MCAST          0x00000010  /* Multicast Destination             */
+N#define TSV0_BCAST          0x00000020  /* Broadcast Destination             */
+N#define TSV0_PKT_DEFER      0x00000040  /* Packet Deferred                   */
+N#define TSV0_EXC_DEFER      0x00000080  /* Excessive Packet Deferral         */
+N#define TSV0_EXC_COLL       0x00000100  /* Excessive Collision               */
+N#define TSV0_LATE_COLL      0x00000200  /* Late Collision Occured            */
+N#define TSV0_GIANT          0x00000400  /* Giant Frame                       */
+N#define TSV0_UNDERRUN       0x00000800  /* Buffer Underrun                   */
+N#define TSV0_BYTES          0x0FFFF000  /* Total Bytes Transferred           */
+N#define TSV0_CTRL_FRAME     0x10000000  /* Control Frame                     */
+N#define TSV0_PAUSE          0x20000000  /* Pause Frame                       */
+N#define TSV0_BACK_PRESS     0x40000000  /* Backpressure Method Applied       */
+N#define TSV0_VLAN           0x80000000  /* VLAN Frame                        */
+N
+N/* Transmit Status Vector 1 Register */
+N#define TSV1_BYTE_CNT       0x0000FFFF  /* Transmit Byte Count               */
+N#define TSV1_COLL_CNT       0x000F0000  /* Transmit Collision Count          */
+N
+N/* Receive Status Vector Register */
+N#define RSV_BYTE_CNT        0x0000FFFF  /* Receive Byte Count                */
+N#define RSV_PKT_IGNORED     0x00010000  /* Packet Previously Ignored         */
+N#define RSV_RXDV_SEEN       0x00020000  /* RXDV Event Previously Seen        */
+N#define RSV_CARR_SEEN       0x00040000  /* Carrier Event Previously Seen     */
+N#define RSV_REC_CODEV       0x00080000  /* Receive Code Violation            */
+N#define RSV_CRC_ERR         0x00100000  /* CRC Error                         */
+N#define RSV_LEN_CHKERR      0x00200000  /* Length Check Error                */
+N#define RSV_LEN_OUTRNG      0x00400000  /* Length Out of Range               */
+N#define RSV_REC_OK          0x00800000  /* Frame Received OK                 */
+N#define RSV_MCAST           0x01000000  /* Multicast Frame                   */
+N#define RSV_BCAST           0x02000000  /* Broadcast Frame                   */
+N#define RSV_DRIB_NIBB       0x04000000  /* Dribble Nibble                    */
+N#define RSV_CTRL_FRAME      0x08000000  /* Control Frame                     */
+N#define RSV_PAUSE           0x10000000  /* Pause Frame                       */
+N#define RSV_UNSUPP_OPC      0x20000000  /* Unsupported Opcode                */
+N#define RSV_VLAN            0x40000000  /* VLAN Frame                        */
+N
+N/* Flow Control Counter Register */
+N#define FCC_MIRR_CNT        0x0000FFFF  /* Mirror Counter                    */
+N#define FCC_PAUSE_TIM       0xFFFF0000  /* Pause Timer                       */
+N
+N/* Flow Control Status Register */
+N#define FCS_MIRR_CNT        0x0000FFFF  /* Mirror Counter Current            */
+N
+N/* Receive Filter Control Register */
+N#define RFC_UCAST_EN        0x00000001  /* Accept Unicast Frames Enable      */
+N#define RFC_BCAST_EN        0x00000002  /* Accept Broadcast Frames Enable    */
+N#define RFC_MCAST_EN        0x00000004  /* Accept Multicast Frames Enable    */
+N#define RFC_UCAST_HASH_EN   0x00000008  /* Accept Unicast Hash Filter Frames */
+N#define RFC_MCAST_HASH_EN   0x00000010  /* Accept Multicast Hash Filter Fram.*/
+N#define RFC_PERFECT_EN      0x00000020  /* Accept Perfect Match Enable       */
+N#define RFC_MAGP_WOL_EN     0x00001000  /* Magic Packet Filter WoL Enable    */
+N#define RFC_PFILT_WOL_EN    0x00002000  /* Perfect Filter WoL Enable         */
+N
+N/* Receive Filter WoL Status/Clear Registers */
+N#define WOL_UCAST           0x00000001  /* Unicast Frame caused WoL          */
+N#define WOL_BCAST           0x00000002  /* Broadcast Frame caused WoL        */
+N#define WOL_MCAST           0x00000004  /* Multicast Frame caused WoL        */
+N#define WOL_UCAST_HASH      0x00000008  /* Unicast Hash Filter Frame WoL     */
+N#define WOL_MCAST_HASH      0x00000010  /* Multicast Hash Filter Frame WoL   */
+N#define WOL_PERFECT         0x00000020  /* Perfect Filter WoL                */
+N#define WOL_RX_FILTER       0x00000080  /* RX Filter caused WoL              */
+N#define WOL_MAG_PACKET      0x00000100  /* Magic Packet Filter caused WoL    */
+N
+N/* Interrupt Status/Enable/Clear/Set Registers */
+N#define INT_RX_OVERRUN      0x00000001  /* Overrun Error in RX Queue         */
+N#define INT_RX_ERR          0x00000002  /* Receive Error                     */
+N#define INT_RX_FIN          0x00000004  /* RX Finished Process Descriptors   */
+N#define INT_RX_DONE         0x00000008  /* Receive Done                      */
+N#define INT_TX_UNDERRUN     0x00000010  /* Transmit Underrun                 */
+N#define INT_TX_ERR          0x00000020  /* Transmit Error                    */
+N#define INT_TX_FIN          0x00000040  /* TX Finished Process Descriptors   */
+N#define INT_TX_DONE         0x00000080  /* Transmit Done                     */
+N#define INT_SOFT_INT        0x00001000  /* Software Triggered Interrupt      */
+N#define INT_WAKEUP          0x00002000  /* Wakeup Event Interrupt            */
+N
+N/* Power Down Register */
+N#define PD_POWER_DOWN       0x80000000  /* Power Down MAC                    */
+N
+N/* RX Descriptor Control Word */
+N#define RCTRL_SIZE          0x000007FF  /* Buffer size mask                  */
+N#define RCTRL_INT           0x80000000  /* Generate RxDone Interrupt         */
+N
+N/* RX Status Hash CRC Word */
+N#define RHASH_SA            0x000001FF  /* Hash CRC for Source Address       */
+N#define RHASH_DA            0x001FF000  /* Hash CRC for Destination Address  */
+N
+N/* RX Status Information Word */
+N#define RINFO_SIZE          0x000007FF  /* Data size in bytes                */
+N#define RINFO_CTRL_FRAME    0x00040000  /* Control Frame                     */
+N#define RINFO_VLAN          0x00080000  /* VLAN Frame                        */
+N#define RINFO_FAIL_FILT     0x00100000  /* RX Filter Failed                  */
+N#define RINFO_MCAST         0x00200000  /* Multicast Frame                   */
+N#define RINFO_BCAST         0x00400000  /* Broadcast Frame                   */
+N#define RINFO_CRC_ERR       0x00800000  /* CRC Error in Frame                */
+N#define RINFO_SYM_ERR       0x01000000  /* Symbol Error from PHY             */
+N#define RINFO_LEN_ERR       0x02000000  /* Length Error                      */
+N#define RINFO_RANGE_ERR     0x04000000  /* Range Error (exceeded max. size)  */
+N#define RINFO_ALIGN_ERR     0x08000000  /* Alignment Error                   */
+N#define RINFO_OVERRUN       0x10000000  /* Receive overrun                   */
+N#define RINFO_NO_DESCR      0x20000000  /* No new Descriptor available       */
+N#define RINFO_LAST_FLAG     0x40000000  /* Last Fragment in Frame            */
+N#define RINFO_ERR           0x80000000  /* Error Occured (OR of all errors)  */
+N
+N#define RINFO_ERR_MASK     (RINFO_FAIL_FILT | RINFO_CRC_ERR   | RINFO_SYM_ERR | \
+N                            RINFO_LEN_ERR   | RINFO_ALIGN_ERR | RINFO_OVERRUN)
+X#define RINFO_ERR_MASK     (RINFO_FAIL_FILT | RINFO_CRC_ERR   | RINFO_SYM_ERR |                             RINFO_LEN_ERR   | RINFO_ALIGN_ERR | RINFO_OVERRUN)
+N
+N/* TX Descriptor Control Word */
+N#define TCTRL_SIZE          0x000007FF  /* Size of data buffer in bytes      */
+N#define TCTRL_OVERRIDE      0x04000000  /* Override Default MAC Registers    */
+N#define TCTRL_HUGE          0x08000000  /* Enable Huge Frame                 */
+N#define TCTRL_PAD           0x10000000  /* Pad short Frames to 64 bytes      */
+N#define TCTRL_CRC           0x20000000  /* Append a hardware CRC to Frame    */
+N#define TCTRL_LAST          0x40000000  /* Last Descriptor for TX Frame      */
+N#define TCTRL_INT           0x80000000  /* Generate TxDone Interrupt         */
+N
+N/* TX Status Information Word */
+N#define TINFO_COL_CNT       0x01E00000  /* Collision Count                   */
+N#define TINFO_DEFER         0x02000000  /* Packet Deferred (not an error)    */
+N#define TINFO_EXCESS_DEF    0x04000000  /* Excessive Deferral                */
+N#define TINFO_EXCESS_COL    0x08000000  /* Excessive Collision               */
+N#define TINFO_LATE_COL      0x10000000  /* Late Collision Occured            */
+N#define TINFO_UNDERRUN      0x20000000  /* Transmit Underrun                 */
+N#define TINFO_NO_DESCR      0x40000000  /* No new Descriptor available       */
+N#define TINFO_ERR           0x80000000  /* Error Occured (OR of all errors)  */
+N
+N/* ENET Device Revision ID */
+N#define OLD_EMAC_MODULE_ID  0x39022000  /* Rev. ID for first rev '-'         */
+N
+N/* DP83848C PHY Registers */
+N#define PHY_REG_BMCR        0x00        /* Basic Mode Control Register       */
+N#define PHY_REG_BMSR        0x01        /* Basic Mode Status Register        */
+N#define PHY_REG_IDR1        0x02        /* PHY Identifier 1                  */
+N#define PHY_REG_IDR2        0x03        /* PHY Identifier 2                  */
+N#define PHY_REG_ANAR        0x04        /* Auto-Negotiation Advertisement    */
+N#define PHY_REG_ANLPAR      0x05        /* Auto-Neg. Link Partner Abitily    */
+N#define PHY_REG_ANER        0x06        /* Auto-Neg. Expansion Register      */
+N#define PHY_REG_ANNPTR      0x07        /* Auto-Neg. Next Page TX            */
+N
+N/* PHY Extended Registers */
+N#define PHY_REG_STS         0x10        /* Status Register                   */
+N#define PHY_REG_MICR        0x11        /* MII Interrupt Control Register    */
+N#define PHY_REG_MISR        0x12        /* MII Interrupt Status Register     */
+N#define PHY_REG_FCSCR       0x14        /* False Carrier Sense Counter       */
+N#define PHY_REG_RECR        0x15        /* Receive Error Counter             */
+N#define PHY_REG_PCSR        0x16        /* PCS Sublayer Config. and Status   */
+N#define PHY_REG_RBR         0x17        /* RMII and Bypass Register          */
+N#define PHY_REG_LEDCR       0x18        /* LED Direct Control Register       */
+N#define PHY_REG_PHYCR       0x19        /* PHY Control Register              */
+N#define PHY_REG_10BTSCR     0x1A        /* 10Base-T Status/Control Register  */
+N#define PHY_REG_CDCTRL1     0x1B        /* CD Test Control and BIST Extens.  */
+N#define PHY_REG_EDCR        0x1D        /* Energy Detect Control Register    */
+N
+N#define PHY_FULLD_100M      0x2100      /* Full Duplex 100Mbit               */
+N#define PHY_HALFD_100M      0x2000      /* Half Duplex 100Mbit               */
+N#define PHY_FULLD_10M       0x0100      /* Full Duplex 10Mbit                */
+N#define PHY_HALFD_10M       0x0000      /* Half Duplex 10MBit                */
+N#define PHY_AUTO_NEG        0x3000      /* Select Auto Negotiation           */
+N
+N#define DP83848C_ID         0x20005C90  /* National PHY Identifier           */
+N
+Nvoid init_emac(void);
+Nunsigned emac_getline(char * buf,int max_len,int * count);
+Nunsigned emac_sendline_crlf(char * buf);
+Nvoid emac_handshake(void);
+N
+N#endif /* _EMAC_H */
+N
+L 17 "comms.c" 2
+N#endif
+N
+Nvoid init_comms(void)
+N{
+N    #if USE_ETHERNET
+X    #if 1
+N	init_emac();
+N	#endif
+N}
+N
+Nunsigned getline(char * buf,int max_len,int * count)
+N{
+N    #if USE_ETHERNET
+X    #if 1
+N	return (emac_getline(buf,max_len,count));
+N	#endif
+N}
+N
+Nunsigned sendline_crlf(char * buf)
+N{
+N    #if USE_ETHERNET
+X    #if 1
+N	return (emac_sendline_crlf(buf));
+N	#endif
+N}
+N
+Nvoid comm_handshake(void) {
+N    
+N	#if USE_ETHERNET
+X	#if 1
+N	emac_handshake();
+N	#endif   
+N
+N}

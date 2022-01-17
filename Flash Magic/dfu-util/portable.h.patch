@@ -1,0 +1,7 @@
+--- C:/Users/Andy/AppData/Local/Temp/portable.h-rev4711.svn000.tmp.h	Fri Jul 14 15:09:39 2017
++++ C:/Users/Andy/AppData/Local/Temp/portable.h-rev4712.svn001.tmp.h	Fri Jul 14 16:09:57 2017
+@@ -9,2 +9,2 @@
+-# define PACKAGE_VERSION "0.9-msvc"
+-# define PACKAGE_STRING "dfu-util 0.9-msvc"
++# define PACKAGE_VERSION "0.9-msvc-esa"
++# define PACKAGE_STRING "dfu-util 0.9-msvc-esa"

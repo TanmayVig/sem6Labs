@@ -1,0 +1,14 @@
+--cpu Cortex-M3
+".\obj\startup_lpc18xx.o"
+".\obj\system_lpc18xx.o"
+".\obj\lpc18xx_scu.o"
+".\obj\lpc18xx_cgu.o"
+".\spifi_drv_M3.lib"
+".\obj\swd.o"
+".\obj\main.o"
+".\obj\bootloader.o"
+".\obj\flashprg.o"
+--library_type=microlib --strict --scatter ".\obj\LPCxpresso18S37.sct"
+--summary_stderr --info summarysizes --map --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list ".\obj\LPCxpresso18S37.map" -o .\obj\LPCxpresso18S37.axf

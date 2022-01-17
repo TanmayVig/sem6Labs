@@ -1,0 +1,3664 @@
+FLASH MAGIC CLASSIC RELEASE NOTES
+(C) EMBEDDED SYSTEMS ACADEMY 2000-2021
+
+This document describes the changes between versions of Flash Magic and any known issues.
+
+For the latest news on Flash Magic visit the Flash Magic web site at: www.flashmagictool.com
+
+
+Version 13.31
+-------------
+
+- Fixed bug that caused incorrect memory size when using LPC15xx and CAN bootloader.
+
+
+Version 13.30
+-------------
+
+- Added support for LPC55S0x and LPC550x.
+
+
+Version 13.25
+-------------
+
+- Fixed issues with support for LPC551x/LPC55S1x.
+
+- Installers now download .NET framework if not found on PC.
+
+- Enabled activating flash bank for LPC4312 and LPC4322. Seems to be required even though they only have one flash bank.
+
+- Fixed bug that stopped LPC55S1x USB bootloader from being recognized
+
+
+Version 13.20
+-------------
+
+- Added support for MCU-Link.
+
+
+Version 13.10
+-------------
+
+- Added command line options for controlling DTR and RTS.
+
+
+Version 13.05
+-------------
+
+- Improvements to uninstaller.
+
+- Fixed bug that caused an issue on some non-English PCs.
+
+- Updated signature for LPC5526.
+
+
+Version 13.00
+-------------
+
+- Added support for LPC55S16/LPC5516, LPC55S14/LPC5514, LPC5512.
+
+
+Version 12.90
+-------------
+
+- Added support for LPC5500/LPC55S00 USB bootloader.
+
+- Updated manual and examples.
+
+
+Version 12.86
+-------------
+
+- Added option to enable/diable echo when using full-duplex.
+
+
+Version 12.85
+-------------
+
+- Added option to disable echo when using half-duplex for increased programming speed.
+
+
+Version 12.80
+-------------
+
+- Fixed bug that stopped CANcrypt timeout and SDO timeout from being set on the command line.
+
+- Added command line option to specify the crystal frequency, and set the default frequency to 12MHz.
+
+- No longer shows Windows 10 SmartScreen warning.
+
+
+Version 12.75
+-------------
+
+- Fixed bug that stopped ISP -> Read Signature on LPC2000.
+
+- When double-clicking an FMX file to open Flash Magic it no longer prompts to save the current settings after Flash Magic opens.
+
+
+Version 12.70
+-------------
+
+- Added LPC55S66, LPC55S28, LPC5528 and LPC5526.
+
+
+Version 12.65
+-------------
+
+- Added support for reading FAIM to command line.
+
+
+Version 12.60
+-------------
+
+- Added support for writing FAIM to command line.
+
+- Fixed bug that stopped vertical scrollbar from appearing in FAIM dialog window.
+
+
+Version 12.55
+-------------
+
+- Increased connection timeout to allow connection to SWD devices that are slower to initialize.
+ 
+
+Version 12.50
+-------------
+
+- Fixed bug that stopped writing to FAIM.
+
+- Added option to set active flash bank for LPC1800/LPC4300.
+
+
+Version 12.45
+-------------
+
+- Added LPC802UK and LPC804UK.
+
+
+Version 12.40
+-------------
+
+- Reduced autobaud timeout from 2000ms to 100ms to speed up delay when trying to communicate with a device that is not responding.
+
+
+Version 12.35
+-------------
+
+- Removed licensing menu options from free version - not required.
+
+- Fixed mistake with flash size of LPC1822.
+
+- Updated license.
+
+
+Version 12.30
+-------------
+
+- Fixed bug that caused some devices to have an erroneous extra flash block.
+
+- No longer a beta.
+
+
+Version 12.26
+-------------
+
+- No longer crashes when trying to view information about binary firmware files.
+
+
+Version 12.25
+-------------
+
+- No changes.
+
+
+Version 12.20
+-------------
+
+- Added LPC55S69 (UART only).
+
+- Fixed buffer overflow bug when erasing a part using SWD.
+
+
+Version 12.11
+-------------
+
+- Fixed bug that stopped erase sectors used by hex file when using a device with multiple memories.
+
+- Fixed bug that caused crash if progress bar updated while closing a programmer.
+
+
+Version 12.10
+-------------
+
+- Command line now allows listing of available ethernet adapters.
+
+- Command line now allows selection of ethernet adapter by name.
+
+- Fixed evaluation watermark appearing in user interface.
+
+- Installer no longer allows installation on Windows XP.
+
+- Fixed bug that stopped start page from displaying if no internet connection.
+
+
+Version 12.05
+-------------
+
+- Fixed bugs related to erasing sectors when using Ethernet bootloader.
+
+- Fixed bug that stopped LPC1700 ethernet bootloader from being used.
+
+
+Version 12.01
+-------------
+
+- Fixed bug that caused incorrect driver version numbers to be shown in the the About window.
+
+- Updated to latest drivers.
+
+
+Version 12.00
+-------------
+
+- All-new user interface (GUI and command line).
+
+- Fixed bug that stopped devices with more than 256 flash blocks from working.
+
+- Fixed bug related to checksum generation for Ethernet Cortex devices.
+
+- Fixed bug that stopped reaing of memory in sizes smaller than or exact multiples of 0x200 bytes.
+
+- Speed improvements for Cortex (SWD and Ethernet) devices.
+
+
+Version 11.20
+-------------
+
+- Removed limit on amount of data for production system direct entry tasks.
+
+- Added LPC182x and LPC181x to command line.
+
+- Added LPC1800 Ethernet MX25L25635F device.
+
+
+Version 11.18
+-------------
+
+- Now supports COM ports 33 - 255.
+
+
+Version 11.17
+-------------
+
+- Fixed bug that stopped mass erase of LPC804.
+
+
+Version 11.16
+-------------
+
+- Fixed bug on command line when using LPC1800/4300 - wrong flash bank selected.
+
+
+Version 11.15
+-------------
+
+- Execute checkbox now checked by default.
+
+- Enabled execute option for LPC-Link2 devices.
+
+
+Version 11.11
+-------------
+
+- Updated LPC80x/83x signatures.
+
+
+Version 11.10
+-------------
+
+- Added support for programming Cortex devices via CMSIS-DAP/DAP-Link (Experimental).
+
+- Added support for Kinetis KW41Z (not on command line or DLLs).
+
+
+Version 11.02
+-------------
+
+- Added support for programming LPC80x and LPC8N0x via SWD.
+
+
+Version 11.01
+-------------
+
+- Fixed bug with reading flash for LPC54xxx when first word needs to be skipped.
+
+
+Version 11.00
+-------------
+
+- Added LPC54005, LPC54016, LPC54018, LPC51U68.
+
+
+Version 10.96
+-------------
+
+- Fixed bug that caused incorrect verify at location 0x000001FF for LPC541xx devices.
+
+
+Version 10.95
+-------------
+
+- Added UART support for LPC804 and LPC8N04.
+
+
+Version 10.90
+-------------
+
+- Fixed bug that stopped CAN bootloader from being used on command line.
+
+
+Version 10.89
+-------------
+
+- Now able to perform individual block erase when using external flash.
+
+
+Version 10.88
+-------------
+
+- No changes.
+
+
+Version 10.86
+-------------
+
+- No changes.
+
+
+Version 10.85
+-------------
+
+- Added support for LPC802.
+
+
+Version 10.82
+-------------
+
+- Can now read and verify on LPC54xxx devices.
+
+
+Version 10.81
+-------------
+
+- Updated LPC834 part name.
+
+
+Version 10.80
+-------------
+
+- Added LPC832 and LPC834.
+
+
+Version 10.75
+-------------
+
+- No changes.
+
+
+Version 10.70
+-------------
+
+- No changes.
+
+
+Version 10.67
+-------------
+
+- Fixed bug that stopped command line interface from connecting to LPC2000 devices.
+
+
+Version 10.66
+-------------
+
+- Fixed bug with LPC84x support that corrupted the bootloader's stack.
+
+
+Version 10.65
+-------------
+
+- Fixed bug that stopped verify working correctly for LPC8xx when using SWD.
+
+
+Version 10.62
+-------------
+
+- Fixed mistake in device signature for LPC54113J256.
+
+
+Version 10.61
+-------------
+
+- Removed LPC54S6xx.
+
+
+Version 10.60
+-------------
+
+- Added LPC54628.
+
+- Added LPC54616 CAN and LPC54628 CAN.
+
+
+Version 10.55
+-------------
+
+- Added support for LPC84x FAIM programming over SWD.
+
+- FAIM window now automatically reads when opened.
+
+- FAIM window now shows raw FAIM contents.
+
+
+Version 10.50
+-------------
+
+- Added support for LPC84x FAIM.
+
+- Improvements to CAN secure bootloader pairing.
+
+- Manual improvements.
+
+
+Version 10.46
+-------------
+
+- No changes.
+
+
+Version 10.45
+-------------
+
+- Improved timing for CANcrypt support.
+
+- Fixed bug that stopped SWD bridge working on standalone LPC-Link2 boards.
+
+- Improved CANcrypt error messages.
+
+
+Version 10.41
+-------------
+
+- Fixed bugs related to 'Go' operation when using LPC54618 CAN.
+
+
+Version 10.40
+-------------
+
+ - Improvements in SWD Link2 and SWD LPC11U35 detection and support.
+
+ - Added support for gang-programming using SWD.
+
+ - Fixed bug in LPC844/845 support.
+
+ - Added support for CANcrypt secure bootloaders.
+
+ - Fixed bug that stopped device signatures starting with 'F' from being correctly understood.
+
+ - Fixed bug that stopped some odd-length binary files from being correctly sent.
+
+
+Version 10.30
+-------------
+
+ - Added support for LPC54618 CAN.
+
+ - Added support for LPC844/LPC845.
+
+ - Added support for programming binary files to CAN bootloaders.
+
+ - Added option to patch hex files before programming.
+
+
+Version 10.10
+-------------
+
+- Improvements to SWD support.
+
+- Fixed bug that stopped first 256 bytes of memory from appearing blank when using SWD with LPC13xx.
+
+
+Version 10.02
+-------------
+
+- Updated device signatures for LPC18Sxx.
+
+
+Version 10.01
+-------------
+
+- Fixed bug related to programming internal flash of LPC546xx.
+
+- Performance improvement when loading in large hex files.
+
+
+Version 10.00
+-------------
+
+- Fixed bug related to external flash programming on LPCxpresso54608.
+
+- Performance improvement when loading in large hex files.
+
+
+Version 9.98
+------------
+
+- Added support for external flash programming on LPCxpresso54608.
+
+
+Version 9.95
+------------
+
+- Added support for LPC5460x family.
+
+
+Version 9.90
+------------
+
+- No changes.
+
+
+Version 9.87
+------------
+
+- Improved SWD support for detecting if a part is already in SWD mode.
+
+
+Version 9.86
+------------
+
+- Fixed bug that stopped reading of flash on LPC1800/LPC4300.
+
+
+Version 9.85
+------------
+
+- Improved support for executing from RAM when using SWD.
+
+- Added support for verifying hex files programmed to RAM.
+
+- Now warns user if nothing was programmed or verified.
+
+- Added LPC11E35/501.
+
+
+Version 9.82
+------------
+
+- Fixed bug with reading and verify for LPC800.
+
+
+Version 9.81
+------------
+
+- Fixed bug that stopped LPC1800/LPC4300 external flash support from working.
+
+
+Version 9.80
+------------
+
+- Updates to SWD support for LPC1100, LPC1200 and LPC1300.
+
+
+Version 9.75
+------------
+
+- Added ability to read ARM Cortex serial numbers on the command line.
+
+
+Version 9.73
+------------
+
+- Fixed bug with erasing blocks 11 - 14 of LPC1812.
+
+
+Version 9.72
+------------
+
+- Fixed bug with NHS3100/NHS3152/NHS3153 SWD support introduced in version 9.70.
+
+
+Version 9.71
+------------
+
+- Improvement to LPC1800/LPC4300 SWD over Link2 support.
+
+
+Version 9.70
+------------
+
+- Fixed bug that stopped verify working on LPC800.
+
+- Fixed bug that stopped SWD over LPC11U35 from working.
+
+- Fixed bug that caused incorrect command line generation from GUI.
+
+
+Version 9.65
+------------
+
+- Added support for NHS3100/NHS3152/NHS3153.
+
+
+Version 9.60
+------------
+
+- Added support for LPC54113 and LPC54114.
+
+
+Version 9.57
+------------
+
+- Added support for additional LPC1700 ethernet devices on the command line.
+
+
+Version 9.56
+------------
+
+- Added LPC11U66 and LPC11E66.
+
+
+Version 9.55
+------------
+
+- Fixed bug that stopped SWD interfaces from working with some devices.
+
+
+Version 9.51
+------------
+
+- No changes.
+
+
+Version 9.50
+------------
+
+- Fixed bug that stopped command line interface from sometimes connecting to devices.
+
+- Fixed mistake with memory size of LPC1124.
+
+
+Version 9.40
+------------
+
+- Added option to specify a delay after opening the COM port and before sending data. Helps with some Cypress drivers.
+
+- Fixed bug in export of command line directives.
+
+
+Version 9.31
+------------
+
+- Completely removes PEAK driver from installation folder.
+
+- Updated to latest PEAK driver.
+
+
+Version 9.30
+------------
+
+ - Increased delay after sending go command from 100ms to 500ms.
+
+ - Internal improvements to go command.
+
+ - Fixed bug with incorrect display of percentage flash used for certain devices.
+
+ - Shows Cortex serial numbers in hexadecimal as well as decimal, with option to copy to clipboard.
+
+ - Added support for standalone LPC-Link2 for USB to SWD programming.
+
+ - Added support for SWD programming of LPC1700 devices.
+
+
+Version 9.20
+------------
+
+- Added support for programming external flash on LPCxpresso18S37 and LPCxpresso4337 boards.
+
+
+Version 9.16
+------------
+
+- Fixed bug that caused crash during verify if line feed missing.
+
+
+Version 9.15
+------------
+
+- Bug fixes related to using Ethernet bootloaders with LPC18xx/LPC43xx.
+
+- Added LPC18xx/LPC43xx example ethernet bootloader.
+
+
+Version 9.10
+------------
+
+- Improvements to the handling of Ethernet bootloaders.
+
+
+Version 9.00
+------------
+
+- Added support for SWD programming of LPC112x, LPC11U3x, LPC11U6x, LPC15xx, LPC18xx, LPC43xx.
+
+- Fixed bugs with SWD support.
+
+
+Version 8.97
+------------
+
+- Updated LPC1124/LPC1125 signatures.
+
+- Renamed SWD interfaces.
+
+- Added calls to netsh to cleanup after using ethernet bootloader.
+
+
+Version 8.96
+------------
+
+- Fixed bug that caused advanced options changes to not appear correctly.
+
+
+Version 8.95
+------------
+
+- Added LPC18Sxx devices.
+
+
+Version 8.90
+------------
+
+- New support for reading LPC54xxx serial numbers.
+
+
+Version 8.82
+------------
+
+- Added support for LPC1124/LPC1125.
+
+
+Version 8.81
+------------
+
+- Fixed bug with enabling/disabling settings when choosing SWD interface.
+
+
+Version 8.80
+------------
+
+- Completed SWD interface support for LPC5410x devices.
+
+
+Version 8.72
+------------
+
+- Fixed bug that stopped interfaces with fixed baudrates from working.
+
+
+Version 8.71
+------------
+
+- Updated serial number handling for LPC5410x devices.
+
+
+Version 8.70
+------------
+
+- Added support for Ethernet bootloaders on LPC43xx flash devices.
+
+
+Version 8.62
+------------
+
+- Fixed bug that stopped flash from being read on LPC800 devices.
+
+
+Version 8.61
+------------
+
+- Fixed bug that stopped flash bank two on LPC18x3 from being programmed.
+
+
+Version 8.60
+------------
+
+- Better automatic line feed handling for ARM7 devices.
+
+
+Version 8.55
+------------
+
+- Added support for LPC11U30-based SWD bridge (LPCxpresso824-MAX board).
+
+
+Version 8.50
+------------
+
+- Added support for LPC54101 and LC54102.
+
+
+Version 8.40
+------------
+
+- Improved line feed support for ARM7 and ARM Cortex devices.
+
+
+Version 8.30
+------------
+
+- Added support for LPC1800/4300-based USB SWD interface.
+
+
+Version 8.26
+------------
+
+- Added LPC822/824.
+
+
+Version 8.25
+------------
+
+- No changes.
+
+
+Version 8.19
+------------
+
+- Added LPC812M101JTB16.
+
+- Renamed LPC81xMx01Fxxxx to LPC81xMx01Jxxxx.
+
+
+Version 8.18
+------------
+
+- Added option to completely disable DTR/RTS.
+
+
+Version 8.17
+------------
+
+- No changes.
+
+
+Version 8.16
+------------
+
+- No changes.
+
+
+Version 8.15
+------------
+
+- No changes.
+
+
+Version 8.11
+------------
+
+- Fixed bug that could cause CAN driver to disconnect from bootloader during ISP operations.
+
+
+Version 8.10
+------------
+
+- Updated PEAK CAN driver.
+
+- Improvements to installer.
+
+
+Version 8.05
+------------
+
+- No changes.
+
+
+Version 7.95
+------------
+
+- No changes.
+
+
+Version 7.90
+------------
+
+- Added support for programming external flash on ARM Cortex devices with on-chip flash.
+
+- Added external flash bootloader for LPC1857/LPC4357.
+
+- LPC18x2/LPC43x2 flash bank bug fix.
+
+- Now reads signatures correctly for all LPC1800/LPC4300 devices.
+
+- Fixed manual link in installer.
+
+- Added support for Ethernet bootloaders on LPC1800.
+
+
+Version 7.85
+------------
+
+- Updated flash block definitions for LPC1500 family.
+
+
+Version 7.80
+------------
+
+- Added options to control line feed handling on ARM and ARM Cortex devices.
+
+
+Version 7.73
+------------
+
+- Added LPC1810 example SPIFI bootloader.
+
+
+Version 7.72
+------------
+
+- Added LPC11E67/68.
+
+
+Version 7.71
+------------
+
+- Changed flash bank 0/1 to A/B in user interface.
+
+
+Version 7.70
+------------
+
+- Added LPC15xx family.
+
+
+Version 7.67r2
+--------------
+
+- Cleaned up start menu.
+
+
+Version 7.67
+------------
+
+- Added LPC11U67/68.
+
+- Fixed bug with block start address for some Cortex devices.
+
+
+Version 7.66
+------------
+
+- Fixed bug that caused Flash Magic to keep COM port open after programming.
+
+
+Version 7.65
+------------
+
+- Improvements to programming finished/failed status messages.
+
+
+Version 7.64
+------------
+
+- Fixed bug that caused crash when erasing blocks used by hex file and ARM Cortex UART driver.
+
+
+Version 7.63
+------------
+
+- Improved support for ARM7 devices when using problematic USB to RS232 cables.
+
+
+Version 7.62
+------------
+
+- Fixed bug that stopped application from starting when external bootloaders were last used.
+
+- Improvements to handling of erase for devices that do not return a linefeed.
+
+
+Version 7.61
+------------
+
+- Internal improvements to block handling.
+
+
+Version 7.60
+------------
+
+- No changes.
+
+
+Version 7.51
+------------
+
+- Updated signatures for ASC3101/3112.
+
+
+Version 7.50
+------------
+
+- Added LPC1812/3/5/7 and LPC1822/3/5/7.
+
+
+Version 7.47 "Jumbo Jet"
+------------------------
+
+- No changes.
+
+
+Version 7.46
+------------
+
+- Fixed mistake in manual.
+
+
+Version 7.45
+------------
+
+- Added EM783 family.
+
+- Added description for using LPC4088 SPIFI bootloader on Embedded Artists board.
+
+
+Version 7.40
+------------
+
+- No changes.
+
+
+Version 7.39
+------------
+
+- Fixed bug that stopped settings files from properly loading.
+
+
+Version 7.38
+------------
+
+- No changes.
+
+
+Version 7.37
+------------
+
+- No changes.
+
+
+Version 7.36
+------------
+
+- Changed programming offset in RAM for LPC810.
+
+
+version 7.35
+------------
+
+- No changes.
+
+
+Version 7.32
+------------
+
+- No changes.
+
+
+Version 7.31
+------------
+
+- No changes.
+
+
+Version 7.30
+------------
+
+- Added LPC4312/3/5/7, LPC4322/3/5/7 and LPC4333/7.
+
+- Improvements to manual.
+
+
+Version 7.21
+------------
+
+- Improved support for external flash bootloaders.
+
+
+Version 7.20
+------------
+
+- Added external SPIFI bootloader for LPC4088.
+
+
+Version 7.11
+------------
+
+- No changes.
+
+
+Version 7.10
+------------
+
+- No changes.
+
+
+Version 7.02
+------------
+
+- Faster signature reading for LPC18xx/LPC43xx devices that return only one signature word.
+
+
+Version 7.01
+------------
+
+- Updated device signatures for existing LPC18xx and LPC43xx devices.
+
+- Added LPC1830/20/10, LPC1853/37/33, LPC4330/20/10, LPC4353.
+
+
+Version 7.00
+------------
+
+- Added support for LPC810, LPC811 and LPC812.
+
+- Fixed bug that stopped pure RAM programming on Cortex devices.
+
+
+Version 6.98
+------------
+
+- Added option to specify UDP post-transmit delay for Ethernet bootloaders.
+
+
+Version 6.97
+------------
+
+- Added LPC11E36 and LPC11E37.
+
+
+Version 6.96
+------------
+
+- No changes.
+
+
+Version 6.95
+------------
+
+- No changes.
+
+
+Version 6.94
+------------
+
+- Fixed bug that stopped LPC1850 signature from being read.
+
+
+Version 6.93
+------------
+
+- Added support for LPC1101LVUK, LPC1102LVUK, LPC1112LV and LPC1114LV.
+
+
+Version 6.92
+------------
+
+- Updated signatures for EM773.
+
+
+Version 6.91
+------------
+
+- Added support for Ethernet driver with LPC1776/8 and LPC1786/8.
+
+
+Version 6.90
+------------
+
+- Added support for LPC4072/4/6/8 and LPC4088.
+
+
+Version 6.80
+------------
+
+- Improved support for devices with more than one flash bank.
+
+
+Version 6.77
+------------
+
+- Minor tweak to Cortex UART driver.
+
+
+Version 6.76
+------------
+
+- A change to the debug file name and location when using the GUI.
+
+
+Version 6.75
+------------
+
+- Added LPC11A02UK, LPC11A04UK, LPC11A11/001, LPC11A02/101 and LPC11A03/201.
+
+
+Version 6.74
+------------
+
+- Fixed bug in command line interface that stopped flash bank from being specified.
+
+
+Version 6.73
+------------
+
+- Improvements to ARM Cortex vector checksum generation.
+
+
+Version 6.72
+------------
+
+- Fixed bugs in LPC1853/7 and LPC4357 support.
+
+
+Version 6.71
+------------
+
+- External bootloaders can now show notes on hardware settings.
+
+- Added additional signatures for Cortex-M0 devices.
+
+- Added LPC11U3x devices.
+
+
+Version 6.70
+------------
+
+- Added support for LPC1853/57 and LPC4357.
+
+
+Version 6.60
+------------
+
+- Improved support for programming external flash, including example bootloader and documentation.
+
+
+Version 6.50
+------------
+
+- Added support for programming external flash on Hitex LPC1850 board.
+
+
+Version 6.34
+------------
+
+- Device database bug fixes,
+
+
+Version 6.33
+------------
+
+- Added LPC4350.
+
+
+Version 6.32
+------------
+
+- Added LPC11A14/301.
+
+
+Version 6.31
+------------
+
+- Fixed bug with ARM Cortex driver that stopped memory from being read.
+
+
+Version 6.30
+------------
+
+- Added LPC1850.
+
+
+Version 6.20
+------------
+
+- Added LPC1111/103, LPC1111/203, LPC1112/103, LPC1112/203, LPC1113/303, LPC1113/203, LPC1114/303, LPC1114/203, LPC1114/323, LPC1114/333 and LPC1115/303.
+
+
+Version 6.10
+------------
+
+- Added LPC2109 to command line interface.
+
+- Added ASC3101/3112.
+
+
+Version 6.03
+------------
+
+- Fixed bug with the Start Bootloader dialog window.
+
+- Added LPC1315/6/7 and LPC1345/6/7.
+
+
+Version 6.02
+------------
+
+- Added LPC11E1x family.
+
+
+Version 6.01
+------------
+
+- Added LPC11U2x family.
+
+
+Version 6.00
+------------
+
+- Updated signatures for LPC11U12/3/4.
+
+
+Version 5.94
+------------
+
+- Fixed bug introduced in previous version that stopped terminal window from being used.
+
+
+Version 5.93
+------------
+
+- Added additional signature for LPC11U14.
+
+
+Version 5.92
+------------
+
+- Fixed bug in command line interface that stopped CAN-based bootloaders from being used
+
+- Improved export of command line directives for non-UART bootloaders.
+
+- Added CAN directive to manual.
+
+
+Version 5.91
+------------
+
+- Added LPC11D14/302.
+
+
+Version 5.90
+------------
+
+- Updated LPC11xx device signatures.
+
+
+Version 5.89
+------------
+
+- Added LPC12D27/301.
+
+- Better support for 230400 baud when using ARM Cortex devices.
+
+
+Version 5.88
+------------
+
+- Fixed bug that stopped programming of boot vector on the command line for LPC9xx devices.
+
+
+Version 5.87
+------------
+
+- Fixed bug in memory size display for LPC177x and LPC178x.
+
+
+Version 5.86
+------------
+
+- Added LPC11U12/13/14.
+
+
+Version 5.85
+------------
+
+- Added support for LPC1311/01 and LPC1313/01.
+
+- Added support for LPC12xx family.
+
+
+Version 5.84
+------------
+
+- Fixed display problem with main window.
+
+
+Version 5.83
+------------
+
+- Added LPC1759 to command line interface.
+
+
+Version 5.82
+------------
+
+- Added LPC177x and LPC178x.
+
+
+Version 5.81
+------------
+
+- Added LPC1769 to command line interface.
+
+
+Version 5.80
+------------
+
+- Updated LPC1111/102 and LPC1111/202 signatures.
+
+
+Version 5.79
+------------
+
+- Fixed mistake with display of LPC1111 memory size.
+
+
+Version 5.78
+------------
+
+- Tweak to LPC11C1x and LPC11C2x support.
+
+
+Version 5.77
+------------
+
+- Fixed bug with implementation of LPC11C1x and LPC11C2x.
+
+
+Version 5.76
+------------
+
+- Completed addition of LPC11C1x and LPC11C2x.
+
+- Added retries option for autobauding with ARM 7 and ARM Cortex devices when using a UART-based bootloader.
+
+
+Version 5.75
+------------
+
+- Added LPC11C22 and LPC11C24.
+
+
+Version 5.74
+------------
+
+- Added LPC1102UK.
+
+
+Version 5.73
+------------
+
+- No changes.
+
+
+Version 5.72
+------------
+
+- No changes.
+
+
+Version 5.71
+------------
+
+- Added LPC1111/102, LPC1111/202, LPC1112/102, LPC1112/202, LPC1113/202, LPC1113/302, LPC1114/202 and LPC1114/302.
+
+
+Version 5.70
+------------
+
+- No changes.
+
+
+Version 5.69
+------------
+
+- No changes.
+
+
+Version 5.68
+------------
+
+- Fixed bug with command line interface not reporting an error for disconnected cables during programming.
+
+- Added improved support for reading CRP values from LPC1751.
+
+
+Version 5.67r2
+--------------
+
+- Updated Ethernet bootloader and blinky example to use new CMSIS header files.
+
+
+Version 5.67
+------------
+
+- Added LPC1763.
+
+
+Version 5.66
+------------
+
+- Added support for PEAK PC Card interface.
+
+- Improved user interface for CAN and Ethernet devices.
+
+- Added LPC11C12 and LPC11C14 with UART bootloader.
+
+- Added EM773 and MPT612.
+
+
+Version 5.65
+------------
+
+- Added LPC11C12 and LPC11C14 with CAN bootloader.
+
+
+Version 5.63
+------------
+
+- Added ability to select Ethernet interface when using Ethernet bootloader.
+
+
+Version 5.62
+------------
+
+- Modification to work around issue on some PCs searching for Ethernet adapters.
+
+- Fixed bug that caused Flash Magic to keep the hex file open after programming.
+
+
+Version 5.61
+------------
+
+- Fixed minor user interface text issue.
+
+
+Version 5.60
+------------
+
+- GUI stops page erasing for 89(L)V51Rx2 devices with bootloader version 4.
+
+- Reading Code Read Protection is now disabled for early LPC1751 devices.
+
+
+Version 5.53
+------------
+
+- Fixed bug with reading signature of LPC2368.
+
+
+Version 5.52
+------------
+
+- Added additional signature for LPC2368.
+
+
+Version 5.51
+------------
+
+- Fixed bug that caused problems using LPC11xx/LPC13xx devices when CRP2 was set.
+
+
+Version 5.50r2
+--------------
+
+- Updated LPC17xx Ethernet bootloader.
+
+
+Version 5.50
+------------
+
+- Added LPC17xx Ethernet driver and bootloader.
+
+- Added LPC1759/69.
+
+
+Version 5.45
+------------
+
+- Fixed bug with Go command when using ARM mode.
+
+
+Version 5.44
+------------
+
+- Fixed bug with Go command when using ARM mode.
+
+
+Version 5.43
+------------
+
+- Added support for the LPC11xx family.
+
+
+Version 5.42
+------------
+
+- Fixed bug with setting AWP, CWP and DCCP from hex file in LPC93x devices.
+
+
+Version 5.41
+------------
+
+- Added 89LPC97x and 89LPC98x families.
+
+- Fixed bug with setting AWP, CWP and DCCP from hex file in LPC95x devices.
+
+
+Version 5.40
+------------
+
+- Added support for setting 89(L)V51Rx2 serial number on command line.
+
+
+Version 5.39
+------------
+
+- Updated signatures for LPC1342/1343.
+
+
+Version 5.38
+------------
+
+- Removed option of free-form user input in memory range selector in display memory window.
+
+
+Version 5.37
+------------
+
+- Fixed bug that stopped some interfaces from being used on the command line.
+
+- Fixed bug that stopped baudrate setting in Start Bootloader window from being used.
+
+- Fixed bugs relating to reading and writing 89(L)V51Rx2 security bit.
+
+
+Version 5.36
+------------
+
+- Updated signatures for 89V51RD2 and 89LV51RD2.
+
+- Fixed bug that stopped NXP bridges from being configured correctly when 89CV51Rx2 is selected.
+
+
+Version 5.35
+------------
+
+- Added LPC1767.
+
+
+Version 5.34
+------------
+
+- Device database only shows signatures when device has a single signature.
+
+- Fixed bug in support for non-LPC9xx ISP interfaces.
+
+- Fixed bug that caused additional security bytes to be attempted to be programmed when using start900.a51 or start950.a51.
+
+
+Version 5.33
+------------
+
+- Fixed bug with reading protocol version number of ISP to ICP bridges. 
+
+
+Version 5.32
+------------
+
+- Added support for NXP ISP to Parallel Programming bridges
+
+- Fixed bug that stopped the current interface selection from being remembered
+
+
+Version 5.31
+------------
+
+- No changes.
+
+
+Version 5.30
+------------
+
+- Added driver for CAN based bootloaders.
+
+
+Version 5.29
+------------
+
+- Added LPC2157/2158.
+
+- Added new method for selecting devices.
+
+
+Version 5.27
+------------
+
+- Minor fix for reading LPC96x device configuration.
+
+
+Version 5.26
+------------
+
+- Updated device signature for LPC1758.
+
+
+Version 5.25
+------------
+
+- Improved RAM programming speed for ARM Cortex devices.
+
+
+Version 5.24 Apollo 11 Landing 40th Anniversary Edition
+-------------------------------------------------------
+
+- Updated device configuration windows for LPC9xx family.
+
+
+Version 5.23
+------------
+
+- Fixed bug with programming RAM only with ARM devices.
+
+- Changed lowest usable RAM location in Cortex-M3 to 0x10000300.
+
+
+Version 5.22
+------------
+
+- Fixed bug with handling of record type 02H in hex files.
+
+
+Version 5.21
+------------
+
+- Fixed bug with Go command when used with LPC13xx.
+
+
+Version 5.20
+------------
+
+- Sped up LPC17xx/LPC2xxx autobauding a bit.
+
+- Improved error messages when autobauding fails.
+
+- Added preliminary support for LPC13xx family.
+
+
+Version 5.15
+------------
+
+- Improved Code Read Protection level detection for LPC17xx/LPC2xxx devices.
+
+
+Version 5.14
+------------
+
+- Removed delay when transmitting using half-duplex to LPC17xx/LPC2xxx devices.
+
+
+Version 5.13
+------------
+
+- Fixed bug with supporting start954.a51.
+
+- Added support for programming LPC9xx DCCP, CWP and AWP bits from a hex file.
+
+- Updated LPC17xx CRP support.
+
+
+Version 5.12
+------------
+
+- Read Security option shows CRP level for LPC17xx and LPC2xxx devices.
+
+
+Version 5.11
+------------
+
+- Added support for start954.a51 from Keil to program all security bits from a hex file.
+
+- LPC17xx/LPC2xxx code read protection settings now come only from the hex file locations 1FCH - 1FFH.
+
+- Fixed bug regarding verify for LPC17xx.
+
+
+Version 5.10
+------------
+
+- Added support for reading AHB RAM and serial number of LPC17xx devices.
+
+
+Version 5.03
+------------
+
+- Speed improvements for LPC2xxx when using half-duplex mode.
+
+
+Version 5.02
+------------
+
+- Worked around issues with ARM 7 bootloader when using half-duplex mode.
+
+
+Version 5.01
+------------
+
+- Fixed bug in ARM 7 driver that stopped code from executing after being programmed.
+
+
+Version 5.00
+------------
+
+- Added support for LPC17xx family.
+
+- Fixed bug with saving contents of device memory as a hex file.
+
+
+Version 4.66
+------------
+
+- Added support for half-duplex mode with LPC2xxx devices.
+
+
+Version 4.65
+------------
+
+- Fixed bug that sometimes caused incorrect warnings when about to program hex files with extended segment records.
+
+
+Version 4.64
+------------
+
+- Updated device configuration windows for LPC9151/9161/9171/9201/9211/922A1/9241/9251.
+
+- Updated device configuration windows for LPC9301/931A1/9321/9331/9341/9351/9361/9402.
+
+
+Version 4.63
+------------
+
+- Added 89LPC9361.
+
+- Added 89LPC9151/9161/9171.
+
+
+Version 4.62
+------------
+
+- Added 350ms delay after controlling DTR and RTS before sending autobaud character for LPC2xxx devices.
+
+
+Version 4.61
+------------
+
+- Changed number of security bits for 89LPC9381.
+
+- Added 89LPC9381 to command line interface.
+
+
+Version 4.60
+------------
+
+- Updated user interface.
+
+- Fixed interface selection issue.
+
+- Added section in manual on Ethernet bootloader.
+
+- Fixed bug regarding disabling of erase options.
+
+
+Version 4.53
+------------
+
+- Fixed bug with 89V51Rx2/89LV51Rx2 autobauding routine.
+
+
+Version 4.52
+------------
+
+- Fixed bug with exiting of ARM Ethernet driver.
+
+
+Version 4.51
+------------
+
+- Added Ethernet bootloader from NXP for LPC2xxx devices.
+
+
+Version 4.50
+------------
+
+- Added support for Ethernet bootloader in LPC2xxx devices.
+
+
+Version 4.39
+------------
+
+- Internal changes to DLLs.
+
+
+Version 4.38
+------------
+
+- Added 89LPC9201, 89LPC9211, 89LPC922A1, 89LPC9241, 89LPC9251, 89LPC9301, 89LPC931A1, 89LPC9331, 89LPC9341, 89LPC9402.
+
+
+Version 4.37
+------------
+
+- Added 89LPC9408.
+
+- Improved validity checking of hex records.
+
+
+Version 4.36
+------------
+
+- No changes.
+
+
+Version 4.35
+------------
+
+- Removed unneeded device.
+
+
+Version 4.34
+------------
+
+- Added support for 115200 baud in Start Bootloader dialog window.
+
+- Added LPC9381.
+
+- Inserted delay during transmission of long hex records.
+
+
+Version 4.33
+------------
+
+- Added additional device signatures for LPC2368 and LPC2387.
+
+
+Version 4.32
+------------
+
+- Added option to delay after sending Go command before closing COM port.
+
+- Selecting FDI USB-ICP-LPC9XX now fixes the baudrate at 19200.
+
+
+Version 4.31
+------------
+
+- Added 89LPC9321 and 89LPC9351.
+
+
+Version 4.30
+------------
+
+- Fixed bug with USB-ICP-LPC9XX interface selection.
+
+
+Version 4.29
+------------
+
+- Added workaround for missing line feed when performing a blank check on LPC9xx devices.
+
+- Renamed Future Designs interfaces.
+
+- Added Future Designs USB-ICP-LPC2K interface.
+
+
+Version 4.28
+------------
+
+- Added LPC2361.
+
+
+Version 4.27
+------------
+
+- No changes.
+
+
+Version 4.26
+------------
+
+- No changes.
+
+
+Version 4.25
+------------
+
+- No changes.
+
+
+Version 4.24
+------------
+
+- General improvements to verification routines.
+
+
+Version 4.23
+------------
+
+- Fixed verify for LPC2xxx hex files that program RAM.
+
+
+Version 4.22
+------------
+
+- Allows programming of LPC2xxx RAM locations 0x40000000 to 0x4000011F.
+
+- Generates error message if an attempt is made to program LPC2xxx RAM locations used by bootloader (0x40000120 to 0x400001FF).
+
+- DTR and RTS are not changed after GO feature has been used to start execution from RAM in LPC2xxx devices.
+
+
+Version 4.21
+------------
+
+- Fixed address display problem for some LPC2xxx devices.
+
+
+Version 4.20
+------------
+
+- Added LPC2458 and LPC2478.
+
+
+Version 4.19
+------------
+
+- Fixed bug that stopped entire flash from being read when using LPC2365 and LPC2366.
+
+
+Version 4.18
+------------
+
+- Added support for LPC2365, LPC2367, LPC2377, LPC2387 and LPC2388.
+
+
+Version 4.17r2
+--------------
+
+- No changes.
+
+
+Version 4.17
+------------
+
+- Programs the first 512 bytes of flash memory in LPC2xxx devices last, to ensure that partially programmed hex files do not program the "valid user code" checksum.
+
+
+Version 4.16
+------------
+
+- Better handling of universal pointer locations for LPC2xxx devices.
+
+
+Version 4.15
+------------
+
+- Added support for the 89LPC954 on the command line.
+
+
+Version 4.14
+------------
+
+- Added additional signatures for LPC2220/2290.
+
+- LPC2xxx device signatures are now displayed in hexadecimal.
+
+- Fixed bug that stopped COM port from being closed if an error occurred after clicking on the Start button.
+
+
+Version 4.13
+------------
+
+- No changes.
+
+
+Version 4.12
+------------
+
+- Added improved support for junk outside of records in hex files.
+
+- Fixed bug with display of hex file data range in info window.
+
+- All types of erase now support automatic conversion to page erase.
+
+- Erase window now supports automatic conversion to page erase.
+
+
+Version 4.11
+------------
+
+- No changes.
+
+
+Version 4.10
+------------
+
+- Added workaround for missing line feeds from some LPC2xxx devices.
+
+
+Version 4.02
+------------
+
+- Updated block sizes and number for LPC2109.
+
+
+Version 4.01
+------------
+
+- Removed need for python24.dll.
+
+
+Version 4.00
+------------
+
+- Internal structural changes to add support for scripts in Production System version.
+
+- Added support for full device erase command for 89(L)V51Rx2 devices.
+
+
+Version 3.71
+------------
+
+- Now supports '$' symbols in paths when using the command line interface.
+
+
+Version 3.70
+------------
+
+- Fixed bug in ARM driver that caused a failure to autobaud to be reported correctly to the application.
+
+- Fixed bug in command line interface that stopped individual blocks from being erased.
+
+
+Version 3.69
+------------
+
+- Fixed bug that caused fourth LPC2366 signature to not be recognized.
+
+
+Version 3.68
+------------
+
+- Added 89LPC954
+
+- Read Signature now displays bootloader version for 89(L)V51Rx2 devices.
+
+
+Version 3.67
+------------
+
+- Added another device signature for LPC2366.
+
+
+Version 3.66
+------------
+
+- Fixed problem that stopped the 89CV51Rx2 clocks bit from being programmed.
+
+- Added better support for working around 89(L)V51Rx2 block 0 erase problem.
+
+
+Version 3.65
+------------
+
+- Improved Erase Page dialog window. Can now select ranges of pages easily and erase all pages with a single click.
+
+
+Version 3.64
+------------
+
+- Fixed mistake in manual regarding use of HEXFILE directive.
+
+- Fixed bug in 8051/XA DLL that stopped clear configuration protection from working with 89LPC952.
+
+- Meaning of clocks bit read from 89CV51Rx2 devices is now inverted.
+
+
+Version 3.63
+------------
+
+- Enabled Clear Config Protection button for 89LPC952.
+
+
+Version 3.62
+------------
+
+- Added support for additional security bits for 89LPC952.
+
+- Added better receive handling after autobauding with 89(L)V51Rx2 devices.
+
+
+Version 3.61
+------------
+
+- Added latest signatures for LPC2xxx devices.
+
+
+Version 3.60
+------------
+
+- Added option to assert DTR and RTS while COM port open when using 89LPC9xx devices.
+
+
+Version 3.59
+------------
+
+- Added 89CV51Rx2 devices.
+
+
+Version 3.58
+------------
+
+- Fixed bug that caused Flash Magic to crash if certain oscillator frequencies were used with high speed communications when using an LPC2xxx device.
+
+
+Version 3.57
+------------
+
+- Worked around bug in Microsoft USB driver for COM ports to enable DTR and RTS to be used.
+
+
+Version 3.56
+------------
+
+- Improved DTR and RTS control when using Microsoft USB driver for mimicking COM ports.
+
+- Exchanged some references of "Philips" to "NXP".
+
+- Default DTR/RTS setting for all devices is now to enable the use of the signals.
+
+
+Version 3.55
+------------
+
+- Fixed bug that stopped command line interface from working.
+
+
+Version 3.54
+------------
+
+- Added support for reading the bootloader version for 89LPC9xx and 89V66x devices.
+
+
+Version 3.53
+------------
+
+- Disabled Execute option when using FDI USB-ICP interface - not supported.
+
+- When selecting FDI USB-ICP interface, DTR and RTS are enabled. For LPC2xxx devices T1 and T2 are set to 300ms each.
+
+
+Version 3.52
+------------
+
+- Fixed bug that caused LPC2xxx bootloader version to be incorrectly read.
+
+- Added support for FDI USBD-dddd interface.
+
+- Fixed bug that caused Update Bootloader feature to fail when using the 89V66x devices.
+
+
+Version 3.51
+------------
+
+- Better handling of placing 89(L)V51Rx2 devices into ISP mode when cycling power to device.
+
+- Fixed bug with LPC2xxx hex file handling. Extended linear address records are now correctly processed.
+
+- First 200H bytes of LPC2xxx RAM now always read as 00H. This area is reserved for the bootloader and cannot always be read.
+
+- Command line interface now returns "not supported" when attempting to verify using an LPC9xx device.
+
+
+Version 3.50
+------------
+
+- Fixed bug in command line directives generation. First argument to HARDWARE directive was wrong.
+
+
+Version 3.49
+------------
+
+- Modifed 89(L)V51Rx2 autobauding to ignore first echoed character.
+
+- Enabled Update Bootloader feature for 89V66x devices.
+
+- Fixed bug when switching to high speed comms when device has already autobauded, for LPC2xxx devices.
+
+- Added support for LPC2xxx devices that mistakenly echo the autobaud character during autobauding.
+
+
+Version 3.48
+------------
+
+- Added 89V52X2.
+
+
+Version 3.47
+------------
+
+- No changes.
+
+
+Version 3.46
+------------
+
+- Color highlighting now used for CRC window to indicate match or no match.
+
+- Fixed bug that stopped 89(L)V51Rx2 devices from entering ISP mode when using DTR to control reset.
+
+
+Version 3.45
+------------
+
+- Now ignores invalid EOF records in hex files.
+
+
+Version 3.44
+------------
+
+- No changes.
+
+
+Version 3.43
+------------
+
+- Fixed problem with Flash Magic attempting to program imaginary security bits for devices with less than three security bits, after loading a settings file.
+
+
+Version 3.42
+------------
+
+- Added support for additional signature bytes for the 89(L)V51Rx2 family.
+
+- Fixed problem that stopped the 89V66x devices from being used on the command line.
+
+- Added LPC2109.
+
+- Revised device configuration window for LPC952.
+
+
+Version 3.41
+------------
+
+- Added LPC2468.
+
+
+Version 3.40
+------------
+
+- No changes
+
+
+Version 3.39
+------------
+
+- Added second set of signature bytes for LPC23xx devices.
+
+
+Version 3.38
+------------
+
+- LPC2368 and LPC2378 now have an additional 4kb flash block.
+
+- Changed color of title bars and progress bar in main window to match current Windows settings.
+
+
+Version 3.37
+------------
+
+- Added warning to 89(L)V51Rx2 device configuration window.
+
+
+Version 3.36
+------------
+
+- Fixed bug that caused incorrect flash blocks to be erased in 89C51Rx2xx devices when performing individual block erasing.
+
+
+version 3.35
+------------
+
+- Added option to generate command line directives from GUI.
+
+
+Version 3.34
+------------
+
+- No changes
+
+
+Version 3.33
+------------
+
+- Fixed bug that caused hex files to fail to verify when code read protection was being used (LPC2xxx).
+
+
+Version 3.32
+------------
+
+- Fixed problem that caused the wrong ICP protocol version to be read.
+
+- Fixed problem that caused FM to fail to communicate with ICP bridges.
+
+
+Version 3.31
+------------
+
+- Increased read and verify speed for LPC2xxx devices (typically 75% faster).
+
+- Fixed bug that caused the NXP ICP Bridge interface selection to not function correctly.
+
+- Fixed mistake in the manual for LPC2xxx ISP hardware schematic diagram.
+
+
+Version 3.30
+------------
+
+- Fixed bug in command line version that caused device erasing to fail.
+
+
+Version 3.29
+------------
+
+- Rebranded for NXP Semiconductors.
+
+
+Version 3.28
+------------
+
+- Pages selected for erasing are remembered between openings of the Erase Pages window.
+
+- Enabled high speed comms for some LPC9xx devices that support the feature.
+
+- Fixed bug that caused improper programming when record types 02H and 04H were present in the hex file and an ARM device was being programmed.
+
+- Fixed bug that caused wrong blocks to be erased when using ERASE directive.
+
+- Fixed bug that caused block 3 CRC to be read incorrectly for LPC9xx devices.
+
+- Added LPC23xx devices.
+
+
+Version 3.27
+------------
+
+- Fixed problem with reading clocks bit from 89V66x devices.
+
+- A erase warning is no longer given before programming the clocks bit in an 89V66x device.
+
+
+Version 3.26
+------------
+
+- internal structural improvements.
+
+
+Version 3.25
+------------
+
+- Registry and settings files now store state of LPC9xxx security bits checkboxes.
+
+- Fixed problem with settings files using wrong icon.
+
+
+Version 3.24
+------------
+
+- Added support for record type 02H in the ARM driver - generated by the GNU tools.
+
+- Forced some settings when LPC2xxx being used with FDI USB-ICP.
+
+
+Version 3.23
+------------
+
+- Added &04 command to start bootloader feature to avoid waiting for any response from the device.
+
+- Fixed bug in LPC2xxx read commands. Word alignment was being calculated incorrectly for sizes.
+
+- Modified Read Flash Memory feature to allow reading of RAM from LPC2xxx devices.
+
+- Fixed problem of boot block showing in user interface for some devices.
+
+
+Version 3.22
+------------
+
+- Fixed bug when clearing status bit in 89V66x devices.
+
+- Added details of hardware ISP entry of 89(L)V51Rx2 devices to manual.
+
+
+Version 3.21
+------------
+
+- Fixed bug in CRC hex file calculation
+
+- Added checkbox to select correct CRC hex file calculation (memory filled or not filled)
+
+
+Version 3.20
+------------
+
+- Version numbers now incorporate a build number
+
+- Minor bug fix in command line interface. Now shows value of UCFG2 for devices that support it.
+
+- Asks user to confirm before programming checksums
+
+- Checks if clocks bit is already set before attempting to program. This works around a problem with the 89LV51Rx2 and 89V51Rx2
+
+- Faster verifying for all devices
+
+- Added support for 89LV51Rx2 and 89V51Rx2 devices on command line
+
+- Added support for DTR and RTS when using 89LV51Rx2 and 89V51Rx2 devices
+
+- Disabled execute option for 89LV51Rx2 and 89V51Rx2 devices.
+
+
+Version 3.13
+------------
+
+- Fixed problem that could cause the drivers to not be found in some situations.
+
+- Fixed bug that caused a crash when programming hex files on the command line.
+
+- Added option to set code read protection in LPC2xxx devices on the command line.
+
+
+Version 3.12
+------------
+
+- Minor improvement to terminal for better performance when receiving large amounts of data.
+
+
+Version 3.11
+------------
+
+- Fixed bug in display flash memory feature. Half of the memory was not being shown.
+
+- Changed progress bar from purple to blue.
+
+
+Version 3.10
+------------
+
+- Improved user interface
+
+- When ICP interface selected, high speed comms will be disabled.
+
+
+Version 3.03
+------------
+
+- Fixed bug with 89C51Rx2xx implementation. Incorrect block erase command was being sent.
+
+
+Version 3.02
+------------
+
+- Fixed bug that stopped devices with two signature bytes from having their signature properly checked.
+
+
+Version 3.01
+------------
+
+- Fixed display problem when showing LPC9xx security bits.
+
+- Fixed bug with incorrect CRC calculation when filling flash memory.
+
+
+Version 3.00 (8051/XA Driver 2.01, ARM Driver 1.00)
+---------------------------------------------------
+
+- Renamed "Generate Checksums" to "Gen Block Checksums" to make the purpose of that feature clearer.
+
+- Added improved support for ICP interfaces.
+
+- New splash and help windows
+
+- Added support for LPC2xxx ARM based devices.
+
+
+Version 2.52 (Dll 1.98)
+-----------------------
+
+- Fixed bug that resulted in com port not being closed when operations such as erase and programming were cancelled.
+
+
+Version 2.51 (Dll 1.97)
+-----------------------
+
+- Added device configuration access for 89(L)V51Rx2 devices.
+
+
+Version 2.50 (Dll 1.96)
+-----------------------
+
+- Added 89LPC918.
+
+- Added support for multiple device drivers.
+
+
+Version 2.49 (Dll 1.95)
+-----------------------
+
+- Changed text for clocks checkbox in section 4 of the main window.
+
+
+Version 2.48 (Dll 1.95)
+-----------------------
+
+- Changed text of ICP warning message.
+
+
+Version 2.47 (Dll 1.95)
+-----------------------
+
+- Added 89V660, 89V662 and 89V664.
+
+
+Version 2.46 (Dll 1.94)
+-----------------------
+
+- Added option to configure the on chip RC clock doubler for the 89LPC952.
+
+
+Version 2.45 (Dll 1.94)
+-----------------------
+
+- 89V51Rx2 and 89LV51Rx2 now show only one security bit in the main window.
+
+
+Version 2.44 (Dll 1.94)
+-----------------------
+
+- Fixed bug that stopped the Clear Configuration Protection command from working.
+
+
+Version 2.43 (Dll 1.93)
+-----------------------
+
+- Rolled back fix introduced in 2.37 as it was causing block 0 to be incorrectly programmed.
+
+
+Version 2.42 (Dll 1.92)
+-----------------------
+
+- Added start bootloader command to allow break conditions to be sent as part of a sequence.
+
+- Fixed bug that sometimes caused the ISP entry method to be activated when using the start bootloader feature.
+
+- Added delay of 100ms after asserting DTR and RTS to allow any hardware initialization to complete before the first data is sent.
+
+
+Version 2.41 (Dll 1.91)
+-----------------------
+
+- Fixed bug that stopped security bit checkboxes from being enabled properly.
+
+
+Version 2.40 (Dll 1.90)
+-----------------------
+
+- Added support for the Clear Configuration Protection (CCP) command.
+
+
+Version 2.39 (Dll 1.89)
+-----------------------
+
+- Added 89LPC9401.
+
+
+Version 2.38 (Dll 1.88)
+-----------------------
+
+- Fixed bug introduced in 2.37 that caused programming of other device families to fail.
+
+
+version 2.37 (Dll 1.87)
+-----------------------
+
+- Improved handling of 89LPC9xx error responses.
+
+- Added workaround for 89LPC9xx program problem when security bits are set.
+
+
+Version 2.36 (Dll 1.86)
+-----------------------
+
+- Added workaround for 89LPC9xx page erase problem when security bits are set.
+
+
+Version 2.35 (Dll 1.85)
+-----------------------
+
+- Added ability to enable/disable trigger output and set additional debug options in 89LPC952.
+
+- Added support for writing UCFG2 of an 89LPC952 from the hex file (see Keil's START950.A51).
+
+
+Version 2.34 (Dll 1.84)
+-----------------------
+
+- Fixed bug with terminal window showing blocks at the end of every line.
+
+
+Version 2.33 (Dll 1.84)
+-----------------------
+
+- Added newline configuration option to terminal.
+
+- Added option to program UCFG2 on 89LPC952.
+
+
+Version 2.32 (Dll 1.83)
+-----------------------
+
+- If reading of device signature fails, now asks user if they wish to continue.
+
+- Fixed bug that caused security bits and clocks settings to be disabled after programming.
+
+- Fixed bug that caused Flash Magic to crashed when being opened by double-clicking on a settings file.
+
+
+Version 2.31 (Dll 1.83)
+-----------------------
+
+- Modifed terminal interface so the terminal window can remain open while ISP operations are performed.
+
+- Terminal interface now transmits backspace and displays received backspaces correctly.
+
+- Device configurations are only programmed if different to the current configuration, which is checked immediately before the write.
+
+
+version 2.30 (Dll 1.82)
+-----------------------
+
+- Added more COM ports in drop down list.
+
+- Added a simple terminal interface.
+
+- Added 89LPC952.
+
+
+Version 2.20 (Dll 1.81)
+-----------------------
+
+- Security bits are no longer read immediately on startup.
+
+- Security bit checkboxes are no longer automatically checked when ISP operations are performed.
+
+- Revamped splash screen.
+
+- When clicking on OK in the advanced options the message "reset the device into bootrom mode again" is no longer shown.
+
+- Added ability to set internal RC oscillator clock doubling bit on 89LPC910x devices.
+
+- Added 89LPC9221.
+
+- Added ability to reset the 89V51Rx2 and 89LV51Rx2 devices.
+
+- Added ability to update the bootloader on specific devices when using specially created hex files from NXP Semiconductors.
+
+- Changed "Start BootROM" feature to "Start Bootloader".
+
+- Replaced STARTBOOTROM directive with STARTBOOTLOADER directive (STARTBOOTROM is depreciated).
+
+- Refreshed manual.
+
+- Added support for additional security bits on some of the 89LPC9xx devices.
+
+- Added signature byte checking.
+
+- ICP/ISP warnings for specific devices are no longer shown every time the application starts.
+
+
+Version 2.15 (Dll 1.80)
+-----------------------
+
+- Fixed bug introduced in version 2.14 that stopped hex files from being programmed.
+
+
+Version 2.14 (Dll 1.80)
+-----------------------
+
+- Fixed bug that could cause the application to appear to hang when the device doesn't respond to programming of hex records.
+
+- Improved invalid hex file checking.
+
+- Improved handling of hex files containing junk.
+
+
+Version 2.13 (Dll 1.79)
+-----------------------
+
+- Now allows multiple copies of Flash Magic to execute at the same time.
+
+
+Version 2.12 (Dll 1.77)
+-----------------------
+
+- 89C669 now supports high speed communications.
+
+
+Version 2.11 (Dll 1.76)
+-----------------------
+
+- Added 89LV51RB2, 89LV51RC2, 89V51RB2 and 89V51RC2
+
+
+Version 2.10 (Dll 1.75)
+-----------------------
+
+- Fixed a bug that stopped some baud rates from being used on the command line.
+
+
+Version 2.09 (Dll 1.75)
+-----------------------
+
+- The "finished" text is now displayed in the main window after the com port is closed, rather than before. A delay of half a second was added before the "finished" text is displayed to help ensure all communications between the device and Flash Magic have completed.
+
+
+Version 2.08 (Dll 1.75)
+-----------------------
+
+- Added 89LPC938, 89LPC9102, 89LPC9103 and 89LPC9107
+
+
+Version 2.07 (Dll 1.74)
+-----------------------
+
+- Removed device configuration for 89V51RD2 and 89LV51RD2.
+
+- Only one security bit is now shown in the security bits window for the 89V51RD2 and 89LV51RD2.
+
+- Fixed bug that stopped security violations from being properly detected when reading device flash memory.
+
+- Added workaround to enable correct reading of CRCs from some LPC9xx devices in half-duplex mode.
+
+
+Version 2.06 (Dll 1.73)
+-----------------------
+
+- Added 89LPC936
+
+
+Version 2.05 (Dll 1.72)
+-----------------------
+
+- Fixed bug that prevented the Hex File Information window from showing a CRC value when the Hex file was read only.
+
+
+Version 2.04 (Dll 1.72)
+-----------------------
+
+- Fixed error message displayed when clocks bit fails to program. Now indicates it was the clocks bit programming that failed.
+
+
+Version 2.03 (Dll 1.71)
+-----------------------
+
+- Fixed bug that caused crashes when displaying the memory contents for devices with block sizes larger than 16kb.
+
+- Now supports hex files that do not have a CR/LF after each record, as per the Intel specification, revision A.
+
+- Fixed problem with window opening half way between screens when using dual monitors.
+
+- Main window now remembers where you left it.
+
+
+Version 2.01 (Dll 1.70)
+-----------------------
+
+- Fixed bug that stopped 89LV51RD2/89V51RD2 from being reprogrammed when the security bit is set.
+
+- Fixed mistake in 89LV51RD2/89V51RD22 Device Configuration window title.
+
+- Added display of a 32-bit CRC to the Hex File Information window.
+
+
+Version 2.00 (Dll 1.69)
+-----------------------
+
+- Added option to limit how fast the high speed communications mode can go
+
+
+Version 1.99 (Dll 1.68)
+-----------------------
+
+- Fixed bug that stopped verify and display flash memory from working with the XA-G39 and XA-G49
+
+- Fixed bug that stopped verify and display flash memory from working in half-duplex mode.
+
+
+Version 1.98 (Dll 1.67)
+-----------------------
+
+- Added 89LPC932A1
+
+
+Version 1.97 (Dll 1.67)
+-----------------------
+
+- 89LV51RD2 and 89V51RD2 altered to show they support only one security bit.
+
+- 89LV51RD2 and 89V51RD2 Serial Number feature now always available when those devices are selected.
+
+- Support for 89LV51RD2 and 89V51RD2 enabling SoftICE mode added.
+
+
+Version 1.96 (Dll 1.66)
+-----------------------
+
+- When programing an LPC9xx, a security bits erase warning is now only given if an attempt is made to program any of the security bit 2s.
+
+- Removed modified erasing warning when erasing only blocks used by the hex file.
+
+- Modified programming warning is no longer given for any hex records outside of the device's flash memory, including UCFG1 programming for the LPC9xx.
+
+- Added ability to specify timings T1 and T2 for LPC9xx ISP hardware entry.
+
+
+Version 1.95 (Dll 1.65)
+-----------------------
+
+- Removed "Check for Update" feature to avoid crashes on some PCs.
+
+
+Version 1.94 (DLL 1.65)
+-----------------------
+
+- Fixed incorrect security bit number, block and page size for 89LPC915, 89LPC916 and 89LPC917.
+
+- Changed recommended baud rates for some 89LPC9xx devices.
+
+
+Version 1.93 (DLL 1.64)
+-----------------------
+
+- Removed Reset item from options menu - no longer useful.
+
+- Changed default baudrate for first run after fresh installation from 19200 to 9600.
+
+- When selecting to use DTR and RTS with an LPC9xx, the revision warning now only appears for the 89LPC932.
+
+- Added baud rate recommendations for some devices.
+
+- Option to use DTR and RTS with an LPC9xx now enabled by default after fresh installation.
+
+- Improved user feedback when trying to use the Start BootROM feature but DTR and RTS are enabled.
+
+
+Version 1.92 (DLL 1.64)
+-----------------------
+
+- Added 89LPC904, 89LPC915, 89LPC916, 89LPC917, 89LPC924, 89LPC925
+
+
+Version 1.91 (DLL 1.64)
+-----------------------
+
+- Added 89LPC933 and 89LPC934.
+
+
+Version 1.90 (DLL 1.64)
+-----------------------
+
+- Verifying no longer includes hex records that contain data above the limit of the device's Flash memory.
+
+
+Version 1.89 (DLL 1.63)
+-----------------------
+
+- LPC9xx devices can now program UCFG1 and the security bits from values in the Hex file, as used by Keil's Start900.a51.
+
+
+Version 1.88 (DLL 1.62)
+-----------------------
+
+- Fixed bug that stopped some devices from being fully erased.
+
+- Fixed bug that resulted in an incorrect Global CRC value for some devices.
+
+
+Version 1.87 (DLL 1.61)
+-----------------------
+
+- Added 89V51RD2.
+
+
+Version 1.86 (DLL 1.60)
+-----------------------
+
+- Fixed bug which stopped the end of file record being sent at the end of the hex file.
+
+- Added high speed communications support to the 89LPC935.
+
+
+Version 1.85 (DLL 1.59)
+-----------------------
+
+- Fixed bug introduced in 1.84 that stopped some devices from programming when using higher baud rates.
+
+
+Version 1.84 (DLL 1.58)
+-----------------------
+
+- For the LPC devices only the LSB of the Status Byte value read and written is used for the status bit.
+
+- Improved programming algorithmn that provides faster programming times. The biggest gains will be seen when filling unused memory and generating checksums.
+
+- Fixed bug in high speed comms algorithm that would cause Flash Magic to crash when very low frequencies were being used.
+
+- Added 89LPC935.
+
+
+Version 1.83 (DLL 1.57)
+-----------------------
+
+- Increased the power down delay during the LPC932 hardware entry from 50ms to 250ms to allow for larger capacitors to be used in the power supply. The 50ms delay was not long enough for larger capacitors to discharge fully.
+
+- Added a JIT Module example demonstrating how to generate a serial number on the fly.
+
+- Added a JIT Module example demonstrating getting user input to generate a serial number.
+
+- Added entries on the help menu to the Flash Magic and NXP discussion forums.
+
+- Fixed bug in uninstaller that stopped registry entries from being removed.
+
+- Fixed bug introduced in version 1.82 that stopped the reset and execute features from working.
+
+- Added option to Tools menu to check for new versions of Flash Magic.
+
+- Minor change to Splash Screen.
+
+
+Version 1.82
+------------
+
+- Increased reset delay for start bootrom command from 4 seconds to 8 seconds (DLL 1.55)
+
+- Changed the "Unable to access COM Port" message to "Unable to Communicate".
+
+- Added Ceibo MP-900 to LPC932 Hardware list.
+
+- Added list of blocks used to the hex file info window.
+
+- Added option to erase only the blocks used by the hex file.
+
+- Added the ERASEUSED directive to erase only the blocks used by the hex file.
+
+- Added the option to enable and disable the embedded hints update feature.
+
+- The status byte and boot vector are now only erased and programmed when necessary. They are first read to check if erasing and programming is necessary.
+
+- The boot vector is no longer programmed to the default automatically after programming a hex file on the LPC devices.
+
+- Five attempts are now made to open files.
+
+- Fixed bug where the wrong value for the Status Byte would be shown for the 6Xx2 devices.
+
+
+Version 1.81
+------------
+
+- Changed the default Boot Vector for the 89LPC921, 89LPC922, 89LPC930 and 89LPC931 (DLL 1.54).
+
+- Added 89LPC920.
+
+
+Version 1.80
+------------
+
+- Hex records outside of the Flash memory of the currently selected device are no longer programmed (DLL 1.53)
+
+- Command Line now accepts short path and file names (evalbo~1, etc.).
+
+
+Version 1.79
+------------
+
+- Added ability to specify the timeouts for ISP operations in Flash Magic and on the command line (DLL 1.52).
+
+- Added support for the 89C669 on the command line.
+
+- Status bit/byte is now set to 1 immediately before a full device erase, erasing block 0 or erasing page 0.
+
+- Currently selected hex file is automatically added to the hex file list in the CRC dialog window.
+
+- Added ability to display more information about the currently selected hex file.
+
+
+Version 1.78
+------------
+
+- Fixed bugs related to the displaying of warning messages when ICP devices are selected
+
+
+Version 1.77
+------------
+
+- Added 89LPC901, 89LPC902, 89LPC903, 89LPC906, 89LPC907 and 89LPC908
+
+- Added 89LV51RC2 and 89LV51RD2
+
+- Added 89LPC912, 89LPC913 and 89LPC914 (DLL 1.51)
+
+
+Version 1.76
+------------
+
+- Command line version of Flash Magic now returns errorlevel 0 for success, errorlevel 1 for error, allowing greater batch file control.
+
+- Added Reset back in to ISP menu (DLL 1.47).
+
+- Added EXECUTE command line directive and changed functionality of RESET command line directive.
+
+
+Version 1.75
+------------
+
+- Fixed bug that stopped Flash Magic autobauding with an LPC932 not using pulse entry on the Keil MCB900 board (DLL 1.46).
+
+
+Version 1.74
+------------
+
+- Command Line now allows hyphens in path and file names.
+
+- Added 89LPC921, 89LPC922, 89LPC930 and 89LPC931 devices.
+
+
+Version 1.73
+------------
+
+- Converted synchronous COM Port operations to asyncronous operations.
+
+- Added access code feature.
+
+
+Version 1.72
+------------
+
+- Fixed bug that stopped hardware activation of ISP mode and high speed comms being used togther with Rx2/66x devices (DLL 1.42).
+
+- Increased delay after deasserting DTR before closing the COM Port when using DTR and RTS from 0ms to 300ms.
+
+- Fixed bug that caused 6 clocks/cycle bit to be disabled when erase all flash checked for Rx2xx devices.
+
+- Fixed bug that stopped high speed comms from being used with the command line version.
+
+- Command line version now stops after the first error.
+
+- Increased timeout for blank check.
+
+
+Version 1.71
+------------
+
+- Supports LPC932 devices not marked as "ISP K1.0". For "ISP K1.0" devices use Flash Magic for MCB900.
+
+- Improvements to LPC932 ISP pulse generation
+
+- Now shows DLL version number in both Windows and Command Line versions (DLL 1.41).
+
+- Fixed display problems when using large fonts
+
+- Improvements to Start BootROM command feature.
+
+- Disabled high speed comms option for devices not supporting it.
+
+
+Version 1.70
+------------
+
+- Changed "Status Byte" references to "Status Bit" when the 89LPC932 is selected.
+
+- Added STATUSBIT and READSTATUSBIT directives.
+
+- Fixed bug in command line version that stopped STATUSBYTE directive working for 89LPC932.
+
+- Added more description to the Status Byte/bit in the Boot Vector and Status Byte window.
+
+- Added support for the XA-G39 (DLL 1.35).
+
+- Improved warning messages given when programming an LPC932 with the Protect ISP option turned on. Now the warnings are seperated out into erase and program, an option is given to cancel and the warnings are only given when necessary.
+
+- Added additional baudrates to the drop-down list in the main window.
+
+
+Version 1.67
+------------
+
+- Added support for the Keil MCB 900 board (DLL 1.34).
+
+
+Version 1.66
+------------
+
+- Fixed bug in registration of path to FM.EXE.
+
+- Placed Compiler vendors in alphabetical order in manual.
+
+
+Version 1.65
+------------
+
+- For Windows NT/2000/XP the path to Flash Magic is now automatically added to the PATH environment variable.
+
+- The device name for the DEVICE command line directive has been made more flexible.
+
+- Fixed bug where if another COM port application was used that configured the COM port for handshaking, Flash Magic would not be able to communicate with the device again (DLL 1.32).
+
+
+Version 1.64
+------------
+
+- Flushes COM Port after each time configuring the COM Port (DLL 1.30).
+
+- Fixed bug where blank lines in Hex file would crash Flash Magic when verifying.
+
+
+Version 1.63
+------------
+
+- Shows baud rate connected at in the title bar of the main window
+
+- Now allows 56000 and 128000 baud to be used for high-speed communications (DLL 1.29).
+
+- Now supports high-speed communications on COM Ports that report very high maximum baud rates.
+
+
+Version 1.62
+------------
+
+- Security bit checboxes/items are no longer disabled, if the security bit is set and the option to erase all flash is not checked.
+
+- Added a "Don't show this message" checkbox to the dialog window that confirms if the device should be programmed without erasing.
+
+
+Version 1.61
+------------
+
+- STARTBOOTROM directive now accepts any printable characters for the command.
+
+- Fixed bug where Rx+ devices could not be programmed if security bit 2 was set.
+
+
+Version 1.60
+------------
+
+- Added play button to listen to the selected Wave file
+
+- Increased long timeouts for devices using lower oscillator frequencies (DLL 1.28)
+
+- Added Just In Time Code feature.
+
+
+Version 1.54
+------------
+
+- Added option to Start BootROM feature to send a break condition instead of a command.
+
+- Fixed bug where some ISP menu items were not being disabled during ISP operations.
+
+- Last modified date and time and size of the selected Hex file are shown in the main window.
+
+- The time the "Finished" text is displayed is increased from 3 to 10 seconds.
+
+- A counter is now displayed in the main window showing the number of times the hex file has been programmed. Modification of the hex file will reset the count.
+
+- Flash Magic now ignores invalid lines and hex records in Hex Files (DLL 1.26).
+
+- Fixed bug in loading of settings file when currently selected device has less flash blocks than device specified in settings file.
+
+- Fixed bug with Splash Screen size when using large fonts.
+
+- Protect ISP setting now saved in Settings file.
+
+- Added option to play a Wave file when programming is complete.
+
+
+Version 1.53
+------------
+
+- Protect ISP option for 89LPC932 added (DLL 1.25)
+
+- Added protectisp parameter to ERASE, ERASEPAGE and HEXFILE directives.
+
+
+Version 1.52
+------------
+
+- Improved error messages (DLL 1.24)
+
+
+Version 1.51
+------------
+
+- Added support for the 89LPC932 CRC feature (DLL 1.22)
+
+- Added support for the 89LPC932 on the command line
+
+
+Version 1.50
+------------
+
+- Fixed some minor user interface problems.
+
+- Added support for the 89LPC932 (DLL 1.20).
+
+
+Version 1.45
+------------
+
+- Various internal updates and changes in support of new devices (DLL 1.19).
+
+
+Version 1.44
+------------
+
+- Fixed bug in Status Byte programming algorithm for the 89C6xX2 devices (DLL 1.18)
+
+- Added warning when 6xX2 devices are selected regarding selecting the correct device.
+
+- Disabled Execute option for 89C6xX2 devices.
+
+- Renamed Execute (rev G+) command to Execute.
+
+- Replaced ability to reprogram Status Byte with ability to read Status Byte for 89C6xX2 devices.
+
+
+Version 1.43
+------------
+
+- Fixed error in Status Byte programming algorithm for the 89C6xX2 devices.
+
+
+Version 1.42
+------------
+
+- Added support for new Rx2 devices (DLL 1.17). They are listed as 89C51Rx2xx. This required modification of section 2 in the main window and the erase and blank check windows. Support includes the ability to change the number of clocks per cycle and read the number of clocks per cycle. The read function is located on the ISP menu.
+
+- Renamed old Rx2 devices to 89C51Rx2Hxx
+
+- Added support for new Rx2 devices on command line. Two new directives added to set the number of clocks per cycle and read the number of clocks per cycle: CLOCKS and READCLOCKs. Device names changed as described above.
+
+- Fixed bug in command line program where com port was not being released
+
+- Added HARDWARERESET directive to the command line to control RST and /PSEN pins using the DTR and RTS signals to place device into BootROM and execute modes automatically.
+
+- Added support for the 89C60X2 and 89C61X2 devices.
+
+- Modifed address ranges in Display Memory window to match Flash Blocks on device.
+
+
+Version 1.41
+------------
+
+- Fixed bug where COM port was closed twice in a row (DLL 1.16)
+
+- Fixed bug that stopped Start BootROM command from being used with High-speed communications mode.
+
+- Fixed bug where Flash Magic would attempt to communicate with the device after sending the Execute command automatically after programming.
+
+- Fixed incorrect tooltip for Execute checkbox.
+
+
+Version 1.40
+------------
+
+- Increased COM port timeouts - some devices take a little longer than the old timeouts (DLL version 1.15).
+
+- Removed reference to downloading manual from embeddedhint.
+
+- Added carriage return and line feed options to the Start BootROM command
+
+- Added carriage return and line feed options to the STARTBOOTROM directve
+
+- Revised the Start BootROM demo project to avoid the use of putchar, making it easier to modify to accept carriage returns and line feeds.
+
+- If an invalid Start BootROM command is sent, Flash Magic now always reports that the command was invalid, rather than sometimes reporting transmit/receive error.
+
+- Added Manual entry to Help menu, which when selected opens the PDF manual
+
+- Revised link on Help menu to NXP web site
+
+- Fixed bug - COM Port is now always released by Flash Magic if ISP operation fails.
+
+- Fixed bug - start BootROM command is now sent half-duplex if half-duplex option selected
+
+- Fixed bug - Start BootROM menu item now disabled during ISP operations
+
+- Added warning to Start BootROM dialog window
+
+- Reset command changed to Execute command (sets status byte to 00H).
+
+- Added support for controlling RST and /PSEN pins using DTR and RTS to place device into BootROM and execute modes automatically.
+
+- Updated splash screen.
+
+
+Version 1.32
+------------
+
+- Fixed bug where FlashMagic would continue to attempt to communicate with the device after sending a reset command.
+
+
+Version 1.31
+------------
+
+- Increased number of erase passes for boot vector and status byte when performing full device erase to six for Rx2, 66x and G49 (DLL version 1.14).
+
+
+Version 1.30
+------------
+
+- Increased number of erase passes for XA-G49 when performing boot vector and status byte erase to six. (DLL version 1.13)
+
+
+Version 1.29
+------------
+
+- Added retries to all ISP operations. Failed commands will be retried up to five times. This increases reliability when using Flash Magic on Windows 95 or NT4 and baud rates above 19200 (DLL version 1.12). See the Notes section at the end of this document.
+
+
+Version 1.28
+------------
+
+- New EmbeddedHints DLL (1.11)
+
+- Command Line directives now accept underscores in paths and file names.
+
+- Now sets COM Port receive and transmit buffers to larger values, or lagest supported by the COM Port driver (DLL version 1.10).
+
+
+Version 1.27
+------------
+
+- Fixed bug in 1.26 where double-clicking on a .fms Flash Magic Settings file generated an error
+
+- Improved debug capabilities
+
+
+Version 1.26
+------------
+
+- Added ability to send a command to the device to place it into BootROM mode
+
+- Added STARTBOOTROM directive to send a command to place the device into BootROM mode
+
+- Added example project to demonstrate how devices may be placed into BootROM mode by Flash Magic
+
+- Removed need to supply a seperate debug version of the Flash Magic DLL (DLL version 1.08).
+
+
+Version 1.25
+------------
+
+- Increased number of erase passes for Rx2 and 66x when performing boot vector and status byte erase to six. (DLL version 1.07)
+
+
+Version 1.24
+------------
+
+- Added "Cancelling. Please wait..." message to Erase window, when Cancel is pressed.
+
+
+Version 1.23
+------------
+
+- Fixed bug where numbers were not allowed in paths to files on the command line. For example: HEXFILE(c:\test2\myhex3.hex, NOCHECKSUMS, NOFILL)
+
+
+Version 1.22
+------------
+
+- Added option to reset the device (Rx2 and 66x families, rev G or higher) to section 4 of the main window (DLL version 1.05)
+
+- Added option to reset the device (Rx2 and 66x families, rev G or higher) to the ISP menu.
+
+- Added RESET directive to reset the device (Rx2 and 66x families, rev G or higher).
+
+- Added ability to verify without programming first (Verify on the ISP menu).
+
+- Added ability to save and open settings files (extension .fms).
+
+- New application icons added.
+
+
+Version 1.21
+------------
+
+- Increased the timeout for erase operations to 7 seconds. The Rx2/66x rev G parts take slightly longer than the previous erase timeout. (DLL version 1.04).
+
+- Improved switch from initial baud rate to high-speed communications mode.
+
+- Added half-duplex communications option.
+
+
+Version 1.20
+------------
+
+- Added a Command Line/DOS version of Flash Magic for running Flash Magic from IDEs, Batch Files, etc.
+
+
+Version 1.10
+------------
+
+- Added support for the XA-G49 (DLL version 1.03).
+
+- Added Tasking and Raisonance Checksum demo projects for the XA-G49 and reoganized the demo projects into 8051 and XA folders.
+
+- If the registry key does not exist when an attempt is made to read the advanced options from it, then it is now automatically created.
+
+- Ensured that when using high speed comms a baud rate with an error of less than 3% but is simply too fast for the device, is not selected. For example a timer 2 reload value of 65534. A baud rate that high appears to cause problems for the 66x BootROM.
+
+
+Version 1.03
+------------
+
+- If the registry key does not exist when the first attempt is made to read the main settings from it, then it is now automatically created.
+
+
+Version 1.02
+------------
+
+- DLL version 1.01 - now ignores any non-8-bit compatible records in Intel HEX Files (i.e. only records 00H and 01H are used)
+- Added error messages if there is an error reading previous settings.
+
+
+Version 1.01
+------------
+
+- If Start is clicked and no options/hex file have been selected in steps 2, 3 or 4, then Flash Magic will now generate an error message, rather than get stuck in an infinate loop with the main window items disabled.
+
+
+Version 1.00
+------------
+
+- Display memory window now only allows selection of 16k blocks that exist on the selected device.
+
+- Uninstaller removes registry entry for FlashMagic.
+
+- Registry entries are now ignored if one or more entries are missing.
+
+- Added a PDF manual - accessable from the Start Menu.
+
+
+Version 0.10 beta
+-----------------
+
+- Added the Embedded Systems Academy logo to the help about window.
+
+- Added the ability to erase flash without having to deselect everything else in the main window - choose Erase Flash from the ISP menu.
+
+- Changed the support Email address in the help about window to the real one.
+
+- Removed the Connect and Disconnect buttons. Every ISP operation now includes an automatic and transparent connect before the operation and an automatic and transparent disconnect after the operation, greatly simplifying the use of FlashMagic. Note that FlashMagic can still be left running while other applications access the COM port.
+
+- Replaced warning messages generated when selection is made to program a security bit on a Rx+ device, with a Yes/No confirmation when the Start button is clicked.
+
+
+Version 0.06 beta
+-----------------
+
+- Added the ability to view the contents of Flash memory - choose Display Flash Memory from the ISP menu.
+
+
+Version 0.05 beta
+-----------------
+
+- Rewrote internet functions in EmbeddedHints to ensure EmbeddedHints will work regardless of whether wininet.dll, rasapi32.dll and wsock32.dll is installed on the machine or not
+
+- Optimized background thread in EmbeddedHints to only check for an internet connection if it is time to try and get more hints rather than once a second
+
+- Modified EmbeddedHints so default hints and previously downloaded hints are shown if no internet connection detected.
+
+- Modified EmbeddedHints so that new hints are fetched when a hint is clicked on, if it is time to get new hints.
+
+
+Version 0.04 beta
+-----------------
+
+- Modified EmbeddedHints so that the Hints fail to start if wininet.dll is not present, rather than FlashMagic failing to start.
+
+
+Version 0.03 beta
+-----------------
+
+- Changed the default EmbeddedHints
+
+- Added "for NXP Semiconductors" to the Splash screen and Help About window
+
+- Increased the Splash Screen delay to 4 seconds
+
+- Added author's names to the Help About window
+
+
+Version 0.02 beta
+-----------------
+
+- The text "COM Port:", "Baud Rate:", "Oscillator Freq. (MHz):", "Device" and "Hex File:" were not being enabled and disabled with the other controls in their sections. This is now fixed.
+
+- Changed the "Verify" option to read "Verify After Programming"
+
+- Moved the "Advanced Options" menu item from the ISP menu to a new Options menu
+
+- Added "Reset" to the Options menu. Selecting it resets the main window and advanced options window
+
+- Fixed bug in EmbeddedHints: if a downloaded hint has the same ID as a hint currently in use, the original hint was not replaced, so two copies of the same hint were shown in the application.
+
+- Adjusted spacing of the lines in the EmbeddedHints so the bottom line does not look crushed.
+
+
+Version 0.01 beta
+-----------------
+
+- The first beta version.
+
+
+Known Issues
+------------
+
+- There are no known issues in this version.
+
+
+Notes
+-----
+
+- DTR and RTS support for 89LV51Rx2 and 89V51Rx2 is EXPERIMENTAL
+
+- It is STRONGLY RECOMMENDED that if using Windows95 or NT4, and baud rates higher than 19200, either verification is performed after programming the device or the checksums features is used. These versions of Windows appear to have reliability problems above that baud rate, and while Flash Magic retries failed commands, if a programming command fails in a certain way, incorrect data may be programmed.
+

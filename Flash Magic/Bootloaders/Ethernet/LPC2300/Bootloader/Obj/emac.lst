@@ -1,0 +1,3019 @@
+L 1 "ethernet\emac.c"
+N//-----------------------------------------------------------------------------
+N// Software that is described herein is for illustrative purposes only  
+N// which provides customers with programming information regarding the  
+N// products. This software is supplied "AS IS" without any warranties.  
+N// NXP Semiconductors assumes no responsibility or liability for the 
+N// use of the software, conveys no license or title under any patent, 
+N// copyright, or mask work right to the product. NXP Semiconductors 
+N// reserves the right to make changes in the software without 
+N// notification. NXP Semiconductors also make no representation or 
+N// warranty that such application will be suitable for the specified 
+N// use without further testing or modification. 
+N//-----------------------------------------------------------------------------
+N
+N#include <LPC23XX.H>
+L 1 "C:\Keil\ARM\Inc\Philips\LPC23XX.H" 1
+N/******************************************************************************
+N *   LPC23xx.h:  Header file for NXP LPC23xx Family Microprocessors
+N *   The header file is the super set of all hardware definition of the 
+N *   peripherals for the LPC23xx family microprocessor.
+N *
+N *   Copyright(C) 2006-2009, NXP Semiconductor
+N *   All rights reserved.
+N *
+N *   History
+N *   2005.10.01  ver 1.00    Prelimnary version, first Release
+N *   2007.05.17  ver 1.01    several corrections
+N *   2007.09.05  ver 1.02    added VICVectPriorityx symbols
+N *   2007.09.05  ver 1.03    FIO1PIN1 value corrected
+N *   2008.04.23  ver 1.04    EMC_DYN_CFGx,EMC_DYN_RASCASx value corrected
+N *   2008.08.12  ver 1.05    EMC_STA_EXT_WAIT value corrected
+N *   2009.03.03  ver 1.06    Removed LPC24xx register references
+N *   2009.03.13  ver 1.07    FIO1MASK1,FIO1SET1,FIO1CLR1 value corrected
+N *
+N******************************************************************************/
+N
+N#ifndef __LPC23xx_H
+N#define __LPC23xx_H
+N
+N/* Vectored Interrupt Controller (VIC) */
+N#define VIC_BASE_ADDR	0xFFFFF000
+N#define VICIRQStatus   (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x000))
+N#define VICFIQStatus   (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x004))
+N#define VICRawIntr     (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x008))
+N#define VICIntSelect   (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x00C))
+N#define VICIntEnable   (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x010))
+N#define VICIntEnClr    (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x014))
+N#define VICSoftInt     (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x018))
+N#define VICSoftIntClr  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x01C))
+N#define VICProtection  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x020))
+N#define VICSWPrioMask  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x024))
+N
+N#define VICVectAddr0   (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x100))
+N#define VICVectAddr1   (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x104))
+N#define VICVectAddr2   (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x108))
+N#define VICVectAddr3   (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x10C))
+N#define VICVectAddr4   (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x110))
+N#define VICVectAddr5   (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x114))
+N#define VICVectAddr6   (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x118))
+N#define VICVectAddr7   (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x11C))
+N#define VICVectAddr8   (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x120))
+N#define VICVectAddr9   (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x124))
+N#define VICVectAddr10  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x128))
+N#define VICVectAddr11  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x12C))
+N#define VICVectAddr12  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x130))
+N#define VICVectAddr13  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x134))
+N#define VICVectAddr14  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x138))
+N#define VICVectAddr15  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x13C))
+N#define VICVectAddr16  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x140))
+N#define VICVectAddr17  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x144))
+N#define VICVectAddr18  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x148))
+N#define VICVectAddr19  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x14C))
+N#define VICVectAddr20  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x150))
+N#define VICVectAddr21  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x154))
+N#define VICVectAddr22  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x158))
+N#define VICVectAddr23  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x15C))
+N#define VICVectAddr24  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x160))
+N#define VICVectAddr25  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x164))
+N#define VICVectAddr26  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x168))
+N#define VICVectAddr27  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x16C))
+N#define VICVectAddr28  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x170))
+N#define VICVectAddr29  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x174))
+N#define VICVectAddr30  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x178))
+N#define VICVectAddr31  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x17C))
+N
+N/* The name convention below is from previous LPC2000 family MCUs, in LPC23xx/24xx,
+Nthese registers are known as "VICVectPriority(x)". */
+N#define VICVectCntl0   (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x200))
+N#define VICVectCntl1   (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x204))
+N#define VICVectCntl2   (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x208))
+N#define VICVectCntl3   (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x20C))
+N#define VICVectCntl4   (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x210))
+N#define VICVectCntl5   (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x214))
+N#define VICVectCntl6   (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x218))
+N#define VICVectCntl7   (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x21C))
+N#define VICVectCntl8   (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x220))
+N#define VICVectCntl9   (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x224))
+N#define VICVectCntl10  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x228))
+N#define VICVectCntl11  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x22C))
+N#define VICVectCntl12  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x230))
+N#define VICVectCntl13  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x234))
+N#define VICVectCntl14  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x238))
+N#define VICVectCntl15  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x23C))
+N#define VICVectCntl16  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x240))
+N#define VICVectCntl17  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x244))
+N#define VICVectCntl18  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x248))
+N#define VICVectCntl19  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x24C))
+N#define VICVectCntl20  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x250))
+N#define VICVectCntl21  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x254))
+N#define VICVectCntl22  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x258))
+N#define VICVectCntl23  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x25C))
+N#define VICVectCntl24  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x260))
+N#define VICVectCntl25  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x264))
+N#define VICVectCntl26  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x268))
+N#define VICVectCntl27  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x26C))
+N#define VICVectCntl28  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x270))
+N#define VICVectCntl29  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x274))
+N#define VICVectCntl30  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x278))
+N#define VICVectCntl31  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x27C))
+N
+N/* LPC23xx/24xx VICVectPriority(x)". */
+N#define VICVectPriority0   (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x200))
+N#define VICVectPriority1   (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x204))
+N#define VICVectPriority2   (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x208))
+N#define VICVectPriority3   (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x20C))
+N#define VICVectPriority4   (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x210))
+N#define VICVectPriority5   (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x214))
+N#define VICVectPriority6   (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x218))
+N#define VICVectPriority7   (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x21C))
+N#define VICVectPriority8   (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x220))
+N#define VICVectPriority9   (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x224))
+N#define VICVectPriority10  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x228))
+N#define VICVectPriority11  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x22C))
+N#define VICVectPriority12  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x230))
+N#define VICVectPriority13  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x234))
+N#define VICVectPriority14  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x238))
+N#define VICVectPriority15  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x23C))
+N#define VICVectPriority16  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x240))
+N#define VICVectPriority17  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x244))
+N#define VICVectPriority18  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x248))
+N#define VICVectPriority19  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x24C))
+N#define VICVectPriority20  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x250))
+N#define VICVectPriority21  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x254))
+N#define VICVectPriority22  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x258))
+N#define VICVectPriority23  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x25C))
+N#define VICVectPriority24  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x260))
+N#define VICVectPriority25  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x264))
+N#define VICVectPriority26  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x268))
+N#define VICVectPriority27  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x26C))
+N#define VICVectPriority28  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x270))
+N#define VICVectPriority29  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x274))
+N#define VICVectPriority30  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x278))
+N#define VICVectPriority31  (*(volatile unsigned long *)(VIC_BASE_ADDR + 0x27C))
+N
+N#define VICVectAddr    (*(volatile unsigned long *)(VIC_BASE_ADDR + 0xF00))
+N
+N
+N/* Pin Connect Block */
+N#define PINSEL_BASE_ADDR	0xE002C000
+N#define PINSEL0        (*(volatile unsigned long *)(PINSEL_BASE_ADDR + 0x00))
+N#define PINSEL1        (*(volatile unsigned long *)(PINSEL_BASE_ADDR + 0x04))
+N#define PINSEL2        (*(volatile unsigned long *)(PINSEL_BASE_ADDR + 0x08))
+N#define PINSEL3        (*(volatile unsigned long *)(PINSEL_BASE_ADDR + 0x0C))
+N#define PINSEL4        (*(volatile unsigned long *)(PINSEL_BASE_ADDR + 0x10))
+N#define PINSEL5        (*(volatile unsigned long *)(PINSEL_BASE_ADDR + 0x14))
+N#define PINSEL6        (*(volatile unsigned long *)(PINSEL_BASE_ADDR + 0x18))
+N#define PINSEL7        (*(volatile unsigned long *)(PINSEL_BASE_ADDR + 0x1C))
+N#define PINSEL8        (*(volatile unsigned long *)(PINSEL_BASE_ADDR + 0x20))
+N#define PINSEL9        (*(volatile unsigned long *)(PINSEL_BASE_ADDR + 0x24))
+N#define PINSEL10       (*(volatile unsigned long *)(PINSEL_BASE_ADDR + 0x28))
+N
+N#define PINMODE0        (*(volatile unsigned long *)(PINSEL_BASE_ADDR + 0x40))
+N#define PINMODE1        (*(volatile unsigned long *)(PINSEL_BASE_ADDR + 0x44))
+N#define PINMODE2        (*(volatile unsigned long *)(PINSEL_BASE_ADDR + 0x48))
+N#define PINMODE3        (*(volatile unsigned long *)(PINSEL_BASE_ADDR + 0x4C))
+N#define PINMODE4        (*(volatile unsigned long *)(PINSEL_BASE_ADDR + 0x50))
+N#define PINMODE5        (*(volatile unsigned long *)(PINSEL_BASE_ADDR + 0x54))
+N#define PINMODE6        (*(volatile unsigned long *)(PINSEL_BASE_ADDR + 0x58))
+N#define PINMODE7        (*(volatile unsigned long *)(PINSEL_BASE_ADDR + 0x5C))
+N#define PINMODE8        (*(volatile unsigned long *)(PINSEL_BASE_ADDR + 0x60))
+N#define PINMODE9        (*(volatile unsigned long *)(PINSEL_BASE_ADDR + 0x64))
+N
+N/* General Purpose Input/Output (GPIO) */
+N#define GPIO_BASE_ADDR		0xE0028000
+N#define IOPIN0         (*(volatile unsigned long *)(GPIO_BASE_ADDR + 0x00))
+N#define IOSET0         (*(volatile unsigned long *)(GPIO_BASE_ADDR + 0x04))
+N#define IODIR0         (*(volatile unsigned long *)(GPIO_BASE_ADDR + 0x08))
+N#define IOCLR0         (*(volatile unsigned long *)(GPIO_BASE_ADDR + 0x0C))
+N#define IOPIN1         (*(volatile unsigned long *)(GPIO_BASE_ADDR + 0x10))
+N#define IOSET1         (*(volatile unsigned long *)(GPIO_BASE_ADDR + 0x14))
+N#define IODIR1         (*(volatile unsigned long *)(GPIO_BASE_ADDR + 0x18))
+N#define IOCLR1         (*(volatile unsigned long *)(GPIO_BASE_ADDR + 0x1C))
+N
+N/* GPIO Interrupt Registers */
+N#define IO0_INT_EN_R    (*(volatile unsigned long *)(GPIO_BASE_ADDR + 0x90)) 
+N#define IO0_INT_EN_F    (*(volatile unsigned long *)(GPIO_BASE_ADDR + 0x94))
+N#define IO0_INT_STAT_R  (*(volatile unsigned long *)(GPIO_BASE_ADDR + 0x84))
+N#define IO0_INT_STAT_F  (*(volatile unsigned long *)(GPIO_BASE_ADDR + 0x88))
+N#define IO0_INT_CLR     (*(volatile unsigned long *)(GPIO_BASE_ADDR + 0x8C))
+N
+N#define IO2_INT_EN_R    (*(volatile unsigned long *)(GPIO_BASE_ADDR + 0xB0)) 
+N#define IO2_INT_EN_F    (*(volatile unsigned long *)(GPIO_BASE_ADDR + 0xB4))
+N#define IO2_INT_STAT_R  (*(volatile unsigned long *)(GPIO_BASE_ADDR + 0xA4))
+N#define IO2_INT_STAT_F  (*(volatile unsigned long *)(GPIO_BASE_ADDR + 0xA8))
+N#define IO2_INT_CLR     (*(volatile unsigned long *)(GPIO_BASE_ADDR + 0xAC))
+N
+N#define IO_INT_STAT     (*(volatile unsigned long *)(GPIO_BASE_ADDR + 0x80))
+N
+N#define PARTCFG_BASE_ADDR		0x3FFF8000
+N#define PARTCFG        (*(volatile unsigned long *)(PARTCFG_BASE_ADDR + 0x00)) 
+N
+N/* Fast I/O setup */
+N#define FIO_BASE_ADDR		0x3FFFC000
+N#define FIO0DIR        (*(volatile unsigned long *)(FIO_BASE_ADDR + 0x00)) 
+N#define FIO0MASK       (*(volatile unsigned long *)(FIO_BASE_ADDR + 0x10))
+N#define FIO0PIN        (*(volatile unsigned long *)(FIO_BASE_ADDR + 0x14))
+N#define FIO0SET        (*(volatile unsigned long *)(FIO_BASE_ADDR + 0x18))
+N#define FIO0CLR        (*(volatile unsigned long *)(FIO_BASE_ADDR + 0x1C))
+N
+N#define FIO1DIR        (*(volatile unsigned long *)(FIO_BASE_ADDR + 0x20)) 
+N#define FIO1MASK       (*(volatile unsigned long *)(FIO_BASE_ADDR + 0x30))
+N#define FIO1PIN        (*(volatile unsigned long *)(FIO_BASE_ADDR + 0x34))
+N#define FIO1SET        (*(volatile unsigned long *)(FIO_BASE_ADDR + 0x38))
+N#define FIO1CLR        (*(volatile unsigned long *)(FIO_BASE_ADDR + 0x3C))
+N
+N#define FIO2DIR        (*(volatile unsigned long *)(FIO_BASE_ADDR + 0x40)) 
+N#define FIO2MASK       (*(volatile unsigned long *)(FIO_BASE_ADDR + 0x50))
+N#define FIO2PIN        (*(volatile unsigned long *)(FIO_BASE_ADDR + 0x54))
+N#define FIO2SET        (*(volatile unsigned long *)(FIO_BASE_ADDR + 0x58))
+N#define FIO2CLR        (*(volatile unsigned long *)(FIO_BASE_ADDR + 0x5C))
+N
+N#define FIO3DIR        (*(volatile unsigned long *)(FIO_BASE_ADDR + 0x60)) 
+N#define FIO3MASK       (*(volatile unsigned long *)(FIO_BASE_ADDR + 0x70))
+N#define FIO3PIN        (*(volatile unsigned long *)(FIO_BASE_ADDR + 0x74))
+N#define FIO3SET        (*(volatile unsigned long *)(FIO_BASE_ADDR + 0x78))
+N#define FIO3CLR        (*(volatile unsigned long *)(FIO_BASE_ADDR + 0x7C))
+N
+N#define FIO4DIR        (*(volatile unsigned long *)(FIO_BASE_ADDR + 0x80)) 
+N#define FIO4MASK       (*(volatile unsigned long *)(FIO_BASE_ADDR + 0x90))
+N#define FIO4PIN        (*(volatile unsigned long *)(FIO_BASE_ADDR + 0x94))
+N#define FIO4SET        (*(volatile unsigned long *)(FIO_BASE_ADDR + 0x98))
+N#define FIO4CLR        (*(volatile unsigned long *)(FIO_BASE_ADDR + 0x9C))
+N
+N/* FIOs can be accessed through WORD, HALF-WORD or BYTE. */
+N#define FIO0DIR0       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x00)) 
+N#define FIO1DIR0       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x20)) 
+N#define FIO2DIR0       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x40)) 
+N#define FIO3DIR0       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x60)) 
+N#define FIO4DIR0       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x80)) 
+N
+N#define FIO0DIR1       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x01)) 
+N#define FIO1DIR1       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x21)) 
+N#define FIO2DIR1       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x41)) 
+N#define FIO3DIR1       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x61)) 
+N#define FIO4DIR1       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x81)) 
+N
+N#define FIO0DIR2       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x02)) 
+N#define FIO1DIR2       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x22)) 
+N#define FIO2DIR2       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x42)) 
+N#define FIO3DIR2       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x62)) 
+N#define FIO4DIR2       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x82)) 
+N
+N#define FIO0DIR3       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x03)) 
+N#define FIO1DIR3       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x23)) 
+N#define FIO2DIR3       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x43)) 
+N#define FIO3DIR3       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x63)) 
+N#define FIO4DIR3       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x83)) 
+N
+N#define FIO0DIRL       (*(volatile unsigned short *)(FIO_BASE_ADDR + 0x00)) 
+N#define FIO1DIRL       (*(volatile unsigned short *)(FIO_BASE_ADDR + 0x20)) 
+N#define FIO2DIRL       (*(volatile unsigned short *)(FIO_BASE_ADDR + 0x40)) 
+N#define FIO3DIRL       (*(volatile unsigned short *)(FIO_BASE_ADDR + 0x60)) 
+N#define FIO4DIRL       (*(volatile unsigned short *)(FIO_BASE_ADDR + 0x80)) 
+N
+N#define FIO0DIRU       (*(volatile unsigned short *)(FIO_BASE_ADDR + 0x02)) 
+N#define FIO1DIRU       (*(volatile unsigned short *)(FIO_BASE_ADDR + 0x22)) 
+N#define FIO2DIRU       (*(volatile unsigned short *)(FIO_BASE_ADDR + 0x42)) 
+N#define FIO3DIRU       (*(volatile unsigned short *)(FIO_BASE_ADDR + 0x62)) 
+N#define FIO4DIRU       (*(volatile unsigned short *)(FIO_BASE_ADDR + 0x82)) 
+N
+N#define FIO0MASK0      (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x10)) 
+N#define FIO1MASK0      (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x30)) 
+N#define FIO2MASK0      (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x50)) 
+N#define FIO3MASK0      (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x70)) 
+N#define FIO4MASK0      (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x90)) 
+N
+N#define FIO0MASK1      (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x11)) 
+N#define FIO1MASK1      (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x31)) 
+N#define FIO2MASK1      (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x51)) 
+N#define FIO3MASK1      (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x71)) 
+N#define FIO4MASK1      (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x91)) 
+N
+N#define FIO0MASK2      (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x12)) 
+N#define FIO1MASK2      (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x32)) 
+N#define FIO2MASK2      (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x52)) 
+N#define FIO3MASK2      (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x72)) 
+N#define FIO4MASK2      (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x92)) 
+N
+N#define FIO0MASK3      (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x13)) 
+N#define FIO1MASK3      (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x33)) 
+N#define FIO2MASK3      (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x53)) 
+N#define FIO3MASK3      (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x73)) 
+N#define FIO4MASK3      (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x93)) 
+N
+N#define FIO0MASKL      (*(volatile unsigned short *)(FIO_BASE_ADDR + 0x10)) 
+N#define FIO1MASKL      (*(volatile unsigned short *)(FIO_BASE_ADDR + 0x30)) 
+N#define FIO2MASKL      (*(volatile unsigned short *)(FIO_BASE_ADDR + 0x50)) 
+N#define FIO3MASKL      (*(volatile unsigned short *)(FIO_BASE_ADDR + 0x70)) 
+N#define FIO4MASKL      (*(volatile unsigned short *)(FIO_BASE_ADDR + 0x90)) 
+N
+N#define FIO0MASKU      (*(volatile unsigned short *)(FIO_BASE_ADDR + 0x12)) 
+N#define FIO1MASKU      (*(volatile unsigned short *)(FIO_BASE_ADDR + 0x32)) 
+N#define FIO2MASKU      (*(volatile unsigned short *)(FIO_BASE_ADDR + 0x52)) 
+N#define FIO3MASKU      (*(volatile unsigned short *)(FIO_BASE_ADDR + 0x72)) 
+N#define FIO4MASKU      (*(volatile unsigned short *)(FIO_BASE_ADDR + 0x92)) 
+N
+N#define FIO0PIN0       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x14)) 
+N#define FIO1PIN0       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x34)) 
+N#define FIO2PIN0       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x54)) 
+N#define FIO3PIN0       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x74)) 
+N#define FIO4PIN0       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x94)) 
+N
+N#define FIO0PIN1       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x15)) 
+N#define FIO1PIN1       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x35)) 
+N#define FIO2PIN1       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x55)) 
+N#define FIO3PIN1       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x75)) 
+N#define FIO4PIN1       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x95)) 
+N
+N#define FIO0PIN2       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x16)) 
+N#define FIO1PIN2       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x36)) 
+N#define FIO2PIN2       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x56)) 
+N#define FIO3PIN2       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x76)) 
+N#define FIO4PIN2       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x96)) 
+N
+N#define FIO0PIN3       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x17)) 
+N#define FIO1PIN3       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x37)) 
+N#define FIO2PIN3       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x57)) 
+N#define FIO3PIN3       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x77)) 
+N#define FIO4PIN3       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x97)) 
+N
+N#define FIO0PINL       (*(volatile unsigned short *)(FIO_BASE_ADDR + 0x14)) 
+N#define FIO1PINL       (*(volatile unsigned short *)(FIO_BASE_ADDR + 0x34)) 
+N#define FIO2PINL       (*(volatile unsigned short *)(FIO_BASE_ADDR + 0x54)) 
+N#define FIO3PINL       (*(volatile unsigned short *)(FIO_BASE_ADDR + 0x74)) 
+N#define FIO4PINL       (*(volatile unsigned short *)(FIO_BASE_ADDR + 0x94)) 
+N
+N#define FIO0PINU       (*(volatile unsigned short *)(FIO_BASE_ADDR + 0x16)) 
+N#define FIO1PINU       (*(volatile unsigned short *)(FIO_BASE_ADDR + 0x36)) 
+N#define FIO2PINU       (*(volatile unsigned short *)(FIO_BASE_ADDR + 0x56)) 
+N#define FIO3PINU       (*(volatile unsigned short *)(FIO_BASE_ADDR + 0x76)) 
+N#define FIO4PINU       (*(volatile unsigned short *)(FIO_BASE_ADDR + 0x96)) 
+N
+N#define FIO0SET0       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x18)) 
+N#define FIO1SET0       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x38)) 
+N#define FIO2SET0       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x58)) 
+N#define FIO3SET0       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x78)) 
+N#define FIO4SET0       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x98)) 
+N
+N#define FIO0SET1       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x19)) 
+N#define FIO1SET1       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x39)) 
+N#define FIO2SET1       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x59)) 
+N#define FIO3SET1       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x79)) 
+N#define FIO4SET1       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x99)) 
+N
+N#define FIO0SET2       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x1A)) 
+N#define FIO1SET2       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x3A)) 
+N#define FIO2SET2       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x5A)) 
+N#define FIO3SET2       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x7A)) 
+N#define FIO4SET2       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x9A)) 
+N
+N#define FIO0SET3       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x1B)) 
+N#define FIO1SET3       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x3B)) 
+N#define FIO2SET3       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x5B)) 
+N#define FIO3SET3       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x7B)) 
+N#define FIO4SET3       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x9B)) 
+N
+N#define FIO0SETL       (*(volatile unsigned short *)(FIO_BASE_ADDR + 0x18)) 
+N#define FIO1SETL       (*(volatile unsigned short *)(FIO_BASE_ADDR + 0x38)) 
+N#define FIO2SETL       (*(volatile unsigned short *)(FIO_BASE_ADDR + 0x58)) 
+N#define FIO3SETL       (*(volatile unsigned short *)(FIO_BASE_ADDR + 0x78)) 
+N#define FIO4SETL       (*(volatile unsigned short *)(FIO_BASE_ADDR + 0x98)) 
+N
+N#define FIO0SETU       (*(volatile unsigned short *)(FIO_BASE_ADDR + 0x1A)) 
+N#define FIO1SETU       (*(volatile unsigned short *)(FIO_BASE_ADDR + 0x3A)) 
+N#define FIO2SETU       (*(volatile unsigned short *)(FIO_BASE_ADDR + 0x5A)) 
+N#define FIO3SETU       (*(volatile unsigned short *)(FIO_BASE_ADDR + 0x7A)) 
+N#define FIO4SETU       (*(volatile unsigned short *)(FIO_BASE_ADDR + 0x9A)) 
+N
+N#define FIO0CLR0       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x1C)) 
+N#define FIO1CLR0       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x3C)) 
+N#define FIO2CLR0       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x5C)) 
+N#define FIO3CLR0       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x7C)) 
+N#define FIO4CLR0       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x9C)) 
+N
+N#define FIO0CLR1       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x1D)) 
+N#define FIO1CLR1       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x3D)) 
+N#define FIO2CLR1       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x5D)) 
+N#define FIO3CLR1       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x7D)) 
+N#define FIO4CLR1       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x9D)) 
+N
+N#define FIO0CLR2       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x1E)) 
+N#define FIO1CLR2       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x3E)) 
+N#define FIO2CLR2       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x5E)) 
+N#define FIO3CLR2       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x7E)) 
+N#define FIO4CLR2       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x9E)) 
+N
+N#define FIO0CLR3       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x1F)) 
+N#define FIO1CLR3       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x3F)) 
+N#define FIO2CLR3       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x5F)) 
+N#define FIO3CLR3       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x7F)) 
+N#define FIO4CLR3       (*(volatile unsigned char *)(FIO_BASE_ADDR + 0x9F)) 
+N
+N#define FIO0CLRL       (*(volatile unsigned short *)(FIO_BASE_ADDR + 0x1C)) 
+N#define FIO1CLRL       (*(volatile unsigned short *)(FIO_BASE_ADDR + 0x3C)) 
+N#define FIO2CLRL       (*(volatile unsigned short *)(FIO_BASE_ADDR + 0x5C)) 
+N#define FIO3CLRL       (*(volatile unsigned short *)(FIO_BASE_ADDR + 0x7C)) 
+N#define FIO4CLRL       (*(volatile unsigned short *)(FIO_BASE_ADDR + 0x9C)) 
+N
+N#define FIO0CLRU       (*(volatile unsigned short *)(FIO_BASE_ADDR + 0x1E)) 
+N#define FIO1CLRU       (*(volatile unsigned short *)(FIO_BASE_ADDR + 0x3E)) 
+N#define FIO2CLRU       (*(volatile unsigned short *)(FIO_BASE_ADDR + 0x5E)) 
+N#define FIO3CLRU       (*(volatile unsigned short *)(FIO_BASE_ADDR + 0x7E)) 
+N#define FIO4CLRU       (*(volatile unsigned short *)(FIO_BASE_ADDR + 0x9E)) 
+N
+N
+N/* System Control Block(SCB) modules include Memory Accelerator Module,
+NPhase Locked Loop, VPB divider, Power Control, External Interrupt, 
+NReset, and Code Security/Debugging */
+N#define SCB_BASE_ADDR	0xE01FC000
+N
+N/* Memory Accelerator Module (MAM) */
+N#define MAMCR          (*(volatile unsigned long *)(SCB_BASE_ADDR + 0x000))
+N#define MAMTIM         (*(volatile unsigned long *)(SCB_BASE_ADDR + 0x004))
+N#define MEMMAP         (*(volatile unsigned long *)(SCB_BASE_ADDR + 0x040))
+N
+N/* Phase Locked Loop (PLL) */
+N#define PLLCON         (*(volatile unsigned long *)(SCB_BASE_ADDR + 0x080))
+N#define PLLCFG         (*(volatile unsigned long *)(SCB_BASE_ADDR + 0x084))
+N#define PLLSTAT        (*(volatile unsigned long *)(SCB_BASE_ADDR + 0x088))
+N#define PLLFEED        (*(volatile unsigned long *)(SCB_BASE_ADDR + 0x08C))
+N
+N/* Power Control */
+N#define PCON           (*(volatile unsigned long *)(SCB_BASE_ADDR + 0x0C0))
+N#define PCONP          (*(volatile unsigned long *)(SCB_BASE_ADDR + 0x0C4))
+N
+N/* Clock Divider */
+N// #define APBDIV         (*(volatile unsigned long *)(SCB_BASE_ADDR + 0x100))
+N#define CCLKCFG        (*(volatile unsigned long *)(SCB_BASE_ADDR + 0x104))
+N#define USBCLKCFG      (*(volatile unsigned long *)(SCB_BASE_ADDR + 0x108))
+N#define CLKSRCSEL      (*(volatile unsigned long *)(SCB_BASE_ADDR + 0x10C))
+N#define PCLKSEL0       (*(volatile unsigned long *)(SCB_BASE_ADDR + 0x1A8))
+N#define PCLKSEL1       (*(volatile unsigned long *)(SCB_BASE_ADDR + 0x1AC))
+N	
+N/* External Interrupts */
+N#define EXTINT         (*(volatile unsigned long *)(SCB_BASE_ADDR + 0x140))
+N#define INTWAKE        (*(volatile unsigned long *)(SCB_BASE_ADDR + 0x144))
+N#define EXTMODE        (*(volatile unsigned long *)(SCB_BASE_ADDR + 0x148))
+N#define EXTPOLAR       (*(volatile unsigned long *)(SCB_BASE_ADDR + 0x14C))
+N
+N/* Reset, reset source identification */
+N#define RSIR           (*(volatile unsigned long *)(SCB_BASE_ADDR + 0x180))
+N
+N/* RSID, code security protection */
+N#define CSPR           (*(volatile unsigned long *)(SCB_BASE_ADDR + 0x184))
+N
+N/* AHB configuration */
+N#define AHBCFG1        (*(volatile unsigned long *)(SCB_BASE_ADDR + 0x188))
+N#define AHBCFG2        (*(volatile unsigned long *)(SCB_BASE_ADDR + 0x18C))
+N
+N/* System Controls and Status */
+N#define SCS            (*(volatile unsigned long *)(SCB_BASE_ADDR + 0x1A0))	
+N
+N/* MPMC(EMC) registers */
+N#define STATIC_MEM0_BASE		0x80000000
+N#define STATIC_MEM1_BASE		0x81000000
+N#define STATIC_MEM2_BASE		0x82000000
+N#define STATIC_MEM3_BASE		0x83000000
+N
+N#define DYNAMIC_MEM0_BASE		0xA0000000
+N#define DYNAMIC_MEM1_BASE		0xB0000000
+N#define DYNAMIC_MEM2_BASE		0xC0000000
+N#define DYNAMIC_MEM3_BASE		0xD0000000
+N
+N/* External Memory Controller (EMC) */
+N#define EMC_BASE_ADDR		0xFFE08000
+N#define EMC_CTRL       (*(volatile unsigned long *)(EMC_BASE_ADDR + 0x000))
+N#define EMC_STAT       (*(volatile unsigned long *)(EMC_BASE_ADDR + 0x004))
+N#define EMC_CONFIG     (*(volatile unsigned long *)(EMC_BASE_ADDR + 0x008))
+N
+N/* Dynamic RAM access registers */
+N#define EMC_DYN_CTRL     (*(volatile unsigned long *)(EMC_BASE_ADDR + 0x020))
+N#define EMC_DYN_RFSH     (*(volatile unsigned long *)(EMC_BASE_ADDR + 0x024))
+N#define EMC_DYN_RD_CFG   (*(volatile unsigned long *)(EMC_BASE_ADDR + 0x028))
+N#define EMC_DYN_RP       (*(volatile unsigned long *)(EMC_BASE_ADDR + 0x030))
+N#define EMC_DYN_RAS      (*(volatile unsigned long *)(EMC_BASE_ADDR + 0x034))
+N#define EMC_DYN_SREX     (*(volatile unsigned long *)(EMC_BASE_ADDR + 0x038))
+N#define EMC_DYN_APR      (*(volatile unsigned long *)(EMC_BASE_ADDR + 0x03C))
+N#define EMC_DYN_DAL      (*(volatile unsigned long *)(EMC_BASE_ADDR + 0x040))
+N#define EMC_DYN_WR       (*(volatile unsigned long *)(EMC_BASE_ADDR + 0x044))
+N#define EMC_DYN_RC       (*(volatile unsigned long *)(EMC_BASE_ADDR + 0x048))
+N#define EMC_DYN_RFC      (*(volatile unsigned long *)(EMC_BASE_ADDR + 0x04C))
+N#define EMC_DYN_XSR      (*(volatile unsigned long *)(EMC_BASE_ADDR + 0x050))
+N#define EMC_DYN_RRD      (*(volatile unsigned long *)(EMC_BASE_ADDR + 0x054))
+N#define EMC_DYN_MRD      (*(volatile unsigned long *)(EMC_BASE_ADDR + 0x058))
+N
+N#define EMC_DYN_CFG0     (*(volatile unsigned long *)(EMC_BASE_ADDR + 0x100))
+N#define EMC_DYN_RASCAS0  (*(volatile unsigned long *)(EMC_BASE_ADDR + 0x104))
+N#define EMC_DYN_CFG1     (*(volatile unsigned long *)(EMC_BASE_ADDR + 0x120))
+N#define EMC_DYN_RASCAS1  (*(volatile unsigned long *)(EMC_BASE_ADDR + 0x124))
+N#define EMC_DYN_CFG2     (*(volatile unsigned long *)(EMC_BASE_ADDR + 0x140))
+N#define EMC_DYN_RASCAS2  (*(volatile unsigned long *)(EMC_BASE_ADDR + 0x144))
+N#define EMC_DYN_CFG3     (*(volatile unsigned long *)(EMC_BASE_ADDR + 0x160))
+N#define EMC_DYN_RASCAS3  (*(volatile unsigned long *)(EMC_BASE_ADDR + 0x164))
+N
+N/* static RAM access registers */
+N#define EMC_STA_CFG0      (*(volatile unsigned long *)(EMC_BASE_ADDR + 0x200))
+N#define EMC_STA_WAITWEN0  (*(volatile unsigned long *)(EMC_BASE_ADDR + 0x204))
+N#define EMC_STA_WAITOEN0  (*(volatile unsigned long *)(EMC_BASE_ADDR + 0x208))
+N#define EMC_STA_WAITRD0   (*(volatile unsigned long *)(EMC_BASE_ADDR + 0x20C))
+N#define EMC_STA_WAITPAGE0 (*(volatile unsigned long *)(EMC_BASE_ADDR + 0x210))
+N#define EMC_STA_WAITWR0   (*(volatile unsigned long *)(EMC_BASE_ADDR + 0x214))
+N#define EMC_STA_WAITTURN0 (*(volatile unsigned long *)(EMC_BASE_ADDR + 0x218))
+N
+N#define EMC_STA_CFG1      (*(volatile unsigned long *)(EMC_BASE_ADDR + 0x220))
+N#define EMC_STA_WAITWEN1  (*(volatile unsigned long *)(EMC_BASE_ADDR + 0x224))
+N#define EMC_STA_WAITOEN1  (*(volatile unsigned long *)(EMC_BASE_ADDR + 0x228))
+N#define EMC_STA_WAITRD1   (*(volatile unsigned long *)(EMC_BASE_ADDR + 0x22C))
+N#define EMC_STA_WAITPAGE1 (*(volatile unsigned long *)(EMC_BASE_ADDR + 0x230))
+N#define EMC_STA_WAITWR1   (*(volatile unsigned long *)(EMC_BASE_ADDR + 0x234))
+N#define EMC_STA_WAITTURN1 (*(volatile unsigned long *)(EMC_BASE_ADDR + 0x238))
+N
+N#define EMC_STA_CFG2      (*(volatile unsigned long *)(EMC_BASE_ADDR + 0x240))
+N#define EMC_STA_WAITWEN2  (*(volatile unsigned long *)(EMC_BASE_ADDR + 0x244))
+N#define EMC_STA_WAITOEN2  (*(volatile unsigned long *)(EMC_BASE_ADDR + 0x248))
+N#define EMC_STA_WAITRD2   (*(volatile unsigned long *)(EMC_BASE_ADDR + 0x24C))
+N#define EMC_STA_WAITPAGE2 (*(volatile unsigned long *)(EMC_BASE_ADDR + 0x250))
+N#define EMC_STA_WAITWR2   (*(volatile unsigned long *)(EMC_BASE_ADDR + 0x254))
+N#define EMC_STA_WAITTURN2 (*(volatile unsigned long *)(EMC_BASE_ADDR + 0x258))
+N
+N#define EMC_STA_CFG3      (*(volatile unsigned long *)(EMC_BASE_ADDR + 0x260))
+N#define EMC_STA_WAITWEN3  (*(volatile unsigned long *)(EMC_BASE_ADDR + 0x264))
+N#define EMC_STA_WAITOEN3  (*(volatile unsigned long *)(EMC_BASE_ADDR + 0x268))
+N#define EMC_STA_WAITRD3   (*(volatile unsigned long *)(EMC_BASE_ADDR + 0x26C))
+N#define EMC_STA_WAITPAGE3 (*(volatile unsigned long *)(EMC_BASE_ADDR + 0x270))
+N#define EMC_STA_WAITWR3   (*(volatile unsigned long *)(EMC_BASE_ADDR + 0x274))
+N#define EMC_STA_WAITTURN3 (*(volatile unsigned long *)(EMC_BASE_ADDR + 0x278))
+N
+N#define EMC_STA_EXT_WAIT  (*(volatile unsigned long *)(EMC_BASE_ADDR + 0x080))
+N
+N	
+N/* Timer 0 */
+N#define TMR0_BASE_ADDR		0xE0004000
+N#define T0IR           (*(volatile unsigned long *)(TMR0_BASE_ADDR + 0x00))
+N#define T0TCR          (*(volatile unsigned long *)(TMR0_BASE_ADDR + 0x04))
+N#define T0TC           (*(volatile unsigned long *)(TMR0_BASE_ADDR + 0x08))
+N#define T0PR           (*(volatile unsigned long *)(TMR0_BASE_ADDR + 0x0C))
+N#define T0PC           (*(volatile unsigned long *)(TMR0_BASE_ADDR + 0x10))
+N#define T0MCR          (*(volatile unsigned long *)(TMR0_BASE_ADDR + 0x14))
+N#define T0MR0          (*(volatile unsigned long *)(TMR0_BASE_ADDR + 0x18))
+N#define T0MR1          (*(volatile unsigned long *)(TMR0_BASE_ADDR + 0x1C))
+N#define T0MR2          (*(volatile unsigned long *)(TMR0_BASE_ADDR + 0x20))
+N#define T0MR3          (*(volatile unsigned long *)(TMR0_BASE_ADDR + 0x24))
+N#define T0CCR          (*(volatile unsigned long *)(TMR0_BASE_ADDR + 0x28))
+N#define T0CR0          (*(volatile unsigned long *)(TMR0_BASE_ADDR + 0x2C))
+N#define T0CR1          (*(volatile unsigned long *)(TMR0_BASE_ADDR + 0x30))
+N#define T0CR2          (*(volatile unsigned long *)(TMR0_BASE_ADDR + 0x34))
+N#define T0CR3          (*(volatile unsigned long *)(TMR0_BASE_ADDR + 0x38))
+N#define T0EMR          (*(volatile unsigned long *)(TMR0_BASE_ADDR + 0x3C))
+N#define T0CTCR         (*(volatile unsigned long *)(TMR0_BASE_ADDR + 0x70))
+N
+N/* Timer 1 */
+N#define TMR1_BASE_ADDR		0xE0008000
+N#define T1IR           (*(volatile unsigned long *)(TMR1_BASE_ADDR + 0x00))
+N#define T1TCR          (*(volatile unsigned long *)(TMR1_BASE_ADDR + 0x04))
+N#define T1TC           (*(volatile unsigned long *)(TMR1_BASE_ADDR + 0x08))
+N#define T1PR           (*(volatile unsigned long *)(TMR1_BASE_ADDR + 0x0C))
+N#define T1PC           (*(volatile unsigned long *)(TMR1_BASE_ADDR + 0x10))
+N#define T1MCR          (*(volatile unsigned long *)(TMR1_BASE_ADDR + 0x14))
+N#define T1MR0          (*(volatile unsigned long *)(TMR1_BASE_ADDR + 0x18))
+N#define T1MR1          (*(volatile unsigned long *)(TMR1_BASE_ADDR + 0x1C))
+N#define T1MR2          (*(volatile unsigned long *)(TMR1_BASE_ADDR + 0x20))
+N#define T1MR3          (*(volatile unsigned long *)(TMR1_BASE_ADDR + 0x24))
+N#define T1CCR          (*(volatile unsigned long *)(TMR1_BASE_ADDR + 0x28))
+N#define T1CR0          (*(volatile unsigned long *)(TMR1_BASE_ADDR + 0x2C))
+N#define T1CR1          (*(volatile unsigned long *)(TMR1_BASE_ADDR + 0x30))
+N#define T1CR2          (*(volatile unsigned long *)(TMR1_BASE_ADDR + 0x34))
+N#define T1CR3          (*(volatile unsigned long *)(TMR1_BASE_ADDR + 0x38))
+N#define T1EMR          (*(volatile unsigned long *)(TMR1_BASE_ADDR + 0x3C))
+N#define T1CTCR         (*(volatile unsigned long *)(TMR1_BASE_ADDR + 0x70))
+N
+N/* Timer 2 */
+N#define TMR2_BASE_ADDR		0xE0070000
+N#define T2IR           (*(volatile unsigned long *)(TMR2_BASE_ADDR + 0x00))
+N#define T2TCR          (*(volatile unsigned long *)(TMR2_BASE_ADDR + 0x04))
+N#define T2TC           (*(volatile unsigned long *)(TMR2_BASE_ADDR + 0x08))
+N#define T2PR           (*(volatile unsigned long *)(TMR2_BASE_ADDR + 0x0C))
+N#define T2PC           (*(volatile unsigned long *)(TMR2_BASE_ADDR + 0x10))
+N#define T2MCR          (*(volatile unsigned long *)(TMR2_BASE_ADDR + 0x14))
+N#define T2MR0          (*(volatile unsigned long *)(TMR2_BASE_ADDR + 0x18))
+N#define T2MR1          (*(volatile unsigned long *)(TMR2_BASE_ADDR + 0x1C))
+N#define T2MR2          (*(volatile unsigned long *)(TMR2_BASE_ADDR + 0x20))
+N#define T2MR3          (*(volatile unsigned long *)(TMR2_BASE_ADDR + 0x24))
+N#define T2CCR          (*(volatile unsigned long *)(TMR2_BASE_ADDR + 0x28))
+N#define T2CR0          (*(volatile unsigned long *)(TMR2_BASE_ADDR + 0x2C))
+N#define T2CR1          (*(volatile unsigned long *)(TMR2_BASE_ADDR + 0x30))
+N#define T2CR2          (*(volatile unsigned long *)(TMR2_BASE_ADDR + 0x34))
+N#define T2CR3          (*(volatile unsigned long *)(TMR2_BASE_ADDR + 0x38))
+N#define T2EMR          (*(volatile unsigned long *)(TMR2_BASE_ADDR + 0x3C))
+N#define T2CTCR         (*(volatile unsigned long *)(TMR2_BASE_ADDR + 0x70))
+N
+N/* Timer 3 */
+N#define TMR3_BASE_ADDR		0xE0074000
+N#define T3IR           (*(volatile unsigned long *)(TMR3_BASE_ADDR + 0x00))
+N#define T3TCR          (*(volatile unsigned long *)(TMR3_BASE_ADDR + 0x04))
+N#define T3TC           (*(volatile unsigned long *)(TMR3_BASE_ADDR + 0x08))
+N#define T3PR           (*(volatile unsigned long *)(TMR3_BASE_ADDR + 0x0C))
+N#define T3PC           (*(volatile unsigned long *)(TMR3_BASE_ADDR + 0x10))
+N#define T3MCR          (*(volatile unsigned long *)(TMR3_BASE_ADDR + 0x14))
+N#define T3MR0          (*(volatile unsigned long *)(TMR3_BASE_ADDR + 0x18))
+N#define T3MR1          (*(volatile unsigned long *)(TMR3_BASE_ADDR + 0x1C))
+N#define T3MR2          (*(volatile unsigned long *)(TMR3_BASE_ADDR + 0x20))
+N#define T3MR3          (*(volatile unsigned long *)(TMR3_BASE_ADDR + 0x24))
+N#define T3CCR          (*(volatile unsigned long *)(TMR3_BASE_ADDR + 0x28))
+N#define T3CR0          (*(volatile unsigned long *)(TMR3_BASE_ADDR + 0x2C))
+N#define T3CR1          (*(volatile unsigned long *)(TMR3_BASE_ADDR + 0x30))
+N#define T3CR2          (*(volatile unsigned long *)(TMR3_BASE_ADDR + 0x34))
+N#define T3CR3          (*(volatile unsigned long *)(TMR3_BASE_ADDR + 0x38))
+N#define T3EMR          (*(volatile unsigned long *)(TMR3_BASE_ADDR + 0x3C))
+N#define T3CTCR         (*(volatile unsigned long *)(TMR3_BASE_ADDR + 0x70))
+N
+N
+N/* Pulse Width Modulator (PWM) */
+N#define PWM0_BASE_ADDR		0xE0014000
+N#define PWM0IR          (*(volatile unsigned long *)(PWM0_BASE_ADDR + 0x00))
+N#define PWM0TCR         (*(volatile unsigned long *)(PWM0_BASE_ADDR + 0x04))
+N#define PWM0TC          (*(volatile unsigned long *)(PWM0_BASE_ADDR + 0x08))
+N#define PWM0PR          (*(volatile unsigned long *)(PWM0_BASE_ADDR + 0x0C))
+N#define PWM0PC          (*(volatile unsigned long *)(PWM0_BASE_ADDR + 0x10))
+N#define PWM0MCR         (*(volatile unsigned long *)(PWM0_BASE_ADDR + 0x14))
+N#define PWM0MR0         (*(volatile unsigned long *)(PWM0_BASE_ADDR + 0x18))
+N#define PWM0MR1         (*(volatile unsigned long *)(PWM0_BASE_ADDR + 0x1C))
+N#define PWM0MR2         (*(volatile unsigned long *)(PWM0_BASE_ADDR + 0x20))
+N#define PWM0MR3         (*(volatile unsigned long *)(PWM0_BASE_ADDR + 0x24))
+N#define PWM0CCR         (*(volatile unsigned long *)(PWM0_BASE_ADDR + 0x28))
+N#define PWM0CR0         (*(volatile unsigned long *)(PWM0_BASE_ADDR + 0x2C))
+N#define PWM0CR1         (*(volatile unsigned long *)(PWM0_BASE_ADDR + 0x30))
+N#define PWM0CR2         (*(volatile unsigned long *)(PWM0_BASE_ADDR + 0x34))
+N#define PWM0CR3         (*(volatile unsigned long *)(PWM0_BASE_ADDR + 0x38))
+N#define PWM0MR4         (*(volatile unsigned long *)(PWM0_BASE_ADDR + 0x40))
+N#define PWM0MR5         (*(volatile unsigned long *)(PWM0_BASE_ADDR + 0x44))
+N#define PWM0MR6         (*(volatile unsigned long *)(PWM0_BASE_ADDR + 0x48))
+N#define PWM0PCR         (*(volatile unsigned long *)(PWM0_BASE_ADDR + 0x4C))
+N#define PWM0LER         (*(volatile unsigned long *)(PWM0_BASE_ADDR + 0x50))
+N#define PWM0CTCR        (*(volatile unsigned long *)(PWM0_BASE_ADDR + 0x70))
+N
+N#define PWM1_BASE_ADDR		0xE0018000
+N#define PWM1IR          (*(volatile unsigned long *)(PWM1_BASE_ADDR + 0x00))
+N#define PWM1TCR         (*(volatile unsigned long *)(PWM1_BASE_ADDR + 0x04))
+N#define PWM1TC          (*(volatile unsigned long *)(PWM1_BASE_ADDR + 0x08))
+N#define PWM1PR          (*(volatile unsigned long *)(PWM1_BASE_ADDR + 0x0C))
+N#define PWM1PC          (*(volatile unsigned long *)(PWM1_BASE_ADDR + 0x10))
+N#define PWM1MCR         (*(volatile unsigned long *)(PWM1_BASE_ADDR + 0x14))
+N#define PWM1MR0         (*(volatile unsigned long *)(PWM1_BASE_ADDR + 0x18))
+N#define PWM1MR1         (*(volatile unsigned long *)(PWM1_BASE_ADDR + 0x1C))
+N#define PWM1MR2         (*(volatile unsigned long *)(PWM1_BASE_ADDR + 0x20))
+N#define PWM1MR3         (*(volatile unsigned long *)(PWM1_BASE_ADDR + 0x24))
+N#define PWM1CCR         (*(volatile unsigned long *)(PWM1_BASE_ADDR + 0x28))
+N#define PWM1CR0         (*(volatile unsigned long *)(PWM1_BASE_ADDR + 0x2C))
+N#define PWM1CR1         (*(volatile unsigned long *)(PWM1_BASE_ADDR + 0x30))
+N#define PWM1CR2         (*(volatile unsigned long *)(PWM1_BASE_ADDR + 0x34))
+N#define PWM1CR3         (*(volatile unsigned long *)(PWM1_BASE_ADDR + 0x38))
+N#define PWM1MR4         (*(volatile unsigned long *)(PWM1_BASE_ADDR + 0x40))
+N#define PWM1MR5         (*(volatile unsigned long *)(PWM1_BASE_ADDR + 0x44))
+N#define PWM1MR6         (*(volatile unsigned long *)(PWM1_BASE_ADDR + 0x48))
+N#define PWM1PCR         (*(volatile unsigned long *)(PWM1_BASE_ADDR + 0x4C))
+N#define PWM1LER         (*(volatile unsigned long *)(PWM1_BASE_ADDR + 0x50))
+N#define PWM1CTCR        (*(volatile unsigned long *)(PWM1_BASE_ADDR + 0x70))
+N
+N
+N/* Universal Asynchronous Receiver Transmitter 0 (UART0) */
+N#define UART0_BASE_ADDR		0xE000C000
+N#define U0RBR          (*(volatile unsigned long *)(UART0_BASE_ADDR + 0x00))
+N#define U0THR          (*(volatile unsigned long *)(UART0_BASE_ADDR + 0x00))
+N#define U0DLL          (*(volatile unsigned long *)(UART0_BASE_ADDR + 0x00))
+N#define U0DLM          (*(volatile unsigned long *)(UART0_BASE_ADDR + 0x04))
+N#define U0IER          (*(volatile unsigned long *)(UART0_BASE_ADDR + 0x04))
+N#define U0IIR          (*(volatile unsigned long *)(UART0_BASE_ADDR + 0x08))
+N#define U0FCR          (*(volatile unsigned long *)(UART0_BASE_ADDR + 0x08))
+N#define U0LCR          (*(volatile unsigned long *)(UART0_BASE_ADDR + 0x0C))
+N#define U0LSR          (*(volatile unsigned long *)(UART0_BASE_ADDR + 0x14))
+N#define U0SCR          (*(volatile unsigned long *)(UART0_BASE_ADDR + 0x1C))
+N#define U0ACR          (*(volatile unsigned long *)(UART0_BASE_ADDR + 0x20))
+N#define U0ICR          (*(volatile unsigned long *)(UART0_BASE_ADDR + 0x24))
+N#define U0FDR          (*(volatile unsigned long *)(UART0_BASE_ADDR + 0x28))
+N#define U0TER          (*(volatile unsigned long *)(UART0_BASE_ADDR + 0x30))
+N
+N/* Universal Asynchronous Receiver Transmitter 1 (UART1) */
+N#define UART1_BASE_ADDR		0xE0010000
+N#define U1RBR          (*(volatile unsigned long *)(UART1_BASE_ADDR + 0x00))
+N#define U1THR          (*(volatile unsigned long *)(UART1_BASE_ADDR + 0x00))
+N#define U1DLL          (*(volatile unsigned long *)(UART1_BASE_ADDR + 0x00))
+N#define U1DLM          (*(volatile unsigned long *)(UART1_BASE_ADDR + 0x04))
+N#define U1IER          (*(volatile unsigned long *)(UART1_BASE_ADDR + 0x04))
+N#define U1IIR          (*(volatile unsigned long *)(UART1_BASE_ADDR + 0x08))
+N#define U1FCR          (*(volatile unsigned long *)(UART1_BASE_ADDR + 0x08))
+N#define U1LCR          (*(volatile unsigned long *)(UART1_BASE_ADDR + 0x0C))
+N#define U1MCR          (*(volatile unsigned long *)(UART1_BASE_ADDR + 0x10))
+N#define U1LSR          (*(volatile unsigned long *)(UART1_BASE_ADDR + 0x14))
+N#define U1MSR          (*(volatile unsigned long *)(UART1_BASE_ADDR + 0x18))
+N#define U1SCR          (*(volatile unsigned long *)(UART1_BASE_ADDR + 0x1C))
+N#define U1ACR          (*(volatile unsigned long *)(UART1_BASE_ADDR + 0x20))
+N#define U1FDR          (*(volatile unsigned long *)(UART1_BASE_ADDR + 0x28))
+N#define U1TER          (*(volatile unsigned long *)(UART1_BASE_ADDR + 0x30))
+N
+N/* Universal Asynchronous Receiver Transmitter 2 (UART2) */
+N#define UART2_BASE_ADDR		0xE0078000
+N#define U2RBR          (*(volatile unsigned long *)(UART2_BASE_ADDR + 0x00))
+N#define U2THR          (*(volatile unsigned long *)(UART2_BASE_ADDR + 0x00))
+N#define U2DLL          (*(volatile unsigned long *)(UART2_BASE_ADDR + 0x00))
+N#define U2DLM          (*(volatile unsigned long *)(UART2_BASE_ADDR + 0x04))
+N#define U2IER          (*(volatile unsigned long *)(UART2_BASE_ADDR + 0x04))
+N#define U2IIR          (*(volatile unsigned long *)(UART2_BASE_ADDR + 0x08))
+N#define U2FCR          (*(volatile unsigned long *)(UART2_BASE_ADDR + 0x08))
+N#define U2LCR          (*(volatile unsigned long *)(UART2_BASE_ADDR + 0x0C))
+N#define U2LSR          (*(volatile unsigned long *)(UART2_BASE_ADDR + 0x14))
+N#define U2SCR          (*(volatile unsigned long *)(UART2_BASE_ADDR + 0x1C))
+N#define U2ACR          (*(volatile unsigned long *)(UART2_BASE_ADDR + 0x20))
+N#define U2ICR          (*(volatile unsigned long *)(UART2_BASE_ADDR + 0x24))
+N#define U2FDR          (*(volatile unsigned long *)(UART2_BASE_ADDR + 0x28))
+N#define U2TER          (*(volatile unsigned long *)(UART2_BASE_ADDR + 0x30))
+N
+N/* Universal Asynchronous Receiver Transmitter 3 (UART3) */
+N#define UART3_BASE_ADDR		0xE007C000
+N#define U3RBR          (*(volatile unsigned long *)(UART3_BASE_ADDR + 0x00))
+N#define U3THR          (*(volatile unsigned long *)(UART3_BASE_ADDR + 0x00))
+N#define U3DLL          (*(volatile unsigned long *)(UART3_BASE_ADDR + 0x00))
+N#define U3DLM          (*(volatile unsigned long *)(UART3_BASE_ADDR + 0x04))
+N#define U3IER          (*(volatile unsigned long *)(UART3_BASE_ADDR + 0x04))
+N#define U3IIR          (*(volatile unsigned long *)(UART3_BASE_ADDR + 0x08))
+N#define U3FCR          (*(volatile unsigned long *)(UART3_BASE_ADDR + 0x08))
+N#define U3LCR          (*(volatile unsigned long *)(UART3_BASE_ADDR + 0x0C))
+N#define U3LSR          (*(volatile unsigned long *)(UART3_BASE_ADDR + 0x14))
+N#define U3SCR          (*(volatile unsigned long *)(UART3_BASE_ADDR + 0x1C))
+N#define U3ACR          (*(volatile unsigned long *)(UART3_BASE_ADDR + 0x20))
+N#define U3ICR          (*(volatile unsigned long *)(UART3_BASE_ADDR + 0x24))
+N#define U3FDR          (*(volatile unsigned long *)(UART3_BASE_ADDR + 0x28))
+N#define U3TER          (*(volatile unsigned long *)(UART3_BASE_ADDR + 0x30))
+N
+N/* I2C Interface 0 */
+N#define I2C0_BASE_ADDR		0xE001C000
+N#define I20CONSET      (*(volatile unsigned long *)(I2C0_BASE_ADDR + 0x00))
+N#define I20STAT        (*(volatile unsigned long *)(I2C0_BASE_ADDR + 0x04))
+N#define I20DAT         (*(volatile unsigned long *)(I2C0_BASE_ADDR + 0x08))
+N#define I20ADR         (*(volatile unsigned long *)(I2C0_BASE_ADDR + 0x0C))
+N#define I20SCLH        (*(volatile unsigned long *)(I2C0_BASE_ADDR + 0x10))
+N#define I20SCLL        (*(volatile unsigned long *)(I2C0_BASE_ADDR + 0x14))
+N#define I20CONCLR      (*(volatile unsigned long *)(I2C0_BASE_ADDR + 0x18))
+N
+N/* I2C Interface 1 */
+N#define I2C1_BASE_ADDR		0xE005C000
+N#define I21CONSET      (*(volatile unsigned long *)(I2C1_BASE_ADDR + 0x00))
+N#define I21STAT        (*(volatile unsigned long *)(I2C1_BASE_ADDR + 0x04))
+N#define I21DAT         (*(volatile unsigned long *)(I2C1_BASE_ADDR + 0x08))
+N#define I21ADR         (*(volatile unsigned long *)(I2C1_BASE_ADDR + 0x0C))
+N#define I21SCLH        (*(volatile unsigned long *)(I2C1_BASE_ADDR + 0x10))
+N#define I21SCLL        (*(volatile unsigned long *)(I2C1_BASE_ADDR + 0x14))
+N#define I21CONCLR      (*(volatile unsigned long *)(I2C1_BASE_ADDR + 0x18))
+N
+N/* I2C Interface 2 */
+N#define I2C2_BASE_ADDR		0xE0080000
+N#define I22CONSET      (*(volatile unsigned long *)(I2C2_BASE_ADDR + 0x00))
+N#define I22STAT        (*(volatile unsigned long *)(I2C2_BASE_ADDR + 0x04))
+N#define I22DAT         (*(volatile unsigned long *)(I2C2_BASE_ADDR + 0x08))
+N#define I22ADR         (*(volatile unsigned long *)(I2C2_BASE_ADDR + 0x0C))
+N#define I22SCLH        (*(volatile unsigned long *)(I2C2_BASE_ADDR + 0x10))
+N#define I22SCLL        (*(volatile unsigned long *)(I2C2_BASE_ADDR + 0x14))
+N#define I22CONCLR      (*(volatile unsigned long *)(I2C2_BASE_ADDR + 0x18))
+N
+N/* SPI0 (Serial Peripheral Interface 0) */
+N#define SPI0_BASE_ADDR		0xE0020000
+N#define S0SPCR         (*(volatile unsigned long *)(SPI0_BASE_ADDR + 0x00))
+N#define S0SPSR         (*(volatile unsigned long *)(SPI0_BASE_ADDR + 0x04))
+N#define S0SPDR         (*(volatile unsigned long *)(SPI0_BASE_ADDR + 0x08))
+N#define S0SPCCR        (*(volatile unsigned long *)(SPI0_BASE_ADDR + 0x0C))
+N#define S0SPINT        (*(volatile unsigned long *)(SPI0_BASE_ADDR + 0x1C))
+N
+N/* SSP0 Controller */
+N#define SSP0_BASE_ADDR		0xE0068000
+N#define SSP0CR0        (*(volatile unsigned long *)(SSP0_BASE_ADDR + 0x00))
+N#define SSP0CR1        (*(volatile unsigned long *)(SSP0_BASE_ADDR + 0x04))
+N#define SSP0DR         (*(volatile unsigned long *)(SSP0_BASE_ADDR + 0x08))
+N#define SSP0SR         (*(volatile unsigned long *)(SSP0_BASE_ADDR + 0x0C))
+N#define SSP0CPSR       (*(volatile unsigned long *)(SSP0_BASE_ADDR + 0x10))
+N#define SSP0IMSC       (*(volatile unsigned long *)(SSP0_BASE_ADDR + 0x14))
+N#define SSP0RIS        (*(volatile unsigned long *)(SSP0_BASE_ADDR + 0x18))
+N#define SSP0MIS        (*(volatile unsigned long *)(SSP0_BASE_ADDR + 0x1C))
+N#define SSP0ICR        (*(volatile unsigned long *)(SSP0_BASE_ADDR + 0x20))
+N#define SSP0DMACR      (*(volatile unsigned long *)(SSP0_BASE_ADDR + 0x24))
+N
+N/* SSP1 Controller */
+N#define SSP1_BASE_ADDR		0xE0030000
+N#define SSP1CR0        (*(volatile unsigned long *)(SSP1_BASE_ADDR + 0x00))
+N#define SSP1CR1        (*(volatile unsigned long *)(SSP1_BASE_ADDR + 0x04))
+N#define SSP1DR         (*(volatile unsigned long *)(SSP1_BASE_ADDR + 0x08))
+N#define SSP1SR         (*(volatile unsigned long *)(SSP1_BASE_ADDR + 0x0C))
+N#define SSP1CPSR       (*(volatile unsigned long *)(SSP1_BASE_ADDR + 0x10))
+N#define SSP1IMSC       (*(volatile unsigned long *)(SSP1_BASE_ADDR + 0x14))
+N#define SSP1RIS        (*(volatile unsigned long *)(SSP1_BASE_ADDR + 0x18))
+N#define SSP1MIS        (*(volatile unsigned long *)(SSP1_BASE_ADDR + 0x1C))
+N#define SSP1ICR        (*(volatile unsigned long *)(SSP1_BASE_ADDR + 0x20))
+N#define SSP1DMACR      (*(volatile unsigned long *)(SSP1_BASE_ADDR + 0x24))
+N
+N
+N/* Real Time Clock */
+N#define RTC_BASE_ADDR		0xE0024000
+N#define RTC_ILR         (*(volatile unsigned long *)(RTC_BASE_ADDR + 0x00))
+N#define RTC_CTC         (*(volatile unsigned long *)(RTC_BASE_ADDR + 0x04))
+N#define RTC_CCR         (*(volatile unsigned long *)(RTC_BASE_ADDR + 0x08))
+N#define RTC_CIIR        (*(volatile unsigned long *)(RTC_BASE_ADDR + 0x0C))
+N#define RTC_AMR         (*(volatile unsigned long *)(RTC_BASE_ADDR + 0x10))
+N#define RTC_CTIME0      (*(volatile unsigned long *)(RTC_BASE_ADDR + 0x14))
+N#define RTC_CTIME1      (*(volatile unsigned long *)(RTC_BASE_ADDR + 0x18))
+N#define RTC_CTIME2      (*(volatile unsigned long *)(RTC_BASE_ADDR + 0x1C))
+N#define RTC_SEC         (*(volatile unsigned long *)(RTC_BASE_ADDR + 0x20))
+N#define RTC_MIN         (*(volatile unsigned long *)(RTC_BASE_ADDR + 0x24))
+N#define RTC_HOUR        (*(volatile unsigned long *)(RTC_BASE_ADDR + 0x28))
+N#define RTC_DOM         (*(volatile unsigned long *)(RTC_BASE_ADDR + 0x2C))
+N#define RTC_DOW         (*(volatile unsigned long *)(RTC_BASE_ADDR + 0x30))
+N#define RTC_DOY         (*(volatile unsigned long *)(RTC_BASE_ADDR + 0x34))
+N#define RTC_MONTH       (*(volatile unsigned long *)(RTC_BASE_ADDR + 0x38))
+N#define RTC_YEAR        (*(volatile unsigned long *)(RTC_BASE_ADDR + 0x3C))
+N#define RTC_CISS        (*(volatile unsigned long *)(RTC_BASE_ADDR + 0x40))
+N#define RTC_ALSEC       (*(volatile unsigned long *)(RTC_BASE_ADDR + 0x60))
+N#define RTC_ALMIN       (*(volatile unsigned long *)(RTC_BASE_ADDR + 0x64))
+N#define RTC_ALHOUR      (*(volatile unsigned long *)(RTC_BASE_ADDR + 0x68))
+N#define RTC_ALDOM       (*(volatile unsigned long *)(RTC_BASE_ADDR + 0x6C))
+N#define RTC_ALDOW       (*(volatile unsigned long *)(RTC_BASE_ADDR + 0x70))
+N#define RTC_ALDOY       (*(volatile unsigned long *)(RTC_BASE_ADDR + 0x74))
+N#define RTC_ALMON       (*(volatile unsigned long *)(RTC_BASE_ADDR + 0x78))
+N#define RTC_ALYEAR      (*(volatile unsigned long *)(RTC_BASE_ADDR + 0x7C))
+N#define RTC_PREINT      (*(volatile unsigned long *)(RTC_BASE_ADDR + 0x80))
+N#define RTC_PREFRAC     (*(volatile unsigned long *)(RTC_BASE_ADDR + 0x84))
+N
+N
+N/* A/D Converter 0 (AD0) */
+N#define AD0_BASE_ADDR		0xE0034000
+N#define AD0CR          (*(volatile unsigned long *)(AD0_BASE_ADDR + 0x00))
+N#define AD0GDR         (*(volatile unsigned long *)(AD0_BASE_ADDR + 0x04))
+N#define AD0INTEN       (*(volatile unsigned long *)(AD0_BASE_ADDR + 0x0C))
+N#define AD0DR0         (*(volatile unsigned long *)(AD0_BASE_ADDR + 0x10))
+N#define AD0DR1         (*(volatile unsigned long *)(AD0_BASE_ADDR + 0x14))
+N#define AD0DR2         (*(volatile unsigned long *)(AD0_BASE_ADDR + 0x18))
+N#define AD0DR3         (*(volatile unsigned long *)(AD0_BASE_ADDR + 0x1C))
+N#define AD0DR4         (*(volatile unsigned long *)(AD0_BASE_ADDR + 0x20))
+N#define AD0DR5         (*(volatile unsigned long *)(AD0_BASE_ADDR + 0x24))
+N#define AD0DR6         (*(volatile unsigned long *)(AD0_BASE_ADDR + 0x28))
+N#define AD0DR7         (*(volatile unsigned long *)(AD0_BASE_ADDR + 0x2C))
+N#define AD0STAT        (*(volatile unsigned long *)(AD0_BASE_ADDR + 0x30))
+N
+N
+N/* D/A Converter */
+N#define DAC_BASE_ADDR		0xE006C000
+N#define DACR           (*(volatile unsigned long *)(DAC_BASE_ADDR + 0x00))
+N
+N
+N/* Watchdog */
+N#define WDG_BASE_ADDR		0xE0000000
+N#define WDMOD          (*(volatile unsigned long *)(WDG_BASE_ADDR + 0x00))
+N#define WDTC           (*(volatile unsigned long *)(WDG_BASE_ADDR + 0x04))
+N#define WDFEED         (*(volatile unsigned long *)(WDG_BASE_ADDR + 0x08))
+N#define WDTV           (*(volatile unsigned long *)(WDG_BASE_ADDR + 0x0C))
+N#define WDCLKSEL       (*(volatile unsigned long *)(WDG_BASE_ADDR + 0x10))
+N
+N/* CAN CONTROLLERS AND ACCEPTANCE FILTER */
+N#define CAN_ACCEPT_BASE_ADDR		0xE003C000
+N#define CAN_AFMR		(*(volatile unsigned long *)(CAN_ACCEPT_BASE_ADDR + 0x00))  	
+N#define CAN_SFF_SA 		(*(volatile unsigned long *)(CAN_ACCEPT_BASE_ADDR + 0x04))  	
+N#define CAN_SFF_GRP_SA 	(*(volatile unsigned long *)(CAN_ACCEPT_BASE_ADDR + 0x08))
+N#define CAN_EFF_SA 		(*(volatile unsigned long *)(CAN_ACCEPT_BASE_ADDR + 0x0C))
+N#define CAN_EFF_GRP_SA 	(*(volatile unsigned long *)(CAN_ACCEPT_BASE_ADDR + 0x10))  	
+N#define CAN_EOT 		(*(volatile unsigned long *)(CAN_ACCEPT_BASE_ADDR + 0x14))
+N#define CAN_LUT_ERR_ADR (*(volatile unsigned long *)(CAN_ACCEPT_BASE_ADDR + 0x18))  	
+N#define CAN_LUT_ERR 	(*(volatile unsigned long *)(CAN_ACCEPT_BASE_ADDR + 0x1C))
+N
+N#define CAN_CENTRAL_BASE_ADDR		0xE0040000  	
+N#define CAN_TX_SR 	(*(volatile unsigned long *)(CAN_CENTRAL_BASE_ADDR + 0x00))  	
+N#define CAN_RX_SR 	(*(volatile unsigned long *)(CAN_CENTRAL_BASE_ADDR + 0x04))  	
+N#define CAN_MSR 	(*(volatile unsigned long *)(CAN_CENTRAL_BASE_ADDR + 0x08))
+N
+N#define CAN1_BASE_ADDR		0xE0044000
+N#define CAN1MOD 	(*(volatile unsigned long *)(CAN1_BASE_ADDR + 0x00))  	
+N#define CAN1CMR 	(*(volatile unsigned long *)(CAN1_BASE_ADDR + 0x04))  	
+N#define CAN1GSR 	(*(volatile unsigned long *)(CAN1_BASE_ADDR + 0x08))  	
+N#define CAN1ICR 	(*(volatile unsigned long *)(CAN1_BASE_ADDR + 0x0C))  	
+N#define CAN1IER 	(*(volatile unsigned long *)(CAN1_BASE_ADDR + 0x10))
+N#define CAN1BTR 	(*(volatile unsigned long *)(CAN1_BASE_ADDR + 0x14))  	
+N#define CAN1EWL 	(*(volatile unsigned long *)(CAN1_BASE_ADDR + 0x18))  	
+N#define CAN1SR 		(*(volatile unsigned long *)(CAN1_BASE_ADDR + 0x1C))  	
+N#define CAN1RFS 	(*(volatile unsigned long *)(CAN1_BASE_ADDR + 0x20))  	
+N#define CAN1RID 	(*(volatile unsigned long *)(CAN1_BASE_ADDR + 0x24))
+N#define CAN1RDA 	(*(volatile unsigned long *)(CAN1_BASE_ADDR + 0x28))  	
+N#define CAN1RDB 	(*(volatile unsigned long *)(CAN1_BASE_ADDR + 0x2C))
+N  	
+N#define CAN1TFI1 	(*(volatile unsigned long *)(CAN1_BASE_ADDR + 0x30))  	
+N#define CAN1TID1 	(*(volatile unsigned long *)(CAN1_BASE_ADDR + 0x34))  	
+N#define CAN1TDA1 	(*(volatile unsigned long *)(CAN1_BASE_ADDR + 0x38))
+N#define CAN1TDB1 	(*(volatile unsigned long *)(CAN1_BASE_ADDR + 0x3C))  	
+N#define CAN1TFI2 	(*(volatile unsigned long *)(CAN1_BASE_ADDR + 0x40))  	
+N#define CAN1TID2 	(*(volatile unsigned long *)(CAN1_BASE_ADDR + 0x44))  	
+N#define CAN1TDA2 	(*(volatile unsigned long *)(CAN1_BASE_ADDR + 0x48))  	
+N#define CAN1TDB2 	(*(volatile unsigned long *)(CAN1_BASE_ADDR + 0x4C))
+N#define CAN1TFI3 	(*(volatile unsigned long *)(CAN1_BASE_ADDR + 0x50))  	
+N#define CAN1TID3 	(*(volatile unsigned long *)(CAN1_BASE_ADDR + 0x54))  	
+N#define CAN1TDA3 	(*(volatile unsigned long *)(CAN1_BASE_ADDR + 0x58))  	
+N#define CAN1TDB3 	(*(volatile unsigned long *)(CAN1_BASE_ADDR + 0x5C))
+N
+N#define CAN2_BASE_ADDR		0xE0048000
+N#define CAN2MOD 	(*(volatile unsigned long *)(CAN2_BASE_ADDR + 0x00))  	
+N#define CAN2CMR 	(*(volatile unsigned long *)(CAN2_BASE_ADDR + 0x04))  	
+N#define CAN2GSR 	(*(volatile unsigned long *)(CAN2_BASE_ADDR + 0x08))  	
+N#define CAN2ICR 	(*(volatile unsigned long *)(CAN2_BASE_ADDR + 0x0C))  	
+N#define CAN2IER 	(*(volatile unsigned long *)(CAN2_BASE_ADDR + 0x10))
+N#define CAN2BTR 	(*(volatile unsigned long *)(CAN2_BASE_ADDR + 0x14))  	
+N#define CAN2EWL 	(*(volatile unsigned long *)(CAN2_BASE_ADDR + 0x18))  	
+N#define CAN2SR 		(*(volatile unsigned long *)(CAN2_BASE_ADDR + 0x1C))  	
+N#define CAN2RFS 	(*(volatile unsigned long *)(CAN2_BASE_ADDR + 0x20))  	
+N#define CAN2RID 	(*(volatile unsigned long *)(CAN2_BASE_ADDR + 0x24))
+N#define CAN2RDA 	(*(volatile unsigned long *)(CAN2_BASE_ADDR + 0x28))  	
+N#define CAN2RDB 	(*(volatile unsigned long *)(CAN2_BASE_ADDR + 0x2C))
+N  	
+N#define CAN2TFI1 	(*(volatile unsigned long *)(CAN2_BASE_ADDR + 0x30))  	
+N#define CAN2TID1 	(*(volatile unsigned long *)(CAN2_BASE_ADDR + 0x34))  	
+N#define CAN2TDA1 	(*(volatile unsigned long *)(CAN2_BASE_ADDR + 0x38))
+N#define CAN2TDB1 	(*(volatile unsigned long *)(CAN2_BASE_ADDR + 0x3C))  	
+N#define CAN2TFI2 	(*(volatile unsigned long *)(CAN2_BASE_ADDR + 0x40))  	
+N#define CAN2TID2 	(*(volatile unsigned long *)(CAN2_BASE_ADDR + 0x44))  	
+N#define CAN2TDA2 	(*(volatile unsigned long *)(CAN2_BASE_ADDR + 0x48))  	
+N#define CAN2TDB2 	(*(volatile unsigned long *)(CAN2_BASE_ADDR + 0x4C))
+N#define CAN2TFI3 	(*(volatile unsigned long *)(CAN2_BASE_ADDR + 0x50))  	
+N#define CAN2TID3 	(*(volatile unsigned long *)(CAN2_BASE_ADDR + 0x54))  	
+N#define CAN2TDA3 	(*(volatile unsigned long *)(CAN2_BASE_ADDR + 0x58))  	
+N#define CAN2TDB3 	(*(volatile unsigned long *)(CAN2_BASE_ADDR + 0x5C))
+N
+N
+N/* MultiMedia Card Interface(MCI) Controller */
+N#define MCI_BASE_ADDR		0xE008C000
+N#define MCI_POWER      (*(volatile unsigned long *)(MCI_BASE_ADDR + 0x00))
+N#define MCI_CLOCK      (*(volatile unsigned long *)(MCI_BASE_ADDR + 0x04))
+N#define MCI_ARGUMENT   (*(volatile unsigned long *)(MCI_BASE_ADDR + 0x08))
+N#define MCI_COMMAND    (*(volatile unsigned long *)(MCI_BASE_ADDR + 0x0C))
+N#define MCI_RESP_CMD   (*(volatile unsigned long *)(MCI_BASE_ADDR + 0x10))
+N#define MCI_RESP0      (*(volatile unsigned long *)(MCI_BASE_ADDR + 0x14))
+N#define MCI_RESP1      (*(volatile unsigned long *)(MCI_BASE_ADDR + 0x18))
+N#define MCI_RESP2      (*(volatile unsigned long *)(MCI_BASE_ADDR + 0x1C))
+N#define MCI_RESP3      (*(volatile unsigned long *)(MCI_BASE_ADDR + 0x20))
+N#define MCI_DATA_TMR   (*(volatile unsigned long *)(MCI_BASE_ADDR + 0x24))
+N#define MCI_DATA_LEN   (*(volatile unsigned long *)(MCI_BASE_ADDR + 0x28))
+N#define MCI_DATA_CTRL  (*(volatile unsigned long *)(MCI_BASE_ADDR + 0x2C))
+N#define MCI_DATA_CNT   (*(volatile unsigned long *)(MCI_BASE_ADDR + 0x30))
+N#define MCI_STATUS     (*(volatile unsigned long *)(MCI_BASE_ADDR + 0x34))
+N#define MCI_CLEAR      (*(volatile unsigned long *)(MCI_BASE_ADDR + 0x38))
+N#define MCI_MASK0      (*(volatile unsigned long *)(MCI_BASE_ADDR + 0x3C))
+N#define MCI_MASK1      (*(volatile unsigned long *)(MCI_BASE_ADDR + 0x40))
+N#define MCI_FIFO_CNT   (*(volatile unsigned long *)(MCI_BASE_ADDR + 0x48))
+N#define MCI_FIFO       (*(volatile unsigned long *)(MCI_BASE_ADDR + 0x80))
+N
+N
+N/* I2S Interface Controller (I2S) */
+N#define I2S_BASE_ADDR		0xE0088000
+N#define I2S_DAO        (*(volatile unsigned long *)(I2S_BASE_ADDR + 0x00))
+N#define I2S_DAI        (*(volatile unsigned long *)(I2S_BASE_ADDR + 0x04))
+N#define I2S_TX_FIFO    (*(volatile unsigned long *)(I2S_BASE_ADDR + 0x08))
+N#define I2S_RX_FIFO    (*(volatile unsigned long *)(I2S_BASE_ADDR + 0x0C))
+N#define I2S_STATE      (*(volatile unsigned long *)(I2S_BASE_ADDR + 0x10))
+N#define I2S_DMA1       (*(volatile unsigned long *)(I2S_BASE_ADDR + 0x14))
+N#define I2S_DMA2       (*(volatile unsigned long *)(I2S_BASE_ADDR + 0x18))
+N#define I2S_IRQ        (*(volatile unsigned long *)(I2S_BASE_ADDR + 0x1C))
+N#define I2S_TXRATE     (*(volatile unsigned long *)(I2S_BASE_ADDR + 0x20))
+N#define I2S_RXRATE     (*(volatile unsigned long *)(I2S_BASE_ADDR + 0x24))
+N
+N
+N/* General-purpose DMA Controller */
+N#define DMA_BASE_ADDR		0xFFE04000
+N#define GPDMA_INT_STAT         (*(volatile unsigned long *)(DMA_BASE_ADDR + 0x000))
+N#define GPDMA_INT_TCSTAT       (*(volatile unsigned long *)(DMA_BASE_ADDR + 0x004))
+N#define GPDMA_INT_TCCLR        (*(volatile unsigned long *)(DMA_BASE_ADDR + 0x008))
+N#define GPDMA_INT_ERR_STAT     (*(volatile unsigned long *)(DMA_BASE_ADDR + 0x00C))
+N#define GPDMA_INT_ERR_CLR      (*(volatile unsigned long *)(DMA_BASE_ADDR + 0x010))
+N#define GPDMA_RAW_INT_TCSTAT   (*(volatile unsigned long *)(DMA_BASE_ADDR + 0x014))
+N#define GPDMA_RAW_INT_ERR_STAT (*(volatile unsigned long *)(DMA_BASE_ADDR + 0x018))
+N#define GPDMA_ENABLED_CHNS     (*(volatile unsigned long *)(DMA_BASE_ADDR + 0x01C))
+N#define GPDMA_SOFT_BREQ        (*(volatile unsigned long *)(DMA_BASE_ADDR + 0x020))
+N#define GPDMA_SOFT_SREQ        (*(volatile unsigned long *)(DMA_BASE_ADDR + 0x024))
+N#define GPDMA_SOFT_LBREQ       (*(volatile unsigned long *)(DMA_BASE_ADDR + 0x028))
+N#define GPDMA_SOFT_LSREQ       (*(volatile unsigned long *)(DMA_BASE_ADDR + 0x02C))
+N#define GPDMA_CONFIG           (*(volatile unsigned long *)(DMA_BASE_ADDR + 0x030))
+N#define GPDMA_SYNC             (*(volatile unsigned long *)(DMA_BASE_ADDR + 0x034))
+N
+N/* DMA channel 0 registers */
+N#define GPDMA_CH0_SRC      (*(volatile unsigned long *)(DMA_BASE_ADDR + 0x100))
+N#define GPDMA_CH0_DEST     (*(volatile unsigned long *)(DMA_BASE_ADDR + 0x104))
+N#define GPDMA_CH0_LLI      (*(volatile unsigned long *)(DMA_BASE_ADDR + 0x108))
+N#define GPDMA_CH0_CTRL     (*(volatile unsigned long *)(DMA_BASE_ADDR + 0x10C))
+N#define GPDMA_CH0_CFG      (*(volatile unsigned long *)(DMA_BASE_ADDR + 0x110))
+N
+N/* DMA channel 1 registers */
+N#define GPDMA_CH1_SRC      (*(volatile unsigned long *)(DMA_BASE_ADDR + 0x120))
+N#define GPDMA_CH1_DEST     (*(volatile unsigned long *)(DMA_BASE_ADDR + 0x124))
+N#define GPDMA_CH1_LLI      (*(volatile unsigned long *)(DMA_BASE_ADDR + 0x128))
+N#define GPDMA_CH1_CTRL     (*(volatile unsigned long *)(DMA_BASE_ADDR + 0x12C))
+N#define GPDMA_CH1_CFG      (*(volatile unsigned long *)(DMA_BASE_ADDR + 0x130))
+N
+N
+N/* USB Controller */
+N#define USB_INT_BASE_ADDR	0xE01FC1C0
+N#define USB_BASE_ADDR		0xFFE0C200		/* USB Base Address */
+N
+N#define USB_INT_STAT    (*(volatile unsigned long *)(USB_INT_BASE_ADDR + 0x00))
+N
+N/* USB Device Interrupt Registers */
+N#define DEV_INT_STAT    (*(volatile unsigned long *)(USB_BASE_ADDR + 0x00))
+N#define DEV_INT_EN      (*(volatile unsigned long *)(USB_BASE_ADDR + 0x04))
+N#define DEV_INT_CLR     (*(volatile unsigned long *)(USB_BASE_ADDR + 0x08))
+N#define DEV_INT_SET     (*(volatile unsigned long *)(USB_BASE_ADDR + 0x0C))
+N#define DEV_INT_PRIO    (*(volatile unsigned long *)(USB_BASE_ADDR + 0x2C))
+N
+N/* USB Device Endpoint Interrupt Registers */
+N#define EP_INT_STAT     (*(volatile unsigned long *)(USB_BASE_ADDR + 0x30))
+N#define EP_INT_EN       (*(volatile unsigned long *)(USB_BASE_ADDR + 0x34))
+N#define EP_INT_CLR      (*(volatile unsigned long *)(USB_BASE_ADDR + 0x38))
+N#define EP_INT_SET      (*(volatile unsigned long *)(USB_BASE_ADDR + 0x3C))
+N#define EP_INT_PRIO     (*(volatile unsigned long *)(USB_BASE_ADDR + 0x40))
+N
+N/* USB Device Endpoint Realization Registers */
+N#define REALIZE_EP      (*(volatile unsigned long *)(USB_BASE_ADDR + 0x44))
+N#define EP_INDEX        (*(volatile unsigned long *)(USB_BASE_ADDR + 0x48))
+N#define MAXPACKET_SIZE  (*(volatile unsigned long *)(USB_BASE_ADDR + 0x4C))
+N
+N/* USB Device Command Reagisters */
+N#define CMD_CODE        (*(volatile unsigned long *)(USB_BASE_ADDR + 0x10))
+N#define CMD_DATA        (*(volatile unsigned long *)(USB_BASE_ADDR + 0x14))
+N
+N/* USB Device Data Transfer Registers */
+N#define RX_DATA         (*(volatile unsigned long *)(USB_BASE_ADDR + 0x18))
+N#define TX_DATA         (*(volatile unsigned long *)(USB_BASE_ADDR + 0x1C))
+N#define RX_PLENGTH      (*(volatile unsigned long *)(USB_BASE_ADDR + 0x20))
+N#define TX_PLENGTH      (*(volatile unsigned long *)(USB_BASE_ADDR + 0x24))
+N#define USB_CTRL        (*(volatile unsigned long *)(USB_BASE_ADDR + 0x28))
+N
+N/* USB Device DMA Registers */
+N#define DMA_REQ_STAT        (*(volatile unsigned long *)(USB_BASE_ADDR + 0x50))
+N#define DMA_REQ_CLR         (*(volatile unsigned long *)(USB_BASE_ADDR + 0x54))
+N#define DMA_REQ_SET         (*(volatile unsigned long *)(USB_BASE_ADDR + 0x58))
+N#define UDCA_HEAD           (*(volatile unsigned long *)(USB_BASE_ADDR + 0x80))
+N#define EP_DMA_STAT         (*(volatile unsigned long *)(USB_BASE_ADDR + 0x84))
+N#define EP_DMA_EN           (*(volatile unsigned long *)(USB_BASE_ADDR + 0x88))
+N#define EP_DMA_DIS          (*(volatile unsigned long *)(USB_BASE_ADDR + 0x8C))
+N#define DMA_INT_STAT        (*(volatile unsigned long *)(USB_BASE_ADDR + 0x90))
+N#define DMA_INT_EN          (*(volatile unsigned long *)(USB_BASE_ADDR + 0x94))
+N#define EOT_INT_STAT        (*(volatile unsigned long *)(USB_BASE_ADDR + 0xA0))
+N#define EOT_INT_CLR         (*(volatile unsigned long *)(USB_BASE_ADDR + 0xA4))
+N#define EOT_INT_SET         (*(volatile unsigned long *)(USB_BASE_ADDR + 0xA8))
+N#define NDD_REQ_INT_STAT    (*(volatile unsigned long *)(USB_BASE_ADDR + 0xAC))
+N#define NDD_REQ_INT_CLR     (*(volatile unsigned long *)(USB_BASE_ADDR + 0xB0))
+N#define NDD_REQ_INT_SET     (*(volatile unsigned long *)(USB_BASE_ADDR + 0xB4))
+N#define SYS_ERR_INT_STAT    (*(volatile unsigned long *)(USB_BASE_ADDR + 0xB8))
+N#define SYS_ERR_INT_CLR     (*(volatile unsigned long *)(USB_BASE_ADDR + 0xBC))
+N#define SYS_ERR_INT_SET     (*(volatile unsigned long *)(USB_BASE_ADDR + 0xC0))
+N
+N/* USB Host Controller */
+N#define USBHC_BASE_ADDR		0xFFE0C000
+N#define HC_REVISION         (*(volatile unsigned long *)(USBHC_BASE_ADDR + 0x00))
+N#define HC_CONTROL          (*(volatile unsigned long *)(USBHC_BASE_ADDR + 0x04))
+N#define HC_CMD_STAT         (*(volatile unsigned long *)(USBHC_BASE_ADDR + 0x08))
+N#define HC_INT_STAT         (*(volatile unsigned long *)(USBHC_BASE_ADDR + 0x0C))
+N#define HC_INT_EN           (*(volatile unsigned long *)(USBHC_BASE_ADDR + 0x10))
+N#define HC_INT_DIS          (*(volatile unsigned long *)(USBHC_BASE_ADDR + 0x14))
+N#define HC_HCCA             (*(volatile unsigned long *)(USBHC_BASE_ADDR + 0x18))
+N#define HC_PERIOD_CUR_ED    (*(volatile unsigned long *)(USBHC_BASE_ADDR + 0x1C))
+N#define HC_CTRL_HEAD_ED     (*(volatile unsigned long *)(USBHC_BASE_ADDR + 0x20))
+N#define HC_CTRL_CUR_ED      (*(volatile unsigned long *)(USBHC_BASE_ADDR + 0x24))
+N#define HC_BULK_HEAD_ED     (*(volatile unsigned long *)(USBHC_BASE_ADDR + 0x28))
+N#define HC_BULK_CUR_ED      (*(volatile unsigned long *)(USBHC_BASE_ADDR + 0x2C))
+N#define HC_DONE_HEAD        (*(volatile unsigned long *)(USBHC_BASE_ADDR + 0x30))
+N#define HC_FM_INTERVAL      (*(volatile unsigned long *)(USBHC_BASE_ADDR + 0x34))
+N#define HC_FM_REMAINING     (*(volatile unsigned long *)(USBHC_BASE_ADDR + 0x38))
+N#define HC_FM_NUMBER        (*(volatile unsigned long *)(USBHC_BASE_ADDR + 0x3C))
+N#define HC_PERIOD_START     (*(volatile unsigned long *)(USBHC_BASE_ADDR + 0x40))
+N#define HC_LS_THRHLD        (*(volatile unsigned long *)(USBHC_BASE_ADDR + 0x44))
+N#define HC_RH_DESCA         (*(volatile unsigned long *)(USBHC_BASE_ADDR + 0x48))
+N#define HC_RH_DESCB         (*(volatile unsigned long *)(USBHC_BASE_ADDR + 0x4C))
+N#define HC_RH_STAT          (*(volatile unsigned long *)(USBHC_BASE_ADDR + 0x50))
+N#define HC_RH_PORT_STAT1    (*(volatile unsigned long *)(USBHC_BASE_ADDR + 0x54))
+N#define HC_RH_PORT_STAT2    (*(volatile unsigned long *)(USBHC_BASE_ADDR + 0x58))
+N
+N/* USB OTG Controller */
+N#define USBOTG_BASE_ADDR	0xFFE0C100
+N#define OTG_INT_STAT        (*(volatile unsigned long *)(USBOTG_BASE_ADDR + 0x00))
+N#define OTG_INT_EN          (*(volatile unsigned long *)(USBOTG_BASE_ADDR + 0x04))
+N#define OTG_INT_SET         (*(volatile unsigned long *)(USBOTG_BASE_ADDR + 0x08))
+N#define OTG_INT_CLR         (*(volatile unsigned long *)(USBOTG_BASE_ADDR + 0x0C))
+N#define OTG_TIMER           (*(volatile unsigned long *)(USBOTG_BASE_ADDR + 0x14))
+N
+N#define USBOTG_I2C_BASE_ADDR	0xFFE0C300
+N#define OTG_I2C_RX          (*(volatile unsigned long *)(USBOTG_I2C_BASE_ADDR + 0x00))
+N#define OTG_I2C_TX          (*(volatile unsigned long *)(USBOTG_I2C_BASE_ADDR + 0x00))
+N#define OTG_I2C_STS         (*(volatile unsigned long *)(USBOTG_I2C_BASE_ADDR + 0x04))
+N#define OTG_I2C_CTL         (*(volatile unsigned long *)(USBOTG_I2C_BASE_ADDR + 0x08))
+N#define OTG_I2C_CLKHI       (*(volatile unsigned long *)(USBOTG_I2C_BASE_ADDR + 0x0C))
+N#define OTG_I2C_CLKLO       (*(volatile unsigned long *)(USBOTG_I2C_BASE_ADDR + 0x10))
+N
+N#define USBOTG_CLK_BASE_ADDR	0xFFE0CFF0
+N#define USBPortSel          (*(volatile unsigned long *)(USBOTG_BASE_ADDR + 0x10))
+N#define USBClkCtrl          (*(volatile unsigned long *)(USBOTG_CLK_BASE_ADDR + 0x04))
+N#define USBClkSt            (*(volatile unsigned long *)(USBOTG_CLK_BASE_ADDR + 0x08))
+N
+N/* Ethernet MAC (32 bit data bus) -- all registers are RW unless indicated in parentheses */
+N#define MAC_BASE_ADDR		0xFFE00000 /* AHB Peripheral # 0 */
+N#define MAC_MAC1            (*(volatile unsigned long *)(MAC_BASE_ADDR + 0x000)) /* MAC config reg 1 */
+N#define MAC_MAC2            (*(volatile unsigned long *)(MAC_BASE_ADDR + 0x004)) /* MAC config reg 2 */
+N#define MAC_IPGT            (*(volatile unsigned long *)(MAC_BASE_ADDR + 0x008)) /* b2b InterPacketGap reg */
+N#define MAC_IPGR            (*(volatile unsigned long *)(MAC_BASE_ADDR + 0x00C)) /* non b2b InterPacketGap reg */
+N#define MAC_CLRT            (*(volatile unsigned long *)(MAC_BASE_ADDR + 0x010)) /* CoLlision window/ReTry reg */
+N#define MAC_MAXF            (*(volatile unsigned long *)(MAC_BASE_ADDR + 0x014)) /* MAXimum Frame reg */
+N#define MAC_SUPP            (*(volatile unsigned long *)(MAC_BASE_ADDR + 0x018)) /* PHY SUPPort reg */
+N#define MAC_TEST            (*(volatile unsigned long *)(MAC_BASE_ADDR + 0x01C)) /* TEST reg */
+N#define MAC_MCFG            (*(volatile unsigned long *)(MAC_BASE_ADDR + 0x020)) /* MII Mgmt ConFiG reg */
+N#define MAC_MCMD            (*(volatile unsigned long *)(MAC_BASE_ADDR + 0x024)) /* MII Mgmt CoMmanD reg */
+N#define MAC_MADR            (*(volatile unsigned long *)(MAC_BASE_ADDR + 0x028)) /* MII Mgmt ADdRess reg */
+N#define MAC_MWTD            (*(volatile unsigned long *)(MAC_BASE_ADDR + 0x02C)) /* MII Mgmt WriTe Data reg (WO) */
+N#define MAC_MRDD            (*(volatile unsigned long *)(MAC_BASE_ADDR + 0x030)) /* MII Mgmt ReaD Data reg (RO) */
+N#define MAC_MIND            (*(volatile unsigned long *)(MAC_BASE_ADDR + 0x034)) /* MII Mgmt INDicators reg (RO) */
+N
+N#define MAC_SA0             (*(volatile unsigned long *)(MAC_BASE_ADDR + 0x040)) /* Station Address 0 reg */
+N#define MAC_SA1             (*(volatile unsigned long *)(MAC_BASE_ADDR + 0x044)) /* Station Address 1 reg */
+N#define MAC_SA2             (*(volatile unsigned long *)(MAC_BASE_ADDR + 0x048)) /* Station Address 2 reg */
+N
+N#define MAC_COMMAND         (*(volatile unsigned long *)(MAC_BASE_ADDR + 0x100)) /* Command reg */
+N#define MAC_STATUS          (*(volatile unsigned long *)(MAC_BASE_ADDR + 0x104)) /* Status reg (RO) */
+N#define MAC_RXDESCRIPTOR    (*(volatile unsigned long *)(MAC_BASE_ADDR + 0x108)) /* Rx descriptor base address reg */
+N#define MAC_RXSTATUS        (*(volatile unsigned long *)(MAC_BASE_ADDR + 0x10C)) /* Rx status base address reg */
+N#define MAC_RXDESCRIPTORNUM (*(volatile unsigned long *)(MAC_BASE_ADDR + 0x110)) /* Rx number of descriptors reg */
+N#define MAC_RXPRODUCEINDEX  (*(volatile unsigned long *)(MAC_BASE_ADDR + 0x114)) /* Rx produce index reg (RO) */
+N#define MAC_RXCONSUMEINDEX  (*(volatile unsigned long *)(MAC_BASE_ADDR + 0x118)) /* Rx consume index reg */
+N#define MAC_TXDESCRIPTOR    (*(volatile unsigned long *)(MAC_BASE_ADDR + 0x11C)) /* Tx descriptor base address reg */
+N#define MAC_TXSTATUS        (*(volatile unsigned long *)(MAC_BASE_ADDR + 0x120)) /* Tx status base address reg */
+N#define MAC_TXDESCRIPTORNUM (*(volatile unsigned long *)(MAC_BASE_ADDR + 0x124)) /* Tx number of descriptors reg */
+N#define MAC_TXPRODUCEINDEX  (*(volatile unsigned long *)(MAC_BASE_ADDR + 0x128)) /* Tx produce index reg */
+N#define MAC_TXCONSUMEINDEX  (*(volatile unsigned long *)(MAC_BASE_ADDR + 0x12C)) /* Tx consume index reg (RO) */
+N
+N#define MAC_TSV0            (*(volatile unsigned long *)(MAC_BASE_ADDR + 0x158)) /* Tx status vector 0 reg (RO) */
+N#define MAC_TSV1            (*(volatile unsigned long *)(MAC_BASE_ADDR + 0x15C)) /* Tx status vector 1 reg (RO) */
+N#define MAC_RSV             (*(volatile unsigned long *)(MAC_BASE_ADDR + 0x160)) /* Rx status vector reg (RO) */
+N
+N#define MAC_FLOWCONTROLCNT  (*(volatile unsigned long *)(MAC_BASE_ADDR + 0x170)) /* Flow control counter reg */
+N#define MAC_FLOWCONTROLSTS  (*(volatile unsigned long *)(MAC_BASE_ADDR + 0x174)) /* Flow control status reg */
+N
+N#define MAC_RXFILTERCTRL    (*(volatile unsigned long *)(MAC_BASE_ADDR + 0x200)) /* Rx filter ctrl reg */
+N#define MAC_RXFILTERWOLSTS  (*(volatile unsigned long *)(MAC_BASE_ADDR + 0x204)) /* Rx filter WoL status reg (RO) */
+N#define MAC_RXFILTERWOLCLR  (*(volatile unsigned long *)(MAC_BASE_ADDR + 0x208)) /* Rx filter WoL clear reg (WO) */
+N
+N#define MAC_HASHFILTERL     (*(volatile unsigned long *)(MAC_BASE_ADDR + 0x210)) /* Hash filter LSBs reg */
+N#define MAC_HASHFILTERH     (*(volatile unsigned long *)(MAC_BASE_ADDR + 0x214)) /* Hash filter MSBs reg */
+N
+N#define MAC_INTSTATUS       (*(volatile unsigned long *)(MAC_BASE_ADDR + 0xFE0)) /* Interrupt status reg (RO) */
+N#define MAC_INTENABLE       (*(volatile unsigned long *)(MAC_BASE_ADDR + 0xFE4)) /* Interrupt enable reg  */
+N#define MAC_INTCLEAR        (*(volatile unsigned long *)(MAC_BASE_ADDR + 0xFE8)) /* Interrupt clear reg (WO) */
+N#define MAC_INTSET          (*(volatile unsigned long *)(MAC_BASE_ADDR + 0xFEC)) /* Interrupt set reg (WO) */
+N
+N#define MAC_POWERDOWN       (*(volatile unsigned long *)(MAC_BASE_ADDR + 0xFF4)) /* Power-down reg */
+N#define MAC_MODULEID        (*(volatile unsigned long *)(MAC_BASE_ADDR + 0xFFC)) /* Module ID reg (RO) */
+N
+N
+N#endif  // __LPC23xx_H
+N
+L 15 "ethernet\emac.c" 2
+N#include "emac.h"
+L 1 "ethernet\emac.h" 1
+N//-----------------------------------------------------------------------------
+N// Software that is described herein is for illustrative purposes only  
+N// which provides customers with programming information regarding the  
+N// products. This software is supplied "AS IS" without any warranties.  
+N// NXP Semiconductors assumes no responsibility or liability for the 
+N// use of the software, conveys no license or title under any patent, 
+N// copyright, or mask work right to the product. NXP Semiconductors 
+N// reserves the right to make changes in the software without 
+N// notification. NXP Semiconductors also make no representation or 
+N// warranty that such application will be suitable for the specified 
+N// use without further testing or modification. 
+N//-----------------------------------------------------------------------------
+N
+N#ifndef _EMAC_H
+N#define _EMAC_H
+N
+N/* EMAC Memory Buffer configuration for 16K Ethernet RAM. */
+N#define NUM_RX_FRAG         25          
+N#define NUM_TX_FRAG         3           
+N#define ETH_FRAG_SIZE       120 
+N       
+N/* Max. Ethernet Frame Size          */
+N#define ETH_MAX_FLEN        1522       
+N
+N/* EMAC variables located in 16K Ethernet SRAM */
+N#define RX_DESC_BASE        0x7FE00000
+N#define RX_STAT_BASE        (RX_DESC_BASE + NUM_RX_FRAG*8)
+N#define TX_DESC_BASE        (RX_STAT_BASE + NUM_RX_FRAG*8)
+N#define TX_STAT_BASE        (TX_DESC_BASE + NUM_TX_FRAG*8)
+N#define RX_BUF_BASE         (TX_STAT_BASE + NUM_TX_FRAG*4)
+N#define TX_BUF_BASE         (RX_BUF_BASE  + NUM_RX_FRAG*ETH_FRAG_SIZE)
+N
+N/* RX and TX descriptor and status definitions. */
+N#define RX_DESC_PACKET(i)   (*(unsigned int *)(RX_DESC_BASE   + 8*i))
+N#define RX_DESC_CTRL(i)     (*(unsigned int *)(RX_DESC_BASE+4 + 8*i))
+N#define RX_STAT_INFO(i)     (*(unsigned int *)(RX_STAT_BASE   + 8*i))
+N#define RX_STAT_HASHCRC(i)  (*(unsigned int *)(RX_STAT_BASE+4 + 8*i))
+N#define TX_DESC_PACKET(i)   (*(unsigned int *)(TX_DESC_BASE   + 8*i))
+N#define TX_DESC_CTRL(i)     (*(unsigned int *)(TX_DESC_BASE+4 + 8*i))
+N#define TX_STAT_INFO(i)     (*(unsigned int *)(TX_STAT_BASE   + 4*i))
+N#define RX_BUF(i)           (RX_BUF_BASE + ETH_FRAG_SIZE*i)
+N#define TX_BUF(i)           (TX_BUF_BASE + ETH_FRAG_SIZE*i)
+N
+N/* MAC Configuration Register 1 */
+N#define MAC1_REC_EN         0x00000001  /* Receive Enable                    */
+N#define MAC1_PASS_ALL       0x00000002  /* Pass All Receive Frames           */
+N#define MAC1_RX_FLOWC       0x00000004  /* RX Flow Control                   */
+N#define MAC1_TX_FLOWC       0x00000008  /* TX Flow Control                   */
+N#define MAC1_LOOPB          0x00000010  /* Loop Back Mode                    */
+N#define MAC1_RES_TX         0x00000100  /* Reset TX Logic                    */
+N#define MAC1_RES_MCS_TX     0x00000200  /* Reset MAC TX Control Sublayer     */
+N#define MAC1_RES_RX         0x00000400  /* Reset RX Logic                    */
+N#define MAC1_RES_MCS_RX     0x00000800  /* Reset MAC RX Control Sublayer     */
+N#define MAC1_SIM_RES        0x00004000  /* Simulation Reset                  */
+N#define MAC1_SOFT_RES       0x00008000  /* Soft Reset MAC                    */
+N
+N/* MAC Configuration Register 2 */
+N#define MAC2_FULL_DUP       0x00000001  /* Full Duplex Mode                  */
+N#define MAC2_FRM_LEN_CHK    0x00000002  /* Frame Length Checking             */
+N#define MAC2_HUGE_FRM_EN    0x00000004  /* Huge Frame Enable                 */
+N#define MAC2_DLY_CRC        0x00000008  /* Delayed CRC Mode                  */
+N#define MAC2_CRC_EN         0x00000010  /* Append CRC to every Frame         */
+N#define MAC2_PAD_EN         0x00000020  /* Pad all Short Frames              */
+N#define MAC2_VLAN_PAD_EN    0x00000040  /* VLAN Pad Enable                   */
+N#define MAC2_ADET_PAD_EN    0x00000080  /* Auto Detect Pad Enable            */
+N#define MAC2_PPREAM_ENF     0x00000100  /* Pure Preamble Enforcement         */
+N#define MAC2_LPREAM_ENF     0x00000200  /* Long Preamble Enforcement         */
+N#define MAC2_NO_BACKOFF     0x00001000  /* No Backoff Algorithm              */
+N#define MAC2_BACK_PRESSURE  0x00002000  /* Backoff Presurre / No Backoff     */
+N#define MAC2_EXCESS_DEF     0x00004000  /* Excess Defer                      */
+N
+N/* Back-to-Back Inter-Packet-Gap Register */
+N#define IPGT_FULL_DUP       0x00000015  /* Recommended value for Full Duplex */
+N#define IPGT_HALF_DUP       0x00000012  /* Recommended value for Half Duplex */
+N
+N/* Non Back-to-Back Inter-Packet-Gap Register */
+N#define IPGR_DEF            0x00000012  /* Recommended value                 */
+N
+N/* Collision Window/Retry Register */
+N#define CLRT_DEF            0x0000370F  /* Default value                     */
+N
+N/* PHY Support Register */
+N#define SUPP_SPEED          0x00000100  /* Reduced MII Logic Current Speed   */
+N
+N/* Test Register */
+N#define TEST_SHCUT_PQUANTA  0x00000001  /* Shortcut Pause Quanta             */
+N#define TEST_TST_PAUSE      0x00000002  /* Test Pause                        */
+N#define TEST_TST_BACKP      0x00000004  /* Test Back Pressure                */
+N
+N/* MII Management Configuration Register */
+N#define MCFG_SCAN_INC       0x00000001  /* Scan Increment PHY Address        */
+N#define MCFG_SUPP_PREAM     0x00000002  /* Suppress Preamble                 */
+N#define MCFG_CLK_SEL        0x0000001C  /* Clock Select Mask                 */
+N#define MCFG_RES_MII        0x00008000  /* Reset MII Management Hardware     */
+N
+N/* Clock Host dividers                  */
+N#define HOST_CLK_BY_4		(0x00 << 2)	/* Host Clock divided by 4           */
+N#define HOST_CLK_BY_6		(0x02 << 2)	/* Host Clock divided by 6           */
+N#define HOST_CLK_BY_8		(0x03 << 2)	/* Host Clock divided by 8           */
+N#define HOST_CLK_BY_10		(0x04 << 2)	/* Host Clock divided by 10          */
+N#define HOST_CLK_BY_14		(0x05 << 2)	/* Host Clock divided by 14          */
+N#define HOST_CLK_BY_20		(0x06 << 2)	/* Host Clock divided by 20          */
+N#define HOST_CLK_BY_28		(0x07 << 2)	/* Host Clock divided by 28          */
+N
+N/* MII Management Command Register */
+N#define MCMD_READ           0x00000001  /* MII Read                          */
+N#define MCMD_SCAN           0x00000002  /* MII Scan continuously             */
+N
+N#define MII_WR_TOUT         0x00050000  /* MII Write timeout count           */
+N#define MII_RD_TOUT         0x00050000  /* MII Read timeout count            */
+N
+N/* MII Management Address Register */
+N#define MADR_REG_ADR        0x0000001F  /* MII Register Address Mask         */
+N#define MADR_PHY_ADR        0x00001F00  /* PHY Address Mask                  */
+N
+N/* MII Management Indicators Register */
+N#define MIND_BUSY           0x00000001  /* MII is Busy                       */
+N#define MIND_SCAN           0x00000002  /* MII Scanning in Progress          */
+N#define MIND_NOT_VAL        0x00000004  /* MII Read Data not valid           */
+N#define MIND_MII_LINK_FAIL  0x00000008  /* MII Link Failed                   */
+N
+N/* Command Register */
+N#define CR_RX_EN            0x00000001  /* Enable Receive                    */
+N#define CR_TX_EN            0x00000002  /* Enable Transmit                   */
+N#define CR_REG_RES          0x00000008  /* Reset Host Registers              */
+N#define CR_TX_RES           0x00000010  /* Reset Transmit Datapath           */
+N#define CR_RX_RES           0x00000020  /* Reset Receive Datapath            */
+N#define CR_PASS_RUNT_FRM    0x00000040  /* Pass Runt Frames                  */
+N#define CR_PASS_RX_FILT     0x00000080  /* Pass RX Filter                    */
+N#define CR_TX_FLOW_CTRL     0x00000100  /* TX Flow Control                   */
+N#define CR_RMII             0x00000200  /* Reduced MII Interface             */
+N#define CR_FULL_DUP         0x00000400  /* Full Duplex                       */
+N
+N/* Status Register */
+N#define SR_RX_EN            0x00000001  /* Enable Receive                    */
+N#define SR_TX_EN            0x00000002  /* Enable Transmit                   */
+N
+N/* Transmit Status Vector 0 Register */
+N#define TSV0_CRC_ERR        0x00000001  /* CRC error                         */
+N#define TSV0_LEN_CHKERR     0x00000002  /* Length Check Error                */
+N#define TSV0_LEN_OUTRNG     0x00000004  /* Length Out of Range               */
+N#define TSV0_DONE           0x00000008  /* Tramsmission Completed            */
+N#define TSV0_MCAST          0x00000010  /* Multicast Destination             */
+N#define TSV0_BCAST          0x00000020  /* Broadcast Destination             */
+N#define TSV0_PKT_DEFER      0x00000040  /* Packet Deferred                   */
+N#define TSV0_EXC_DEFER      0x00000080  /* Excessive Packet Deferral         */
+N#define TSV0_EXC_COLL       0x00000100  /* Excessive Collision               */
+N#define TSV0_LATE_COLL      0x00000200  /* Late Collision Occured            */
+N#define TSV0_GIANT          0x00000400  /* Giant Frame                       */
+N#define TSV0_UNDERRUN       0x00000800  /* Buffer Underrun                   */
+N#define TSV0_BYTES          0x0FFFF000  /* Total Bytes Transferred           */
+N#define TSV0_CTRL_FRAME     0x10000000  /* Control Frame                     */
+N#define TSV0_PAUSE          0x20000000  /* Pause Frame                       */
+N#define TSV0_BACK_PRESS     0x40000000  /* Backpressure Method Applied       */
+N#define TSV0_VLAN           0x80000000  /* VLAN Frame                        */
+N
+N/* Transmit Status Vector 1 Register */
+N#define TSV1_BYTE_CNT       0x0000FFFF  /* Transmit Byte Count               */
+N#define TSV1_COLL_CNT       0x000F0000  /* Transmit Collision Count          */
+N
+N/* Receive Status Vector Register */
+N#define RSV_BYTE_CNT        0x0000FFFF  /* Receive Byte Count                */
+N#define RSV_PKT_IGNORED     0x00010000  /* Packet Previously Ignored         */
+N#define RSV_RXDV_SEEN       0x00020000  /* RXDV Event Previously Seen        */
+N#define RSV_CARR_SEEN       0x00040000  /* Carrier Event Previously Seen     */
+N#define RSV_REC_CODEV       0x00080000  /* Receive Code Violation            */
+N#define RSV_CRC_ERR         0x00100000  /* CRC Error                         */
+N#define RSV_LEN_CHKERR      0x00200000  /* Length Check Error                */
+N#define RSV_LEN_OUTRNG      0x00400000  /* Length Out of Range               */
+N#define RSV_REC_OK          0x00800000  /* Frame Received OK                 */
+N#define RSV_MCAST           0x01000000  /* Multicast Frame                   */
+N#define RSV_BCAST           0x02000000  /* Broadcast Frame                   */
+N#define RSV_DRIB_NIBB       0x04000000  /* Dribble Nibble                    */
+N#define RSV_CTRL_FRAME      0x08000000  /* Control Frame                     */
+N#define RSV_PAUSE           0x10000000  /* Pause Frame                       */
+N#define RSV_UNSUPP_OPC      0x20000000  /* Unsupported Opcode                */
+N#define RSV_VLAN            0x40000000  /* VLAN Frame                        */
+N
+N/* Flow Control Counter Register */
+N#define FCC_MIRR_CNT        0x0000FFFF  /* Mirror Counter                    */
+N#define FCC_PAUSE_TIM       0xFFFF0000  /* Pause Timer                       */
+N
+N/* Flow Control Status Register */
+N#define FCS_MIRR_CNT        0x0000FFFF  /* Mirror Counter Current            */
+N
+N/* Receive Filter Control Register */
+N#define RFC_UCAST_EN        0x00000001  /* Accept Unicast Frames Enable      */
+N#define RFC_BCAST_EN        0x00000002  /* Accept Broadcast Frames Enable    */
+N#define RFC_MCAST_EN        0x00000004  /* Accept Multicast Frames Enable    */
+N#define RFC_UCAST_HASH_EN   0x00000008  /* Accept Unicast Hash Filter Frames */
+N#define RFC_MCAST_HASH_EN   0x00000010  /* Accept Multicast Hash Filter Fram.*/
+N#define RFC_PERFECT_EN      0x00000020  /* Accept Perfect Match Enable       */
+N#define RFC_MAGP_WOL_EN     0x00001000  /* Magic Packet Filter WoL Enable    */
+N#define RFC_PFILT_WOL_EN    0x00002000  /* Perfect Filter WoL Enable         */
+N
+N/* Receive Filter WoL Status/Clear Registers */
+N#define WOL_UCAST           0x00000001  /* Unicast Frame caused WoL          */
+N#define WOL_BCAST           0x00000002  /* Broadcast Frame caused WoL        */
+N#define WOL_MCAST           0x00000004  /* Multicast Frame caused WoL        */
+N#define WOL_UCAST_HASH      0x00000008  /* Unicast Hash Filter Frame WoL     */
+N#define WOL_MCAST_HASH      0x00000010  /* Multicast Hash Filter Frame WoL   */
+N#define WOL_PERFECT         0x00000020  /* Perfect Filter WoL                */
+N#define WOL_RX_FILTER       0x00000080  /* RX Filter caused WoL              */
+N#define WOL_MAG_PACKET      0x00000100  /* Magic Packet Filter caused WoL    */
+N
+N/* Interrupt Status/Enable/Clear/Set Registers */
+N#define INT_RX_OVERRUN      0x00000001  /* Overrun Error in RX Queue         */
+N#define INT_RX_ERR          0x00000002  /* Receive Error                     */
+N#define INT_RX_FIN          0x00000004  /* RX Finished Process Descriptors   */
+N#define INT_RX_DONE         0x00000008  /* Receive Done                      */
+N#define INT_TX_UNDERRUN     0x00000010  /* Transmit Underrun                 */
+N#define INT_TX_ERR          0x00000020  /* Transmit Error                    */
+N#define INT_TX_FIN          0x00000040  /* TX Finished Process Descriptors   */
+N#define INT_TX_DONE         0x00000080  /* Transmit Done                     */
+N#define INT_SOFT_INT        0x00001000  /* Software Triggered Interrupt      */
+N#define INT_WAKEUP          0x00002000  /* Wakeup Event Interrupt            */
+N
+N/* Power Down Register */
+N#define PD_POWER_DOWN       0x80000000  /* Power Down MAC                    */
+N
+N/* RX Descriptor Control Word */
+N#define RCTRL_SIZE          0x000007FF  /* Buffer size mask                  */
+N#define RCTRL_INT           0x80000000  /* Generate RxDone Interrupt         */
+N
+N/* RX Status Hash CRC Word */
+N#define RHASH_SA            0x000001FF  /* Hash CRC for Source Address       */
+N#define RHASH_DA            0x001FF000  /* Hash CRC for Destination Address  */
+N
+N/* RX Status Information Word */
+N#define RINFO_SIZE          0x000007FF  /* Data size in bytes                */
+N#define RINFO_CTRL_FRAME    0x00040000  /* Control Frame                     */
+N#define RINFO_VLAN          0x00080000  /* VLAN Frame                        */
+N#define RINFO_FAIL_FILT     0x00100000  /* RX Filter Failed                  */
+N#define RINFO_MCAST         0x00200000  /* Multicast Frame                   */
+N#define RINFO_BCAST         0x00400000  /* Broadcast Frame                   */
+N#define RINFO_CRC_ERR       0x00800000  /* CRC Error in Frame                */
+N#define RINFO_SYM_ERR       0x01000000  /* Symbol Error from PHY             */
+N#define RINFO_LEN_ERR       0x02000000  /* Length Error                      */
+N#define RINFO_RANGE_ERR     0x04000000  /* Range Error (exceeded max. size)  */
+N#define RINFO_ALIGN_ERR     0x08000000  /* Alignment Error                   */
+N#define RINFO_OVERRUN       0x10000000  /* Receive overrun                   */
+N#define RINFO_NO_DESCR      0x20000000  /* No new Descriptor available       */
+N#define RINFO_LAST_FLAG     0x40000000  /* Last Fragment in Frame            */
+N#define RINFO_ERR           0x80000000  /* Error Occured (OR of all errors)  */
+N
+N#define RINFO_ERR_MASK     (RINFO_FAIL_FILT | RINFO_CRC_ERR   | RINFO_SYM_ERR | \
+N                            RINFO_LEN_ERR   | RINFO_ALIGN_ERR | RINFO_OVERRUN)
+X#define RINFO_ERR_MASK     (RINFO_FAIL_FILT | RINFO_CRC_ERR   | RINFO_SYM_ERR |                             RINFO_LEN_ERR   | RINFO_ALIGN_ERR | RINFO_OVERRUN)
+N
+N/* TX Descriptor Control Word */
+N#define TCTRL_SIZE          0x000007FF  /* Size of data buffer in bytes      */
+N#define TCTRL_OVERRIDE      0x04000000  /* Override Default MAC Registers    */
+N#define TCTRL_HUGE          0x08000000  /* Enable Huge Frame                 */
+N#define TCTRL_PAD           0x10000000  /* Pad short Frames to 64 bytes      */
+N#define TCTRL_CRC           0x20000000  /* Append a hardware CRC to Frame    */
+N#define TCTRL_LAST          0x40000000  /* Last Descriptor for TX Frame      */
+N#define TCTRL_INT           0x80000000  /* Generate TxDone Interrupt         */
+N
+N/* TX Status Information Word */
+N#define TINFO_COL_CNT       0x01E00000  /* Collision Count                   */
+N#define TINFO_DEFER         0x02000000  /* Packet Deferred (not an error)    */
+N#define TINFO_EXCESS_DEF    0x04000000  /* Excessive Deferral                */
+N#define TINFO_EXCESS_COL    0x08000000  /* Excessive Collision               */
+N#define TINFO_LATE_COL      0x10000000  /* Late Collision Occured            */
+N#define TINFO_UNDERRUN      0x20000000  /* Transmit Underrun                 */
+N#define TINFO_NO_DESCR      0x40000000  /* No new Descriptor available       */
+N#define TINFO_ERR           0x80000000  /* Error Occured (OR of all errors)  */
+N
+N/* ENET Device Revision ID */
+N#define OLD_EMAC_MODULE_ID  0x39022000  /* Rev. ID for first rev '-'         */
+N
+N/* DP83848C PHY Registers */
+N#define PHY_REG_BMCR        0x00        /* Basic Mode Control Register       */
+N#define PHY_REG_BMSR        0x01        /* Basic Mode Status Register        */
+N#define PHY_REG_IDR1        0x02        /* PHY Identifier 1                  */
+N#define PHY_REG_IDR2        0x03        /* PHY Identifier 2                  */
+N#define PHY_REG_ANAR        0x04        /* Auto-Negotiation Advertisement    */
+N#define PHY_REG_ANLPAR      0x05        /* Auto-Neg. Link Partner Abitily    */
+N#define PHY_REG_ANER        0x06        /* Auto-Neg. Expansion Register      */
+N#define PHY_REG_ANNPTR      0x07        /* Auto-Neg. Next Page TX            */
+N
+N/* PHY Extended Registers */
+N#define PHY_REG_STS         0x10        /* Status Register                   */
+N#define PHY_REG_MICR        0x11        /* MII Interrupt Control Register    */
+N#define PHY_REG_MISR        0x12        /* MII Interrupt Status Register     */
+N#define PHY_REG_FCSCR       0x14        /* False Carrier Sense Counter       */
+N#define PHY_REG_RECR        0x15        /* Receive Error Counter             */
+N#define PHY_REG_PCSR        0x16        /* PCS Sublayer Config. and Status   */
+N#define PHY_REG_RBR         0x17        /* RMII and Bypass Register          */
+N#define PHY_REG_LEDCR       0x18        /* LED Direct Control Register       */
+N#define PHY_REG_PHYCR       0x19        /* PHY Control Register              */
+N#define PHY_REG_10BTSCR     0x1A        /* 10Base-T Status/Control Register  */
+N#define PHY_REG_CDCTRL1     0x1B        /* CD Test Control and BIST Extens.  */
+N#define PHY_REG_EDCR        0x1D        /* Energy Detect Control Register    */
+N
+N#define PHY_FULLD_100M      0x2100      /* Full Duplex 100Mbit               */
+N#define PHY_HALFD_100M      0x2000      /* Half Duplex 100Mbit               */
+N#define PHY_FULLD_10M       0x0100      /* Full Duplex 10Mbit                */
+N#define PHY_HALFD_10M       0x0000      /* Half Duplex 10MBit                */
+N#define PHY_AUTO_NEG        0x3000      /* Select Auto Negotiation           */
+N
+N#define DP83848C_ID         0x20005C90  /* National PHY Identifier           */
+N
+Nvoid init_emac(void);
+Nunsigned emac_getline(char * buf,int max_len,int * count);
+Nunsigned emac_sendline_crlf(char * buf);
+Nvoid emac_handshake(void);
+N
+N#endif /* _EMAC_H */
+N
+L 16 "ethernet\emac.c" 2
+N#include "..\sbl_config.h"
+L 1 "ethernet\..\sbl_config.h" 1
+N /*----------------------------------------------------------------------------
+N * which provides customers with programming information regarding the  
+N * products. This software is supplied "AS IS" without any warranties.  
+N * NXP Semiconductors assumes no responsibility or liability for the 
+N * use of the software, conveys no license or title under any patent, 
+N * copyright, or mask work right to the product. NXP Semiconductors 
+N * reserves the right to make changes in the software without 
+N * notification. NXP Semiconductors also make no representation or 
+N * warranty that such application will be suitable for the specified 
+N * use without further testing or modification. 
+N *---------------------------------------------------------------------------*/
+N
+N#ifndef  _SBL_CONFIG_H
+N#define  _SBL_CONFIG_H
+N
+N//*** <<< Use Configuration Wizard in Context Menu >>> ***
+N
+N/*
+N// <h> Flash Configuration
+N//   <o0> User Start Sector <2=> Sector 2 <3=> Sector 3
+N//   <o1> User Start Sector Address <0x2000=> Sector 2 <0x3000=> Sector 3
+N//   <o2> User End Sector <10=> Sector 10 <14=> Sector 14 <27=> Sector 27
+N//   <o3> User End Sector Address <0x1FFFF=> Sector 10 <0x3FFFF=> Sector 14 <0x7DFFF=> Sector 27
+N//   <o4> Code Read Protection
+N//        <0x11223344=> NO CRP <0x12345678=> CRP1 <0x87654321=> CRP2 <0x43218765=> CRP3
+N// </h>
+N*/
+N
+N#define USER_START_SECTOR 2
+N#define USER_START_SECTOR_ADDRESS 8192
+N#define USER_END_SECTOR 27
+N#define USER_END_SECTOR_ADDRESS 516095
+N#define CRP 0x11223344
+N#define USER_START_SECTOR_SIZE 0x1000
+N#define RAM_START 0x40000000
+N#define RAM_END	  0x4000FFFF
+N
+Nextern const unsigned fcclk_KHz;
+Nextern const unsigned crp;
+N
+N#define CRP1  0x12345678
+N#define CRP2  0x87654321
+N#define CRP3  0x43218765
+N#define NOCRP 0x11223344
+N
+N/*
+N// <h> Update Entry Pin
+N//   <o0> Port
+N//        <0xE0028000=> Port 0 <0xE0028010=> Port 1
+N//   <o1> Pin <0-31>
+N// </h>
+N*/
+N#define ISP_ENTRY_GPIO_REG 0xE0028000  /* Port */
+N#define ISP_ENTRY_PIN 	   15          /* Pin  */
+N
+N/*
+N// <h> Interface Selection
+N//   <o0> Interface
+N//        <1=> Ethernet <0=> Other
+N// </h>
+N*/
+N#define USE_ETHERNET 	1			   /* Use Interface */
+N
+N/*
+N// <h> Ethernet Options
+N//   <o0> Use Debug
+N//        <1=> Yes <0=> No 
+N//   <o1> PHY chip
+N//        <0=> National PHY <1=> Other PHY
+N//   <o2> PHY address  <00-31>
+N//   <o3> MAC_Address_6 <0x00-0xFF>   
+N//   <o4> MAC_Address_5 <0x00-0xFF>  
+N//   <o5> MAC_Address_4 <0x00-0xFF>  
+N//   <o6> MAC_Address_3 <0x00-0xFF>  
+N//   <o7> MAC_Address_2 <0x00-0xFF>  
+N//   <o8> MAC_Address_1 <0x00-0xFF>  
+N// </h>
+N*/
+N#define ETHERNET_DEBUG 	0			   /* Use Debug */
+N#define PHY_CHIP		0			   /* PHY chip */
+N#define PHY_ADDRESS		1			   /* PHY address */
+N#define MYMAC_6         0x0C		   /* MAC_6 */
+N#define MYMAC_5         0x1D		   /* MAC_5 */
+N#define MYMAC_4         0x12		   /* MAC_4 */
+N#define MYMAC_3         0xE0		   /* MAC_3 */
+N#define MYMAC_2         0x1F		   /* MAC_2 */
+N#define MYMAC_1         0x10           /* MAC_1 */ 
+N            
+N/*
+N// <h> Activity Indicator LED
+N//   <o0> Enabled
+N//        <1=> Yes  <0=> No
+N//   <o1> Select LED (Port 2 - pin X)
+N//        LED <0-7>
+N// </h>
+N*/
+N#define  LED_ENABLED	1			   /* LED enabled */
+N#define  PORT2_PIN		7			   /* Port 2 pin */
+N
+N/*
+N// <h> Protocol Options
+N//   <o0> Timeout (milliseconds) <0-1000000>   
+N// </h>
+N*/
+N#define ETHERNET_TIMEOUT 60000         /* Ethernet timeout */
+N
+N#endif  /* __SBL_CONFIG_H__ */
+L 17 "ethernet\emac.c" 2
+N#include "..\isp\isp_iap.h"
+L 1 "ethernet\..\isp\isp_iap.h" 1
+N//-----------------------------------------------------------------------------
+N// Software that is described herein is for illustrative purposes only  
+N// which provides customers with programming information regarding the  
+N// products. This software is supplied "AS IS" without any warranties.  
+N// NXP Semiconductors assumes no responsibility or liability for the 
+N// use of the software, conveys no license or title under any patent, 
+N// copyright, or mask work right to the product. NXP Semiconductors 
+N// reserves the right to make changes in the software without 
+N// notification. NXP Semiconductors also make no representation or 
+N// warranty that such application will be suitable for the specified 
+N// use without further testing or modification. 
+N//-----------------------------------------------------------------------------
+N
+N#ifndef  _ISP_IAP_H
+N#define  _ISP_IAP_H
+N
+N#define     CR                  0x0D
+N#define     LF                  0x0A
+N#define     NUL                 0x00
+N#define     SP                  0x20
+N#define     NO_OF_IAP_PARAMS    5
+N#define     NO_OF_ISP_PARAMS    5
+N#define     PARAM_SIZE          15
+N#define     ISP_CMD_CODE        0
+N#define     ISP_PARAM_0         0
+N#define     ISP_PARAM_1         1
+N#define     ISP_PARAM_2         2
+N#define     ISP_PARAM_3         3
+N#define     ISP_PARAM_4         4
+N#define     IAP_CMD_CODE        0
+N#define     IAP_PARAM_0         1
+N#define     IAP_PARAM_1         2
+N#define     IAP_PARAM_2         3
+N#define     IAP_PARAM_3         4
+N#define     IAP_STAT_CODE       0
+N#define     IAP_RESULT_0        1
+N#define     IAP_RESULT_1        2
+N#define     IAP_RESULT_2        3
+N#define     IAP_RESULT_3        4
+N
+N#define     CMD_SIZE            70
+N#define     UU_LINE             45
+N#define     LINE_CHECKSUM       20
+N#define     TRUE                1
+N#define     FALSE               (!TRUE)
+N#define     UNLOCK_CODE         0x5A5A
+N#define     BY_4                4
+N
+Ntypedef enum
+N{
+NPREPARE_SECTOR_FOR_WRITE=50,
+NCOPY_RAM_TO_FLASH=51,
+NERASE_SECTOR=52,
+NBLANK_CHECK_SECTOR=53,
+NREAD_PART_ID=54,
+NREAD_BOOT_VER=55,
+NCOMPARE=56,
+NREINVOKE_ISP=57
+N}IAP_Command_Code;
+N
+Ntypedef enum
+N{
+NCMD_SUCCESS=0,
+NINVALID_COMMAND=1,
+NSRC_ADDR_ERROR=2, /* Source address not on word boundary */
+NDST_ADDR_ERROR=3, /* Destination address not on word or 256 byte boundary */
+NSRC_ADDR_NOT_MAPPED=4,
+NDST_ADDR_NOT_MAPPED=5,
+NCOUNT_ERROR=6, /* Byte count is not multiple of 4 or is not a permitted value */
+NINVALID_SECTOR=7,
+NSECTOR_NOT_BLANK=8,
+NSECTOR_NOT_PREPARED_FOR_WRITE_OPERATION=9,
+NCOMPARE_ERROR=10,
+NBUSY=11, /* Flash programming hardware interface is busy */
+NPARAM_ERROR=12, /* Insufficient number of parameters */
+NADDR_ERROR=13, /* Address not on word boundary */
+NADDR_NOT_MAPPED=14,
+NCMD_LOCKED=15, /* Command is locked */
+NINVALID_CODE=16, /* Unlock code is invalid */
+NINVALID_BAUD_RATE=17,
+NINVALID_STOP_BIT=18,
+NCODE_READ_PROTECTION_ENABLED=19
+N}Command_ErrorCode;
+N
+Ntypedef enum
+N{
+NCOUNT=100,
+NFLASH_PROG_COUNT,
+NRAM_OR_FLASH_ADDRESS,
+NRAM_ADDRESS,
+NFLASH_ADDRESS,
+NNO_PARAM_CHECK
+N}Parameter_Type;
+N
+N#define CMD_SUCCESS 0
+N#define IAP_ADDRESS 0x7FFFFFF1
+N
+Nvoid execute_user_code(void);
+Nunsigned user_code_present(void);
+Nunsigned check_isp_entry_pin(void);
+Nvoid isp_cmd_loop(void);
+Nint str_cmp(char *, char *);
+N
+N#endif /* _ISP_IAP_H */
+N
+N
+L 18 "ethernet\emac.c" 2
+N#include "..\timer\timer.h"
+L 1 "ethernet\..\timer\timer.h" 1
+N//-----------------------------------------------------------------------------
+N// Software that is described herein is for illustrative purposes only  
+N// which provides customers with programming information regarding the  
+N// products. This software is supplied "AS IS" without any warranties.  
+N// Embedded Systems Academy, Inc. assumes no responsibility or liability
+N// for the use of the software, conveys no license or title under any patent, 
+N// copyright, or mask work right to the product. NXP Semiconductors 
+N// reserves the right to make changes in the software without 
+N// notification. NXP Semiconductors also make no representation or 
+N// warranty that such application will be suitable for the specified 
+N// use without further testing or modification. 
+N//-----------------------------------------------------------------------------
+N
+N#ifndef __timer_H
+N#define __timer_H
+N
+Nvoid Timer_init(void);
+Nvoid Timer_DeInit(void);
+Nunsigned long Timer_GetTimestamp(void);
+Nint Timer_HasTimestampExpired(unsigned long timestamp);
+Nvoid Timer_Delay(unsigned long milliseconds);
+N
+N#endif
+L 19 "ethernet\emac.c" 2
+N#include <string.h>
+L 1 "C:\Keil\ARM\ARMCC\Bin\..\include\string.h" 1
+N/* string.h: ANSI 'C' (X3J11 Oct 88) library header, section 4.11 */
+N/* Copyright (C) Codemist Ltd., 1988-1993.                        */
+N/* Copyright 1991-1993 ARM Limited. All rights reserved.          */
+N/* version 0.04 */
+N
+N/*
+N * RCS $Revision: 185525 $
+N * Checkin $Date: 2014-05-29 12:44:48 +0100 (Thu, 29 May 2014) $
+N */
+N
+N/*
+N * string.h declares one type and several functions, and defines one macro
+N * useful for manipulating character arrays and other objects treated as
+N * character arrays. Various methods are used for determining the lengths of
+N * the arrays, but in all cases a char * or void * argument points to the
+N * initial (lowest addresses) character of the array. If an array is written
+N * beyond the end of an object, the behaviour is undefined.
+N */
+N
+N#ifndef __string_h
+N#define __string_h
+N#define __ARMCLIB_VERSION 5050041
+N
+N#define _ARMABI __declspec(__nothrow)
+N
+N  #ifndef __STRING_DECLS
+N  #define __STRING_DECLS
+N
+N    #undef __CLIBNS
+N
+N    #ifdef __cplusplus
+S        namespace std {
+S        #define __CLIBNS std::
+S        extern "C" {
+N    #else
+N      #define __CLIBNS
+N    #endif  /* __cplusplus */
+N
+N#if defined(__cplusplus) || !defined(__STRICT_ANSI__)
+X#if 0L || !0L
+N /* unconditional in C++ and non-strict C for consistency of debug info */
+N  #if __sizeof_ptr == 8
+X  #if 4 == 8
+S    typedef unsigned long size_t;   /* see <stddef.h> */
+N  #else
+N    typedef unsigned int size_t;   /* see <stddef.h> */
+N  #endif
+N#elif !defined(__size_t)
+S  #define __size_t 1
+S  #if __sizeof_ptr == 8
+S    typedef unsigned long size_t;   /* see <stddef.h> */
+S  #else
+S    typedef unsigned int size_t;   /* see <stddef.h> */
+S  #endif
+N#endif
+N
+N#undef NULL
+N#define NULL 0                   /* see <stddef.h> */
+N
+Nextern _ARMABI void *memcpy(void * __restrict /*s1*/,
+Xextern __declspec(__nothrow) void *memcpy(void * __restrict  ,
+N                    const void * __restrict /*s2*/, size_t /*n*/) __attribute__((__nonnull__(1,2)));
+N   /*
+N    * copies n characters from the object pointed to by s2 into the object
+N    * pointed to by s1. If copying takes place between objects that overlap,
+N    * the behaviour is undefined.
+N    * Returns: the value of s1.
+N    */
+Nextern _ARMABI void *memmove(void * /*s1*/,
+Xextern __declspec(__nothrow) void *memmove(void *  ,
+N                    const void * /*s2*/, size_t /*n*/) __attribute__((__nonnull__(1,2)));
+N   /*
+N    * copies n characters from the object pointed to by s2 into the object
+N    * pointed to by s1. Copying takes place as if the n characters from the
+N    * object pointed to by s2 are first copied into a temporary array of n
+N    * characters that does not overlap the objects pointed to by s1 and s2,
+N    * and then the n characters from the temporary array are copied into the
+N    * object pointed to by s1.
+N    * Returns: the value of s1.
+N    */
+Nextern _ARMABI char *strcpy(char * __restrict /*s1*/, const char * __restrict /*s2*/) __attribute__((__nonnull__(1,2)));
+Xextern __declspec(__nothrow) char *strcpy(char * __restrict  , const char * __restrict  ) __attribute__((__nonnull__(1,2)));
+N   /*
+N    * copies the string pointed to by s2 (including the terminating nul
+N    * character) into the array pointed to by s1. If copying takes place
+N    * between objects that overlap, the behaviour is undefined.
+N    * Returns: the value of s1.
+N    */
+Nextern _ARMABI char *strncpy(char * __restrict /*s1*/, const char * __restrict /*s2*/, size_t /*n*/) __attribute__((__nonnull__(1,2)));
+Xextern __declspec(__nothrow) char *strncpy(char * __restrict  , const char * __restrict  , size_t  ) __attribute__((__nonnull__(1,2)));
+N   /*
+N    * copies not more than n characters (characters that follow a null
+N    * character are not copied) from the array pointed to by s2 into the array
+N    * pointed to by s1. If copying takes place between objects that overlap,
+N    * the behaviour is undefined.
+N    * Returns: the value of s1.
+N    */
+N
+Nextern _ARMABI char *strcat(char * __restrict /*s1*/, const char * __restrict /*s2*/) __attribute__((__nonnull__(1,2)));
+Xextern __declspec(__nothrow) char *strcat(char * __restrict  , const char * __restrict  ) __attribute__((__nonnull__(1,2)));
+N   /*
+N    * appends a copy of the string pointed to by s2 (including the terminating
+N    * null character) to the end of the string pointed to by s1. The initial
+N    * character of s2 overwrites the null character at the end of s1.
+N    * Returns: the value of s1.
+N    */
+Nextern _ARMABI char *strncat(char * __restrict /*s1*/, const char * __restrict /*s2*/, size_t /*n*/) __attribute__((__nonnull__(1,2)));
+Xextern __declspec(__nothrow) char *strncat(char * __restrict  , const char * __restrict  , size_t  ) __attribute__((__nonnull__(1,2)));
+N   /*
+N    * appends not more than n characters (a null character and characters that
+N    * follow it are not appended) from the array pointed to by s2 to the end of
+N    * the string pointed to by s1. The initial character of s2 overwrites the
+N    * null character at the end of s1. A terminating null character is always
+N    * appended to the result.
+N    * Returns: the value of s1.
+N    */
+N
+N/*
+N * The sign of a nonzero value returned by the comparison functions is
+N * determined by the sign of the difference between the values of the first
+N * pair of characters (both interpreted as unsigned char) that differ in the
+N * objects being compared.
+N */
+N
+Nextern _ARMABI int memcmp(const void * /*s1*/, const void * /*s2*/, size_t /*n*/) __attribute__((__nonnull__(1,2)));
+Xextern __declspec(__nothrow) int memcmp(const void *  , const void *  , size_t  ) __attribute__((__nonnull__(1,2)));
+N   /*
+N    * compares the first n characters of the object pointed to by s1 to the
+N    * first n characters of the object pointed to by s2.
+N    * Returns: an integer greater than, equal to, or less than zero, according
+N    *          as the object pointed to by s1 is greater than, equal to, or
+N    *          less than the object pointed to by s2.
+N    */
+Nextern _ARMABI int strcmp(const char * /*s1*/, const char * /*s2*/) __attribute__((__nonnull__(1,2)));
+Xextern __declspec(__nothrow) int strcmp(const char *  , const char *  ) __attribute__((__nonnull__(1,2)));
+N   /*
+N    * compares the string pointed to by s1 to the string pointed to by s2.
+N    * Returns: an integer greater than, equal to, or less than zero, according
+N    *          as the string pointed to by s1 is greater than, equal to, or
+N    *          less than the string pointed to by s2.
+N    */
+Nextern _ARMABI int strncmp(const char * /*s1*/, const char * /*s2*/, size_t /*n*/) __attribute__((__nonnull__(1,2)));
+Xextern __declspec(__nothrow) int strncmp(const char *  , const char *  , size_t  ) __attribute__((__nonnull__(1,2)));
+N   /*
+N    * compares not more than n characters (characters that follow a null
+N    * character are not compared) from the array pointed to by s1 to the array
+N    * pointed to by s2.
+N    * Returns: an integer greater than, equal to, or less than zero, according
+N    *          as the string pointed to by s1 is greater than, equal to, or
+N    *          less than the string pointed to by s2.
+N    */
+Nextern _ARMABI int strcasecmp(const char * /*s1*/, const char * /*s2*/) __attribute__((__nonnull__(1,2)));
+Xextern __declspec(__nothrow) int strcasecmp(const char *  , const char *  ) __attribute__((__nonnull__(1,2)));
+N   /*
+N    * compares the string pointed to by s1 to the string pointed to by s2,
+N    * case-insensitively as defined by the current locale.
+N    * Returns: an integer greater than, equal to, or less than zero, according
+N    *          as the string pointed to by s1 is greater than, equal to, or
+N    *          less than the string pointed to by s2.
+N    */
+Nextern _ARMABI int strncasecmp(const char * /*s1*/, const char * /*s2*/, size_t /*n*/) __attribute__((__nonnull__(1,2)));
+Xextern __declspec(__nothrow) int strncasecmp(const char *  , const char *  , size_t  ) __attribute__((__nonnull__(1,2)));
+N   /*
+N    * compares not more than n characters (characters that follow a null
+N    * character are not compared) from the array pointed to by s1 to the array
+N    * pointed to by s2, case-insensitively as defined by the current locale.
+N    * Returns: an integer greater than, equal to, or less than zero, according
+N    *          as the string pointed to by s1 is greater than, equal to, or
+N    *          less than the string pointed to by s2.
+N    */
+Nextern _ARMABI int strcoll(const char * /*s1*/, const char * /*s2*/) __attribute__((__nonnull__(1,2)));
+Xextern __declspec(__nothrow) int strcoll(const char *  , const char *  ) __attribute__((__nonnull__(1,2)));
+N   /*
+N    * compares the string pointed to by s1 to the string pointed to by s2, both
+N    * interpreted as appropriate to the LC_COLLATE category of the current
+N    * locale.
+N    * Returns: an integer greater than, equal to, or less than zero, according
+N    *          as the string pointed to by s1 is greater than, equal to, or
+N    *          less than the string pointed to by s2 when both are interpreted
+N    *          as appropriate to the current locale.
+N    */
+N
+Nextern _ARMABI size_t strxfrm(char * __restrict /*s1*/, const char * __restrict /*s2*/, size_t /*n*/) __attribute__((__nonnull__(2)));
+Xextern __declspec(__nothrow) size_t strxfrm(char * __restrict  , const char * __restrict  , size_t  ) __attribute__((__nonnull__(2)));
+N   /*
+N    * transforms the string pointed to by s2 and places the resulting string
+N    * into the array pointed to by s1. The transformation function is such that
+N    * if the strcmp function is applied to two transformed strings, it returns
+N    * a value greater than, equal to or less than zero, corresponding to the
+N    * result of the strcoll function applied to the same two original strings.
+N    * No more than n characters are placed into the resulting array pointed to
+N    * by s1, including the terminating null character. If n is zero, s1 is
+N    * permitted to be a null pointer. If copying takes place between objects
+N    * that overlap, the behaviour is undefined.
+N    * Returns: The length of the transformed string is returned (not including
+N    *          the terminating null character). If the value returned is n or
+N    *          more, the contents of the array pointed to by s1 are
+N    *          indeterminate.
+N    */
+N
+N
+N#ifdef __cplusplus
+Sextern _ARMABI const void *memchr(const void * /*s*/, int /*c*/, size_t /*n*/) __attribute__((__nonnull__(1)));
+Sextern "C++" void *memchr(void * __s, int __c, size_t __n) __attribute__((__nonnull__(1)));
+Sextern "C++" inline void *memchr(void * __s, int __c, size_t __n)
+S    { return const_cast<void *>(memchr(const_cast<const void *>(__s), __c, __n)); }
+N#else
+Nextern _ARMABI void *memchr(const void * /*s*/, int /*c*/, size_t /*n*/) __attribute__((__nonnull__(1)));
+Xextern __declspec(__nothrow) void *memchr(const void *  , int  , size_t  ) __attribute__((__nonnull__(1)));
+N#endif
+N   /*
+N    * locates the first occurence of c (converted to an unsigned char) in the
+N    * initial n characters (each interpreted as unsigned char) of the object
+N    * pointed to by s.
+N    * Returns: a pointer to the located character, or a null pointer if the
+N    *          character does not occur in the object.
+N    */
+N
+N#ifdef __cplusplus
+Sextern _ARMABI const char *strchr(const char * /*s*/, int /*c*/) __attribute__((__nonnull__(1)));
+Sextern "C++" char *strchr(char * __s, int __c) __attribute__((__nonnull__(1)));
+Sextern "C++" inline char *strchr(char * __s, int __c)
+S    { return const_cast<char *>(strchr(const_cast<const char *>(__s), __c)); }
+N#else
+Nextern _ARMABI char *strchr(const char * /*s*/, int /*c*/) __attribute__((__nonnull__(1)));
+Xextern __declspec(__nothrow) char *strchr(const char *  , int  ) __attribute__((__nonnull__(1)));
+N#endif
+N   /*
+N    * locates the first occurence of c (converted to an char) in the string
+N    * pointed to by s (including the terminating null character).
+N    * Returns: a pointer to the located character, or a null pointer if the
+N    *          character does not occur in the string.
+N    */
+N
+Nextern _ARMABI size_t strcspn(const char * /*s1*/, const char * /*s2*/) __attribute__((__nonnull__(1,2)));
+Xextern __declspec(__nothrow) size_t strcspn(const char *  , const char *  ) __attribute__((__nonnull__(1,2)));
+N   /*
+N    * computes the length of the initial segment of the string pointed to by s1
+N    * which consists entirely of characters not from the string pointed to by
+N    * s2. The terminating null character is not considered part of s2.
+N    * Returns: the length of the segment.
+N    */
+N
+N#ifdef __cplusplus
+Sextern _ARMABI const char *strpbrk(const char * /*s1*/, const char * /*s2*/) __attribute__((__nonnull__(1,2)));
+Sextern "C++" char *strpbrk(char * __s1, const char * __s2) __attribute__((__nonnull__(1,2)));
+Sextern "C++" inline char *strpbrk(char * __s1, const char * __s2)
+S    { return const_cast<char *>(strpbrk(const_cast<const char *>(__s1), __s2)); }
+N#else
+Nextern _ARMABI char *strpbrk(const char * /*s1*/, const char * /*s2*/) __attribute__((__nonnull__(1,2)));
+Xextern __declspec(__nothrow) char *strpbrk(const char *  , const char *  ) __attribute__((__nonnull__(1,2)));
+N#endif
+N   /*
+N    * locates the first occurence in the string pointed to by s1 of any
+N    * character from the string pointed to by s2.
+N    * Returns: returns a pointer to the character, or a null pointer if no
+N    *          character form s2 occurs in s1.
+N    */
+N
+N#ifdef __cplusplus
+Sextern _ARMABI const char *strrchr(const char * /*s*/, int /*c*/) __attribute__((__nonnull__(1)));
+Sextern "C++" char *strrchr(char * __s, int __c) __attribute__((__nonnull__(1)));
+Sextern "C++" inline char *strrchr(char * __s, int __c)
+S    { return const_cast<char *>(strrchr(const_cast<const char *>(__s), __c)); }
+N#else
+Nextern _ARMABI char *strrchr(const char * /*s*/, int /*c*/) __attribute__((__nonnull__(1)));
+Xextern __declspec(__nothrow) char *strrchr(const char *  , int  ) __attribute__((__nonnull__(1)));
+N#endif
+N   /*
+N    * locates the last occurence of c (converted to a char) in the string
+N    * pointed to by s. The terminating null character is considered part of
+N    * the string.
+N    * Returns: returns a pointer to the character, or a null pointer if c does
+N    *          not occur in the string.
+N    */
+N
+Nextern _ARMABI size_t strspn(const char * /*s1*/, const char * /*s2*/) __attribute__((__nonnull__(1,2)));
+Xextern __declspec(__nothrow) size_t strspn(const char *  , const char *  ) __attribute__((__nonnull__(1,2)));
+N   /*
+N    * computes the length of the initial segment of the string pointed to by s1
+N    * which consists entirely of characters from the string pointed to by S2
+N    * Returns: the length of the segment.
+N    */
+N
+N#ifdef __cplusplus
+Sextern _ARMABI const char *strstr(const char * /*s1*/, const char * /*s2*/) __attribute__((__nonnull__(1,2)));
+Sextern "C++" char *strstr(char * __s1, const char * __s2) __attribute__((__nonnull__(1,2)));
+Sextern "C++" inline char *strstr(char * __s1, const char * __s2)
+S    { return const_cast<char *>(strstr(const_cast<const char *>(__s1), __s2)); }
+N#else
+Nextern _ARMABI char *strstr(const char * /*s1*/, const char * /*s2*/) __attribute__((__nonnull__(1,2)));
+Xextern __declspec(__nothrow) char *strstr(const char *  , const char *  ) __attribute__((__nonnull__(1,2)));
+N#endif
+N   /*
+N    * locates the first occurence in the string pointed to by s1 of the
+N    * sequence of characters (excluding the terminating null character) in the
+N    * string pointed to by s2.
+N    * Returns: a pointer to the located string, or a null pointer if the string
+N    *          is not found.
+N    */
+N
+Nextern _ARMABI char *strtok(char * __restrict /*s1*/, const char * __restrict /*s2*/) __attribute__((__nonnull__(2)));
+Xextern __declspec(__nothrow) char *strtok(char * __restrict  , const char * __restrict  ) __attribute__((__nonnull__(2)));
+Nextern _ARMABI char *_strtok_r(char * /*s1*/, const char * /*s2*/, char ** /*ptr*/) __attribute__((__nonnull__(2,3)));
+Xextern __declspec(__nothrow) char *_strtok_r(char *  , const char *  , char **  ) __attribute__((__nonnull__(2,3)));
+N#ifndef __STRICT_ANSI__
+Nextern _ARMABI char *strtok_r(char * /*s1*/, const char * /*s2*/, char ** /*ptr*/) __attribute__((__nonnull__(2,3)));
+Xextern __declspec(__nothrow) char *strtok_r(char *  , const char *  , char **  ) __attribute__((__nonnull__(2,3)));
+N#endif
+N   /*
+N    * A sequence of calls to the strtok function breaks the string pointed to
+N    * by s1 into a sequence of tokens, each of which is delimited by a
+N    * character from the string pointed to by s2. The first call in the
+N    * sequence has s1 as its first argument, and is followed by calls with a
+N    * null pointer as their first argument. The separator string pointed to by
+N    * s2 may be different from call to call.
+N    * The first call in the sequence searches for the first character that is
+N    * not contained in the current separator string s2. If no such character
+N    * is found, then there are no tokens in s1 and the strtok function returns
+N    * a null pointer. If such a character is found, it is the start of the
+N    * first token.
+N    * The strtok function then searches from there for a character that is
+N    * contained in the current separator string. If no such character is found,
+N    * the current token extends to the end of the string pointed to by s1, and
+N    * subsequent searches for a token will fail. If such a character is found,
+N    * it is overwritten by a null character, which terminates the current
+N    * token. The strtok function saves a pointer to the following character,
+N    * from which the next search for a token will start.
+N    * Each subsequent call, with a null pointer as the value for the first
+N    * argument, starts searching from the saved pointer and behaves as
+N    * described above.
+N    * Returns: pointer to the first character of a token, or a null pointer if
+N    *          there is no token.
+N    *
+N    * strtok_r() is a common extension which works exactly like
+N    * strtok(), but instead of storing its state in a hidden
+N    * library variable, requires the user to pass in a pointer to a
+N    * char * variable which will be used instead. Any sequence of
+N    * calls to strtok_r() passing the same char ** pointer should
+N    * behave exactly like the corresponding sequence of calls to
+N    * strtok(). This means that strtok_r() can safely be used in
+N    * multi-threaded programs, and also that you can tokenise two
+N    * strings in parallel.
+N    */
+N
+Nextern _ARMABI void *memset(void * /*s*/, int /*c*/, size_t /*n*/) __attribute__((__nonnull__(1)));
+Xextern __declspec(__nothrow) void *memset(void *  , int  , size_t  ) __attribute__((__nonnull__(1)));
+N   /*
+N    * copies the value of c (converted to an unsigned char) into each of the
+N    * first n charactes of the object pointed to by s.
+N    * Returns: the value of s.
+N    */
+Nextern _ARMABI char *strerror(int /*errnum*/);
+Xextern __declspec(__nothrow) char *strerror(int  );
+N   /*
+N    * maps the error number in errnum to an error message string.
+N    * Returns: a pointer to the string, the contents of which are
+N    *          implementation-defined. The array pointed to shall not be
+N    *          modified by the program, but may be overwritten by a
+N    *          subsequent call to the strerror function.
+N    */
+Nextern _ARMABI size_t strlen(const char * /*s*/) __attribute__((__nonnull__(1)));
+Xextern __declspec(__nothrow) size_t strlen(const char *  ) __attribute__((__nonnull__(1)));
+N   /*
+N    * computes the length of the string pointed to by s.
+N    * Returns: the number of characters that precede the terminating null
+N    *          character.
+N    */
+N
+Nextern _ARMABI size_t strlcpy(char * /*dst*/, const char * /*src*/, size_t /*len*/) __attribute__((__nonnull__(1,2)));
+Xextern __declspec(__nothrow) size_t strlcpy(char *  , const char *  , size_t  ) __attribute__((__nonnull__(1,2)));
+N   /*
+N    * copies the string src into the string dst, using no more than
+N    * len bytes of dst. Always null-terminates dst _within the
+N    * length len (i.e. will copy at most len-1 bytes of string plus
+N    * a NUL), unless len is actually zero.
+N    * 
+N    * Return value is the length of the string that _would_ have
+N    * been written, i.e. the length of src. Thus, the operation
+N    * succeeded without truncation if and only if ret < len;
+N    * otherwise, the value in ret tells you how big to make dst if
+N    * you decide to reallocate it. (That value does _not_ include
+N    * the NUL.)
+N    * 
+N    * This is a BSD-derived library extension, which we are
+N    * permitted to declare in a standard header because ISO defines
+N    * function names beginning with 'str' as reserved for future
+N    * expansion of <string.h>.
+N    */
+N
+Nextern _ARMABI size_t strlcat(char * /*dst*/, const char * /*src*/, size_t /*len*/) __attribute__((__nonnull__(1,2)));
+Xextern __declspec(__nothrow) size_t strlcat(char *  , const char *  , size_t  ) __attribute__((__nonnull__(1,2)));
+N   /*
+N    * concatenates the string src to the string dst, using no more
+N    * than len bytes of dst. Always null-terminates dst _within the
+N    * length len (i.e. will copy at most len-1 bytes of string plus
+N    * a NUL), unless len is actually zero.
+N    * 
+N    * Return value is the length of the string that _would_ have
+N    * been written, i.e. the length of src plus the original length
+N    * of dst. Thus, the operation succeeded without truncation if
+N    * and only if ret < len; otherwise, the value in ret tells you
+N    * how big to make dst if you decide to reallocate it. (That
+N    * value does _not_ include the NUL.)
+N    * 
+N    * If no NUL is encountered within the first len bytes of dst,
+N    * then the length of dst is considered to have been equal to
+N    * len for the purposes of the return value (as if there were a
+N    * NUL at dst[len]). Thus, the return value in this case is len
+N    * + strlen(src).
+N    * 
+N    * This is a BSD-derived library extension, which we are
+N    * permitted to declare in a standard header because ISO defines
+N    * function names beginning with 'str' as reserved for future
+N    * expansion of <string.h>.
+N    */
+N
+Nextern _ARMABI void _membitcpybl(void * /*dest*/, const void * /*src*/, int /*destoffset*/, int /*srcoffset*/, size_t /*nbits*/) __attribute__((__nonnull__(1,2)));
+Xextern __declspec(__nothrow) void _membitcpybl(void *  , const void *  , int  , int  , size_t  ) __attribute__((__nonnull__(1,2)));
+Nextern _ARMABI void _membitcpybb(void * /*dest*/, const void * /*src*/, int /*destoffset*/, int /*srcoffset*/, size_t /*nbits*/) __attribute__((__nonnull__(1,2)));
+Xextern __declspec(__nothrow) void _membitcpybb(void *  , const void *  , int  , int  , size_t  ) __attribute__((__nonnull__(1,2)));
+Nextern _ARMABI void _membitcpyhl(void * /*dest*/, const void * /*src*/, int /*destoffset*/, int /*srcoffset*/, size_t /*nbits*/) __attribute__((__nonnull__(1,2)));
+Xextern __declspec(__nothrow) void _membitcpyhl(void *  , const void *  , int  , int  , size_t  ) __attribute__((__nonnull__(1,2)));
+Nextern _ARMABI void _membitcpyhb(void * /*dest*/, const void * /*src*/, int /*destoffset*/, int /*srcoffset*/, size_t /*nbits*/) __attribute__((__nonnull__(1,2)));
+Xextern __declspec(__nothrow) void _membitcpyhb(void *  , const void *  , int  , int  , size_t  ) __attribute__((__nonnull__(1,2)));
+Nextern _ARMABI void _membitcpywl(void * /*dest*/, const void * /*src*/, int /*destoffset*/, int /*srcoffset*/, size_t /*nbits*/) __attribute__((__nonnull__(1,2)));
+Xextern __declspec(__nothrow) void _membitcpywl(void *  , const void *  , int  , int  , size_t  ) __attribute__((__nonnull__(1,2)));
+Nextern _ARMABI void _membitcpywb(void * /*dest*/, const void * /*src*/, int /*destoffset*/, int /*srcoffset*/, size_t /*nbits*/) __attribute__((__nonnull__(1,2)));
+Xextern __declspec(__nothrow) void _membitcpywb(void *  , const void *  , int  , int  , size_t  ) __attribute__((__nonnull__(1,2)));
+Nextern _ARMABI void _membitmovebl(void * /*dest*/, const void * /*src*/, int /*destoffset*/, int /*srcoffset*/, size_t /*nbits*/) __attribute__((__nonnull__(1,2)));
+Xextern __declspec(__nothrow) void _membitmovebl(void *  , const void *  , int  , int  , size_t  ) __attribute__((__nonnull__(1,2)));
+Nextern _ARMABI void _membitmovebb(void * /*dest*/, const void * /*src*/, int /*destoffset*/, int /*srcoffset*/, size_t /*nbits*/) __attribute__((__nonnull__(1,2)));
+Xextern __declspec(__nothrow) void _membitmovebb(void *  , const void *  , int  , int  , size_t  ) __attribute__((__nonnull__(1,2)));
+Nextern _ARMABI void _membitmovehl(void * /*dest*/, const void * /*src*/, int /*destoffset*/, int /*srcoffset*/, size_t /*nbits*/) __attribute__((__nonnull__(1,2)));
+Xextern __declspec(__nothrow) void _membitmovehl(void *  , const void *  , int  , int  , size_t  ) __attribute__((__nonnull__(1,2)));
+Nextern _ARMABI void _membitmovehb(void * /*dest*/, const void * /*src*/, int /*destoffset*/, int /*srcoffset*/, size_t /*nbits*/) __attribute__((__nonnull__(1,2)));
+Xextern __declspec(__nothrow) void _membitmovehb(void *  , const void *  , int  , int  , size_t  ) __attribute__((__nonnull__(1,2)));
+Nextern _ARMABI void _membitmovewl(void * /*dest*/, const void * /*src*/, int /*destoffset*/, int /*srcoffset*/, size_t /*nbits*/) __attribute__((__nonnull__(1,2)));
+Xextern __declspec(__nothrow) void _membitmovewl(void *  , const void *  , int  , int  , size_t  ) __attribute__((__nonnull__(1,2)));
+Nextern _ARMABI void _membitmovewb(void * /*dest*/, const void * /*src*/, int /*destoffset*/, int /*srcoffset*/, size_t /*nbits*/) __attribute__((__nonnull__(1,2)));
+Xextern __declspec(__nothrow) void _membitmovewb(void *  , const void *  , int  , int  , size_t  ) __attribute__((__nonnull__(1,2)));
+N    /*
+N     * Copies or moves a piece of memory from one place to another,
+N     * with one-bit granularity. So you can start or finish a copy
+N     * part way through a byte, and you can copy between regions
+N     * with different alignment within a byte.
+N     * 
+N     * All these functions have the same prototype: two void *
+N     * pointers for destination and source, then two integers
+N     * giving the bit offset from those pointers, and finally the
+N     * number of bits to copy.
+N     * 
+N     * Just like memcpy and memmove, the "cpy" functions copy as
+N     * fast as they can in the assumption that the memory regions
+N     * do not overlap, while the "move" functions cope correctly
+N     * with overlap.
+N     *
+N     * Treating memory as a stream of individual bits requires
+N     * defining a convention about what order those bits are
+N     * considered to be arranged in. The above functions support
+N     * multiple conventions:
+N     * 
+N     *  - the "bl" functions consider the unit of memory to be the
+N     *    byte, and consider the bits within each byte to be
+N     *    arranged in little-endian fashion, so that the LSB comes
+N     *    first. (For example, membitcpybl(a,b,0,7,1) would copy
+N     *    the MSB of the byte at b to the LSB of the byte at a.)
+N     * 
+N     *  - the "bb" functions consider the unit of memory to be the
+N     *    byte, and consider the bits within each byte to be
+N     *    arranged in big-endian fashion, so that the MSB comes
+N     *    first.
+N     * 
+N     *  - the "hl" functions consider the unit of memory to be the
+N     *    16-bit halfword, and consider the bits within each word
+N     *    to be arranged in little-endian fashion.
+N     * 
+N     *  - the "hb" functions consider the unit of memory to be the
+N     *    16-bit halfword, and consider the bits within each word
+N     *    to be arranged in big-endian fashion.
+N     * 
+N     *  - the "wl" functions consider the unit of memory to be the
+N     *    32-bit word, and consider the bits within each word to be
+N     *    arranged in little-endian fashion.
+N     * 
+N     *  - the "wb" functions consider the unit of memory to be the
+N     *    32-bit word, and consider the bits within each word to be
+N     *    arranged in big-endian fashion.
+N     */
+N
+N    #ifdef __cplusplus
+S         }  /* extern "C" */
+S      }  /* namespace std */
+N    #endif /* __cplusplus */
+N  #endif /* __STRING_DECLS */
+N
+N  #ifdef __cplusplus
+S    #ifndef __STRING_NO_EXPORTS
+S      using ::std::size_t;
+S      using ::std::memcpy;
+S      using ::std::memmove;
+S      using ::std::strcpy;
+S      using ::std::strncpy;
+S      using ::std::strcat;
+S      using ::std::strncat;
+S      using ::std::memcmp;
+S      using ::std::strcmp;
+S      using ::std::strncmp;
+S      using ::std::strcasecmp;
+S      using ::std::strncasecmp;
+S      using ::std::strcoll;
+S      using ::std::strxfrm;
+S      using ::std::memchr;
+S      using ::std::strchr;
+S      using ::std::strcspn;
+S      using ::std::strpbrk;
+S      using ::std::strrchr;
+S      using ::std::strspn;
+S      using ::std::strstr;
+S      using ::std::strtok;
+S#ifndef __STRICT_ANSI__
+S      using ::std::strtok_r;
+S#endif
+S      using ::std::_strtok_r;
+S      using ::std::memset;
+S      using ::std::strerror;
+S      using ::std::strlen;
+S      using ::std::strlcpy;
+S      using ::std::strlcat;
+S      using ::std::_membitcpybl;
+S      using ::std::_membitcpybb;
+S      using ::std::_membitcpyhl;
+S      using ::std::_membitcpyhb;
+S      using ::std::_membitcpywl;
+S      using ::std::_membitcpywb;
+S      using ::std::_membitmovebl;
+S      using ::std::_membitmovebb;
+S      using ::std::_membitmovehl;
+S      using ::std::_membitmovehb;
+S      using ::std::_membitmovewl;
+S      using ::std::_membitmovewb;
+S    #endif /* __STRING_NO_EXPORTS */
+N  #endif /* __cplusplus */
+N
+N#endif
+N
+N/* end of string.h */
+N
+L 20 "ethernet\emac.c" 2
+N
+N#if ETHERNET_DEBUG
+X#if 0
+S  #include "..\Debug\uart.h"
+N#endif 
+N
+N#define EtherHdrLen		14
+N#define IpHdrLen		20
+N#define HdrLen          42			/* Ethernet hdr + IP hdr + UDP hdr  */
+N
+N#define FrameSize  	    data_size+HdrLen
+N#define PACKET_BUF_SIZE 120
+N#define CR				0x0D
+N#define LF				0x0A
+N
+N#define true			1
+N#define	false			0
+N
+N#define HTONS(n) ((((unsigned short)((n) & 0xff)) << 8) | (((n) & 0xff00) >> 8))
+N
+N#define FRAMEr   ((struct ethernet_hdr *)&rxbuffer[0])
+N#define PACKETr  ((struct packet_hdr *)&rxbuffer[14])
+N#define PAYLOADr	((struct payload *)&rxbuffer[42])
+N
+N#define FRAMEt   ((struct ethernet_hdr *)&txbuffer[0])
+N#define PACKETt  ((struct packet_hdr *)&txbuffer[14])
+N#define PAYLOADt	((struct payload *)&txbuffer[42])
+N
+Nconst char sync[] 	=	"Synchronized";
+Nconst char Ok[] 	=   "OK";
+N
+Nchar synchro;
+Nchar rxbuffer[PACKET_BUF_SIZE];
+Xchar rxbuffer[120];
+Nchar txbuffer[PACKET_BUF_SIZE];
+Xchar txbuffer[120];
+Nchar MyMAC[6]; 
+Nchar HostMAC[6];
+Nunsigned short DestPort;
+Nunsigned short SrcPort;
+Nunsigned short data_size=0;
+N
+Nstatic unsigned short *rxptr;
+Nstatic unsigned short *txptr;
+N
+Nstruct ethernet_hdr {
+N  char destination[6];
+N  char source[6];
+N  unsigned short protocol;
+N};
+N
+Nstruct packet_hdr {
+N  char fill1[2];
+N  unsigned short iplen;
+N  char fill2[6];
+N  unsigned short iphdrchksum;
+N  char srcipaddr[4];       
+N  char destipaddr[4];
+N  unsigned short srcport;		
+N  unsigned short destport;		
+N  unsigned short udplen;	       
+N  unsigned short udpchksum;		
+N};
+N
+Nstruct payload{
+N  char data[PACKET_BUF_SIZE - HdrLen];
+X  char data[120 - 42];
+N};
+N
+Nunsigned long ethernet_timeout;
+N
+N//*****************************************************// 
+N//  Private functions                                  //
+N//*****************************************************//
+Nvoid write_PHY (int PhyReg, int Value) {
+N  unsigned int tout;
+N
+N  MAC_MADR = (PHY_ADDRESS<<8) | PhyReg;
+X  (*(volatile unsigned long *)(0xFFE00000 + 0x028)) = (1<<8) | PhyReg;
+N  MAC_MWTD = Value;
+X  (*(volatile unsigned long *)(0xFFE00000 + 0x02C)) = Value;
+N
+N  /* Wait utill operation completed */
+N  tout = 0;
+N  for (tout = 0; tout < MII_WR_TOUT; tout++) {
+X  for (tout = 0; tout < 0x00050000; tout++) {
+N    if ((MAC_MIND & MIND_BUSY) == 0) {
+X    if (((*(volatile unsigned long *)(0xFFE00000 + 0x034)) & 0x00000001) == 0) {
+N      break;
+N    }
+N  }
+N}
+N
+Nunsigned short read_PHY (unsigned char PhyReg) {
+N  unsigned int tout;
+N
+N  MAC_MADR = (PHY_ADDRESS<<8) | PhyReg;
+X  (*(volatile unsigned long *)(0xFFE00000 + 0x028)) = (1<<8) | PhyReg;
+N  MAC_MCMD = MCMD_READ;
+X  (*(volatile unsigned long *)(0xFFE00000 + 0x024)) = 0x00000001;
+N
+N  /* Wait until operation completed */
+N  tout = 0;
+N  for (tout = 0; tout < MII_RD_TOUT; tout++) {
+X  for (tout = 0; tout < 0x00050000; tout++) {
+N    if ((MAC_MIND & MIND_BUSY) == 0) {
+X    if (((*(volatile unsigned long *)(0xFFE00000 + 0x034)) & 0x00000001) == 0) {
+N      break;
+N    }
+N  }
+N  MAC_MCMD = 0;
+X  (*(volatile unsigned long *)(0xFFE00000 + 0x024)) = 0;
+N  return (MAC_MRDD);
+X  return ((*(volatile unsigned long *)(0xFFE00000 + 0x030)));
+N}
+N
+Nunsigned short ReadFrame_EMAC(void)
+N{
+N  return (*rxptr++);
+N}
+N
+Nvoid CopyFromFrame_EMAC(void *Dest, unsigned short Size) {
+N  unsigned short * piDest;                       
+N
+N  piDest = Dest;                                 
+N  while (Size > 1) {
+N    *piDest++ = ReadFrame_EMAC();
+N    Size -= 2;
+N  } 
+N  if (Size) {                                         
+N    *(unsigned char *)piDest = (char)ReadFrame_EMAC();
+N  }                                                   
+N}
+N
+Nint same_mac(char * mac1,char * mac2) {
+N  int i;
+N  
+N  for(i=0; i<6; i++) {
+N    if(mac1[i] != mac2[i])
+N	  return false;
+X	  return 0;
+N  }
+N  return true;
+X  return 1;
+N}
+N
+Nint filter_pass(void) {
+N
+N   if (!synchro)
+N     return true;
+X     return 1;
+N
+N   if(! same_mac(FRAMEr->source,HostMAC)) {
+X   if(! same_mac(((struct ethernet_hdr *)&rxbuffer[0])->source,HostMAC)) {
+N#if ETHERNET_DEBUG
+X#if 0
+S	 print("Frame from different MAC: Filtered out!\n");
+N#endif   	
+N     return false;
+X     return 0;
+N   }
+N   if(PACKETr->destport != DestPort) {
+X   if(((struct packet_hdr *)&rxbuffer[14])->destport != DestPort) {
+N#if ETHERNET_DEBUG
+X#if 0
+S	 print("Packet from different Destination Port: Filtered out!\n");
+N#endif 
+N     return false;
+X     return 0;
+N   }
+N   if(PACKETr->srcport != SrcPort) {
+X   if(((struct packet_hdr *)&rxbuffer[14])->srcport != SrcPort) {
+N#if ETHERNET_DEBUG
+X#if 0
+S	 print("Packet to different Source Port: Filtered out!\n");
+N#endif 
+N     return false;
+X     return 0;
+N   }
+N   return true;
+X   return 1;
+N}
+N
+Nvoid WriteFrame_EMAC(unsigned short Data)
+N{
+N  *txptr++ = Data;
+N}
+N
+Nvoid CopyToFrame_EMAC(void *Source, unsigned int Size)
+N{
+N  unsigned short * piSource;
+N
+N  piSource = Source;
+N  Size = (Size + 1) & 0xFFFE;    
+N  while (Size > 0) {
+N    WriteFrame_EMAC(*piSource++);
+N    Size -= 2;
+N  }
+N}
+N
+Nint chksum16(void *buf1, short len) {
+N  unsigned short * buf = buf1;
+N  int chksum16, chksum=0;
+N
+N  while(len > 0) {	
+N    if (len == 1)
+N      chksum16 = ((*buf)&0x00FF);
+N    else
+N      chksum16 = (*buf);
+N    chksum = chksum + HTONS(chksum16);
+X    chksum = chksum + ((((unsigned short)((chksum16) & 0xff)) << 8) | (((chksum16) & 0xff00) >> 8));
+N    *buf++;
+N    len -=2;
+N  }
+N  return (~(chksum + ((chksum & 0xFFFF0000) >> 16))&0xFFFF);
+N}
+N
+N//*****************************************************// 
+N//  Public functions                                   //
+N//*****************************************************//
+Nvoid init_emac(void)  {
+N  unsigned int regv,tout,id1,id2,i;
+N
+N  synchro = false;
+X  synchro = 0;
+N
+N#if ETHERNET_DEBUG
+X#if 0
+S  UART_init(57600);
+S  print("Ethernet Secondary Bootloader: Target in debug mode\n");
+N#endif 
+N
+N   /* Power Up the EMAC controller. */
+N  PCONP |= 0x40000000;
+X  (*(volatile unsigned long *)(0xE01FC000 + 0x0C4)) |= 0x40000000;
+N  
+N  /* Enable P1 Ethernet Pins. */
+N  if (MAC_MODULEID == OLD_EMAC_MODULE_ID) { 
+X  if ((*(volatile unsigned long *)(0xFFE00000 + 0xFFC)) == 0x39022000) { 
+N    /* For the first silicon rev.'-' ID P1.6 should be set. */
+N    PINSEL2 = 0x50151105;
+X    (*(volatile unsigned long *)(0xE002C000 + 0x08)) = 0x50151105;
+N  }
+N  else {
+N    /* on rev. 'A' and later, P1.6 should NOT be set. */
+N    PINSEL2 = 0x50150105;
+X    (*(volatile unsigned long *)(0xE002C000 + 0x08)) = 0x50150105;
+N  }
+N  PINSEL3 = (PINSEL3 & ~0x0000000F) | 0x00000005;
+X  (*(volatile unsigned long *)(0xE002C000 + 0x0C)) = ((*(volatile unsigned long *)(0xE002C000 + 0x0C)) & ~0x0000000F) | 0x00000005;
+N 
+N  /* Reset all EMAC internal modules. */
+N  MAC_MAC1 = MAC1_RES_TX | MAC1_RES_MCS_TX | MAC1_RES_RX | MAC1_RES_MCS_RX |
+X  (*(volatile unsigned long *)(0xFFE00000 + 0x000)) = 0x00000100 | 0x00000200 | 0x00000400 | 0x00000800 |
+N             MAC1_SIM_RES | MAC1_SOFT_RES;
+X             0x00004000 | 0x00008000;
+N  MAC_COMMAND = CR_REG_RES | CR_TX_RES | CR_RX_RES;
+X  (*(volatile unsigned long *)(0xFFE00000 + 0x100)) = 0x00000008 | 0x00000010 | 0x00000020;
+N
+N  /* A short delay after reset. */
+N  for (tout = 100; tout; tout--);
+N
+N  /* Initialize MAC control registers. */
+N  MAC_MAC1 = MAC1_PASS_ALL;
+X  (*(volatile unsigned long *)(0xFFE00000 + 0x000)) = 0x00000002;
+N  MAC_MAC2 = MAC2_CRC_EN | MAC2_PAD_EN;
+X  (*(volatile unsigned long *)(0xFFE00000 + 0x004)) = 0x00000010 | 0x00000020;
+N  MAC_MAXF = ETH_MAX_FLEN;
+X  (*(volatile unsigned long *)(0xFFE00000 + 0x014)) = 1522;
+N  MAC_CLRT = CLRT_DEF;
+X  (*(volatile unsigned long *)(0xFFE00000 + 0x010)) = 0x0000370F;
+N  MAC_IPGR = IPGR_DEF;
+X  (*(volatile unsigned long *)(0xFFE00000 + 0x00C)) = 0x00000012;
+N
+N  /* Enable Reduced MII interface. */
+N  MAC_COMMAND = CR_RMII | CR_PASS_RUNT_FRM;
+X  (*(volatile unsigned long *)(0xFFE00000 + 0x100)) = 0x00000200 | 0x00000040;
+N
+N  /* Put the PHY chip in reset mode */
+N  write_PHY (PHY_REG_BMCR, 0x8000);
+X  write_PHY (0x00, 0x8000);
+N
+N  /* Wait for hardware reset to end. */
+N  for (tout = 0; tout < 0x100000; tout++) {
+N    regv = read_PHY (PHY_REG_BMCR);
+X    regv = read_PHY (0x00);
+N    if (!(regv & 0x8000)) {
+N      /* Reset complete */
+N      break;
+N    }
+N  }
+N 
+N  /* MII Mgmt Configuration register and MII Mgnt hardware Reset       */
+N  /* host clock divided by 20, no suppress preamble, no scan increment */
+N  MAC_MCFG = HOST_CLK_BY_20 | MCFG_RES_MII;	
+X  (*(volatile unsigned long *)(0xFFE00000 + 0x020)) = (0x06 << 2) | 0x00008000;	
+N  for ( i = 0; i < 0x40; i++ );
+N  MAC_MCFG &= (~MCFG_RES_MII);	/* Clear the reset */
+X  (*(volatile unsigned long *)(0xFFE00000 + 0x020)) &= (~0x00008000);	 
+N  MAC_MCMD = 0;	
+X  (*(volatile unsigned long *)(0xFFE00000 + 0x024)) = 0;	
+N
+N#if(PHY_CHIP==0)  //National PHY
+X#if(0==0)  
+N  /* Check if this is a DP83848C PHY. */
+N  id1 = read_PHY (PHY_REG_IDR1);
+X  id1 = read_PHY (0x02);
+N  id2 = read_PHY (PHY_REG_IDR2);
+X  id2 = read_PHY (0x03);
+N  if (((id1 << 16) | (id2 & 0xFFF0)) == DP83848C_ID) {
+X  if (((id1 << 16) | (id2 & 0xFFF0)) == 0x20005C90) {
+N    /* Configure the PHY device */
+N
+N    /* Use autonegotiation about the link speed. */
+N    write_PHY (PHY_REG_BMCR, PHY_AUTO_NEG);
+X    write_PHY (0x00, 0x3000);
+N    /* Wait to complete Auto_Negotiation. */
+N    for (tout = 0; tout < 0x100000; tout++) {
+N      regv = read_PHY (PHY_REG_BMSR);
+X      regv = read_PHY (0x01);
+N      if (regv & 0x0020) {
+N        /* Autonegotiation Complete. */
+N        break;
+N      }
+N    }
+N  }
+N  
+N  /* Check the link status. */
+N  for (tout = 0; tout < 0x10000; tout++) {
+N    regv = read_PHY (PHY_REG_STS);
+X    regv = read_PHY (0x10);
+N    if (regv & 0x0001) {
+N      /* Link is on. */
+N      break;
+N    }
+N  }
+N
+N  /* Configure Full/Half Duplex mode. */
+N  if (regv & 0x0004) {
+N    /* Full duplex is enabled. */
+N    MAC_MAC2    |= MAC2_FULL_DUP;
+X    (*(volatile unsigned long *)(0xFFE00000 + 0x004))    |= 0x00000001;
+N    MAC_COMMAND |= CR_FULL_DUP;
+X    (*(volatile unsigned long *)(0xFFE00000 + 0x100)) |= 0x00000400;
+N    MAC_IPGT     = IPGT_FULL_DUP;
+X    (*(volatile unsigned long *)(0xFFE00000 + 0x008))     = 0x00000015;
+N  }
+N  else {
+N    /* Half duplex mode. */
+N    MAC_IPGT = IPGT_HALF_DUP;
+X    (*(volatile unsigned long *)(0xFFE00000 + 0x008)) = 0x00000012;
+N  }
+N
+N  /* Configure 100MBit/10MBit mode. */
+N  if (regv & 0x0002) {
+N    /* 10MBit mode. */
+N    MAC_SUPP = 0;
+X    (*(volatile unsigned long *)(0xFFE00000 + 0x018)) = 0;
+N  }
+N  else {
+N    /* 100MBit mode. */
+N    MAC_SUPP = SUPP_SPEED;
+X    (*(volatile unsigned long *)(0xFFE00000 + 0x018)) = 0x00000100;
+N  }
+N#endif
+N
+N#if(PHY_CHIP==1)  //Other PHY
+X#if(0==1)  
+S  /* Initialization code for other PHY */
+S
+S
+N#endif
+N
+N  /* Set the Ethernet MAC Address registers */
+N  MAC_SA0 = (MYMAC_1 << 8) | MYMAC_2;
+X  (*(volatile unsigned long *)(0xFFE00000 + 0x040)) = (0x10 << 8) | 0x1F;
+N  MAC_SA1 = (MYMAC_3 << 8) | MYMAC_4;
+X  (*(volatile unsigned long *)(0xFFE00000 + 0x044)) = (0xE0 << 8) | 0x12;
+N  MAC_SA2 = (MYMAC_5 << 8) | MYMAC_6;
+X  (*(volatile unsigned long *)(0xFFE00000 + 0x048)) = (0x1D << 8) | 0x0C;
+N
+N  /* save the Ethernet MAC Address to MyMAC[] */
+N  MyMAC[0] = MYMAC_6;
+X  MyMAC[0] = 0x0C;
+N  MyMAC[1] = MYMAC_5;
+X  MyMAC[1] = 0x1D;
+N  MyMAC[2] = MYMAC_4;
+X  MyMAC[2] = 0x12;
+N  MyMAC[3] = MYMAC_3;
+X  MyMAC[3] = 0xE0;
+N  MyMAC[4] = MYMAC_2;
+X  MyMAC[4] = 0x1F;
+N  MyMAC[5] = MYMAC_1;
+X  MyMAC[5] = 0x10;
+N
+N  /* Initialize Rx DMA Descriptors */
+N  for (i = 0; i < NUM_RX_FRAG; i++) {
+X  for (i = 0; i < 25; i++) {
+N    RX_DESC_PACKET(i)  = RX_BUF(i);
+X    (*(unsigned int *)(0x7FE00000 + 8*i))  = (((((0x7FE00000 + 25*8) + 25*8) + 3*8) + 3*4) + 120*i);
+N    RX_DESC_CTRL(i)    = RCTRL_INT | (ETH_FRAG_SIZE-1);
+X    (*(unsigned int *)(0x7FE00000+4 + 8*i))    = 0x80000000 | (120-1);
+N    RX_STAT_INFO(i)    = 0;
+X    (*(unsigned int *)((0x7FE00000 + 25*8) + 8*i))    = 0;
+N    RX_STAT_HASHCRC(i) = 0;
+X    (*(unsigned int *)((0x7FE00000 + 25*8)+4 + 8*i)) = 0;
+N  }
+N  /* Set EMAC Receive Descriptor Registers. */
+N  MAC_RXDESCRIPTOR    = RX_DESC_BASE;
+X  (*(volatile unsigned long *)(0xFFE00000 + 0x108))    = 0x7FE00000;
+N  MAC_RXSTATUS        = RX_STAT_BASE;
+X  (*(volatile unsigned long *)(0xFFE00000 + 0x10C))        = (0x7FE00000 + 25*8);
+N  MAC_RXDESCRIPTORNUM = NUM_RX_FRAG-1;
+X  (*(volatile unsigned long *)(0xFFE00000 + 0x110)) = 25-1;
+N  /* Rx Descriptors Point to 0 */
+N  MAC_RXCONSUMEINDEX  = 0;
+X  (*(volatile unsigned long *)(0xFFE00000 + 0x118))  = 0;
+N
+N  /* Initialize Tx DMA Descriptors */
+N  for (i = 0; i < NUM_TX_FRAG; i++) {
+X  for (i = 0; i < 3; i++) {
+N    TX_DESC_PACKET(i) = TX_BUF(i);
+X    (*(unsigned int *)(((0x7FE00000 + 25*8) + 25*8) + 8*i)) = ((((((0x7FE00000 + 25*8) + 25*8) + 3*8) + 3*4) + 25*120) + 120*i);
+N    TX_DESC_CTRL(i)   = 0;
+X    (*(unsigned int *)(((0x7FE00000 + 25*8) + 25*8)+4 + 8*i))   = 0;
+N    TX_STAT_INFO(i)   = 0;
+X    (*(unsigned int *)((((0x7FE00000 + 25*8) + 25*8) + 3*8) + 4*i))   = 0;
+N  }
+N  /* Set EMAC Transmit Descriptor Registers. */
+N  MAC_TXDESCRIPTOR    = TX_DESC_BASE;
+X  (*(volatile unsigned long *)(0xFFE00000 + 0x11C))    = ((0x7FE00000 + 25*8) + 25*8);
+N  MAC_TXSTATUS        = TX_STAT_BASE;
+X  (*(volatile unsigned long *)(0xFFE00000 + 0x120))        = (((0x7FE00000 + 25*8) + 25*8) + 3*8);
+N  MAC_TXDESCRIPTORNUM = NUM_TX_FRAG-1;
+X  (*(volatile unsigned long *)(0xFFE00000 + 0x124)) = 3-1;
+N  /* Tx Descriptors Point to 0 */
+N  MAC_TXPRODUCEINDEX  = 0;
+X  (*(volatile unsigned long *)(0xFFE00000 + 0x128))  = 0;
+N
+N  /* Receive Broadcast and Perfect Match Packets */
+N  MAC_RXFILTERCTRL = RFC_PERFECT_EN;  
+X  (*(volatile unsigned long *)(0xFFE00000 + 0x200)) = 0x00000020;  
+N
+N  /* Enable EMAC interrupts. */
+N  MAC_INTENABLE = INT_RX_DONE | INT_TX_DONE;
+X  (*(volatile unsigned long *)(0xFFE00000 + 0xFE4)) = 0x00000008 | 0x00000080;
+N
+N  /* Reset all interrupts */
+N  MAC_INTCLEAR  = 0xFFFF;
+X  (*(volatile unsigned long *)(0xFFE00000 + 0xFE8))  = 0xFFFF;
+N
+N  /* Enable receive and transmit mode of MAC Ethernet core */
+N  MAC_COMMAND  |= (CR_RX_EN | CR_TX_EN);
+X  (*(volatile unsigned long *)(0xFFE00000 + 0x100))  |= (0x00000001 | 0x00000002);
+N  MAC_MAC1     |= MAC1_REC_EN;
+X  (*(volatile unsigned long *)(0xFFE00000 + 0x000))     |= 0x00000001;
+N
+N  /* Complete some IP & UDP header values */
+N  txbuffer[12] = 0x08;
+N  txbuffer[13] = 0x00;
+N  txbuffer[14] = 0x45;
+N  txbuffer[15] = 0x00;
+N  txbuffer[18] = 0xD8;
+N  txbuffer[19] = 0xF4;
+N  txbuffer[20] = 0x00;
+N  txbuffer[21] = 0x00;
+N  txbuffer[22] = 0x80;
+N  txbuffer[23] = 0x11;
+N}
+N
+N// gets a command from the next packet received
+N// returns 0 if packet received, 1 if timeout
+Nunsigned emac_getline(char * buf,int max_len,int * count) {
+N  unsigned short RxLen;
+N  unsigned int idx, i;
+N
+N#if ETHERNET_DEBUG
+X#if 0
+S  int j;
+N#endif
+N
+N#if LED_ENABLED
+X#if 1
+N  int k=0;
+N#endif
+N 
+N  /* get timestamp for end of timeout period */
+N  ethernet_timeout = Timer_GetTimestamp() + ETHERNET_TIMEOUT;
+X  ethernet_timeout = Timer_GetTimestamp() + 60000;
+N
+N  /* Check for Received frames */
+N  while(1){
+N    while(MAC_RXCONSUMEINDEX == MAC_RXPRODUCEINDEX){
+X    while((*(volatile unsigned long *)(0xFFE00000 + 0x118)) == (*(volatile unsigned long *)(0xFFE00000 + 0x114))){
+N#if LED_ENABLED
+X#if 1
+N      /* increment the counter and check timeout  */
+N	  if (k++ > 200000) {
+N	     k=0;
+N		 /* toogle the LED           */
+N	     if (FIO2PIN & (1<<PORT2_PIN))
+X	     if ((*(volatile unsigned long *)(0x3FFFC000 + 0x54)) & (1<<7))
+N	       FIO2CLR |= (1<<PORT2_PIN);
+X	       (*(volatile unsigned long *)(0x3FFFC000 + 0x5C)) |= (1<<7);
+N	     else
+N	       FIO2SET |= (1<<PORT2_PIN);
+X	       (*(volatile unsigned long *)(0x3FFFC000 + 0x58)) |= (1<<7);
+N	  }
+N#endif
+N
+N	  /* no filtered packets received during timeout period */
+N      if (Timer_HasTimestampExpired(ethernet_timeout))
+N	  {
+N#if ETHERNET_DEBUG
+X#if 0
+S        print("Timed out - going back to looking for handshake\n");
+N#endif
+N	    return 1;
+N	  }
+N    }
+N
+N    idx = MAC_RXCONSUMEINDEX;
+X    idx = (*(volatile unsigned long *)(0xFFE00000 + 0x118));
+N
+N    /* check for crc error */
+N	if (RX_STAT_INFO(idx) & RINFO_CRC_ERR)
+X	if ((*(unsigned int *)((0x7FE00000 + 25*8) + 8*idx)) & 0x00800000)
+N	{
+N#if ETHERNET_DEBUG
+X#if 0
+S      print("Rx CRC error\n");
+N#endif
+N      /* ignore frame */
+N      if (++idx == NUM_RX_FRAG)
+X      if (++idx == 25)
+N  	  idx = 0;   
+N	  MAC_RXCONSUMEINDEX = idx;
+X	  (*(volatile unsigned long *)(0xFFE00000 + 0x118)) = idx;
+N      continue;
+N	}
+N
+N    /* Get the Length and a pointer to the data  */
+N    RxLen = (RX_STAT_INFO(idx) & RINFO_SIZE) - 3;				 
+X    RxLen = ((*(unsigned int *)((0x7FE00000 + 25*8) + 8*idx)) & 0x000007FF) - 3;				 
+N    rxptr = (unsigned short *)RX_DESC_PACKET(idx);
+X    rxptr = (unsigned short *)(*(unsigned int *)(0x7FE00000 + 8*idx));
+N    CopyFromFrame_EMAC(rxbuffer, RxLen);
+N    if (++idx == NUM_RX_FRAG)
+X    if (++idx == 25)
+N	  idx = 0;   
+N	MAC_RXCONSUMEINDEX = idx;
+X	(*(volatile unsigned long *)(0xFFE00000 + 0x118)) = idx;
+N    if(filter_pass())
+N      break;
+N  } 
+N  /* limit incoming data for protection  */
+N  if ((RxLen-42) > max_len)
+N    RxLen = max_len + 42;
+N  memcpy(buf,PAYLOADr->data,RxLen-42);
+X  memcpy(buf,((struct payload *)&rxbuffer[42])->data,RxLen-42);
+N
+N  /* detect '0x0A' (string terminator) and replace it by CR+LF  */
+N  for(i=0;i<max_len;i++) {
+N    if(buf[i]==CR){
+X    if(buf[i]==0x0D){
+N	  buf[i]='\0';
+N	  break;
+N	}
+N  }
+N  (*count) = i;
+N
+N#if ETHERNET_DEBUG
+X#if 0
+S  /* print received command   */
+S  print("Rx:  ");
+S  if (RxLen > 60) {
+S	print("...Data...");
+S  }else{
+S    j=0;
+S    for(i=0; i<(*count); i++) {
+S	  printascii(buf[i]);
+S      j++;
+S      if (j==16) {
+S        j=0;
+S        print("\r\n     ");
+S      }
+S    }
+S  }
+S  print("\r\n-------------------\r\n");
+N#endif
+N
+N    // reset timestamp for end of timeout period
+N    ethernet_timeout = Timer_GetTimestamp() + ETHERNET_TIMEOUT;
+X    ethernet_timeout = Timer_GetTimestamp() + 60000;
+N
+N    return (0);
+N}
+N
+Nunsigned emac_sendline_crlf(char * buf) {  
+N  int i;
+N  unsigned int idx;
+N
+N#if ETHERNET_DEBUG
+X#if 0
+S  int j;
+N#endif
+N
+N  /* detect '\0' (string terminator) and replace it by CR+LF  */
+N  for(i=0;i<CMD_SIZE;i++) {
+X  for(i=0;i<70;i++) {
+N    PAYLOADt->data[i] = buf[i] ;			
+X    ((struct payload *)&txbuffer[42])->data[i] = buf[i] ;			
+N    if(buf[i]=='\0'){
+N	  PAYLOADt->data[i]=CR;
+X	  ((struct payload *)&txbuffer[42])->data[i]=0x0D;
+N	  PAYLOADt->data[i+1]=LF;
+X	  ((struct payload *)&txbuffer[42])->data[i+1]=0x0A;
+N	  break;
+N	}
+N  }
+N  data_size = i+2;
+N
+N#if ETHERNET_DEBUG
+X#if 0
+S  print("Tx:  ");
+S  j=0;
+S  for(i=0; i<data_size-2; i++) {
+S	printascii(buf[i]);
+S    j++;
+S    if (j==16) {
+S      j=0;
+S      print("\r\n     ");
+S    }
+S  }
+S  print("\r\n-------------------\r\n");
+N#endif
+N    
+N  idx  = MAC_TXPRODUCEINDEX;
+X  idx  = (*(volatile unsigned long *)(0xFFE00000 + 0x128));
+N  txptr = (unsigned short *)TX_DESC_PACKET(idx);
+X  txptr = (unsigned short *)(*(unsigned int *)(((0x7FE00000 + 25*8) + 25*8) + 8*idx));
+N  TX_DESC_CTRL(idx) = FrameSize | TCTRL_LAST;
+X  (*(unsigned int *)(((0x7FE00000 + 25*8) + 25*8)+4 + 8*idx)) = data_size + 42 | 0x40000000;
+N  memcpy(FRAMEt->destination,FRAMEr->source,6);
+X  memcpy(((struct ethernet_hdr *)&txbuffer[0])->destination,((struct ethernet_hdr *)&rxbuffer[0])->source,6);
+N  memcpy(FRAMEt->source,MyMAC,6);
+X  memcpy(((struct ethernet_hdr *)&txbuffer[0])->source,MyMAC,6);
+N  PACKETt->iplen = HTONS(FrameSize - EtherHdrLen);
+X  ((struct packet_hdr *)&txbuffer[14])->iplen = ((((unsigned short)((data_size + 42 - 14) & 0xff)) << 8) | (((data_size + 42 - 14) & 0xff00) >> 8));
+N  memcpy(PACKETt->destipaddr,PACKETr->srcipaddr,4);
+X  memcpy(((struct packet_hdr *)&txbuffer[14])->destipaddr,((struct packet_hdr *)&rxbuffer[14])->srcipaddr,4);
+N  memcpy(PACKETt->srcipaddr,PACKETr->destipaddr,4);
+X  memcpy(((struct packet_hdr *)&txbuffer[14])->srcipaddr,((struct packet_hdr *)&rxbuffer[14])->destipaddr,4);
+N  PACKETt->iphdrchksum = 0;
+X  ((struct packet_hdr *)&txbuffer[14])->iphdrchksum = 0;
+N  PACKETt->iphdrchksum = HTONS(chksum16(PACKETt->fill1, IpHdrLen));
+X  ((struct packet_hdr *)&txbuffer[14])->iphdrchksum = ((((unsigned short)((chksum16(((struct packet_hdr *)&txbuffer[14])->fill1, 20)) & 0xff)) << 8) | (((chksum16(((struct packet_hdr *)&txbuffer[14])->fill1, 20)) & 0xff00) >> 8));
+N  PACKETt->destport = PACKETr->srcport;
+X  ((struct packet_hdr *)&txbuffer[14])->destport = ((struct packet_hdr *)&rxbuffer[14])->srcport;
+N  PACKETt->srcport = PACKETr->destport;
+X  ((struct packet_hdr *)&txbuffer[14])->srcport = ((struct packet_hdr *)&rxbuffer[14])->destport;
+N  PACKETt->udplen = HTONS(FrameSize - EtherHdrLen - IpHdrLen);
+X  ((struct packet_hdr *)&txbuffer[14])->udplen = ((((unsigned short)((data_size + 42 - 14 - 20) & 0xff)) << 8) | (((data_size + 42 - 14 - 20) & 0xff00) >> 8));
+N  PACKETt->udpchksum = 0;
+X  ((struct packet_hdr *)&txbuffer[14])->udpchksum = 0;
+N  CopyToFrame_EMAC(&txbuffer[0], FrameSize);
+X  CopyToFrame_EMAC(&txbuffer[0], data_size + 42);
+N  if (++idx == NUM_TX_FRAG) idx = 0;
+X  if (++idx == 3) idx = 0;
+N  MAC_TXPRODUCEINDEX = idx;  
+X  (*(volatile unsigned long *)(0xFFE00000 + 0x128)) = idx;  
+N  return (1);
+N}
+N
+Nvoid emac_handshake(void) {
+N
+N   int count;
+N   char buf[15];
+N   char buf1[15];
+N
+N   synchro = false;
+X   synchro = 0;
+N
+N   while(1) {
+N     if (emac_getline(buf,1,&count) == 0) {
+N       if (buf[0] == '?') {					  
+N  	     /* save Dest & Source Ports   */
+N 	     DestPort = PACKETr->destport;
+X 	     DestPort = ((struct packet_hdr *)&rxbuffer[14])->destport;
+N	     SrcPort  = PACKETr->srcport;
+X	     SrcPort  = ((struct packet_hdr *)&rxbuffer[14])->srcport;
+N
+N#if ETHERNET_DEBUG
+X#if 0
+S         /* print Dest & Source Ports   */
+S	     print("Dest: ");
+S	     printhexa((DestPort>>8)&0xFF);
+S	     printhexa(DestPort&0xFF);
+S	     print("\nSource: ");
+S	     printhexa((SrcPort>>8)&0xFF);
+S	     printhexa(SrcPort&0xFF);
+S	     print("\n");
+N#endif
+N         /* save Host MAC address   */
+N	     memcpy(HostMAC,FRAMEr->source,6);
+X	     memcpy(HostMAC,((struct ethernet_hdr *)&rxbuffer[0])->source,6);
+N
+N#if ETHERNET_DEBUG
+X#if 0
+S         /* print Host MAC address  */
+S	     print("\nSource MAC: ");
+S	     printhexa(HostMAC[5]);
+S	     printhexa(HostMAC[4]);
+S	     printhexa(HostMAC[3]);
+S	     printhexa(HostMAC[2]);
+S	     printhexa(HostMAC[1]);
+S	     printhexa(HostMAC[0]);
+S	     print("\n");
+N#endif
+N
+N         emac_sendline_crlf((char *)&sync[0]);         
+N         emac_getline(buf,15,&count);
+N	     memcpy(&buf1[0],&sync[0],sizeof(sync));
+N	     if (str_cmp(&buf[0],&buf1[0])==0) {
+N           emac_sendline_crlf((char *)&Ok[0]);
+N		   synchro = true;
+X		   synchro = 1;
+N		   break;
+N	     }
+N       }
+N	 }
+N   }
+N}
+N

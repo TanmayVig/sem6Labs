@@ -1,0 +1,694 @@
+Component: ARM Compiler 5.05 (build 41) Tool: armlink [4d0eb9]
+
+==============================================================================
+
+Section Cross References
+
+    startup_lpc18xx.o(RESET) refers to startup_lpc18xx.o(STACK) for __initial_sp
+    startup_lpc18xx.o(RESET) refers to startup_lpc18xx.o(.text) for Reset_Handler
+    startup_lpc18xx.o(RESET) refers to main.o(.text) for SysTick_Handler
+    startup_lpc18xx.o(.text) refers to system_lpc18xx.o(.text) for SystemInit
+    startup_lpc18xx.o(.text) refers to entry.o(.ARM.Collect$$$$00000000) for __main
+    system_lpc18xx.o(.text) refers to uldiv.o(.text) for __aeabi_uldivmod
+    system_lpc18xx.o(.text) refers to system_lpc18xx.o(.data) for SystemCoreClock
+    system_lpc18xx.o(.text) refers to system_lpc18xx.o(.constdata) for emcdivby2_opc
+    system_lpc18xx.o(.text) refers to system_lpc18xx.o(i.GetPLL1Param) for GetPLL1Param
+    lpc18xx_cgu.o(.text) refers to dfltui.o(.text) for __aeabi_ui2d
+    lpc18xx_cgu.o(.text) refers to f2d.o(.text) for __aeabi_f2d
+    lpc18xx_cgu.o(.text) refers to cdcmple.o(.text) for __aeabi_cdcmple
+    lpc18xx_cgu.o(.text) refers to cdrcmple.o(.text) for __aeabi_cdrcmple
+    lpc18xx_cgu.o(.text) refers to ddiv.o(.text) for __aeabi_ddiv
+    lpc18xx_cgu.o(.text) refers to dfixui.o(.text) for __aeabi_d2uiz
+    lpc18xx_cgu.o(.text) refers to dadd.o(.text) for __aeabi_dadd
+    lpc18xx_cgu.o(.text) refers to dmul.o(.text) for __aeabi_dmul
+    lpc18xx_cgu.o(.text) refers to lpc18xx_scu.o(.text) for scu_pinmux
+    lpc18xx_cgu.o(.text) refers to lpc18xx_cgu.o(.constdata) for CGU_Entity_ControlReg_Offset
+    lpc18xx_cgu.o(.text) refers to lpc18xx_cgu.o(.data) for CGU_ClockSourceFrequency
+    swd.o(.text) refers to strlen.o(.text) for strlen
+    swd.o(.text) refers to flashprg.o(.constdata) for Descriptor
+    swd.o(.text) refers to swd.o(.data) for CommandMailboxes
+    main.o(.text) refers to bootloader.o(.text) for Bootloader_Init
+    main.o(.text) refers to bootloader.o(.data) for gBootloaderTick
+    main.o(.text) refers to system_lpc18xx.o(.data) for SystemCoreClock
+    bootloader.o(.text) refers to swd.o(.text) for Host_Initialize
+    bootloader.o(.text) refers to flashprg.o(.text) for Memory_Init
+    bootloader.o(.text) refers to flashprg.o(.constdata) for Descriptor
+    bootloader.o(.text) refers to bootloader.o(.data) for state
+    bootloader.o(.text) refers to bootloader.o(.bss) for rxbuffer
+    flashprg.o(.text) refers to lpc18xx_cgu.o(.text) for CGU_EntityConnect
+    flashprg.o(.text) refers to spifi_rom_api.o(.constdata) for spifi_table
+    flashprg.o(.text) refers to flashprg.o(.data) for pSpifi
+    flashprg.o(.text) refers to flashprg.o(.bss) for obj
+    spifi_rom_api.o(.text) refers to falcon_details.o(.text) for pullMISO
+    spifi_rom_api.o(.text) refers to spansion.o(.text) for span
+    spifi_rom_api.o(.text) refers to eon.o(.text) for eon
+    spifi_rom_api.o(.text) refers to atmel.o(.text) for atm
+    spifi_rom_api.o(.text) refers to numonyx.o(.text) for numo
+    spifi_rom_api.o(.text) refers to amic.o(.text) for amic
+    spifi_rom_api.o(.text) refers to chi.o(.text) for chi
+    spifi_rom_api.o(.text) refers to esmt.o(.text) for esmt
+    spifi_rom_api.o(.text) refers to sst.o(.text) for sst
+    spifi_rom_api.o(.text) refers to macronix.o(.text) for mxic
+    spifi_rom_api.o(.text) refers to giga.o(.text) for giga
+    spifi_rom_api.o(.text) refers to winbond.o(.text) for wbd
+    spifi_rom_api.o(.text) refers to memcpya.o(.text) for __aeabi_memcpy4
+    spifi_rom_api.o(.constdata) refers to spifi_rom_api.o(.text) for spifi_init
+    amic.o(.text) refers to spifi_rom_api.o(.text) for setSize
+    atmel.o(.text) refers to spifi_rom_api.o(.text) for setProtEnts
+    atmel.o(.text) refers to atmel.o(.constdata) for .constdata
+    chi.o(.text) refers to spifi_rom_api.o(.text) for setSize
+    eon.o(.text) refers to spifi_rom_api.o(.text) for setSize
+    esmt.o(.text) refers to spifi_rom_api.o(.text) for setSize
+    giga.o(.text) refers to spifi_rom_api.o(.text) for setSize
+    macronix.o(.text) refers to spifi_rom_api.o(.text) for setSize
+    macronix.o(.text) refers to macronix.o(.constdata) for .constdata
+    numonyx.o(.text) refers to spifi_rom_api.o(.text) for setSize
+    spansion.o(.text) refers to spifi_rom_api.o(.text) for read04
+    sst.o(.text) refers to spifi_rom_api.o(.text) for setSize
+    sst.o(.text) refers to sst.o(.constdata) for .constdata
+    winbond.o(.text) refers to spifi_rom_api.o(.text) for setSize
+    entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry10a.o(.ARM.Collect$$$$0000000D) for __rt_final_cpp
+    entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry11a.o(.ARM.Collect$$$$0000000F) for __rt_final_exit
+    entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry7b.o(.ARM.Collect$$$$00000008) for _main_clock
+    entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry8b.o(.ARM.Collect$$$$0000000A) for _main_cpp_init
+    entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry9a.o(.ARM.Collect$$$$0000000B) for _main_init
+    entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry5.o(.ARM.Collect$$$$00000004) for _main_scatterload
+    entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry2.o(.ARM.Collect$$$$00000001) for _main_stk
+    uldiv.o(.text) refers to llushr.o(.text) for __aeabi_llsr
+    uldiv.o(.text) refers to llshl.o(.text) for __aeabi_llsl
+    dadd.o(.text) refers (Special) to iusefp.o(.text) for __I$use$fp
+    dadd.o(.text) refers to llshl.o(.text) for __aeabi_llsl
+    dadd.o(.text) refers to llsshr.o(.text) for __aeabi_lasr
+    dadd.o(.text) refers to depilogue.o(.text) for _double_epilogue
+    dmul.o(.text) refers (Special) to iusefp.o(.text) for __I$use$fp
+    dmul.o(.text) refers to depilogue.o(.text) for _double_epilogue
+    ddiv.o(.text) refers (Special) to iusefp.o(.text) for __I$use$fp
+    ddiv.o(.text) refers to depilogue.o(.text) for _double_round
+    dfltui.o(.text) refers (Special) to iusefp.o(.text) for __I$use$fp
+    dfltui.o(.text) refers to depilogue.o(.text) for _double_epilogue
+    dfixui.o(.text) refers (Special) to iusefp.o(.text) for __I$use$fp
+    dfixui.o(.text) refers to llushr.o(.text) for __aeabi_llsr
+    f2d.o(.text) refers (Special) to iusefp.o(.text) for __I$use$fp
+    cdcmple.o(.text) refers (Special) to iusefp.o(.text) for __I$use$fp
+    cdrcmple.o(.text) refers (Special) to iusefp.o(.text) for __I$use$fp
+    entry2.o(.ARM.Collect$$$$00000001) refers to entry2.o(.ARM.Collect$$$$00002712) for __lit__00000000
+    entry2.o(.ARM.Collect$$$$00002712) refers to startup_lpc18xx.o(STACK) for __initial_sp
+    entry2.o(__vectab_stack_and_reset_area) refers to startup_lpc18xx.o(STACK) for __initial_sp
+    entry2.o(__vectab_stack_and_reset_area) refers to entry.o(.ARM.Collect$$$$00000000) for __main
+    entry5.o(.ARM.Collect$$$$00000004) refers to init.o(.text) for __scatterload
+    entry9a.o(.ARM.Collect$$$$0000000B) refers to main.o(.text) for main
+    entry9b.o(.ARM.Collect$$$$0000000C) refers to main.o(.text) for main
+    depilogue.o(.text) refers to llshl.o(.text) for __aeabi_llsl
+    depilogue.o(.text) refers to llushr.o(.text) for __aeabi_llsr
+    init.o(.text) refers to entry5.o(.ARM.Collect$$$$00000004) for __main_after_scatterload
+
+
+==============================================================================
+
+Removing Unused input sections from the image.
+
+    Removing startup_lpc18xx.o(HEAP), (0 bytes).
+    Removing system_lpc18xx.o(.rev16_text), (4 bytes).
+    Removing system_lpc18xx.o(.revsh_text), (4 bytes).
+    Removing lpc18xx_scu.o(.rev16_text), (4 bytes).
+    Removing lpc18xx_scu.o(.revsh_text), (4 bytes).
+    Removing lpc18xx_cgu.o(.rev16_text), (4 bytes).
+    Removing lpc18xx_cgu.o(.revsh_text), (4 bytes).
+    Removing main.o(.rev16_text), (4 bytes).
+    Removing main.o(.revsh_text), (4 bytes).
+    Removing flashprg.o(.rev16_text), (4 bytes).
+    Removing flashprg.o(.revsh_text), (4 bytes).
+    Removing falcon_details.o(.rev16_text), (4 bytes).
+    Removing falcon_details.o(.revsh_text), (4 bytes).
+
+13 unused section(s) (total 48 bytes) removed from the image.
+
+==============================================================================
+
+Image Symbol Table
+
+    Local Symbols
+
+    Symbol Name                              Value     Ov Type        Size  Object(Section)
+
+    ../clib/microlib/division.c              0x00000000   Number         0  uldiv.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry2.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry5.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9b.o ABSOLUTE
+    ../clib/microlib/longlong.c              0x00000000   Number         0  llsshr.o ABSOLUTE
+    ../clib/microlib/longlong.c              0x00000000   Number         0  llushr.o ABSOLUTE
+    ../clib/microlib/longlong.c              0x00000000   Number         0  llshl.o ABSOLUTE
+    ../clib/microlib/string/memcpy.c         0x00000000   Number         0  memcpya.o ABSOLUTE
+    ../clib/microlib/string/memcpy.c         0x00000000   Number         0  memcpyb.o ABSOLUTE
+    ../clib/microlib/string/strlen.c         0x00000000   Number         0  strlen.o ABSOLUTE
+    ../clib/microlib/stubs.s                 0x00000000   Number         0  iusefp.o ABSOLUTE
+    ../fplib/microlib/f2d.c                  0x00000000   Number         0  f2d.o ABSOLUTE
+    ../fplib/microlib/fpadd.c                0x00000000   Number         0  dadd.o ABSOLUTE
+    ../fplib/microlib/fpdiv.c                0x00000000   Number         0  ddiv.o ABSOLUTE
+    ../fplib/microlib/fpepilogue.c           0x00000000   Number         0  depilogue.o ABSOLUTE
+    ../fplib/microlib/fpfix.c                0x00000000   Number         0  dfixui.o ABSOLUTE
+    ../fplib/microlib/fpflt.c                0x00000000   Number         0  dfltui.o ABSOLUTE
+    ../fplib/microlib/fpmul.c                0x00000000   Number         0  dmul.o ABSOLUTE
+    ..\Core\bootloader.c                     0x00000000   Number         0  bootloader.o ABSOLUTE
+    ..\Core\swd.c                            0x00000000   Number         0  swd.o ABSOLUTE
+    ..\\falcon_details.c                     0x00000000   Number         0  falcon_details.o ABSOLUTE
+    ..\amic.c                                0x00000000   Number         0  amic.o ABSOLUTE
+    ..\atmel.c                               0x00000000   Number         0  atmel.o ABSOLUTE
+    ..\chi.c                                 0x00000000   Number         0  chi.o ABSOLUTE
+    ..\eon.c                                 0x00000000   Number         0  eon.o ABSOLUTE
+    ..\esmt.c                                0x00000000   Number         0  esmt.o ABSOLUTE
+    ..\falcon_details.c                      0x00000000   Number         0  falcon_details.o ABSOLUTE
+    ..\giga.c                                0x00000000   Number         0  giga.o ABSOLUTE
+    ..\macronix.c                            0x00000000   Number         0  macronix.o ABSOLUTE
+    ..\numonyx.c                             0x00000000   Number         0  numonyx.o ABSOLUTE
+    ..\spansion.c                            0x00000000   Number         0  spansion.o ABSOLUTE
+    ..\spifi_rom_api.c                       0x00000000   Number         0  spifi_rom_api.o ABSOLUTE
+    ..\sst.c                                 0x00000000   Number         0  sst.o ABSOLUTE
+    ..\winbond.c                             0x00000000   Number         0  winbond.o ABSOLUTE
+    FlashPrg.c                               0x00000000   Number         0  flashprg.o ABSOLUTE
+    FlashPrg.c                               0x00000000   Number         0  flashprg.o ABSOLUTE
+    cdcmple.s                                0x00000000   Number         0  cdcmple.o ABSOLUTE
+    cdrcmple.s                               0x00000000   Number         0  cdrcmple.o ABSOLUTE
+    dc.s                                     0x00000000   Number         0  dc.o ABSOLUTE
+    handlers.s                               0x00000000   Number         0  handlers.o ABSOLUTE
+    init.s                                   0x00000000   Number         0  init.o ABSOLUTE
+    lib\\lpc18xx_cgu.c                       0x00000000   Number         0  lpc18xx_cgu.o ABSOLUTE
+    lib\\lpc18xx_scu.c                       0x00000000   Number         0  lpc18xx_scu.o ABSOLUTE
+    lib\\system_LPC18xx.c                    0x00000000   Number         0  system_lpc18xx.o ABSOLUTE
+    lib\lpc18xx_cgu.c                        0x00000000   Number         0  lpc18xx_cgu.o ABSOLUTE
+    lib\lpc18xx_scu.c                        0x00000000   Number         0  lpc18xx_scu.o ABSOLUTE
+    lib\startup_LPC18xx.s                    0x00000000   Number         0  startup_lpc18xx.o ABSOLUTE
+    lib\system_LPC18xx.c                     0x00000000   Number         0  system_lpc18xx.o ABSOLUTE
+    main.c                                   0x00000000   Number         0  main.o ABSOLUTE
+    main.c                                   0x00000000   Number         0  main.o ABSOLUTE
+    RESET                                    0x10000500   Section      188  startup_lpc18xx.o(RESET)
+    .ARM.Collect$$$$00000000                 0x100005bc   Section        0  entry.o(.ARM.Collect$$$$00000000)
+    .ARM.Collect$$$$00000001                 0x100005bc   Section        4  entry2.o(.ARM.Collect$$$$00000001)
+    .ARM.Collect$$$$00000004                 0x100005c0   Section        4  entry5.o(.ARM.Collect$$$$00000004)
+    .ARM.Collect$$$$00000008                 0x100005c4   Section        0  entry7b.o(.ARM.Collect$$$$00000008)
+    .ARM.Collect$$$$0000000A                 0x100005c4   Section        0  entry8b.o(.ARM.Collect$$$$0000000A)
+    .ARM.Collect$$$$0000000B                 0x100005c4   Section        8  entry9a.o(.ARM.Collect$$$$0000000B)
+    .ARM.Collect$$$$0000000D                 0x100005cc   Section        0  entry10a.o(.ARM.Collect$$$$0000000D)
+    .ARM.Collect$$$$0000000F                 0x100005cc   Section        0  entry11a.o(.ARM.Collect$$$$0000000F)
+    .ARM.Collect$$$$00002712                 0x100005cc   Section        4  entry2.o(.ARM.Collect$$$$00002712)
+    __lit__00000000                          0x100005cc   Data           4  entry2.o(.ARM.Collect$$$$00002712)
+    .text                                    0x100005d0   Section       40  startup_lpc18xx.o(.text)
+    RESERVED0                                0x100005eb   Thumb Code     0  startup_lpc18xx.o(.text)
+    RESERVED1                                0x100005eb   Thumb Code     0  startup_lpc18xx.o(.text)
+    RESERVED2                                0x100005eb   Thumb Code     0  startup_lpc18xx.o(.text)
+    .text                                    0x100005f8   Section        0  system_lpc18xx.o(.text)
+    WaitUs                                   0x10000771   Thumb Code    72  system_lpc18xx.o(.text)
+    .text                                    0x10000f0c   Section        0  lpc18xx_scu.o(.text)
+    .text                                    0x10000f30   Section        0  lpc18xx_cgu.o(.text)
+    .text                                    0x10001eb0   Section        0  swd.o(.text)
+    .text                                    0x1000208c   Section        0  main.o(.text)
+    .text                                    0x10002110   Section        0  bootloader.o(.text)
+    IsTimeExpired                            0x1000214b   Thumb Code    42  bootloader.o(.text)
+    VerifyChecksum                           0x10002175   Thumb Code    46  bootloader.o(.text)
+    GetTime                                  0x100021a3   Thumb Code     6  bootloader.o(.text)
+    .text                                    0x10002498   Section        0  flashprg.o(.text)
+    .text                                    0x10002588   Section        0  spifi_rom_api.o(.text)
+    .text                                    0x1000386c   Section        0  amic.o(.text)
+    .text                                    0x1000390c   Section        0  atmel.o(.text)
+    .text                                    0x10003a20   Section        0  chi.o(.text)
+    .text                                    0x10003afc   Section        0  eon.o(.text)
+    .text                                    0x10003bb8   Section        0  esmt.o(.text)
+    .text                                    0x10003c74   Section        0  giga.o(.text)
+    .text                                    0x10003d24   Section        0  macronix.o(.text)
+    .text                                    0x10003eb8   Section        0  numonyx.o(.text)
+    .text                                    0x10004038   Section        0  spansion.o(.text)
+    .text                                    0x10004124   Section        0  sst.o(.text)
+    .text                                    0x100041dc   Section        0  winbond.o(.text)
+    .text                                    0x100042d8   Section        0  falcon_details.o(.text)
+    .text                                    0x10004450   Section        0  uldiv.o(.text)
+    .text                                    0x100044b2   Section        0  memcpya.o(.text)
+    .text                                    0x100044d6   Section        0  strlen.o(.text)
+    .text                                    0x100044e4   Section        0  dadd.o(.text)
+    .text                                    0x10004632   Section        0  dmul.o(.text)
+    .text                                    0x10004716   Section        0  ddiv.o(.text)
+    .text                                    0x100047f4   Section        0  dfltui.o(.text)
+    .text                                    0x1000480e   Section        0  dfixui.o(.text)
+    .text                                    0x10004840   Section        0  f2d.o(.text)
+    .text                                    0x10004868   Section       48  cdcmple.o(.text)
+    .text                                    0x10004898   Section       48  cdrcmple.o(.text)
+    .text                                    0x100048c8   Section        0  llshl.o(.text)
+    .text                                    0x100048e6   Section        0  llushr.o(.text)
+    .text                                    0x10004906   Section        0  llsshr.o(.text)
+    .text                                    0x1000492a   Section        0  iusefp.o(.text)
+    .text                                    0x1000492a   Section        0  depilogue.o(.text)
+    .text                                    0x100049e4   Section       36  init.o(.text)
+    i.GetPLL1Param                           0x10004a08   Section        0  system_lpc18xx.o(i.GetPLL1Param)
+    i.__scatterload_copy                     0x10004a50   Section       14  handlers.o(i.__scatterload_copy)
+    i.__scatterload_null                     0x10004a5e   Section        2  handlers.o(i.__scatterload_null)
+    i.__scatterload_zeroinit                 0x10004a60   Section       14  handlers.o(i.__scatterload_zeroinit)
+    .constdata                               0x10004a6e   Section       20  system_lpc18xx.o(.constdata)
+    .constdata                               0x10004a88   Section     1272  lpc18xx_cgu.o(.constdata)
+    .constdata                               0x10004f80   Section      584  flashprg.o(.constdata)
+    .constdata                               0x100051c8   Section       80  spifi_rom_api.o(.constdata)
+    .constdata                               0x10005218   Section       64  atmel.o(.constdata)
+    .constdata                               0x10005258   Section      130  macronix.o(.constdata)
+    .constdata                               0x100052dc   Section      120  sst.o(.constdata)
+    .data                                    0x10006500   Section        4  system_lpc18xx.o(.data)
+    .data                                    0x10006504   Section       76  lpc18xx_cgu.o(.data)
+    .data                                    0x10006550   Section       16  swd.o(.data)
+    CommandMailboxes                         0x10006550   Data           4  swd.o(.data)
+    ResponseMailboxes                        0x10006554   Data           4  swd.o(.data)
+    CommandMailboxIndex                      0x10006558   Data           4  swd.o(.data)
+    ResponseMailboxIndex                     0x1000655c   Data           4  swd.o(.data)
+    .data                                    0x10006560   Section       44  bootloader.o(.data)
+    state                                    0x10006564   Data           4  bootloader.o(.data)
+    headerbytes                              0x10006568   Data           4  bootloader.o(.data)
+    lastbytetimestamp                        0x1000656c   Data           2  bootloader.o(.data)
+    databytes                                0x10006570   Data           4  bootloader.o(.data)
+    chunkbytes                               0x10006574   Data           4  bootloader.o(.data)
+    chunkaddress                             0x10006578   Data           4  bootloader.o(.data)
+    localchecksum                            0x1000657c   Data           4  bootloader.o(.data)
+    programstartaddr                         0x10006580   Data           4  bootloader.o(.data)
+    datasize                                 0x10006584   Data           4  bootloader.o(.data)
+    remotechecksum                           0x10006588   Data           4  bootloader.o(.data)
+    .data                                    0x1000658c   Section        4  flashprg.o(.data)
+    pSpifi                                   0x1000658c   Data           4  flashprg.o(.data)
+    .bss                                     0x10006590   Section     1140  bootloader.o(.bss)
+    rxbuffer                                 0x10006590   Data         100  bootloader.o(.bss)
+    chunk                                    0x100065f4   Data        1024  bootloader.o(.bss)
+    header                                   0x100069f4   Data          16  bootloader.o(.bss)
+    .bss                                     0x10006a04   Section      148  flashprg.o(.bss)
+    obj                                      0x10006a04   Data         128  flashprg.o(.bss)
+    opers                                    0x10006a84   Data          20  flashprg.o(.bss)
+    STACK                                    0x10006a98   Section     2048  startup_lpc18xx.o(STACK)
+
+    Global Symbols
+
+    Symbol Name                              Value     Ov Type        Size  Object(Section)
+
+    BuildAttributes$$THM_ISAv4$P$D$K$B$S$PE$A:L22UL41UL21$X:L11$S22US41US21$IEEE1$IW$USESV6$~STKCKD$USESV7$~SHL$OSPACE$ROPI$EBA8$MICROLIB$REQ8$PRES8$EABIv2 0x00000000   Number         0  anon$$obj.o ABSOLUTE
+    __ARM_use_no_argv                        0x00000000   Number         0  main.o ABSOLUTE
+    __cpp_initialize__aeabi_                  - Undefined Weak Reference
+    __cxa_finalize                            - Undefined Weak Reference
+    __decompress                              - Undefined Weak Reference
+    _clock_init                               - Undefined Weak Reference
+    _microlib_exit                            - Undefined Weak Reference
+    __Vectors                                0x10000500   Data           4  startup_lpc18xx.o(RESET)
+    __main                                   0x100005bd   Thumb Code     0  entry.o(.ARM.Collect$$$$00000000)
+    _main_stk                                0x100005bd   Thumb Code     0  entry2.o(.ARM.Collect$$$$00000001)
+    _main_scatterload                        0x100005c1   Thumb Code     0  entry5.o(.ARM.Collect$$$$00000004)
+    __main_after_scatterload                 0x100005c5   Thumb Code     0  entry5.o(.ARM.Collect$$$$00000004)
+    _main_clock                              0x100005c5   Thumb Code     0  entry7b.o(.ARM.Collect$$$$00000008)
+    _main_cpp_init                           0x100005c5   Thumb Code     0  entry8b.o(.ARM.Collect$$$$0000000A)
+    _main_init                               0x100005c5   Thumb Code     0  entry9a.o(.ARM.Collect$$$$0000000B)
+    __rt_final_cpp                           0x100005cd   Thumb Code     0  entry10a.o(.ARM.Collect$$$$0000000D)
+    __rt_final_exit                          0x100005cd   Thumb Code     0  entry11a.o(.ARM.Collect$$$$0000000F)
+    Reset_Handler                            0x100005d1   Thumb Code     8  startup_lpc18xx.o(.text)
+    NMI_Handler                              0x100005d9   Thumb Code     2  startup_lpc18xx.o(.text)
+    HardFault_Handler                        0x100005db   Thumb Code     2  startup_lpc18xx.o(.text)
+    MemManage_Handler                        0x100005dd   Thumb Code     2  startup_lpc18xx.o(.text)
+    BusFault_Handler                         0x100005df   Thumb Code     2  startup_lpc18xx.o(.text)
+    UsageFault_Handler                       0x100005e1   Thumb Code     2  startup_lpc18xx.o(.text)
+    SVC_Handler                              0x100005e3   Thumb Code     2  startup_lpc18xx.o(.text)
+    DebugMon_Handler                         0x100005e5   Thumb Code     2  startup_lpc18xx.o(.text)
+    PendSV_Handler                           0x100005e7   Thumb Code     2  startup_lpc18xx.o(.text)
+    ADC0_IRQHandler                          0x100005eb   Thumb Code     0  startup_lpc18xx.o(.text)
+    ADC1_IRQHandler                          0x100005eb   Thumb Code     0  startup_lpc18xx.o(.text)
+    AES_IRQHandler                           0x100005eb   Thumb Code     0  startup_lpc18xx.o(.text)
+    DAC_IRQHandler                           0x100005eb   Thumb Code     0  startup_lpc18xx.o(.text)
+    DMA_IRQHandler                           0x100005eb   Thumb Code     0  startup_lpc18xx.o(.text)
+    ETH_IRQHandler                           0x100005eb   Thumb Code     0  startup_lpc18xx.o(.text)
+    EVRT_IRQHandler                          0x100005eb   Thumb Code     0  startup_lpc18xx.o(.text)
+    I2C0_IRQHandler                          0x100005eb   Thumb Code     0  startup_lpc18xx.o(.text)
+    I2C1_IRQHandler                          0x100005eb   Thumb Code     0  startup_lpc18xx.o(.text)
+    I2S_IRQHandler                           0x100005eb   Thumb Code     0  startup_lpc18xx.o(.text)
+    LCD_IRQHandler                           0x100005eb   Thumb Code     0  startup_lpc18xx.o(.text)
+    MCPWM_IRQHandler                         0x100005eb   Thumb Code     0  startup_lpc18xx.o(.text)
+    RIT_IRQHandler                           0x100005eb   Thumb Code     0  startup_lpc18xx.o(.text)
+    SCT_IRQHandler                           0x100005eb   Thumb Code     0  startup_lpc18xx.o(.text)
+    SDIO_IRQHandler                          0x100005eb   Thumb Code     0  startup_lpc18xx.o(.text)
+    SPIFI_IRQHandler                         0x100005eb   Thumb Code     0  startup_lpc18xx.o(.text)
+    SSP0_IRQHandler                          0x100005eb   Thumb Code     0  startup_lpc18xx.o(.text)
+    SSP1_IRQHandler                          0x100005eb   Thumb Code     0  startup_lpc18xx.o(.text)
+    TIMER0_IRQHandler                        0x100005eb   Thumb Code     0  startup_lpc18xx.o(.text)
+    TIMER1_IRQHandler                        0x100005eb   Thumb Code     0  startup_lpc18xx.o(.text)
+    TIMER2_IRQHandler                        0x100005eb   Thumb Code     0  startup_lpc18xx.o(.text)
+    TIMER3_IRQHandler                        0x100005eb   Thumb Code     0  startup_lpc18xx.o(.text)
+    UART0_IRQHandler                         0x100005eb   Thumb Code     0  startup_lpc18xx.o(.text)
+    UART1_IRQHandler                         0x100005eb   Thumb Code     0  startup_lpc18xx.o(.text)
+    UART2_IRQHandler                         0x100005eb   Thumb Code     0  startup_lpc18xx.o(.text)
+    UART3_IRQHandler                         0x100005eb   Thumb Code     0  startup_lpc18xx.o(.text)
+    USB0_IRQHandler                          0x100005eb   Thumb Code     0  startup_lpc18xx.o(.text)
+    USB1_IRQHandler                          0x100005eb   Thumb Code     0  startup_lpc18xx.o(.text)
+    getPC                                    0x100005f5   Thumb Code     4  startup_lpc18xx.o(.text)
+    SetClock                                 0x100005f9   Thumb Code   376  system_lpc18xx.o(.text)
+    SystemInit_ExtMemCtl                     0x100007b9   Thumb Code  1276  system_lpc18xx.o(.text)
+    MeasureFreq                              0x10000cb5   Thumb Code    94  system_lpc18xx.o(.text)
+    GetClkSel                                0x10000d13   Thumb Code   168  system_lpc18xx.o(.text)
+    GetClockFreq                             0x10000dbb   Thumb Code   238  system_lpc18xx.o(.text)
+    SystemCoreClockUpdate                    0x10000ea9   Thumb Code    22  system_lpc18xx.o(.text)
+    SystemInit                               0x10000ebf   Thumb Code    56  system_lpc18xx.o(.text)
+    scu_pinmux                               0x10000f0d   Thumb Code    30  lpc18xx_scu.o(.text)
+    pdec_new                                 0x10000f31   Thumb Code    62  lpc18xx_cgu.o(.text)
+    ndec_new                                 0x10000f6f   Thumb Code    76  lpc18xx_cgu.o(.text)
+    mdec_new                                 0x10000fbb   Thumb Code    66  lpc18xx_cgu.o(.text)
+    anadeci_new                              0x10000ffd   Thumb Code    70  lpc18xx_cgu.o(.text)
+    anadecp_new                              0x10001043   Thumb Code    16  lpc18xx_cgu.o(.text)
+    compute_pll_regs                         0x10001053   Thumb Code  1136  lpc18xx_cgu.o(.text)
+    CGU_EnableEntity                         0x100014c3   Thumb Code   278  lpc18xx_cgu.o(.text)
+    CGU_SetXTALOSC                           0x100015d9   Thumb Code    54  lpc18xx_cgu.o(.text)
+    CGU_Init                                 0x1000160f   Thumb Code    20  lpc18xx_cgu.o(.text)
+    CGU_GetBaseStatus                        0x10001623   Thumb Code   174  lpc18xx_cgu.o(.text)
+    CGU_ConfigPWR                            0x100016d1   Thumb Code   734  lpc18xx_cgu.o(.text)
+    CGU_GetPCLKFrequency                     0x100019af   Thumb Code   230  lpc18xx_cgu.o(.text)
+    CGU_UpdateClock                          0x10001a95   Thumb Code   260  lpc18xx_cgu.o(.text)
+    CGU_SetDIV                               0x10001b99   Thumb Code    56  lpc18xx_cgu.o(.text)
+    CGU_EntityConnect                        0x10001bd1   Thumb Code   116  lpc18xx_cgu.o(.text)
+    CGU_SetPLL0                              0x10001c45   Thumb Code   116  lpc18xx_cgu.o(.text)
+    CGU_SetPLL0_Audio                        0x10001cb9   Thumb Code    86  lpc18xx_cgu.o(.text)
+    CGU_SetPLL1                              0x10001d0f   Thumb Code   160  lpc18xx_cgu.o(.text)
+    CGU_FrequencyMonitor                     0x10001daf   Thumb Code   170  lpc18xx_cgu.o(.text)
+    CGU_RealFrequencyCompare                 0x10001e59   Thumb Code    64  lpc18xx_cgu.o(.text)
+    Host_Initialize                          0x10001eb1   Thumb Code    56  swd.o(.text)
+    Host_SendData                            0x10001ee9   Thumb Code   120  swd.o(.text)
+    Host_Debug                               0x10001f61   Thumb Code   158  swd.o(.text)
+    Host_ReceiveData                         0x10001fff   Thumb Code   120  swd.o(.text)
+    SysTick_Handler                          0x1000208d   Thumb Code    12  main.o(.text)
+    c_entry                                  0x10002099   Thumb Code    98  main.o(.text)
+    main                                     0x100020fb   Thumb Code     4  main.o(.text)
+    Bootloader_Init                          0x10002111   Thumb Code    58  bootloader.o(.text)
+    Bootloader_Process                       0x100021a9   Thumb Code   598  bootloader.o(.text)
+    Memory_Init                              0x10002499   Thumb Code    72  flashprg.o(.text)
+    Memory_EraseChip                         0x100024e1   Thumb Code    36  flashprg.o(.text)
+    Memory_EraseSector                       0x10002505   Thumb Code    58  flashprg.o(.text)
+    Memory_ProgramPage                       0x1000253f   Thumb Code    42  flashprg.o(.text)
+    Memory_ReadByte                          0x10002569   Thumb Code     6  flashprg.o(.text)
+    memcpy_spifi_lib                         0x10002589   Thumb Code    42  spifi_rom_api.o(.text)
+    memset_spifi_lib                         0x100025b3   Thumb Code    18  spifi_rom_api.o(.text)
+    read_flash                               0x100025c5   Thumb Code    50  spifi_rom_api.o(.text)
+    cmd                                      0x100025f7   Thumb Code    22  spifi_rom_api.o(.text)
+    all_quad                                 0x1000260d   Thumb Code    16  spifi_rom_api.o(.text)
+    read04                                   0x1000261d   Thumb Code    32  spifi_rom_api.o(.text)
+    readAd                                   0x1000263d   Thumb Code    18  spifi_rom_api.o(.text)
+    send04                                   0x1000264f   Thumb Code    40  spifi_rom_api.o(.text)
+    wren                                     0x10002677   Thumb Code     6  spifi_rom_api.o(.text)
+    wren_send04                              0x1000267d   Thumb Code    28  spifi_rom_api.o(.text)
+    wren_sendAd                              0x10002699   Thumb Code    74  spifi_rom_api.o(.text)
+    cancel_mem_mode                          0x100026e3   Thumb Code    64  spifi_rom_api.o(.text)
+    wait_busy                                0x10002723   Thumb Code   218  spifi_rom_api.o(.text)
+    write_stat                               0x100027fd   Thumb Code    50  spifi_rom_api.o(.text)
+    set_mem_mode                             0x1000282f   Thumb Code   142  spifi_rom_api.o(.text)
+    setWPSEL                                 0x100028bd   Thumb Code    48  spifi_rom_api.o(.text)
+    setProtEnts                              0x100028ed   Thumb Code    60  spifi_rom_api.o(.text)
+    getProtBytes                             0x10002929   Thumb Code    28  spifi_rom_api.o(.text)
+    readProt                                 0x10002945   Thumb Code    84  spifi_rom_api.o(.text)
+    setSize                                  0x10002999   Thumb Code    52  spifi_rom_api.o(.text)
+    setDev                                   0x100029cd   Thumb Code   418  spifi_rom_api.o(.text)
+    spifi_init                               0x10002b6f   Thumb Code   466  spifi_rom_api.o(.text)
+    setProt                                  0x10002d41   Thumb Code  1066  spifi_rom_api.o(.text)
+    checkAd                                  0x1000316b   Thumb Code    72  spifi_rom_api.o(.text)
+    send_erase_cmd                           0x100031b3   Thumb Code    66  spifi_rom_api.o(.text)
+    send_prog_cmd                            0x100031f5   Thumb Code    24  spifi_rom_api.o(.text)
+    prog_block                               0x1000320d   Thumb Code   248  spifi_rom_api.o(.text)
+    ck_erase                                 0x10003305   Thumb Code    24  spifi_rom_api.o(.text)
+    ck_setup                                 0x1000331d   Thumb Code    22  spifi_rom_api.o(.text)
+    ck_prog                                  0x10003333   Thumb Code    98  spifi_rom_api.o(.text)
+    check_block                              0x10003395   Thumb Code   128  spifi_rom_api.o(.text)
+    spifi_program                            0x10003415   Thumb Code   594  spifi_rom_api.o(.text)
+    spifi_erase                              0x10003667   Thumb Code   514  spifi_rom_api.o(.text)
+    amic                                     0x1000386d   Thumb Code   134  amic.o(.text)
+    atm                                      0x1000390d   Thumb Code   252  atmel.o(.text)
+    chi                                      0x10003a21   Thumb Code   194  chi.o(.text)
+    eon                                      0x10003afd   Thumb Code   176  eon.o(.text)
+    esmt                                     0x10003bb9   Thumb Code   164  esmt.o(.text)
+    giga                                     0x10003c75   Thumb Code   156  giga.o(.text)
+    mxic                                     0x10003d25   Thumb Code   382  macronix.o(.text)
+    numo_dummies                             0x10003eb9   Thumb Code    50  numonyx.o(.text)
+    numo                                     0x10003eeb   Thumb Code   292  numonyx.o(.text)
+    moreId                                   0x10004039   Thumb Code    66  spansion.o(.text)
+    span                                     0x1000407b   Thumb Code   146  spansion.o(.text)
+    sst                                      0x10004125   Thumb Code   158  sst.o(.text)
+    wbd_dummies                              0x100041dd   Thumb Code    30  winbond.o(.text)
+    wbd                                      0x100041fb   Thumb Code   202  winbond.o(.text)
+    set_uart                                 0x100042d9   Thumb Code    70  falcon_details.o(.text)
+    pullMISO                                 0x1000431f   Thumb Code    22  falcon_details.o(.text)
+    set_spifi_io                             0x10004335   Thumb Code    26  falcon_details.o(.text)
+    set_spifi_clk                            0x1000434f   Thumb Code   208  falcon_details.o(.text)
+    __aeabi_uldivmod                         0x10004451   Thumb Code    98  uldiv.o(.text)
+    __aeabi_memcpy                           0x100044b3   Thumb Code    36  memcpya.o(.text)
+    __aeabi_memcpy4                          0x100044b3   Thumb Code     0  memcpya.o(.text)
+    __aeabi_memcpy8                          0x100044b3   Thumb Code     0  memcpya.o(.text)
+    strlen                                   0x100044d7   Thumb Code    14  strlen.o(.text)
+    __aeabi_dadd                             0x100044e5   Thumb Code   322  dadd.o(.text)
+    __aeabi_dsub                             0x10004627   Thumb Code     6  dadd.o(.text)
+    __aeabi_drsub                            0x1000462d   Thumb Code     6  dadd.o(.text)
+    __aeabi_dmul                             0x10004633   Thumb Code   228  dmul.o(.text)
+    __aeabi_ddiv                             0x10004717   Thumb Code   222  ddiv.o(.text)
+    __aeabi_ui2d                             0x100047f5   Thumb Code    26  dfltui.o(.text)
+    __aeabi_d2uiz                            0x1000480f   Thumb Code    50  dfixui.o(.text)
+    __aeabi_f2d                              0x10004841   Thumb Code    38  f2d.o(.text)
+    __aeabi_cdcmpeq                          0x10004869   Thumb Code     0  cdcmple.o(.text)
+    __aeabi_cdcmple                          0x10004869   Thumb Code    48  cdcmple.o(.text)
+    __aeabi_cdrcmple                         0x10004899   Thumb Code    48  cdrcmple.o(.text)
+    __aeabi_llsl                             0x100048c9   Thumb Code    30  llshl.o(.text)
+    _ll_shift_l                              0x100048c9   Thumb Code     0  llshl.o(.text)
+    __aeabi_llsr                             0x100048e7   Thumb Code    32  llushr.o(.text)
+    _ll_ushift_r                             0x100048e7   Thumb Code     0  llushr.o(.text)
+    __aeabi_lasr                             0x10004907   Thumb Code    36  llsshr.o(.text)
+    _ll_sshift_r                             0x10004907   Thumb Code     0  llsshr.o(.text)
+    __I$use$fp                               0x1000492b   Thumb Code     0  iusefp.o(.text)
+    _double_round                            0x1000492b   Thumb Code    30  depilogue.o(.text)
+    _double_epilogue                         0x10004949   Thumb Code   156  depilogue.o(.text)
+    __scatterload                            0x100049e5   Thumb Code    28  init.o(.text)
+    __scatterload_rt2                        0x100049e5   Thumb Code     0  init.o(.text)
+    GetPLL1Param                             0x10004a09   Thumb Code    68  system_lpc18xx.o(i.GetPLL1Param)
+    __scatterload_copy                       0x10004a51   Thumb Code    14  handlers.o(i.__scatterload_copy)
+    __scatterload_null                       0x10004a5f   Thumb Code     2  handlers.o(i.__scatterload_null)
+    __scatterload_zeroinit                   0x10004a61   Thumb Code    14  handlers.o(i.__scatterload_zeroinit)
+    emcdivby2_opc                            0x10004a6e   Data          20  system_lpc18xx.o(.constdata)
+    CGU_Entity_ControlReg_Offset             0x10004a88   Data          90  lpc18xx_cgu.o(.constdata)
+    CGU_ConnectAlloc_Tbl                     0x10004ae2   Data         765  lpc18xx_cgu.o(.constdata)
+    CGU_PERIPHERAL_Info                      0x10004de0   Data         390  lpc18xx_cgu.o(.constdata)
+    pfdInMax                                 0x10004f68   Data           8  lpc18xx_cgu.o(.constdata)
+    fccoMax                                  0x10004f70   Data           8  lpc18xx_cgu.o(.constdata)
+    fccoMin                                  0x10004f78   Data           8  lpc18xx_cgu.o(.constdata)
+    Descriptor                               0x10004f80   Data         584  flashprg.o(.constdata)
+    spifi_table                              0x100051c8   Data          80  spifi_rom_api.o(.constdata)
+    AT25DF041E                               0x10005218   Data          32  atmel.o(.constdata)
+    AT2xDF081AE                              0x10005238   Data          32  atmel.o(.constdata)
+    MX25U80E                                 0x10005258   Data          16  macronix.o(.constdata)
+    MX25U16E                                 0x10005268   Data          16  macronix.o(.constdata)
+    MX25U32E                                 0x10005278   Data          16  macronix.o(.constdata)
+    MX25L64E                                 0x10005288   Data          24  macronix.o(.constdata)
+    MX25L128E                                0x100052a0   Data          24  macronix.o(.constdata)
+    MX25L256E                                0x100052b8   Data          24  macronix.o(.constdata)
+    mxMasks                                  0x100052d0   Data          10  macronix.o(.constdata)
+    SST16MbE                                 0x100052dc   Data          40  sst.o(.constdata)
+    SST32MbE                                 0x10005304   Data          40  sst.o(.constdata)
+    SST64MbE                                 0x1000532c   Data          40  sst.o(.constdata)
+    Region$$Table$$Base                      0x10005354   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x10005374   Number         0  anon$$obj.o(Region$$Table)
+    SystemCoreClock                          0x10006500   Data           4  system_lpc18xx.o(.data)
+    CGU_ClockSourceFrequency                 0x10006504   Data          68  lpc18xx_cgu.o(.data)
+    expectedPLL0Freq                         0x10006548   Data           4  lpc18xx_cgu.o(.data)
+    expectedPLL0AudioFreq                    0x1000654c   Data           4  lpc18xx_cgu.o(.data)
+    gBootloaderTick                          0x10006560   Data           2  bootloader.o(.data)
+    __initial_sp                             0x10007298   Data           0  startup_lpc18xx.o(STACK)
+
+
+
+==============================================================================
+
+Memory Map of the image
+
+  Image Entry point : 0x100005bd
+
+  Load Region LR_IROM1 (Base: 0x10000500, Size: 0x00004f04, Max: 0x00006000, ABSOLUTE)
+
+    Execution Region ER_IROM1 (Base: 0x10000500, Size: 0x00004e74, Max: 0x00006000, ABSOLUTE)
+
+    Base Addr    Size         Type   Attr      Idx    E Section Name        Object
+
+    0x10000500   0x000000bc   Data   RO            3    RESET               startup_lpc18xx.o
+    0x100005bc   0x00000000   Code   RO          283  * .ARM.Collect$$$$00000000  mc_w.l(entry.o)
+    0x100005bc   0x00000004   Code   RO          310    .ARM.Collect$$$$00000001  mc_w.l(entry2.o)
+    0x100005c0   0x00000004   Code   RO          313    .ARM.Collect$$$$00000004  mc_w.l(entry5.o)
+    0x100005c4   0x00000000   Code   RO          315    .ARM.Collect$$$$00000008  mc_w.l(entry7b.o)
+    0x100005c4   0x00000000   Code   RO          317    .ARM.Collect$$$$0000000A  mc_w.l(entry8b.o)
+    0x100005c4   0x00000008   Code   RO          318    .ARM.Collect$$$$0000000B  mc_w.l(entry9a.o)
+    0x100005cc   0x00000000   Code   RO          320    .ARM.Collect$$$$0000000D  mc_w.l(entry10a.o)
+    0x100005cc   0x00000000   Code   RO          322    .ARM.Collect$$$$0000000F  mc_w.l(entry11a.o)
+    0x100005cc   0x00000004   Code   RO          311    .ARM.Collect$$$$00002712  mc_w.l(entry2.o)
+    0x100005d0   0x00000028   Code   RO            4    .text               startup_lpc18xx.o
+    0x100005f8   0x00000914   Code   RO           12    .text               system_lpc18xx.o
+    0x10000f0c   0x00000024   Code   RO           64    .text               lpc18xx_scu.o
+    0x10000f30   0x00000f80   Code   RO           94    .text               lpc18xx_cgu.o
+    0x10001eb0   0x000001dc   Code   RO          126    .text               swd.o
+    0x1000208c   0x00000084   Code   RO          152    .text               main.o
+    0x10002110   0x00000388   Code   RO          191    .text               bootloader.o
+    0x10002498   0x000000f0   Code   RO          212    .text               flashprg.o
+    0x10002588   0x000012e4   Code   RO          249    .text               spifi_drv_M3.lib(spifi_rom_api.o)
+    0x1000386c   0x000000a0   Code   RO          252    .text               spifi_drv_M3.lib(amic.o)
+    0x1000390c   0x00000114   Code   RO          254    .text               spifi_drv_M3.lib(atmel.o)
+    0x10003a20   0x000000dc   Code   RO          257    .text               spifi_drv_M3.lib(chi.o)
+    0x10003afc   0x000000bc   Code   RO          259    .text               spifi_drv_M3.lib(eon.o)
+    0x10003bb8   0x000000bc   Code   RO          261    .text               spifi_drv_M3.lib(esmt.o)
+    0x10003c74   0x000000b0   Code   RO          263    .text               spifi_drv_M3.lib(giga.o)
+    0x10003d24   0x00000194   Code   RO          265    .text               spifi_drv_M3.lib(macronix.o)
+    0x10003eb8   0x00000180   Code   RO          268    .text               spifi_drv_M3.lib(numonyx.o)
+    0x10004038   0x000000ec   Code   RO          270    .text               spifi_drv_M3.lib(spansion.o)
+    0x10004124   0x000000b8   Code   RO          272    .text               spifi_drv_M3.lib(sst.o)
+    0x100041dc   0x000000fc   Code   RO          275    .text               spifi_drv_M3.lib(winbond.o)
+    0x100042d8   0x00000178   Code   RO          279    .text               spifi_drv_M3.lib(falcon_details.o)
+    0x10004450   0x00000062   Code   RO          286    .text               mc_w.l(uldiv.o)
+    0x100044b2   0x00000024   Code   RO          288    .text               mc_w.l(memcpya.o)
+    0x100044d6   0x0000000e   Code   RO          290    .text               mc_w.l(strlen.o)
+    0x100044e4   0x0000014e   Code   RO          294    .text               mf_w.l(dadd.o)
+    0x10004632   0x000000e4   Code   RO          296    .text               mf_w.l(dmul.o)
+    0x10004716   0x000000de   Code   RO          298    .text               mf_w.l(ddiv.o)
+    0x100047f4   0x0000001a   Code   RO          300    .text               mf_w.l(dfltui.o)
+    0x1000480e   0x00000032   Code   RO          302    .text               mf_w.l(dfixui.o)
+    0x10004840   0x00000026   Code   RO          304    .text               mf_w.l(f2d.o)
+    0x10004866   0x00000002   PAD
+    0x10004868   0x00000030   Code   RO          306    .text               mf_w.l(cdcmple.o)
+    0x10004898   0x00000030   Code   RO          308    .text               mf_w.l(cdrcmple.o)
+    0x100048c8   0x0000001e   Code   RO          324    .text               mc_w.l(llshl.o)
+    0x100048e6   0x00000020   Code   RO          326    .text               mc_w.l(llushr.o)
+    0x10004906   0x00000024   Code   RO          328    .text               mc_w.l(llsshr.o)
+    0x1000492a   0x00000000   Code   RO          330    .text               mc_w.l(iusefp.o)
+    0x1000492a   0x000000ba   Code   RO          331    .text               mf_w.l(depilogue.o)
+    0x100049e4   0x00000024   Code   RO          333    .text               mc_w.l(init.o)
+    0x10004a08   0x00000048   Code   RO           31    i.GetPLL1Param      system_lpc18xx.o
+    0x10004a50   0x0000000e   Code   RO          337    i.__scatterload_copy  mc_w.l(handlers.o)
+    0x10004a5e   0x00000002   Code   RO          338    i.__scatterload_null  mc_w.l(handlers.o)
+    0x10004a60   0x0000000e   Code   RO          339    i.__scatterload_zeroinit  mc_w.l(handlers.o)
+    0x10004a6e   0x00000014   Data   RO           13    .constdata          system_lpc18xx.o
+    0x10004a82   0x00000006   PAD
+    0x10004a88   0x000004f8   Data   RO           95    .constdata          lpc18xx_cgu.o
+    0x10004f80   0x00000248   Data   RO          214    .constdata          flashprg.o
+    0x100051c8   0x00000050   Data   RO          250    .constdata          spifi_drv_M3.lib(spifi_rom_api.o)
+    0x10005218   0x00000040   Data   RO          255    .constdata          spifi_drv_M3.lib(atmel.o)
+    0x10005258   0x00000082   Data   RO          266    .constdata          spifi_drv_M3.lib(macronix.o)
+    0x100052da   0x00000002   PAD
+    0x100052dc   0x00000078   Data   RO          273    .constdata          spifi_drv_M3.lib(sst.o)
+    0x10005354   0x00000020   Data   RO          335    Region$$Table       anon$$obj.o
+
+
+    Execution Region RW_IRAM1 (Base: 0x10006500, Size: 0x00000d98, Max: 0x00001000, ABSOLUTE)
+
+    Base Addr    Size         Type   Attr      Idx    E Section Name        Object
+
+    0x10006500   0x00000004   Data   RW           14    .data               system_lpc18xx.o
+    0x10006504   0x0000004c   Data   RW           96    .data               lpc18xx_cgu.o
+    0x10006550   0x00000010   Data   RW          127    .data               swd.o
+    0x10006560   0x0000002c   Data   RW          193    .data               bootloader.o
+    0x1000658c   0x00000004   Data   RW          215    .data               flashprg.o
+    0x10006590   0x00000474   Zero   RW          192    .bss                bootloader.o
+    0x10006a04   0x00000094   Zero   RW          213    .bss                flashprg.o
+    0x10006a98   0x00000800   Zero   RW            1    STACK               startup_lpc18xx.o
+
+
+==============================================================================
+
+Image component sizes
+
+
+      Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
+
+       904        154          0         44       1140       2951   bootloader.o
+       240         26        584          4        148       6732   flashprg.o
+      3968        182       1272         76          0      14734   lpc18xx_cgu.o
+        36          6          0          0          0       2209   lpc18xx_scu.o
+       132         18          0          0          0      53854   main.o
+        40          8        188          0       2048        864   startup_lpc18xx.o
+       476         22          0         16          0       2256   swd.o
+      2396        206         20          4          0      11311   system_lpc18xx.o
+
+    ----------------------------------------------------------------------
+      8192        622       2102        144       3336      94911   Object Totals
+         0          0         32          0          0          0   (incl. Generated)
+         0          0          6          0          0          0   (incl. Padding)
+
+    ----------------------------------------------------------------------
+
+      Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Library Member Name
+
+         0          0          0          0          0          0   entry.o
+         0          0          0          0          0          0   entry10a.o
+         0          0          0          0          0          0   entry11a.o
+         8          4          0          0          0          0   entry2.o
+         4          0          0          0          0          0   entry5.o
+         0          0          0          0          0          0   entry7b.o
+         0          0          0          0          0          0   entry8b.o
+         8          4          0          0          0          0   entry9a.o
+        30          0          0          0          0          0   handlers.o
+        36          8          0          0          0         68   init.o
+         0          0          0          0          0          0   iusefp.o
+        30          0          0          0          0         68   llshl.o
+        36          0          0          0          0         68   llsshr.o
+        32          0          0          0          0         68   llushr.o
+        36          0          0          0          0         68   memcpya.o
+        14          0          0          0          0         68   strlen.o
+        98          0          0          0          0         92   uldiv.o
+        48          0          0          0          0         68   cdcmple.o
+        48          0          0          0          0         68   cdrcmple.o
+       334          0          0          0          0        148   dadd.o
+       222          0          0          0          0        100   ddiv.o
+       186          0          0          0          0        176   depilogue.o
+        50          0          0          0          0         76   dfixui.o
+        26          0          0          0          0         76   dfltui.o
+       228          0          0          0          0         96   dmul.o
+        38          0          0          0          0         68   f2d.o
+       160         26          0          0          0         92   amic.o
+       276         24         64          0          0         96   atmel.o
+       220         26          0          0          0         88   chi.o
+       188         12          0          0          0         96   eon.o
+       188         24          0          0          0         96   esmt.o
+       376         50          0          0          0        232   falcon_details.o
+       176         20          0          0          0         96   giga.o
+       404         28        130          0          0         92   macronix.o
+       384         42          0          0          0        184   numonyx.o
+       236         24          0          0          0        112   spansion.o
+      4836        118         80          0          0       1128   spifi_rom_api.o
+       184         26        120          0          0         88   sst.o
+       252         20          0          0          0        172   winbond.o
+
+    ----------------------------------------------------------------------
+      9394        456        396          0          0       3948   Library Totals
+         2          0          2          0          0          0   (incl. Padding)
+
+    ----------------------------------------------------------------------
+
+      Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Library Name
+
+       332         16          0          0          0        500   mc_w.l
+      1180          0          0          0          0        876   mf_w.l
+      7880        440        394          0          0       2572   spifi_drv_M3.lib
+
+    ----------------------------------------------------------------------
+      9394        456        396          0          0       3948   Library Totals
+
+    ----------------------------------------------------------------------
+
+==============================================================================
+
+
+      Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
+
+     17586       1078       2498        144       3336      96879   Grand Totals
+     17586       1078       2498        144       3336      96879   ELF Image Totals
+     17586       1078       2498        144          0          0   ROM Totals
+
+==============================================================================
+
+    Total RO  Size (Code + RO Data)                20084 (  19.61kB)
+    Total RW  Size (RW Data + ZI Data)              3480 (   3.40kB)
+    Total ROM Size (Code + RO Data + RW Data)      20228 (  19.75kB)
+
+==============================================================================
+

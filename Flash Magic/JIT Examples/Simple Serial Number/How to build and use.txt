@@ -1,0 +1,26 @@
+HOW TO BUILD AND USE THIS JUST IN TIME EXAMPLE MODULE
+
+A. BUILDING
+
+1. Go to www.mingw.org and download the current version of the MinGw Compiler (it will have a name something like MinGW-3.1.0-1.exe).
+
+2. Install. Make sure that the path to the bin subfolder is added to the PATH environment variable.
+
+3. Run build.bat from the command prompt/DOS prompt. serialnumber.exe will be created.
+
+
+B. USING
+
+1. Start Flash Magic
+
+2. Choose Options -> Advanced Options
+
+3. Click on the Just In Time Code tab
+
+4. Click on Browse... and select serialnumber.exe
+
+5. Enter a timeout, for example 60 seconds.
+
+6. Click on OK.
+
+Now, every time you click on Start, the JIT module will be called.

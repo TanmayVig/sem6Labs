@@ -1,0 +1,29 @@
+#!/bin/bash
+cd "$(dirname "$0")/../"
+CONTENTSFOLD="$PWD"
+####################################################
+# this script will run when Wineskin is starting up
+# before the X server or Wine starts
+# $CONTENTSFOLD is the full path to the current
+#       contents folder in the wrapper.
+####################################################
+
+# ENTER COMMANDS HERE
+
+rm -rf $CONTENTSFOLD/Resources/dosdevices/COM*
+
+portnum=4
+
+for f in /dev/cu.*
+do
+  #echo "$f - COM$portnum"
+  ln -s "$f" "$CONTENTSFOLD/Resources/dosdevices/COM$portnum"
+  (( portnum += 1 ))
+done
+
+for f in /dev/tty.*
+do
+  #echo "$f - COM$portnum"
+  ln -s "$f" "$CONTENTSFOLD/Resources/dosdevices/COM$portnum"
+  (( portnum += 1 ))
+done

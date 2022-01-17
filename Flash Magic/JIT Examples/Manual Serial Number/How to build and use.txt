@@ -1,0 +1,22 @@
+HOW TO BUILD AND USE THIS JUST IN TIME EXAMPLE MODULE
+
+A. BUILDING
+
+1. Open the ManualSerialNumber.bpr project in Borland C++ Builder and build. This project was created and tested with Borland C++ Builder 5 Professional.
+
+
+B. USING
+
+1. Start Flash Magic
+
+2. Choose Options -> Advanced Options
+
+3. Click on the Just In Time Code tab
+
+4. Click on Browse... and select ManualSerialNumber.exe
+
+5. Enter a timeout, for example 60 seconds.
+
+6. Click on OK.
+
+Now, every time you click on Start, the JIT module will be called.

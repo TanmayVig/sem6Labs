@@ -1,0 +1,83 @@
+; MCU-Link - VCOM driver installation file
+; Copyright 2020 NXP
+; Supports Windows 8, Windows 10 (32-bit and 64-bit)
+; Based on https://docs.microsoft.com/en-us/windows-hardware/drivers/usbcon/usb-driver-installation-based-on-compatible-ids
+
+[Version]
+Signature      = "$Windows NT$"
+Class          = Ports
+ClassGuid      = {4D36E978-E325-11CE-BFC1-08002BE10318}
+Provider       = %NXP%
+DriverVer      = 09/09/2020,1.0.0.0
+CatalogFile    = mcu-link-vcom.cat
+
+[Manufacturer]
+%NXP%          = DeviceList,NTx86,NTAMD64,NTIA64,NTARM,NTARM64
+
+[DeviceList.NTx86]
+; Rev 2.x: x = 3'b PWR|VCOM|SWD - use MI according to VCOM availability
+%VCOM%         = VCOM_Install, USB\VID_1FC9&PID_0143&REV_0202&MI_00,USB\COMPOSITE
+%VCOM%         = VCOM_Install, USB\VID_1FC9&PID_0143&REV_0203&MI_02,USB\COMPOSITE
+%VCOM%         = VCOM_Install, USB\VID_1FC9&PID_0143&REV_0206&MI_01,USB\COMPOSITE
+%VCOM%         = VCOM_Install, USB\VID_1FC9&PID_0143&REV_0207&MI_02,USB\COMPOSITE
+; Rev 1.1 - best effort, assume MI = 2 for VCOM
+%VCOM%         = VCOM_Install, USB\VID_1FC9&PID_0143&REV_0101&MI_02,USB\COMPOSITE
+
+[DeviceList.NTAMD64]
+; Rev 2.x: x = 3'b PWR|VCOM|SWD - use MI according to VCOM availability
+%VCOM%         = VCOM_Install, USB\VID_1FC9&PID_0143&REV_0202&MI_00,USB\COMPOSITE
+%VCOM%         = VCOM_Install, USB\VID_1FC9&PID_0143&REV_0203&MI_02,USB\COMPOSITE
+%VCOM%         = VCOM_Install, USB\VID_1FC9&PID_0143&REV_0206&MI_01,USB\COMPOSITE
+%VCOM%         = VCOM_Install, USB\VID_1FC9&PID_0143&REV_0207&MI_02,USB\COMPOSITE
+; Rev 1.1 - best effort, assume MI = 2 for VCOM
+%VCOM%         = VCOM_Install, USB\VID_1FC9&PID_0143&REV_0101&MI_02,USB\COMPOSITE
+
+[DeviceList.NTIA64]
+; Rev 2.x: x = 3'b PWR|VCOM|SWD - use MI according to VCOM availability
+%VCOM%         = VCOM_Install, USB\VID_1FC9&PID_0143&REV_0202&MI_00,USB\COMPOSITE
+%VCOM%         = VCOM_Install, USB\VID_1FC9&PID_0143&REV_0203&MI_02,USB\COMPOSITE
+%VCOM%         = VCOM_Install, USB\VID_1FC9&PID_0143&REV_0206&MI_01,USB\COMPOSITE
+%VCOM%         = VCOM_Install, USB\VID_1FC9&PID_0143&REV_0207&MI_02,USB\COMPOSITE
+; Rev 1.1 - best effort, assume MI = 2 for VCOM
+%VCOM%         = VCOM_Install, USB\VID_1FC9&PID_0143&REV_0101&MI_02,USB\COMPOSITE
+
+[DeviceList.NTARM]
+; Rev 2.x: x = 3'b PWR|VCOM|SWD - use MI according to VCOM availability
+%VCOM%         = VCOM_Install, USB\VID_1FC9&PID_0143&REV_0202&MI_00,USB\COMPOSITE
+%VCOM%         = VCOM_Install, USB\VID_1FC9&PID_0143&REV_0203&MI_02,USB\COMPOSITE
+%VCOM%         = VCOM_Install, USB\VID_1FC9&PID_0143&REV_0206&MI_01,USB\COMPOSITE
+%VCOM%         = VCOM_Install, USB\VID_1FC9&PID_0143&REV_0207&MI_02,USB\COMPOSITE
+; Rev 1.1 - best effort, assume MI = 2 for VCOM
+%VCOM%         = VCOM_Install, USB\VID_1FC9&PID_0143&REV_0101&MI_02,USB\COMPOSITE
+
+[DeviceList.NTARM64]
+; Rev 2.x: x = 3'b PWR|VCOM|SWD - use MI according to VCOM availability
+%VCOM%         = VCOM_Install, USB\VID_1FC9&PID_0143&REV_0202&MI_00,USB\COMPOSITE
+%VCOM%         = VCOM_Install, USB\VID_1FC9&PID_0143&REV_0203&MI_02,USB\COMPOSITE
+%VCOM%         = VCOM_Install, USB\VID_1FC9&PID_0143&REV_0206&MI_01,USB\COMPOSITE
+%VCOM%         = VCOM_Install, USB\VID_1FC9&PID_0143&REV_0207&MI_02,USB\COMPOSITE
+; Rev 1.1 - best effort, assume MI = 2 for VCOM
+%VCOM%         = VCOM_Install, USB\VID_1FC9&PID_0143&REV_0101&MI_02,USB\COMPOSITE
+
+[VCOM_Install.NT]
+; Delegate to the mdmcpq.inf driver installer (will handle usbser.sys)
+include        = mdmcpq.inf
+CopyFiles      = FakeModemCopyFileSection
+
+[VCOM_Install.NT.Services]
+include        = mdmcpq.inf
+AddService     = usbser, 0x00000002, DriverService.NT
+
+[DriverService.NT]
+; Similar to the LowerFilter_Service_Inst section of mdmcpq.inf
+DisplayName    = %SERVICENAME%
+ServiceType    = 1 ; SERVICE_KERNEL_DRIVER
+StartType      = 3 ; SERVICE_DEMAND_START
+ErrorControl   = 1 ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\usbser.sys
+LoadOrderGroup = Base
+
+[Strings]
+NXP            = "NXP"
+VCOM           = "MCU-Link VCom Port"
+SERVICENAME    = "MCU-Link USB Serial driver"

@@ -1,0 +1,11 @@
+<html>
+<body>
+<pre>
+<h1>µVision3 Build Log</h1>
+<h2>Project:</h2>
+D:\ESA Data\ESA\Utilities\FlashMagic\Ethernet Bootloader\LPC1700\User Code Sample Blinky\blinky.uv2
+Project File Date:  12/18/2009
+
+<h2>Output:</h2>
+Clean started: Project: 'blinky'
+   deleting intermediate output files for target 'Target 1'

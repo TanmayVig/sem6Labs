@@ -1,0 +1,23 @@
+--cpu Cortex-M3
+".\obj\sbl_main.o"
+".\obj\comms.o"
+".\obj\isp_iap.o"
+".\obj\timer.o"
+".\obj\enet_18xx_43xx.o"
+".\obj\clock_18xx_43xx.o"
+".\obj\rgu_18xx_43xx.o"
+".\obj\chip_18xx_43xx.o"
+".\obj\sysinit_18xx_43xx.o"
+".\obj\gpio_18xx_43xx.o"
+".\obj\emc_18xx_43xx.o"
+".\obj\timer_18xx_43xx.o"
+".\obj\stopwatch_18xx_43xx.o"
+".\obj\lpc_phy_dp83848.o"
+".\obj\board.o"
+".\obj\board_sysinit.o"
+".\obj\keil_startup_lpc18xx43xx.o"
+".\obj\sysinit.o"
+--strict --scatter ".\Obj\ethernet_bootloader.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list ".\Obj\ethernet_bootloader.map" -o .\Obj\ethernet_bootloader.axf

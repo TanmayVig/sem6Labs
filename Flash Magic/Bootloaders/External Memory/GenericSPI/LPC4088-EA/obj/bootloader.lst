@@ -1,0 +1,762 @@
+L 1 "..\..\Core\bootloader.c"
+N// bootloader functionality
+N// supported by Flash Magic and allows programming of external
+N// memory devices
+N// (C) Embedded Systems Academy, Inc. 2012 All Rights Reserved
+N// May be used "as-is" without warranty, express or implied
+N// Use at your own risk
+N// $Id: bootloader.c 3002 2013-01-24 02:00:07Z andy $
+N
+N#include "bootloader.h"
+L 1 "..\..\Core\bootloader.h" 1
+N// bootloader functionality
+N// supported by Flash Magic and allows programming of external
+N// memory devices
+N// (C) Embedded Systems Academy, Inc. 2012 All Rights Reserved
+N// May be used "as-is" without warranty, express or implied
+N// Use at your own risk
+N// $Id: bootloader.h 2660 2012-05-17 15:23:26Z andy $
+N
+N#ifndef _BOOTLOADERH_
+N#define _BOOTLOADERH_
+N
+N#include <stdint.h>
+L 1 "C:\Keil\ARM\ARMCC\Bin\..\include\stdint.h" 1
+N/* Copyright (C) ARM Ltd., 1999,2014 */
+N/* All rights reserved */
+N
+N/*
+N * RCS $Revision: 185525 $
+N * Checkin $Date: 2014-05-29 12:44:48 +0100 (Thu, 29 May 2014) $
+N * Revising $Author: agrant $
+N */
+N
+N#ifndef __stdint_h
+N#define __stdint_h
+N#define __ARMCLIB_VERSION 5050041
+N
+N  #ifdef __INT64_TYPE__
+S    /* armclang predefines '__INT64_TYPE__' and '__INT64_C_SUFFIX__' */
+S    #define __INT64 __INT64_TYPE__
+N  #else
+N    /* armcc has builtin '__int64' which can be used in --strict mode */
+N    #define __INT64 __int64
+N    #define __INT64_C_SUFFIX__ ll
+N  #endif
+N  #define __PASTE2(x, y) x ## y
+N  #define __PASTE(x, y) __PASTE2(x, y)
+N  #define __INT64_C(x)  __ESCAPE__(__PASTE(x, __INT64_C_SUFFIX__))
+N  #define __UINT64_C(x)  __ESCAPE__(__PASTE(x ## u, __INT64_C_SUFFIX__))
+N  #if defined(__clang__) || (defined(__ARMCC_VERSION) && !defined(__STRICT_ANSI__))
+X  #if 0L || (1L && !0L)
+N    /* armclang and non-strict armcc allow 'long long' in system headers */
+N    #define __LONGLONG long long
+N  #else
+S    /* strict armcc has '__int64' */
+S    #define __LONGLONG __int64
+N  #endif
+N
+N  #ifndef __STDINT_DECLS
+N  #define __STDINT_DECLS
+N
+N    #undef __CLIBNS
+N
+N    #ifdef __cplusplus
+S      namespace std {
+S          #define __CLIBNS std::
+S          extern "C" {
+N    #else
+N      #define __CLIBNS
+N    #endif  /* __cplusplus */
+N
+N
+N/*
+N * 'signed' is redundant below, except for 'signed char' and if
+N * the typedef is used to declare a bitfield.
+N */
+N
+N    /* 7.18.1.1 */
+N
+N    /* exact-width signed integer types */
+Ntypedef   signed          char int8_t;
+Ntypedef   signed short     int int16_t;
+Ntypedef   signed           int int32_t;
+Ntypedef   signed       __INT64 int64_t;
+Xtypedef   signed       __int64 int64_t;
+N
+N    /* exact-width unsigned integer types */
+Ntypedef unsigned          char uint8_t;
+Ntypedef unsigned short     int uint16_t;
+Ntypedef unsigned           int uint32_t;
+Ntypedef unsigned       __INT64 uint64_t;
+Xtypedef unsigned       __int64 uint64_t;
+N
+N    /* 7.18.1.2 */
+N
+N    /* smallest type of at least n bits */
+N    /* minimum-width signed integer types */
+Ntypedef   signed          char int_least8_t;
+Ntypedef   signed short     int int_least16_t;
+Ntypedef   signed           int int_least32_t;
+Ntypedef   signed       __INT64 int_least64_t;
+Xtypedef   signed       __int64 int_least64_t;
+N
+N    /* minimum-width unsigned integer types */
+Ntypedef unsigned          char uint_least8_t;
+Ntypedef unsigned short     int uint_least16_t;
+Ntypedef unsigned           int uint_least32_t;
+Ntypedef unsigned       __INT64 uint_least64_t;
+Xtypedef unsigned       __int64 uint_least64_t;
+N
+N    /* 7.18.1.3 */
+N
+N    /* fastest minimum-width signed integer types */
+Ntypedef   signed           int int_fast8_t;
+Ntypedef   signed           int int_fast16_t;
+Ntypedef   signed           int int_fast32_t;
+Ntypedef   signed       __INT64 int_fast64_t;
+Xtypedef   signed       __int64 int_fast64_t;
+N
+N    /* fastest minimum-width unsigned integer types */
+Ntypedef unsigned           int uint_fast8_t;
+Ntypedef unsigned           int uint_fast16_t;
+Ntypedef unsigned           int uint_fast32_t;
+Ntypedef unsigned       __INT64 uint_fast64_t;
+Xtypedef unsigned       __int64 uint_fast64_t;
+N
+N    /* 7.18.1.4 integer types capable of holding object pointers */
+N#if __sizeof_ptr == 8
+X#if 4 == 8
+Stypedef   signed       __INT64 intptr_t;
+Stypedef unsigned       __INT64 uintptr_t;
+N#else
+Ntypedef   signed           int intptr_t;
+Ntypedef unsigned           int uintptr_t;
+N#endif
+N
+N    /* 7.18.1.5 greatest-width integer types */
+Ntypedef   signed     __LONGLONG intmax_t;
+Xtypedef   signed     long long intmax_t;
+Ntypedef unsigned     __LONGLONG uintmax_t;
+Xtypedef unsigned     long long uintmax_t;
+N
+N
+N#if !defined(__cplusplus) || defined(__STDC_LIMIT_MACROS)
+X#if !0L || 0L
+N
+N    /* 7.18.2.1 */
+N
+N    /* minimum values of exact-width signed integer types */
+N#define INT8_MIN                   -128
+N#define INT16_MIN                -32768
+N#define INT32_MIN          (~0x7fffffff)   /* -2147483648 is unsigned */
+N#define INT64_MIN  __INT64_C(~0x7fffffffffffffff) /* -9223372036854775808 is unsigned */
+N
+N    /* maximum values of exact-width signed integer types */
+N#define INT8_MAX                    127
+N#define INT16_MAX                 32767
+N#define INT32_MAX            2147483647
+N#define INT64_MAX  __INT64_C(9223372036854775807)
+N
+N    /* maximum values of exact-width unsigned integer types */
+N#define UINT8_MAX                   255
+N#define UINT16_MAX                65535
+N#define UINT32_MAX           4294967295u
+N#define UINT64_MAX __UINT64_C(18446744073709551615)
+N
+N    /* 7.18.2.2 */
+N
+N    /* minimum values of minimum-width signed integer types */
+N#define INT_LEAST8_MIN                   -128
+N#define INT_LEAST16_MIN                -32768
+N#define INT_LEAST32_MIN          (~0x7fffffff)
+N#define INT_LEAST64_MIN  __INT64_C(~0x7fffffffffffffff)
+N
+N    /* maximum values of minimum-width signed integer types */
+N#define INT_LEAST8_MAX                    127
+N#define INT_LEAST16_MAX                 32767
+N#define INT_LEAST32_MAX            2147483647
+N#define INT_LEAST64_MAX  __INT64_C(9223372036854775807)
+N
+N    /* maximum values of minimum-width unsigned integer types */
+N#define UINT_LEAST8_MAX                   255
+N#define UINT_LEAST16_MAX                65535
+N#define UINT_LEAST32_MAX           4294967295u
+N#define UINT_LEAST64_MAX __UINT64_C(18446744073709551615)
+N
+N    /* 7.18.2.3 */
+N
+N    /* minimum values of fastest minimum-width signed integer types */
+N#define INT_FAST8_MIN           (~0x7fffffff)
+N#define INT_FAST16_MIN          (~0x7fffffff)
+N#define INT_FAST32_MIN          (~0x7fffffff)
+N#define INT_FAST64_MIN  __INT64_C(~0x7fffffffffffffff)
+N
+N    /* maximum values of fastest minimum-width signed integer types */
+N#define INT_FAST8_MAX             2147483647
+N#define INT_FAST16_MAX            2147483647
+N#define INT_FAST32_MAX            2147483647
+N#define INT_FAST64_MAX  __INT64_C(9223372036854775807)
+N
+N    /* maximum values of fastest minimum-width unsigned integer types */
+N#define UINT_FAST8_MAX            4294967295u
+N#define UINT_FAST16_MAX           4294967295u
+N#define UINT_FAST32_MAX           4294967295u
+N#define UINT_FAST64_MAX __UINT64_C(18446744073709551615)
+N
+N    /* 7.18.2.4 */
+N
+N    /* minimum value of pointer-holding signed integer type */
+N#if __sizeof_ptr == 8
+X#if 4 == 8
+S#define INTPTR_MIN INT64_MIN
+N#else
+N#define INTPTR_MIN INT32_MIN
+N#endif
+N
+N    /* maximum value of pointer-holding signed integer type */
+N#if __sizeof_ptr == 8
+X#if 4 == 8
+S#define INTPTR_MAX INT64_MAX
+N#else
+N#define INTPTR_MAX INT32_MAX
+N#endif
+N
+N    /* maximum value of pointer-holding unsigned integer type */
+N#if __sizeof_ptr == 8
+X#if 4 == 8
+S#define UINTPTR_MAX INT64_MAX
+N#else
+N#define UINTPTR_MAX INT32_MAX
+N#endif
+N
+N    /* 7.18.2.5 */
+N
+N    /* minimum value of greatest-width signed integer type */
+N#define INTMAX_MIN  __ESCAPE__(~0x7fffffffffffffffll)
+N
+N    /* maximum value of greatest-width signed integer type */
+N#define INTMAX_MAX  __ESCAPE__(9223372036854775807ll)
+N
+N    /* maximum value of greatest-width unsigned integer type */
+N#define UINTMAX_MAX __ESCAPE__(18446744073709551615ull)
+N
+N    /* 7.18.3 */
+N
+N    /* limits of ptrdiff_t */
+N#if __sizeof_ptr == 8
+X#if 4 == 8
+S#define PTRDIFF_MIN INT64_MIN
+S#define PTRDIFF_MAX INT64_MAX
+N#else
+N#define PTRDIFF_MIN INT32_MIN
+N#define PTRDIFF_MAX INT32_MAX
+N#endif
+N
+N    /* limits of sig_atomic_t */
+N#define SIG_ATOMIC_MIN (~0x7fffffff)
+N#define SIG_ATOMIC_MAX   2147483647
+N
+N    /* limit of size_t */
+N#if __sizeof_ptr == 8
+X#if 4 == 8
+S#define SIZE_MAX UINT64_MAX
+N#else
+N#define SIZE_MAX UINT32_MAX
+N#endif
+N
+N    /* limits of wchar_t */
+N    /* NB we have to undef and redef because they're defined in both
+N     * stdint.h and wchar.h */
+N#undef WCHAR_MIN
+N#undef WCHAR_MAX
+N
+N#if defined(__WCHAR32) || (defined(__ARM_SIZEOF_WCHAR_T) && __ARM_SIZEOF_WCHAR_T == 4)
+X#if 0L || (0L && __ARM_SIZEOF_WCHAR_T == 4)
+S  #define WCHAR_MIN   0
+S  #define WCHAR_MAX   0xffffffffU
+N#else
+N  #define WCHAR_MIN   0
+N  #define WCHAR_MAX   65535
+N#endif
+N
+N    /* limits of wint_t */
+N#define WINT_MIN (~0x7fffffff)
+N#define WINT_MAX 2147483647
+N
+N#endif /* __STDC_LIMIT_MACROS */
+N
+N#if !defined(__cplusplus) || defined(__STDC_CONSTANT_MACROS)
+X#if !0L || 0L
+N
+N    /* 7.18.4.1 macros for minimum-width integer constants */
+N#define INT8_C(x)   (x)
+N#define INT16_C(x)  (x)
+N#define INT32_C(x)  (x)
+N#define INT64_C(x)  __INT64_C(x)
+N
+N#define UINT8_C(x)  (x ## u)
+N#define UINT16_C(x) (x ## u)
+N#define UINT32_C(x) (x ## u)
+N#define UINT64_C(x) __UINT64_C(x)
+N
+N    /* 7.18.4.2 macros for greatest-width integer constants */
+N#define INTMAX_C(x)  __ESCAPE__(x ## ll)
+N#define UINTMAX_C(x) __ESCAPE__(x ## ull)
+N
+N#endif /* __STDC_CONSTANT_MACROS */
+N
+N    #ifdef __cplusplus
+S         }  /* extern "C" */
+S      }  /* namespace std */
+N    #endif /* __cplusplus */
+N  #endif /* __STDINT_DECLS */
+N
+N  #ifdef __cplusplus
+S    #ifndef __STDINT_NO_EXPORTS
+S      using ::std::int8_t;
+S      using ::std::int16_t;
+S      using ::std::int32_t;
+S      using ::std::int64_t;
+S      using ::std::uint8_t;
+S      using ::std::uint16_t;
+S      using ::std::uint32_t;
+S      using ::std::uint64_t;
+S      using ::std::int_least8_t;
+S      using ::std::int_least16_t;
+S      using ::std::int_least32_t;
+S      using ::std::int_least64_t;
+S      using ::std::uint_least8_t;
+S      using ::std::uint_least16_t;
+S      using ::std::uint_least32_t;
+S      using ::std::uint_least64_t;
+S      using ::std::int_fast8_t;
+S      using ::std::int_fast16_t;
+S      using ::std::int_fast32_t;
+S      using ::std::int_fast64_t;
+S      using ::std::uint_fast8_t;
+S      using ::std::uint_fast16_t;
+S      using ::std::uint_fast32_t;
+S      using ::std::uint_fast64_t;
+S      using ::std::intptr_t;
+S      using ::std::uintptr_t;
+S      using ::std::intmax_t;
+S      using ::std::uintmax_t;
+S    #endif
+N  #endif /* __cplusplus */
+N
+N#undef __INT64
+N#undef __LONGLONG
+N
+N#endif /* __stdint_h */
+N
+N/* end of stdint.h */
+L 13 "..\..\Core\bootloader.h" 2
+N
+Nextern volatile uint16_t gBootloaderTick;
+N
+Nextern int Bootloader_Init(uint32_t clock);
+Nextern void Bootloader_Process(void);
+Nextern void Bootloader_SendError(void);
+N
+N#endif // _BOOTLOADERH_
+L 10 "..\..\Core\bootloader.c" 2
+N#include "descriptor.h"
+L 1 "..\..\Core\descriptor.h" 1
+N// bootloader descriptor
+N// defines a block of data that describes the bootloader
+N// do not modify the contents of this file
+N// $Id: descriptor.h 3890 2015-05-08 15:13:42Z andy $
+N
+N
+N#ifndef _DESCRIPTORH_
+N#define _DESCRIPTORH_
+N
+N#include <stdint.h>
+N
+N// header and footer to mark start and end of structure in hex file
+N#define DESCRIPTOR_HEADER 0xAA557F3D
+N#define DESCRIPTOR_FOOTER 0x3D7F55AA
+N
+N// version of the descriptor described in this file
+N#define DESCRIPTOR_VERSION 3
+N
+N// maximum length of a bootloader name in characters including null terminator
+N#define DESCRIPTOR_MAXNAMELENGTH 64
+N// maxiumum length of a bootloader description in characters including null terminator
+N#define DESCRIPTOR_MAXDESCLENGTH 128
+N// maxiumum length of bootloader notes in characters including null terminator
+N#define DESCRIPTOR_MAXNOTESLENGTH 256
+N
+N// bootstrap methods
+N#define DESCRIPTOR_BOOTSTRAP_BOOTROM    0
+N#define DESCRIPTOR_BOOTSTRAP_CORTEXUART 1
+N#define DESCRIPTOR_BOOTSTRAP_SWDLINK2   2
+N
+N// bootloader functionality
+N// undefined bits are reserved and must be set to zero
+N#define BOOTLOADER_FUNC_BASIC (1UL << 0)                   // erase, erase sectors, program
+N
+N// bootloader descriptor
+N// 32-bit field alignment
+N// values must be little-endian
+Ntypedef struct _descriptor
+N{
+N  uint32_t header;                                         // must be set to DESCRIPTOR_HEADER
+N  uint32_t descriptorversion;                              // must be set to DESCRIPTOR_VERSION
+N  uint32_t functionality;                                  // bootloader functionality (ORing of BOOTLOADER_FUNC_xxx)
+N  uint32_t bootloaderversion;                              // version number of bootloader
+N  uint32_t startaddress;                                   // programmable memory start address
+N  uint32_t endaddress;                                     // programmable memory end address
+N  uint32_t ramstartaddress;                                // ram start address (for bootloader storage)
+N  uint32_t ramendaddress;                                  // ram end address (for bootloader storage)
+N  uint32_t sectorsize;                                     // programmable sector size in bytes
+N  uint8_t  flasherasedvalue;                               // programmable memory erased value
+N  uint32_t programsize;                                    // number of bytes to program at once - cannot be larger than MAXPROGRAMSIZE
+N  uint32_t baudrate;                                       // baudrate to use for communication with bootloader
+N  uint32_t bootstrapmethod;                                // method of downloading bootloader (DESCRIPTOR_BOOTSTRAP_xxx)
+N  uint32_t bootstrapbaudrate;                              // baudeate to use for downloading of bootloader
+N  uint32_t ramcmdmailboxaddress;                           // ram address for commmand mailbox (0 = not used)
+N  uint32_t ramrespmailboxaddress;                          // ram address for response mailbox (0 = not used)
+N  uint32_t numrammailboxes;                                // number of ram mailboxes in each direction (0 = not used)
+N  char     devicename[DESCRIPTOR_MAXNAMELENGTH];           // name of device
+X  char     devicename[64];           
+N  char     name[DESCRIPTOR_MAXNAMELENGTH];                 // name (DESCRIPTOR_MAXNAMELENGTH characters or shorter)
+X  char     name[64];                 
+N  char     description[DESCRIPTOR_MAXDESCLENGTH];          // description (DESCRIPTOR_MAXDESCLENGTH characters or shorter)
+X  char     description[128];          
+N  char     notes[DESCRIPTOR_MAXNOTESLENGTH];               // notes (DESCRIPTOE_MAXNOTESLENGTH characters or shorter) - use semicolons for newlines
+X  char     notes[256];               
+N  uint32_t footer;                                         // must be set to DESCRIPTOR_FOOTER
+N} descriptor_t;
+N
+Nextern const descriptor_t Descriptor;
+N
+N#endif // _DESCRIPTORH_
+L 11 "..\..\Core\bootloader.c" 2
+N#include "host.h"
+L 1 "..\..\Core\host.h" 1
+N// support for sending/receiving data to/from the host (Flash Magic)
+N// $Id: $
+N
+N#ifndef _HOSTH_
+N#define _HOSTH_
+N
+N#include <stdint.h>
+N
+N// host API
+Nextern void Host_Initialize(uint32_t baudrate);
+Nextern void Host_SendData(uint8_t *data, int length);
+Nextern int Host_ReceiveData(uint8_t *buffer, int maxlength);
+Nextern void Host_Debug(char *Message);
+N
+N#endif // _HOSTH_
+L 12 "..\..\Core\bootloader.c" 2
+N
+N// programming API
+Nextern int Memory_Init(unsigned long adr, unsigned long clk);
+Nextern int Memory_EraseChip(void);
+Nextern int Memory_EraseSector(unsigned long adr);
+Nextern int Memory_ProgramPage(unsigned long adr, unsigned long sz, unsigned char *buf);
+Nextern unsigned char Memory_ReadByte(unsigned long adr);
+N
+N// global tick counter - must be incremented every millisecond
+Nvolatile uint16_t gBootloaderTick = 0;
+N
+N// uart receive buffer size
+N#define RXBUFFERSIZE 100
+N
+N// maximum number of bytes of data to receive at once
+N// the descriptor programsize field must be same or smaller than this value
+N#define MAXPROGRAMSIZE 1024
+N
+N// if no data received for this time then receive state machine is reset, in milliseconds
+N#define RECEIVETIMEOUT 1000
+N
+N// states
+N#define STATE_HEADER 0
+N#define STATE_DATA   1
+N
+N// commands
+N#define COMMAND_PROGRAM     0
+N#define COMMAND_ERASEALL    1
+N#define COMMAND_ERASESECTOR 2
+N
+N// module variables
+Nstatic uint8_t rxbuffer[RXBUFFERSIZE];
+Xstatic uint8_t rxbuffer[100];
+Nstatic uint8_t chunk[MAXPROGRAMSIZE];
+Xstatic uint8_t chunk[1024];
+Nstatic int state;
+Nstatic uint32_t headerbytes;
+Nstatic uint16_t lastbytetimestamp = 0;
+Nstatic uint32_t databytes, chunkbytes;
+Nstatic uint32_t chunkaddress;
+Nstatic uint32_t localchecksum;
+Nstatic uint32_t programstartaddr;
+Nstatic uint8_t header[16];
+Nstatic uint32_t datasize;
+Nstatic uint32_t remotechecksum;
+N
+N// module functions
+Nstatic uint16_t GetTime(void);
+Nstatic uint8_t IsTimeExpired(uint16_t timestamp);
+Nstatic int VerifyChecksum(uint32_t startaddress, uint32_t endaddress, uint32_t checksum);
+N
+N// initializes the bootloader
+N// returns 1 for success, 0 for error
+Nint Bootloader_Init
+N  (
+N  uint32_t clock                                           // CPU clock frequency in MHz
+N  )
+N{
+N  // init host
+N  Host_Initialize(Descriptor.baudrate);
+N
+N  // init command state machine
+N  state = STATE_HEADER;
+X  state = 0;
+N  headerbytes = 0;
+N
+N  if (Memory_Init(Descriptor.startaddress, clock))
+N  {
+N    // failed to init
+N    Host_SendData("INITERR\r\n", 9);
+N    return 0;
+N  }
+N
+N  // send boot message
+N  Host_SendData("ESAFLASHOS\r\n", 12);
+N
+N  return 1;
+N}
+N
+N// executes the bootloader state machine
+N// call continually in a background loop or an RTOS task
+Nvoid Bootloader_Process(void)
+N{
+N  uint32_t length, b;
+N  uint32_t sectoraddr;
+N
+N  // fixme - remove
+N  int HLen;
+N  uint8_t HBuffer[256];
+N  HLen = Host_ReceiveData(HBuffer, 256);
+N  if (HLen > 0)
+N  {
+N    Host_SendData(HBuffer, HLen);
+N  }
+N  
+N  length = Host_ReceiveData(rxbuffer, RXBUFFERSIZE);     
+X  length = Host_ReceiveData(rxbuffer, 100);     
+N  if (length)
+N  {
+N    // remember when data was received
+N    lastbytetimestamp = GetTime();
+N
+N    for (b = 0; b < length; b++)
+N    {
+N      switch (state)
+N      {
+N        case STATE_HEADER:
+X        case 0:
+N          // autobaud character - tell the client that we are executing
+N          if ((rxbuffer[b] == '?') && !headerbytes)
+N          {
+N            Host_SendData("ESAFLASHOS\r\n", 12);
+N            break;
+N          }
+N
+N          header[headerbytes++] = rxbuffer[b];
+N          // if received complete header then parse it...
+N          if (headerbytes == 16)
+N          {
+N            // first byte is the command
+N            switch (header[0])
+N            {
+N              case COMMAND_PROGRAM:
+X              case 0:
+N                // get size of data that is going to be sent
+N                datasize = ((uint32_t)header[2] << 8) | header[1];
+N                datasize *= Descriptor.programsize;
+N            
+N                // get checksum
+N                remotechecksum = ((uint32_t)header[6] << 24) | ((uint32_t)header[5] << 16) | ((uint32_t)header[4] << 8) | header[3];
+N            
+N                // get programming start address
+N                programstartaddr = ((uint32_t)header[10] << 24) | ((uint32_t)header[9] << 16) | ((uint32_t)header[8] << 8) | header[7];
+N
+N                // now get data 
+N                state = STATE_DATA;
+X                state = 1;
+N                databytes = 0;
+N                chunkbytes = 0;
+N                localchecksum = 0;
+N                chunkaddress = programstartaddr;
+N                break;
+N
+N              case COMMAND_ERASEALL:
+X              case 1:
+N                // erase the flash memory
+N                if (Memory_EraseChip())
+N                {
+N                  Host_SendData("ERROR\r\n", 7);
+N                }
+N                else
+N                {
+N                  Host_SendData("OK\r\n", 4);
+N                }
+N
+N                // wait for next header
+N                headerbytes = 0;
+N                break;
+N
+N              case COMMAND_ERASESECTOR:
+X              case 2:
+N                // get sector address
+N                sectoraddr = ((uint32_t)header[4] << 24) | ((uint32_t)header[3] << 16) | ((uint32_t)header[2] << 8) | header[1];
+N                // erase sector
+N                if (Memory_EraseSector(sectoraddr))
+N                {
+N                  Host_SendData("ERROR\r\n", 7);
+N                }
+N                else
+N                {
+N                  Host_SendData("OK\r\n", 4);
+N                }
+N
+N                // wait for next header
+N                headerbytes = 0;
+N                break;
+N                
+N              // unknown command
+N              default:
+N                // wait for next header
+N                headerbytes = 0;
+N                break;
+N            }
+N          }
+N          break;
+N
+N        case STATE_DATA:
+X        case 1:
+N          // update checksum calculation
+N          localchecksum += rxbuffer[b];
+N
+N          chunk[chunkbytes++] = rxbuffer[b];
+N          if (chunkbytes == Descriptor.programsize)
+N          {
+N            // program page
+N            if (!Memory_ProgramPage(chunkaddress, chunkbytes, chunk))
+N            {
+N              Host_SendData("PROGOK\r\n", 8);
+N              chunkaddress += chunkbytes;
+N              chunkbytes = 0;
+N            }
+N            else
+N            {
+N              Host_SendData("PROGERR\r\n", 9);
+N              // wait for next header
+N              state = STATE_HEADER;
+X              state = 0;
+N              headerbytes = 0;
+N            }
+N          }
+N
+N          databytes++;
+N          if (databytes == datasize)
+N          {
+N            // end of data transfer
+N            // check checksum
+N            localchecksum = 0xFFFFFFFF - localchecksum + 1;
+N            if (localchecksum != remotechecksum)
+N            {
+N              Host_SendData("CHECKSUM\r\n", 10);
+N            }
+N            // verify flash
+N            else if (!VerifyChecksum(programstartaddr, chunkaddress - 1, localchecksum))
+N            {
+N              Host_SendData("VERIFY\r\n", 8);
+N            }
+N            else
+N            {
+N              Host_SendData("OK\r\n", 4);
+N            }
+N            // wait for next header
+N            state = STATE_HEADER;
+X            state = 0;
+N            headerbytes = 0;
+N          }
+N          break;
+N      }
+N    }
+N  }
+N  else
+N  {
+N    // haven't received data in a while so reset state machine
+N    if (IsTimeExpired(lastbytetimestamp + RECEIVETIMEOUT))
+X    if (IsTimeExpired(lastbytetimestamp + 1000))
+N    {
+N      // wait for next header
+N      state = STATE_HEADER;
+X      state = 0;
+N      headerbytes = 0;
+N    }
+N  }
+N}
+N
+N// verifies the contents of memory matches the checksum
+N// returns 1 if matches, 0 if does not match
+Nstatic int VerifyChecksum(uint32_t startaddress, uint32_t endaddress, uint32_t checksum)
+N{
+N  uint32_t address;
+N  uint32_t chk = 0x00000000;
+N
+N  // calculate checksum
+N  for (address = startaddress; address <= endaddress; address++)
+N  {
+N    chk += Memory_ReadByte(address); 
+N  }
+N
+N  // 2's complement
+N  chk = 0xFFFFFFFF - chk + 1;
+N
+N  // compare
+N  if (chk != checksum) return 0;
+N
+N  return 1;
+N}
+N
+N
+N// reads the 1 millisecond timer count
+N// returns the current timer count
+Nstatic uint16_t GetTime(void)
+N{
+N  return gBootloaderTick;
+N}
+N
+N
+N// compares a timer count and determines if the time has passed or not
+N// returns 1 if the timer count is in the past, returns 0 if the timer
+N// count is in the future
+N// note that the maximum time measurable is 0x8000 (about 32 seconds)
+Nstatic uint8_t IsTimeExpired(uint16_t timestamp)
+N{
+N  uint16_t time_now;
+N
+N  time_now = gBootloaderTick;
+N  if (time_now >= timestamp)
+N  {
+N    if ((time_now - timestamp) < 0x8000)
+N      return 1;
+N    else
+N      return 0;
+N  }
+N  else
+N  {
+N    if ((timestamp - time_now) >= 0x8000)
+N      return 1;
+N    else
+N      return 0;
+N  }
+N}

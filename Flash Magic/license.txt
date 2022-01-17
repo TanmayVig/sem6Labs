@@ -1,0 +1,63 @@
+Software License Agreement for
+
+Flash Magic
+
+This EmSA Software License Agreement ("Agreement") is between "You" (either an individual or an entity), the user, and Embedded Systems Academy GmbH ("EmSA"). This Agreement authorizes You to use the Software licensed by a purchase from EmSA, sent to You by electronic mail or downloaded from EmSA's Web pages or Servers or from other sources, under the terms and conditions set forth below. This is an agreement on license rights and not an agreement for sale. EmSA continues to own the copy of the Software and the physical media contained in the sales package, if any, and any other copy that You are authorized to make pursuant to this Agreement. 
+
+Read this Agreement carefully before installing, downloading or using the Software. By clicking on the "I agree to accept the License Agreement" button, installing, downloading and/or using the Software, You agree to the terms and conditions of this Agreement. If You do not agree to all of the terms and conditions of this Agreement, promptly click on the "Decline" or "I do not accept the License Agreement" button, cancel the installation or downloading, or destroy or return the Software and accompanying documentation to EMSA. YOU AGREE THAT YOUR USE OF THE SOFTWARE ACKNOWLEDGES THAT YOU HAVE READ THIS AGREEMENT, UNDERSTAND IT, AND AGREE TO BE BOUND BY ITS TERMS AND CONDITIONS. 
+
+1. SOFTWARE
+
+As used in this Agreement, the term "Software" means, collectively and/or as applicable: the software product identified above with all accompanying files including the object or binary code form of the software, digital images, stock photographs, clip art or other artistic works ("Stock Files"), related explanatory written materials and any other possible documentation related thereto ("Documentation"), fonts, and upgrades, modified versions, updates, additions and copies of the Software (collectively "Updates"), if any, licensed to You by EmSA under this Agreement. 
+
+2. RIGHTS AND USE
+
+EmSA grants to You a non-exclusive license right to install the Software on the local hard disk(s) or other permanent storage media. Flash Magic is provided free as a DEVELOPMENT TOOL ONLY. It is NOT LICENSED FOR PRODUCTION, TESTING OR IN FIELD USE. Contact ESA for additional options if non-development uses are required.
+
+3. LIMITATIONS ON END USER RIGHTS
+
+You may not copy, distribute, or make derivative works of the Software, except as follows:
+
+(a) You may make a copy of the Software as an archival backup copy, provided Your archival backup copy is not installed or used on any computer or other supported hardware. Any other copies You make of the Software are in violation of this Agreement.
+
+(b) You may not use, modify, translate, reproduce or transfer the right to use the Software or copy the Software, except as expressly provided in this Agreement.
+
+(c) You may not resell, sublicense, rent, lease or lend the Software by itself. You may resell, rent, lease or lend non-PC hardware to which You installed our Software.
+
+(d) You may not reverse engineer, reverse compile, disassemble or otherwise attempt to discover the source code of the Software (except to the extent that this restriction is expressly prohibited by law) or create derivative works based on the Software.
+
+(e) Unless stated otherwise in the Documentation, You shall not display, modify, reproduce and distribute any of the Stock Files included with the Software, if any. In the event that the Documentation allows You to display the Stock Files, You shall not distribute the Stock Files on a stand-alone basis, i.e., in circumstances in which the Stock Files constitute the primary value of the product being distributed. You should review the "Read-Me" files associated with the Stock Files that You use to ascertain what rights You have with respect to such materials. Stock Files may not be used in the production of libelous, defamatory, fraudulent, infringing, lewd, obscene or pornographic material or in any otherwise illegal manner. You may not register or claim any rights in the Stock Files or derivative works thereof.
+
+(f) You agree that You shall only use the Software in a manner that complies with all applicable laws in the jurisdiction in which You use the Software, including, but not limited to, applicable restrictions concerning copyright and other intellectual property rights.
+ 	
+4. COPYRIGHT
+
+The Software and all rights, without limitation including proprietary rights therein, are owned by EmSA and are protected by international treaty provisions and all other applicable national laws of the country in which it is being used. The structure, organization and code of the Software are the valuable trade secrets and confidential information of EmSA. You must not copy the Software, except as set forth in Clause 3 (Limitations On End User Rights). Any copies which You are permitted to make pursuant to this Agreement must contain the same copyright and other proprietary notices that appear on the Software. 
+
+5. COMMENCEMENT & TERMINATION
+
+This Agreement is effective from the first date You install the Software. Your end user license rights automatically and immediately terminate without notice from EmSA if You fail to comply with any provision of this Agreement. In such event or to terminate this Agreement at any time, You must permanently delete or destroy, at Your own costs, the Software, all backup copies and all related materials provided by EmSA from all Your computers and other supported hardware devices. 
+
+6. YOU ACKNOWLEDGE THE SOFTWARE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND EXPRESS OR IMPLIED AND TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW NEITHER EMSA, ITS LICENSORS OR AFFILIATES NOR THE COPYRIGHT HOLDERS MAKE ANY REPRESENTATIONS OR WARRANTIES, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE OR THAT THE SOFTWARE WILL NOT INFRINGE ANY THIRD PARTY PATENTS, COPYRIGHTS, TRADEMARKS OR OTHER RIGHTS. THERE IS NO WARRANTY BY EMSA OR BY ANY OTHER PARTY THAT THE FUNCTIONS CONTAINED IN THE SOFTWARE WILL MEET YOUR REQUIREMENTS OR THAT THE OPERATION OF THE SOFTWARE WILL BE UNINTERRUPTED OR ERROR-FREE. YOU ASSUME ALL RESPONSIBILITY AND RISK FOR THE SELECTION OF THE SOFTWARE TO ACHIEVE YOUR INTENDED RESULTS AND FOR THE INSTALLATION, USE AND RESULTS OBTAINED FROM IT. 
+
+7. NO OTHER OBLIGATIONS
+
+This Agreement creates no obligations on the part of EmSA other than as specifically set forth herein. 
+
+8. LIMITATION OF LIABILITY
+
+TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL EMSA OR ITS EMPLOYEES BE LIABLE FOR ANY LOST PROFITS, REVENUE, SALES, DATA OR COSTS OF PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES, PROPERTY DAMAGE, PERSONAL INJURY, INTERRUPTION OF BUSINESS, LOSS OF BUSINESS INFORMATION OR FOR ANY SPECIAL, DIRECT, INDIRECT, INCIDENTAL, ECONOMIC, COVER, PUNITIVE, SPECIAL OR CONSEQUENTIAL DAMAGES, HOWEVER CAUSED AND WHETHER ARISING UNDER CONTRACT, TORT, NEGLIGENCE, OR OTHER THEORY OF LIABILITY ARISING OUT OF THE USE OF OR INABILITY TO USE THE SOFTWARE, EVEN IF EMSA IS ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. BECAUSE SOME COUNTRIES/STATES/JURISDICTIONS DO NOT ALLOW THE EXCLUSION OR LIMITATION OF LIABILITY, BUT MAY ALLOW LIABILITY TO BE LIMITED, IN SUCH CASES, EMSA OR ITS EMPLOYEES' LIABILITY SHALL BE LIMITED TO U.S.$25. Nothing contained in this Agreement shall prejudice the statutory rights of any party dealing as a consumer. EMSA is acting on behalf of its employees and licensors or affiliates for the purpose of disclaiming, excluding and/or restricting obligations, warranties and liability as provided in this Clause 9, but in no other respects and for no other purpose. 
+
+9. TECHNICAL SUPPORT AND UPDATES
+
+Technical support is provided by email only and limited to issues directly related to the Software.
+Technical support and updates are only provided during the active support and maintenance period, which expires one year after purchase, unless continuously extended through a purchase.
+
+10. NOTICES
+
+All customer support questions should be e-mailed to support@esacademy.com.
+Software downloads and Updates are available at www.esacademy.org. 
+
+11. GENERAL PROVISIONS
+
+If any part of this Agreement is found void and unenforceable, it will not affect the validity of the balance of the Agreement, which shall remain valid and enforceable according to its terms. This Agreement may only be modified in writing by an authorized officer of EmSA. This is the entire agreement between EMSA and You relating to the Software and it supersedes any prior representations, discussions, undertakings, end user agreements, communications or advertising relating to the Software.

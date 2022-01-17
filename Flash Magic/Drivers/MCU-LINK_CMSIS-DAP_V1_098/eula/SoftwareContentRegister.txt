@@ -1,0 +1,85 @@
+--------------------------------------------
+NXP Software Content Register
+
+Package:                   MCU-Link CMSIS-DAP Probe Firmware
+Outgoing License:          LA_OPT_NXP_Software_License v15 - Additional Distribution License, Section 2.3 applies
+License File:              ./LA_OPT_NXP_Software_License.txt
+Main Copyright Holder:     NXP B.V.
+Type of content:           binary
+Version:                   1.098
+--------------------------------------------
+
+This is the "eula" subdirectory of the top-level directory
+for the NXP MCU-Link Probe Firmware package.
+
+The NXP MCU-Link CMSIS-DAP Probe Firmware is owned by NXP B.V.
+
+As detailed in the Software Content Register below, the NXP MCU-Link CMSIS-DAP
+Probe Firmware package comprises NXP copyrighted files, MCU-Link probe firmware
+and host specific scripts, utilities and drivers.
+NXP copyrighted files are licensed under the terms of the NXP B.V. proprietary
+license associated with this distribution (see LA_OPT_NXP_Software_License.txt).
+
+The MCU-Link probe firmware image is delivered in .s19 format.
+Portions of MCUXpresso SDK LPC55S69 have been used to build the firmware.
+The package also includes host specific scripts, utilities, drivers.
+
+Software Content Register
+--------------------------
+
+Package:        MCU-Link CMSIS-DAP Probe Firmware
+License:        LA_OPT_NXP_Software_License - Additional Distribution License, Section 2.3 applies
+License file:   ./LA_OPT_NXP_Software_License.txt
+Format:         Binary
+Location:       ../probe_firmware, ../scripts
+
+Component:      MCU-Link USB Windows drivers
+Version:        1.0.0.0
+License:        LA_OPT_NXP_Software_License - Additional Distribution License, Section 2.3 applies
+License file:   ./LA_OPT_NXP_Software_License.txt
+Format:         Binary
+Location:       ../drivers
+
+Component:      Bootloader Host Application (blhost)
+Version:        2.4.0
+License:        LA_OPT_NXP_Software_License - Additional Distribution License, Section 2.3 applies
+License file:   ./LA_OPT_NXP_Software_License.txt
+Format:         Binary
+Location:       ../bin
+
+Other components used for MCU-Link CMSIS-DAP Probe Firmware
+------------------------------------------------------------
+
+Component:      MCUXpresso Software Development Kit (SDK) LPC55S69
+Version:        2.7.0
+License:        LA_OPT_NXP_Software_License v15 - Additional Distribution License, Section 2.3 applies
+License file:   ./LA_OPT_NXP_Software_License.txt
+
+Component:      MCUXpresso SDK LPC55S69 - USB stack
+Version:        2.7.0
+License:        BSD-3-Clause
+License file:   ./licenses/BSD-3-clause.txt
+
+Component:      MCUXpresso SDK LPC55S69 - KSDK Peripheral Driver
+Version:        2.x.x
+License:        BSD-3-Clause
+License file:   ./licenses/BSD-3-clause.txt
+
+Component:      ARM CMSIS-DAP Firmware
+Version:        4.4.0
+Home Page:      https://github.com/ARM-software/CMSIS
+License:        CMSIS-DAP EULA
+License URL:    https://github.com/ARM-software/CMSIS/blob/master/CMSIS/DAP/CMSIS-DAP%20EULA.pdf 
+
+Component:      ARM CMSIS Driver header files
+Version:        4.4.0
+Home Page:      https://github.com/ARM-software/CMSIS
+License:        Zlib
+License file:   ./licenses/Zlib.txt
+License URL:    https://github.com/ARM-software/CMSIS/blob/master/CMSIS/CMSIS_END_USER_LICENCE_AGREEMENT.pdf
+
+Component:      CMSIS_5
+Version:        5.5.1
+Home Page:      https://github.com/ARM-software/CMSIS_5
+License:        Apache-2.0
+License file:   ./licenses/Apache-2.0.txt

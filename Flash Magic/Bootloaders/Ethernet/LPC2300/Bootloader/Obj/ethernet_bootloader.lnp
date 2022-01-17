@@ -1,0 +1,13 @@
+--cpu ARM7TDMI
+".\obj\lpc2300.o"
+".\obj\board_init.o"
+".\obj\sbl_main.o"
+".\obj\comms.o"
+".\obj\isp_iap.o"
+".\obj\emac.o"
+".\obj\uart.o"
+".\obj\timer.o"
+--scatter ".\Obj\ethernet_bootloader.sct"
+--summary_stderr --info summarysizes --map --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list ".\Obj\ethernet_bootloader.map" -o .\Obj\ethernet_bootloader.axf

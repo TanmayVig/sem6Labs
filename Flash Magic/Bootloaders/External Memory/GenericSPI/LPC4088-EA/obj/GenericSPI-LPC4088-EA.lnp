@@ -1,0 +1,17 @@
+--cpu Cortex-M4.fp
+".\obj\startup_lpc407x_8x_177x_8x.o"
+".\obj\system_lpc407x_8x_177x_8x.o"
+".\Drivers\lib\spifi_drv_M4.lib"
+".\obj\lpc_systick.o"
+".\obj\lpc_clkpwr.o"
+".\obj\lpc_pinsel.o"
+".\obj\lpc_uart.o"
+".\obj\uart.o"
+".\obj\lpc_nvic.o"
+".\obj\main.o"
+".\obj\bootloader.o"
+".\obj\flashprg.o"
+--library_type=microlib --strict --scatter ".\obj\GenericSPI-LPC4088-EA.sct"
+--summary_stderr --info summarysizes --map --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list ".\obj\GenericSPI-LPC4088-EA.map" -o .\obj\GenericSPI-LPC4088-EA.axf

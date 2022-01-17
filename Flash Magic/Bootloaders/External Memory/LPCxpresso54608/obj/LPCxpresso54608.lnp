@@ -1,0 +1,25 @@
+--cpu=Cortex-M4.fp
+".\obj\system_lpc54608.o"
+".\obj\startup_lpc54608.o"
+".\obj\main.o"
+".\obj\bootloader.o"
+".\obj\swd.o"
+".\obj\flashprg.o"
+".\obj\debug.o"
+".\obj\board.o"
+".\obj\clock_config.o"
+".\obj\pin_mux.o"
+".\obj\fsl_clock.o"
+".\obj\fsl_common.o"
+".\obj\fsl_emc.o"
+".\obj\fsl_gpio.o"
+".\obj\fsl_inputmux.o"
+".\obj\fsl_power.o"
+".\obj\fsl_reset.o"
+".\obj\fsl_spifi.o"
+".\obj\fsl_flexcomm.o"
+".\obj\fsl_usart.o"
+--diag_suppress 6314 --strict --scatter ".\LPC54608J512_ram.scf"
+keil_lib_power.lib --remove --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list ".\obj\LPCxpresso54608.map" -o .\obj\LPCxpresso54608.axf

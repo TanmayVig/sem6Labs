@@ -1,0 +1,32 @@
+SRECORD EXAMPLES
+================
+
+V1.00, October 2017
+EmSA - www.esacademy.com
+
+1. To relocate a hex file:
+
+  srec_cat In.hex -intel -offset 0x10000000 -o Out.hex -intel -line-length=43
+
+This adds 0x10000000 to all addresses in the hex file, for example if the hex file targets address 0x00000000 but needs to be stored in external flash at 0x10000000. A negative offset can be used to move records to a lower address.
+
+The line length is optional but matches common linker outputs containing 16 bytes per line.
+
+2. Converting binary to hex:
+
+  srec_cat In.bin -binary -o Out.hex -intel -line-length=43
+
+  srec_cat In.bin -binary -offset 0x00001000 Out.hex -intel -line-length=43
+
+The line length is optional but matches common linker outputs containing 16 bytes per line. The second example locates the binary data at 0x00001000.
+
+3. Merging two hex files:
+
+  srec_cat In1.hex -intel In2.hex -intel -o Merged.hex -intel
+
+4. Split a hex file:
+
+  srec_cat In.hex -intel -crop 0x00000000 0x10000 -o PartA.hex -intel
+
+Extracts the range 0x00000000 -> 0x0000FFFF into a hex file. This can be run twice on the same file to split into two files.
+
