@@ -1,0 +1,3 @@
+".\Objects\prog.obj" 
+TO ".\Objects\P2" 
+PRINT(".\Listings\P2.m51") RAMSIZE(256) 
