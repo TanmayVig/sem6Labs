@@ -1,0 +1,115 @@
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    02/07/2022  16:38:23  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.2.0, INVOKED BY:
+D:\SEM-6\C51\BIN\BL51.EXE .\Objects\prog3.obj TO .\Objects\3 PRINT (.\Listings\3.m51) RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\prog3.obj (PROG3)
+  D:\SEM-6\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  .\Objects\3 (PROG3)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0004H     UNIT         _DATA_GROUP_
+            IDATA   000CH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     0060H     UNIT         ?PR?MAIN?PROG3
+            CODE    0860H     0026H     UNIT         ?PR?_DELAY?PROG3
+            CODE    0886H     000CH     UNIT         ?C_C51STARTUP
+
+
+
+OVERLAY MAP OF MODULE:   .\Objects\3 (PROG3)
+
+
+SEGMENT                          DATA_GROUP 
+  +--> CALLED SEGMENT          START    LENGTH
+----------------------------------------------
+?C_C51STARTUP                  -----    -----
+  +--> ?PR?MAIN?PROG3
+
+?PR?MAIN?PROG3                 0008H    0004H
+  +--> ?PR?_DELAY?PROG3
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\3 (PROG3)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        PROG3
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  D:00A8H         PUBLIC        IEN0
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  02/07/2022  16:38:23  PAGE 2
+
+
+  D:00E8H         PUBLIC        IEN1
+  B:00B0H.0       PUBLIC        RxD
+  B:00B0H.1       PUBLIC        TxD
+  C:0860H         PUBLIC        _delay
+  D:00D8H         PUBLIC        CCON
+  C:0800H         PUBLIC        main
+  B:00B0H.6       PUBLIC        WR
+  D:00C0H         PUBLIC        WDTC
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  D:00B8H         PUBLIC        IP0
+  D:00F8H         PUBLIC        IP1
+  D:00C8H         PUBLIC        T2CON
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          _DELAY
+  D:0006H         SYMBOL        d
+  -------         DO            
+  D:0004H         SYMBOL        i
+  D:0002H         SYMBOL        j
+  -------         ENDDO         
+  C:0860H         LINE#         2
+  C:0860H         LINE#         4
+  C:0863H         LINE#         5
+  C:0885H         LINE#         6
+  -------         ENDPROC       _DELAY
+  -------         PROC          MAIN
+  -------         DO            
+  D:0008H         SYMBOL        i
+  D:000AH         SYMBOL        j
+  D:0082H         SYMBOL        k
+  -------         ENDDO         
+  C:0800H         LINE#         7
+  C:0800H         LINE#         9
+  C:0800H         LINE#         10
+  C:0805H         LINE#         11
+  C:080AH         LINE#         12
+  C:080DH         LINE#         13
+  C:0814H         LINE#         14
+  C:082CH         LINE#         15
+  C:082FH         LINE#         16
+  C:0838H         LINE#         17
+  C:084BH         LINE#         18
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        PROG3
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0086H BYTE ( 6%) *
+******************************************************************************
+
+Program Size: data=13.0 xdata=0 code=149
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
