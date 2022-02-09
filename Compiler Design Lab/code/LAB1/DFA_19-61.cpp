@@ -1,4 +1,5 @@
-// vikas yadav
+// By - Tanmay Vig
+// Teaching assistant - vikas yadav
 #include <iostream>
 #include <sstream>
 #include <string>
