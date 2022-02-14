@@ -1,0 +1,69 @@
+C51 COMPILER V9.60.0.0   PROJ4                                                             02/14/2022 16:21:28 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE PROJ4
+OBJECT MODULE PLACED IN .\Objects\proj4.obj
+COMPILER INVOKED BY: D:\sem-6\C51\BIN\C51.EXE proj4.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\proj4
+                    -.lst) TABS(2) OBJECT(.\Objects\proj4.obj)
+
+line level    source
+
+   1          #include<p89v51rd2.h>
+   2          void delay(unsigned int dela)
+   3          {
+   4   1      unsigned int i,j;
+   5   1      for(i=0;i<=1000;i++)
+   6   1      for(j=0;j<=dela;j++);
+   7   1        
+   8   1      }
+   9          
+  10          unsigned int i,j,temp,max;
+  11          void main(void)
+  12          {
+  13   1        P3 = 0;
+  14   1      while(1)
+  15   1      {
+  16   2        if(INT0 == 0 && INT1 == 1){
+  17   3          max = 2;
+  18   3        }else if(INT1 == 0 && INT0 ==1){
+  19   3          max = 4;
+  20   3        }else if(INT0 == 0 && INT1 ==0){
+  21   3          max = 8;
+  22   3        }else{
+  23   3          max = 0;
+  24   3        }
+  25   2        // Max count 7 for 3 bits
+  26   2        for(i=0;i< max;++i){
+  27   3          // Assigning appropriate bits to pins of led
+  28   3          for(j=0;j<3;++j){
+  29   4            temp = i >> j;
+  30   4            if(j == 0){
+  31   5              RxD = temp & 1;
+  32   5            }
+  33   4            else if(j==1){
+  34   5              TxD = temp & 1;
+  35   5            }
+  36   4            else{
+  37   5              WR = temp & 1;
+  38   5            }
+  39   4          }
+  40   3          delay(1500);
+  41   3        }
+  42   2      }
+  43   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    187    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      8    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+C51 COMPILER V9.60.0.0   PROJ4                                                             02/14/2022 16:21:28 PAGE 2   
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
