@@ -7,7 +7,7 @@
 
 using namespace std;
 
-string valid_check(int dfa[][100], int initial_state)
+string mealy_outPut(int dfa[][100], int initial_state)
 {
     string str;
     cout << "Enter string: ";
@@ -58,7 +58,8 @@ int main()
         n++;
     }
 
-    cout << "Output: " << valid_check(dfa, initial_state);
+    string op = mealy_outPut(dfa, initial_state);
+    cout << "Output: " << op << endl;
 
     return 0;
 }
