@@ -18,13 +18,16 @@ string moore_outPut(int dfa[][100], int initial_state, int n, int m)
     int i = 1;
     string op(1, (char)dfa[initial_state][m - 1]);
     // cout << dfa[initial_state][2 * (str[0] - '0') + 1] << "::" << str[0] - '0' + 1 << endl;
+    cout << "Transition: " << op[0];
     while (i < str.size() && curr_state != -1)
     {
 
         op = op + (char)(dfa[curr_state][m - 1]);
+        cout << "->" << op[i];
         // cout << curr_state << "::" << str[0] - '0' + 1 << endl;
         curr_state = dfa[curr_state][str[i++] - '0'];
     }
+    cout << "\n";
 
     return op;
 }
