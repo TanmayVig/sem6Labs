@@ -1,0 +1,157 @@
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    03/21/2022  15:20:15  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.2.0, INVOKED BY:
+D:\SEM-6\C51\BIN\BL51.EXE .\Objects\proj6.obj TO .\Objects\6 PRINT (.\Listings\6.m51) RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\proj6.obj (PROJ6)
+  D:\SEM-6\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  .\Objects\6 (PROJ6)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     000AH     UNIT         ?DT?PROJ6
+            IDATA   0012H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     012AH     UNIT         ?PR?MAIN?PROJ6
+            CODE    092AH     0020H     UNIT         ?PR?_DELAY?PROJ6
+            CODE    094AH     000CH     UNIT         ?PR?BUZZER?PROJ6
+            CODE    0956H     000CH     UNIT         ?C_C51STARTUP
+
+
+
+OVERLAY MAP OF MODULE:   .\Objects\6 (PROJ6)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?PROJ6
+
+?PR?MAIN?PROJ6
+  +--> ?PR?_DELAY?PROJ6
+  +--> ?PR?BUZZER?PROJ6
+
+?PR?BUZZER?PROJ6
+  +--> ?PR?_DELAY?PROJ6
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\6 (PROJ6)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        PROJ6
+  C:0000H         SYMBOL        _ICE_DUMMY_
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  03/21/2022  15:20:15  PAGE 2
+
+
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  D:00A8H         PUBLIC        IEN0
+  D:00E8H         PUBLIC        IEN1
+  C:092AH         PUBLIC        _delay
+  B:00B0H.2       PUBLIC        sw1
+  B:00B0H.3       PUBLIC        sw2
+  B:00B0H.4       PUBLIC        sw3
+  B:00B0H.5       PUBLIC        sw4
+  D:00D8H         PUBLIC        CCON
+  C:094AH         PUBLIC        buzzer
+  C:0800H         PUBLIC        main
+  D:00C0H         PUBLIC        WDTC
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  D:0008H         PUBLIC        temp
+  D:000AH         PUBLIC        max
+  D:00B8H         PUBLIC        IP0
+  D:00F8H         PUBLIC        IP1
+  B:0080H.3       PUBLIC        bzz
+  B:00B0H.0       PUBLIC        led1
+  D:00C8H         PUBLIC        T2CON
+  D:000CH         PUBLIC        i
+  B:00B0H.1       PUBLIC        led2
+  D:000EH         PUBLIC        j
+  B:00B0H.6       PUBLIC        led3
+  B:00B0H.7       PUBLIC        led4
+  D:0010H         PUBLIC        t
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          _DELAY
+  D:0006H         SYMBOL        dela
+  -------         DO            
+  D:0004H         SYMBOL        i
+  D:0002H         SYMBOL        j
+  -------         ENDDO         
+  C:092AH         LINE#         15
+  C:092AH         LINE#         16
+  C:092AH         LINE#         18
+  C:092DH         LINE#         19
+  C:0949H         LINE#         21
+  -------         ENDPROC       _DELAY
+  -------         PROC          BUZZER
+  C:094AH         LINE#         23
+  C:094AH         LINE#         24
+  C:094CH         LINE#         25
+  C:0953H         LINE#         26
+  C:0955H         LINE#         27
+  -------         ENDPROC       BUZZER
+  -------         PROC          MAIN
+  C:0800H         LINE#         29
+  C:0800H         LINE#         30
+  C:0800H         LINE#         31
+  C:0808H         LINE#         32
+  C:0810H         LINE#         33
+  C:0810H         LINE#         34
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  03/21/2022  15:20:15  PAGE 3
+
+
+  C:0810H         LINE#         35
+  C:0819H         LINE#         36
+  C:0821H         LINE#         37
+  C:082AH         LINE#         38
+  C:0832H         LINE#         39
+  C:083BH         LINE#         40
+  C:0843H         LINE#         41
+  C:084CH         LINE#         42
+  C:0854H         LINE#         44
+  C:085AH         LINE#         46
+  C:085CH         LINE#         47
+  C:086DH         LINE#         48
+  C:0880H         LINE#         50
+  C:0885H         LINE#         51
+  C:0899H         LINE#         52
+  C:08B0H         LINE#         53
+  C:08C9H         LINE#         54
+  C:08E2H         LINE#         55
+  C:08F1H         LINE#         56
+  C:08FFH         LINE#         57
+  C:0906H         LINE#         58
+  C:0911H         LINE#         59
+  C:0914H         LINE#         60
+  C:091CH         LINE#         61
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        PROJ6
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0156H BYTE (16%) *
+******************************************************************************
+
+Program Size: data=19.0 xdata=0 code=357
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

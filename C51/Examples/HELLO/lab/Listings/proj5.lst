@@ -1,0 +1,79 @@
+C51 COMPILER V9.60.0.0   PROJ5                                                             03/07/2022 16:00:02 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE PROJ5
+OBJECT MODULE PLACED IN .\Objects\proj5.obj
+COMPILER INVOKED BY: D:\sem-6\C51\BIN\C51.EXE proj5.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\proj5
+                    -.lst) TABS(2) OBJECT(.\Objects\proj5.obj)
+
+line level    source
+
+   1          #include<p89v51rd2.h>
+   2          
+   3          sbit led1=P3^0;
+   4          sbit led2=P3^1;
+   5          sbit led3=P3^6;
+   6          sbit led4=P3^7;
+   7          //led declarations
+   8          sbit sw1=P3^2;
+   9          sbit sw2=P3^3;
+  10          sbit sw3=P3^4;
+  11          sbit sw4=P3^5;
+  12          //switch declarations
+  13          
+  14          void delay(unsigned int dela) // delay function
+  15          {
+  16   1      unsigned int i,j;
+  17   1      for(i=0;i<=1000;i++)
+  18   1      for(j=0;j<=dela;j++);
+  19   1        
+  20   1      }
+  21          
+  22          unsigned int i,j,temp,max;
+  23          void main(void)
+  24          {
+  25   1        led1=led2=led3=led4=0;
+  26   1        sw1=sw2=sw3=sw4=1;
+  27   1        while(1)
+  28   1        {
+  29   2          if(sw1 == 0 && sw2 == 1 && sw3 == 1) 
+  30   2            max = 16;
+  31   2          else if(sw1 == 1 && sw2 == 0 && sw3 == 1)
+  32   2            max = 4;
+  33   2          else if(sw1 == 1 && sw2 == 1 && sw3 ==0)
+  34   2            max = 2;
+  35   2          else if( sw1 == 1 && sw2 == 0 && sw3 ==0)
+  36   2            max = 8;
+  37   2          else
+  38   2            max = 1;
+  39   2          // Max count 7 for 3 bits
+  40   2          for(i=0;i< max;++i){
+  41   3            // Assigning appropriate bits to pins of led
+  42   3            for(j=0;j<4;++j){
+  43   4              temp = 1 << j;
+  44   4              //i & 1<<j
+  45   4              if(j == 0) led1 = !(temp & i);
+  46   4              else if(j==1) led2 = !(temp & i);
+  47   4              else if (j==2) led3 = !(temp & i);
+  48   4              else led4 = !(temp & i);
+  49   4            }
+  50   3            delay(1500);
+  51   3          }
+  52   2        }
+  53   1      }
+
+C51 COMPILER V9.60.0.0   PROJ5                                                             03/07/2022 16:00:02 PAGE 2   
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    283    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      8    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

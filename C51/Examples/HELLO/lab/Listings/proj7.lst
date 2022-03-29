@@ -1,0 +1,32 @@
+C51 COMPILER V9.60.0.0   PROJ7                                                             03/28/2022 16:53:14 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE PROJ7
+OBJECT MODULE PLACED IN .\Objects\proj7.obj
+COMPILER INVOKED BY: D:\sem-6\C51\BIN\C51.EXE proj7.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\proj7
+                    -.lst) TABS(2) OBJECT(.\Objects\proj7.obj)
+
+line level    source
+
+   1          #include <lcd.h>
+   2           
+   3           void main(void){
+   4   1         LCD_INIT();
+   5   1         LCD_WRITE("Tanmay Vig",0,0);
+   6   1         LCD_WRITE("19BCS061",1,0);
+   7   1         while(1);
+   8   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    252    ----
+   CONSTANT SIZE    =     29    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      3       5
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
