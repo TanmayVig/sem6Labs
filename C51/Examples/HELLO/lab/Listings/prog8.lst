@@ -1,0 +1,61 @@
+C51 COMPILER V9.60.0.0   PROG8                                                             04/11/2022 15:33:07 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE PROG8
+OBJECT MODULE PLACED IN .\Objects\prog8.obj
+COMPILER INVOKED BY: D:\sem-6\C51\BIN\C51.EXE prog8.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\prog8
+                    -.lst) TABS(2) OBJECT(.\Objects\prog8.obj)
+
+line level    source
+
+   1          #include <lcd.h>
+   2          #include <stdio.h>
+   3          void slow(int d){
+   4   1        int i,j;
+   5   1        for(i=0;i<=1000;i++)
+   6   1          for(j=0;j<=d;j++);
+   7   1      }
+   8          
+   9          void toScreen(INT0, INT1, T0, T1){
+  10   1        int num, i;
+  11   1        unsigned long fact;
+  12   1        char charTemp[16];
+  13   1        
+  14   1        num = (8)*(INT0^1) + (4)*(INT1^1) + (2)*(T0^1) + (1)*(T1^1);
+  15   1        
+  16   1        for(i=1;i<=num;i++)
+  17   1            fact = fact*i;
+  18   1        
+  19   1        sprintf(charTemp,"%lu",fact);
+  20   1        
+  21   1        LCD_WRITE(charTemp, 0, 0);
+  22   1        slow(100000);
+  23   1      }
+  24          
+  25          void main()
+  26          {
+  27   1        INT0 = 0;
+  28   1        INT1 = 0;
+  29   1        T0 = 0;
+  30   1        T1 = 0;
+  31   1      
+  32   1        LCD_INIT();
+  33   1        
+  34   1        while(1){
+  35   2          toScreen(INT0, INT1, T0, T1);
+  36   2        }
+  37   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    471    ----
+   CONSTANT SIZE    =     13    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      3      35
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

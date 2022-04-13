@@ -1,261 +1,154 @@
-#include <bits/stdc++.h>
-
-#include <bits/stdc++.h>
+#include <iostream>
+#include <iterator>
+#include <map>
+#include <set>
+#include <vector>
+#include <string.h>
+#include <queue>
+#include <fstream>
 using namespace std;
 
-string to_string(vector<string> a)
+set<string> firstOf(string str, map<string, vector<string>> prod)
 {
-    string ans;
-    for (auto i : a)
+    set<string> Set;
+    if (prod.find(str) == prod.end())
     {
-        ans += i + ",";
-    }
-    ans.pop_back();
-    return ans;
-}
-
-string to_string(set<string> a)
-{
-    string ans;
-    for (auto i : a)
-    {
-        ans += i + ",";
-    }
-    ans.pop_back();
-
-    return ans;
-}
-
-vector<vector<int>> readCSString(string input)
-{
-    stringstream s(input);
-    string a;
-    vector<vector<int>> v;
-    while (s >> a)
-    {
-        istringstream f(a);
-        string n;
-        vector<int> _v;
-        while (getline(f, n, ','))
+        if (str.size() == 1)
+            Set.insert(str);
+        else
         {
-            _v.push_back(stoi(n));
+            string x("");
+            x += str[0];
+            set<string> fiS = firstOf(x, prod);
+            Set.insert(fiS.begin(), fiS.end());
         }
-        v.push_back(_v);
+        return Set;
     }
-    return v;
-}
-
-vector<int> readString(string input)
-{
-    stringstream s(input);
-    int a;
-    vector<int> v;
-    while (s >> a)
+    for (string x : prod[str])
     {
-        v.push_back(a);
+        string s("");
+        s += x[0];
+        set<string> fiO = firstOf(s, prod);
+        Set.insert(fiO.begin(), fiO.end());
     }
-    return v;
+    return Set;
 }
-
-vector<string> readGrammarString(string input)
+set<string> followOf(string str, map<string, vector<string>> prod, string start)
 {
-    stringstream s(input);
-    vector<string> v;
-    string a;
-    while (s >> a)
-    {
-        v.push_back(a);
-    }
-    return v;
-}
 
-bool checkFinal(string input)
-{
-    stringstream s(input);
-    string a;
-    while (getline(s, a, ','))
+    set<string> Set;
+    if (str == start)
+        Set.insert("$");
+    for (map<string, vector<string>>::iterator ii = prod.begin(); ii != prod.end(); ++ii)
     {
-        if (a == "fin")
+        string key = (*ii).first;
+        for (string x : (*ii).second)
         {
-            return true;
-        }
-    }
-    return false;
-}
-
-class FA
-{
-public:
-    vector<string> states;
-    vector<string> symbols;
-    map<pair<string, string>, vector<string>> transition;
-
-    void displayTransitionTable()
-    {
-        cout << "-----------------TRANSITION TABLE-----------------\n";
-        cout << "STATE\t"
-             << "SYMBOL\t"
-             << " STATE\n";
-        for (auto i : transition)
-        {
-            for (auto j : i.second)
-                cout << i.first.first + "\t" + i.first.second + "\t  " + j << "\n";
-        }
-    }
-};
-
-vector<string> calcClosure(FA nfa, string state)
-{
-    vector<string> ans;
-    ans.push_back(state);
-    if (nfa.transition[{state, "eps"}].size() == 0)
-        return ans;
-
-    for (auto j : nfa.transition[{state, "eps"}])
-    {
-        // ans.push_back(j);
-        vector<string> aans = calcClosure(nfa, j);
-        for (auto k : aans)
-        {
-            ans.push_back(k);
-        }
-    }
-    return ans;
-}
-
-map<string, vector<string>> generateClosures(FA nfa)
-{
-    map<string, vector<string>> ans;
-
-    for (auto i : nfa.states)
-    {
-        ans[i] = calcClosure(nfa, i);
-        // for (string j : ans[i])
-        //     cout << i << " : " << j << " ";
-        // cout << endl;
-    }
-    return ans;
-}
-
-FA NFAtoDFA(FA nfa, map<string, vector<string>> closures)
-{
-    FA dfa;
-    set<set<string>> isChecked;
-    queue<set<string>> q;
-    set<string> first;
-    for (auto i : closures[nfa.states[0]])
-        first.insert(i);
-    isChecked.insert(first);
-
-    q.push(first);
-    while (!q.empty())
-    {
-        set<string> sstates = q.front();
-        q.pop();
-        dfa.states.push_back(to_string(sstates));
-        for (auto sym : nfa.symbols)
-        {
-            set<string> dest;
-            for (auto state : sstates)
+            string y = x;
+            // cout<<y<<endl;
+            for (int i = 0; i < y.size(); i++)
             {
-                for (auto k : nfa.transition[{state, sym}])
+                string s("");
+                s += y[i];
+                if (s == str)
                 {
-                    dest.insert(k);
-                    for (auto l : closures[k])
-                        dest.insert(l);
-                }
-            }
-            if (!dest.empty())
-            {
-                dfa.transition[{to_string(sstates), sym}].push_back(to_string(dest));
-                if (isChecked.find(dest) == isChecked.end())
-                {
-                    isChecked.insert(dest);
-                    q.push(dest);
+                    if (i == x.size() - 1)
+                    {
+                        if (key != str)
+                        {
+                            set<string> foO = followOf(key, prod, start);
+                            Set.insert(foO.begin(), foO.end());
+                        }
+                    }
+                    else
+                    {
+                        string st("");
+                        st += y[i + 1];
+                        set<string> fiO = firstOf(st, prod);
+                        Set.insert(fiO.begin(), fiO.end());
+                        if (Set.find("e") != Set.end())
+                        {
+                            Set.erase("e");
+                            y[i + 1] = y[i];
+                        }
+                    }
                 }
             }
         }
     }
-    return dfa;
+    return Set;
 }
 
-FA generateDFA()
+int split(vector<string> &arr, string line, char delimiter)
 {
-    FA nfa;
-    fstream f;
-    string word;
-    f.open("./RG.txt", ios::in);
-    if (!f)
+    line += delimiter;
+    int i = 0, len = line.length();
+    string str = "";
+    for (int j = 0; j < len; j++)
     {
-        cout << strerror(errno);
-        exit(0);
-    }
-    vector<vector<string>> grammar;
-    while (getline(f, word))
-    {
-        grammar.push_back(readGrammarString(word));
-    }
-    for (int i = 0; i < grammar.size(); i++)
-    {
-        for (int j = 0; j < grammar[i].size(); j++)
+        if (line[j] == delimiter)
         {
-            string state = grammar[i][0];
-            if (j == 0)
-            {
-                nfa.states.push_back(grammar[i][0]);
-                continue;
-            }
-            if (grammar[i][j].size() == 1)
-            {
-                if (find(nfa.symbols.begin(), nfa.symbols.end(), grammar[i][j]) == nfa.symbols.end())
-                {
-                    nfa.symbols.push_back(grammar[i][j]);
-                }
-                nfa.transition[{state, grammar[i][j]}].push_back("fin");
-            }
-            else
-            {
-                nfa.transition[{state, grammar[i][j].at(0) + (string) ""}].push_back(grammar[i][j][1] + (string) "");
-            }
+            arr.push_back(str);
+            str = "";
         }
+        else
+            str += line[j];
     }
-    map<string, vector<string>> closures = generateClosures(nfa);
-    return NFAtoDFA(nfa, closures);
+    return i;
 }
-
-void checkString(FA dfa, string input)
-{
-    string currentState = "S";
-    for (int i = 0; i < input.size(); i++)
-    {
-        if (dfa.transition.find({currentState, input[i] + (string) ""}) == dfa.transition.end())
-        {
-            break;
-        }
-        currentState = dfa.transition[{currentState, input[i] + (string) ""}][0];
-        if (checkFinal(currentState))
-        {
-            break;
-        }
-    }
-    if (checkFinal(currentState))
-    {
-        cout << "String accepted";
-    }
-    else
-    {
-        cout << "String not accepted";
-    }
-}
-
 int main()
 {
-    string input;
-    cout << "Name: Tanmay Vig\n";
-    cout << "Enter a string: ";
-    cin >> input;
-    FA dfa = generateDFA();
-    dfa.displayTransitionTable();
-    checkString(dfa, input);
+    map<string, vector<string>> map1;
+    vector<string> arl;
+    ifstream file;
+    file.open("./FirstAndfollow.txt", ios::in);
+    if (file.is_open())
+    {
+        string line, initial;
+
+        getline(file, initial);
+        while (getline(file, line))
+        {
+            size_t brk = line.find("->");
+            string state = line.substr(0, brk);
+            string transition = line.substr(brk + 2, line.length());
+            split(arl, transition, '|');
+            map1[state] = arl;
+            arl.clear();
+        }
+        // for (map<string, vector<string>>::iterator ii = map1.begin(); ii != map1.end(); ++ii)
+        for (auto ii : map1)
+        {
+            cout << ii.first << ": ";
+            for (int i = 0; i < (ii).second.size(); i++)
+            {
+                cout << (ii).second[i] << " ";
+            }
+            cout << endl;
+        }
+        set<string>::iterator itr;
+        cout << "First of :" << endl;
+        for (map<string, vector<string>>::iterator ii = map1.begin(); ii != map1.end(); ++ii)
+        {
+            set<string> fiS = firstOf((*ii).first, map1);
+            cout << ((*ii).first) << ": ";
+            for (itr = fiS.begin(); itr != fiS.end(); itr++)
+            {
+                cout << *itr << " ";
+            }
+            cout << endl;
+        }
+        cout << "Follow of:" << endl;
+        for (map<string, vector<string>>::iterator ii = map1.begin(); ii != map1.end(); ++ii)
+        {
+            set<string> foO = followOf((*ii).first, map1, initial);
+            cout << (*ii).first << ": ";
+            for (itr = foO.begin(); itr != foO.end(); itr++)
+            {
+                cout << *itr << " ";
+            }
+            cout << endl;
+        }
+    }
     return 0;
 }

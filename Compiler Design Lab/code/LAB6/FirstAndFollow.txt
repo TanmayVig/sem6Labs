@@ -1,6 +1,4 @@
-S->Bb
-S->Cd
-B->aB
-B->#
-C->cC
-C->#
+S
+S->Bb|Cd
+B->aB|#
+C->cC|#
