@@ -92,7 +92,7 @@ set<char> follow(char ele, unordered_map<char, set<int>> right, vector<vector<ch
 }
 int main()
 {
-    ifstream fin("./FirstAndFollow.txt");
+    ifstream fin("./LLParser.txt");
     vector<vector<char>> prod;
     string str;
     while (getline(fin, str))
