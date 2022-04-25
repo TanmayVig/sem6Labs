@@ -1,0 +1,24 @@
+C51 COMPILER V9.60.0.0   10                                                                04/25/2022 14:59:14 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE 10
+OBJECT MODULE PLACED IN .\Objects\10.obj
+COMPILER INVOKED BY: D:\sem-6\C51\BIN\C51.EXE 10.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\10.lst) 
+                    -TABS(2) OBJECT(.\Objects\10.obj)
+
+line level    source
+
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   ----    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

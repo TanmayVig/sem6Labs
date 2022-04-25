@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "*.html": "html",
+        "utility": "cpp",
+        "fstream": "cpp"
+    }
+}

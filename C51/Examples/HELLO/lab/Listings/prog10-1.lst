@@ -1,0 +1,69 @@
+C51 COMPILER V9.60.0.0   PROG10_1                                                          04/25/2022 16:17:21 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE PROG10_1
+OBJECT MODULE PLACED IN .\Objects\prog10-1.obj
+COMPILER INVOKED BY: D:\sem-6\C51\BIN\C51.EXE prog10-1.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\pr
+                    -og10-1.lst) TABS(2) OBJECT(.\Objects\prog10-1.obj)
+
+line level    source
+
+   1          #include<p89v51rd2.h>
+   2          
+   3          sbit flag = P1^5;
+   4          
+   5          void T1M2Delay(){
+   6   1        
+   7   1        TMOD=0x20;  // Timer 1, mode 2
+   8   1        TH1=0x1A;   // 1A for 250micro sec
+   9   1        TR1=1;
+  10   1      
+  11   1        while (TF1==0);
+  12   1        
+  13   1        TR1=0;
+  14   1        TF1=0;
+  15   1        
+  16   1      }
+  17          
+  18          void T0M1Delay(void)
+  19          {
+  20   1        TMOD=0x01;
+  21   1        TL1=0xFE;
+  22   1        TH1=0xA5; // A5FE F0R 25 m sec
+  23   1        TR1=1;
+  24   1        while (TF1==0);
+  25   1        TR1=0;
+  26   1        TF1=0;
+  27   1      }
+  28          void main(void)
+  29          {
+  30   1        unsigned int x;
+  31   1        while (1)
+  32   1        {
+  33   2          flag=~flag;
+  34   2          
+  35   2          for (x=0;x<1000;x++) // 250 micro sec
+  36   2            T1M2Delay();
+  37   2          
+  38   2          //for (x=0;x<10;x++) // 25 m sec
+  39   2            //T0M1Delay();
+  40   2          
+  41   2          
+  42   2        }
+  43   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     56    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+C51 COMPILER V9.60.0.0   PROG10_1                                                          04/25/2022 16:17:21 PAGE 2   
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
