@@ -56,23 +56,28 @@ string string_matching(string str, vector<pair<string, string>> grammar, map<cha
         if (ind == str.length())
             return "String Not Accepted\n";
         print_stack(st);
-        cout << str.substr(ind) << endl;
+        cout << str.substr(ind);
         top = st.top();
         int act = action[str[ind]][top.second];
 
         if (act == 99)
-            return "String is Accepted\n";
+        {
+            cout << " -> acc\n";
+            return "\nString is Accepted\n";
+        }
 
         if (act == 0)
         {
-            return "String Not Accepted\n";
+            return "\nString Not Accepted\n";
         }
         else if (act > 0)
         {
+            cout << " -> shift " << str[ind] << act << endl;
             st.push({str[ind++], act});
         }
         else
         {
+            cout << " -> reduce " << -(act + 1) << endl;
             auto prod = grammar[-(act + 1)];
 
             for (int i = prod.second.length() - 1; i >= 0; i--)
@@ -80,7 +85,7 @@ string string_matching(string str, vector<pair<string, string>> grammar, map<cha
 
                 if (st.empty())
                 {
-                    return "String Not Accepted\n";
+                    return "\nString Not Accepted\n";
                 }
 
                 if (st.top().first == prod.second[i])
@@ -90,12 +95,12 @@ string string_matching(string str, vector<pair<string, string>> grammar, map<cha
                 }
                 else
                 {
-                    return "String Not Accepted\n";
+                    return "\nString Not Accepted\n";
                 }
             }
             if (st.empty() || gotu[prod.first[0]][st.top().second] == 0)
             {
-                return "String Not Accepted\n";
+                return "\nString Not Accepted\n";
             }
 
             st.push({prod.first[0], gotu[prod.first[0]][st.top().second]});
